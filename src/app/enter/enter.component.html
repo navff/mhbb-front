@@ -1,0 +1,24 @@
+<header>
+<ul class="main-nav container">
+	
+	<li><img src="img/logo.svg" alt="" class="main-nav__link-logo"></li>
+	<li><a href="javascript:void(0);" class="main-nav__link">О проекте</a></li>
+	<li><a href="javascript:void(0);" class="main-nav__link">Стать спонсором</a></li>
+	<li><a href="javascript:void(0);" class="main-nav__link">Стать представителем</a></li>
+	<li><a [routerLink]="['enter']" class="main-nav__link-enter">Вход</a></li>
+</ul>
+</header>
+<main>
+	<div class="container form-flex">
+		<a [routerLink]="['']" class="button-back">&larr; Назад</a>
+		<h2>Вход и регистрация</h2>
+		<md-input-container>
+			<input mdInput placeholder="Электронная почта">
+		</md-input-container>
+		<button md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+		<p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять кружки и курсы.
+			Если вы не были зарегистрированы, — зарегистрируем. 
+		</p>
+	</div>
+
+</main>
