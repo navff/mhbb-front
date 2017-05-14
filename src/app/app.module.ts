@@ -6,13 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { EnterComponent } from './enter/enter.component';
 import { DetailsComponent } from './details/details.component';
-import { ReservationComponent } from './reservation/reservation.component';
-import { ReservationSuccessComponent } from './reservation/reservation-success/reservation-success.component';
-import { FooterComponent } from './footer/footer.component';
+import { ReservationComponent } from './details/reservation/reservation.component';
+import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
+import { AddHobbyComponent } from './add-hobby/add-hobby.component';
+import { AddHobbySuccessComponent } from './add-hobby/add-hobby-success/add-hobby-success.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { routing } from './app.routing';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -28,12 +30,14 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   ],
   declarations: [
     AppComponent,
-    HeaderComponent,
     HomeComponent,
     EnterComponent,
     DetailsComponent,
     ReservationComponent,
     ReservationSuccessComponent,
+    AddHobbyComponent,
+    AddHobbySuccessComponent,
+    HeaderComponent,
     FooterComponent
   ],
   bootstrap: [AppComponent]
