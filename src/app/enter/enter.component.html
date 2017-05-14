@@ -1,15 +1,6 @@
-<header>
-<ul class="main-nav container">
-	
-	<li><img src="img/logo.svg" alt="" class="main-nav__link-logo"></li>
-	<li><a href="javascript:void(0);" class="main-nav__link">О проекте</a></li>
-	<li><a href="javascript:void(0);" class="main-nav__link">Стать спонсором</a></li>
-	<li><a href="javascript:void(0);" class="main-nav__link">Стать представителем</a></li>
-	<li><a [routerLink]="['enter']" class="main-nav__link-enter">Вход</a></li>
-</ul>
-</header>
+<my-header></my-header>
 <main>
-	<div class="container form-flex">
+	<div class="container form">
 		<a [routerLink]="['']" class="button-back">&larr; Назад</a>
 		<h2>Вход и регистрация</h2>
 		<md-input-container>
@@ -22,3 +13,5 @@
 	</div>
 
 </main>
+
+<my-footer></my-footer>

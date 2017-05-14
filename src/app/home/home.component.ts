@@ -18,6 +18,6 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
-        this.httpService.getData().subscribe((data: Response) => this.activities = data.json());
+        this.httpService.getAllActivities().subscribe((data: Response) => this.activities = data.json());
     };
 }

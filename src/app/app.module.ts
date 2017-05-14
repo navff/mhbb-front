@@ -6,8 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { EnterComponent } from './enter/enter.component';
+import { DetailsComponent } from './details/details.component';
+import { ReservationComponent } from './reservation/reservation.component';
+import { ReservationSuccessComponent } from './reservation/reservation-success/reservation-success.component';
+import { FooterComponent } from './footer/footer.component';
 import { routing } from './app.routing';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -23,8 +28,13 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   ],
   declarations: [
     AppComponent,
+    HeaderComponent,
     HomeComponent,
-    EnterComponent
+    EnterComponent,
+    DetailsComponent,
+    ReservationComponent,
+    ReservationSuccessComponent,
+    FooterComponent
   ],
   bootstrap: [AppComponent]
 })
