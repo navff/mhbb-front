@@ -1,8 +1,7 @@
 <my-header></my-header>
-<main>
 	<div class="container">
 		<section class="info">
-			<a [routerLink]="['/details']" class="button-back">&larr; Назад</a>
+			<a routerLink='/details' class="button-back">&larr; Назад</a>
 			<h1 class="heading">Курсы кулинарного искусства</h1>
 			<ul class="info-list">
 				<li>
@@ -60,9 +59,8 @@
 			<md-input-container class="form-item form-item-commentary">
 				<input mdInput placeholder="Пожелания, комментарии">
 			</md-input-container>
-			<button [routerLink]="['/details/reservation/reservationsuccess']" md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
+			<button routerLink='/details/reservation/reservationsuccess' md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
 			<p>С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
 		</form>
 	</div>
-</main>
 <my-footer></my-footer>

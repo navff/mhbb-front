@@ -1,4 +1,5 @@
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule }             from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { EnterComponent } from './enter/enter.component';
@@ -9,8 +10,7 @@ import { ReservationSuccessComponent } from './details/reservation/reservation-s
 import { AddHobbyComponent } from './add-hobby/add-hobby.component';
 import { AddHobbySuccessComponent } from './add-hobby/add-hobby-success/add-hobby-success.component';
 
-
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'enter', component: EnterComponent },
   { path: 'enter/entersuccess', component: EnterSuccessComponent },
@@ -18,7 +18,13 @@ const routes: Routes = [
   { path: 'details/reservation', component: ReservationComponent },
   { path: 'details/reservation/reservationsuccess', component: ReservationSuccessComponent },
   { path: 'addhobby', component: AddHobbyComponent },
-  { path: 'addhobby/addhobbysuccess', component: AddHobbySuccessComponent }
+  { path: 'addhobby/addhobbysuccess', component: AddHobbySuccessComponent },
+
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
 ];
 
-export const routing = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

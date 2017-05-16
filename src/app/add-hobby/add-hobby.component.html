@@ -1,8 +1,7 @@
 <my-header></my-header>
-<main>
 	<div class="container">
 		<section class="photos">
-			<a [routerLink]="['']" class="button-back">&larr; Назад</a>
+			<a routerLink='' class="button-back">&larr; Назад</a>
 			<md-input-container class="form-item-course-name">
 				<input mdInput placeholder="Название курса">
 			</md-input-container>
@@ -44,8 +43,7 @@
 				<textarea mdInput rows="3" placeholder="Ведущие"></textarea>
 			</md-input-container>
 			<md-checkbox color="primary">Преподаватели не пьют и не курят</md-checkbox>
-			<button [routerLink]="['/addhobby/addhobbysuccess']" md-raised-button color="primary" class="button-publish">ОПУБЛИКОВАТЬ</button>
+			<button routerLink='/addhobby/addhobbysuccess' md-raised-button color="primary" class="button-publish">ОПУБЛИКОВАТЬ</button>
 		</form>
 	</div>
-</main>
 <my-footer></my-footer>

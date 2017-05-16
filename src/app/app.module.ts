@@ -16,7 +16,8 @@ import { AddHobbyComponent } from './add-hobby/add-hobby.component';
 import { AddHobbySuccessComponent } from './add-hobby/add-hobby-success/add-hobby-success.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { routing } from './app.routing';
+
+import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
@@ -25,22 +26,17 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     BrowserModule,
     HttpModule,
     FormsModule,
-    routing,
     BrowserAnimationsModule,
-    MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule
+    MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
-    EnterComponent,
-    EnterSuccessComponent,
-    DetailsComponent,
-    ReservationComponent,
-    ReservationSuccessComponent,
-    AddHobbyComponent,
-    AddHobbySuccessComponent,
-    HeaderComponent,
-    FooterComponent
+    EnterComponent, EnterSuccessComponent,
+    DetailsComponent, ReservationComponent, ReservationSuccessComponent,
+    AddHobbyComponent, AddHobbySuccessComponent,
+    HeaderComponent, FooterComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,13 @@
 <my-header></my-header>
-<main>
 	<div class="container form">
-		<a [routerLink]="['']" class="button-back">&larr; Назад</a>
+		<a routerLink='' class="button-back">&larr; Назад</a>
 		<h2>Вход и регистрация</h2>
 		<md-input-container>
 			<input mdInput placeholder="Электронная почта">
 		</md-input-container>
-		<button [routerLink]="['/enter/entersuccess']" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+		<button routerLink='/enter/entersuccess' md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
 		<p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять кружки и курсы.
 			Если вы не были зарегистрированы, — зарегистрируем. 
 		</p>
 	</div>
-
-</main>
-
 <my-footer></my-footer>
