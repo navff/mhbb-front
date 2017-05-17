@@ -1,1 +1,20 @@
 <h1 class="admin-heading container">Отзывы на проверку</h1>
+<form class="container">
+    <md-input-container class="form-item">
+        <input mdInput placeholder="Поисковое слово">
+    </md-input-container>
+    <md-select class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</md-option>
+    </md-select>
+</form>
+<div class="container">
+    <div class="review">
+        <p class="review-name-date"><a href="javascript:void(0);">Павел Владимирович</a>, 12.09.2017г.</p>
+        <p class="review-text">Козлы. Не умеют готовить карамельное бурфи.</p>
+        <p class="review-descr">Отзыв о <a href="javascript:void(0);">«База отдыха «Нижневартовский камыш»</a></p>
+        <div class="buttons">
+            <a href="javascript:void(0);" class="button-accept">ПРИНЯТЬ</a>
+            <a href="javascript:void(0);" class="button-reject">ОТКЛОНИТЬ</a>
+        </div>
+    </div>
+</div>

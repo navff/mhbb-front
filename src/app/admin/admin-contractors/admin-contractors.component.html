@@ -1,1 +1,17 @@
 <h1 class="admin-heading container">Организаторы</h1>
+<form class="container">
+    <md-input-container class="form-item">
+        <input mdInput placeholder="Поисковое слово">
+    </md-input-container>
+    <md-select class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</md-option>
+    </md-select>
+</form>
+
+<section class="container">
+    <div class="contractors">
+        <a routerLink='../contractors/edit' class="contractor">МБУК «Ледовый дворец»</a>
+        <a routerLink='../contractors/edit' class="contractor">ОАО «Череповецкий камерный театр»</a>
+        <a routerLink='../contractors/edit' class="contractor">МБУК «Дворец металлургов»</a>
+    </div>
+</section>
