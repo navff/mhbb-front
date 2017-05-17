@@ -15,7 +15,6 @@ import { ReservationSuccessComponent } from './details/reservation/reservation-s
 import { AddHobbyComponent } from './add-hobby/add-hobby.component';
 import { AddHobbySuccessComponent } from './add-hobby/add-hobby-success/add-hobby-success.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -36,7 +35,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     EnterComponent, EnterSuccessComponent,
     DetailsComponent, ReservationComponent, ReservationSuccessComponent,
     AddHobbyComponent, AddHobbySuccessComponent,
-    HeaderComponent, FooterComponent
+    HeaderComponent
   ],
   bootstrap: [AppComponent]
 })
