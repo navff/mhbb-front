@@ -7,8 +7,6 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
-import { AddHobbyComponent } from './add-hobby/add-hobby.component';
-import { AddHobbySuccessComponent } from './add-hobby/add-hobby-success/add-hobby-success.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,10 +15,9 @@ export const routes: Routes = [
   { path: 'details', component: DetailsComponent },
   { path: 'details/reservation', component: ReservationComponent },
   { path: 'details/reservation/reservationsuccess', component: ReservationSuccessComponent },
-  { path: 'addhobby', component: AddHobbyComponent },
-  { path: 'addhobby/addhobbysuccess', component: AddHobbySuccessComponent },
 
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+  { path: 'addhobby', loadChildren: './add-hobby/add-hobby.module#AddHobbyModule'},
 ];
 
 @NgModule({

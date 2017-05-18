@@ -1,8 +1,5 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule } from '@angular/material';
 
 import { AdminComponent } from './admin.component';
 import { AdminMainComponent }     from './admin-main/admin-main.component';
@@ -14,13 +11,13 @@ import { AdminReviewsComponent }     from './admin-reviews/admin-reviews.compone
 import { AdminFooterComponent }      from './shared/admin-footer/admin-footer.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   imports:      [
     CommonModule,
-    FormsModule, HttpModule,
-    MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule,
+    SharedModule,
     AdminRoutingModule,
    ],
   declarations: [

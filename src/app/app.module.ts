@@ -1,9 +1,8 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule } from '@angular/material';
+
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -12,9 +11,6 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
-import { AddHobbyComponent } from './add-hobby/add-hobby.component';
-import { AddHobbySuccessComponent } from './add-hobby/add-hobby-success/add-hobby-success.component';
-import { HeaderComponent } from './shared/header/header.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -23,19 +19,15 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 @NgModule({
   imports: [
     BrowserModule,
-    HttpModule,
-    FormsModule,
     BrowserAnimationsModule,
-    MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule,
+    SharedModule,
     AppRoutingModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     EnterComponent, EnterSuccessComponent,
-    DetailsComponent, ReservationComponent, ReservationSuccessComponent,
-    AddHobbyComponent, AddHobbySuccessComponent,
-    HeaderComponent
+    DetailsComponent, ReservationComponent, ReservationSuccessComponent
   ],
   bootstrap: [AppComponent]
 })
