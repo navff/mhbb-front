@@ -6,14 +6,20 @@ import { RouterModule } from '@angular/router';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule } from '@angular/material';
 
 import { HeaderComponent }     from './header/header.component';
+import { FilterPipe } from './my-filter.pipe';
+
 @NgModule({
   imports:      [ HttpModule, FormsModule,
       MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule,
       RouterModule
- ],
-  declarations: [ HeaderComponent ],
+    ],
+  declarations: [ HeaderComponent,
+  FilterPipe
+    ],
   exports:      [ HttpModule, FormsModule,
       MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule,
-      HeaderComponent]
+      HeaderComponent,
+      FilterPipe
+    ]
 })
 export class SharedModule { }

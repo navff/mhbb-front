@@ -15,7 +15,6 @@ import { ReservationSuccessComponent } from './details/reservation/reservation-s
 import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
-import { IsCheckedPipe } from './shared/is-checked.pipe';
 
 @NgModule({
   imports: [
@@ -28,8 +27,7 @@ import { IsCheckedPipe } from './shared/is-checked.pipe';
     AppComponent,
     HomeComponent,
     EnterComponent, EnterSuccessComponent,
-    DetailsComponent, ReservationComponent, ReservationSuccessComponent,
-    IsCheckedPipe
+    DetailsComponent, ReservationComponent, ReservationSuccessComponent
   ],
   bootstrap: [AppComponent]
 })

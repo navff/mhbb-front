@@ -23,9 +23,10 @@
 		<md-checkbox color="primary">Бесплатно</md-checkbox>
 			<a class="hobbies-add" routerLink='/addhobby' md-fab></a>
 	</form>
-	
+
+<h2 class="admin-heading">На проверку</h2>
 <div class="hobbies-flex">
-	<div routerLink='/details' class="hobby-wrapper" *ngFor="let activity of activities">
+	<div routerLink='/details' class="hobby-wrapper" *ngFor="let activity of activities | myFilter:'IsChecked':false">
 		<img src="" alt="" class="hobby-image">
 		<div class="hobby-top-descr">
 			<p class="hobby-age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
@@ -38,4 +39,21 @@
 		</div>
 	</div>		
 </div>
+
+<h2 class="admin-heading">Проверенные</h2>
+<div class="hobbies-flex">
+	<div routerLink='/details' class="hobby-wrapper" *ngFor="let activity of activities | myFilter:'IsChecked':true">
+		<img src="" alt="" class="hobby-image">
+		<div class="hobby-top-descr">
+			<p class="hobby-age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
+			<p class="hobby-likes">2201</p>
+		</div>
+		<div class="hobby-bottom-descr">
+			<h6 class="hobby-name">{{activity.Name}}</h6>
+			<p class="hobby-company">{{activity.Organizer.Name}}</p>
+			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="!activity.Prices">
+		</div>
+	</div>		
+</div>
+
 </section>

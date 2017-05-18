@@ -13,8 +13,12 @@ export class HomeComponent implements OnInit {
   interests = [];
   activities: Activity[] = [];
 
+  pricesBool = true;
     constructor(private activityService: ActivityService, private interestService: InterestService) {}
-
+    togglePrices() {
+      this.pricesBool = !this.pricesBool;
+      console.log(this.pricesBool);
+    }
     ngOnInit() {
         this.activityService.getAllActivities().subscribe((data: Response) => this.activities = data.json());
         this.interestService.getAllInterests().subscribe((data: Response) => this.interests = data.json());

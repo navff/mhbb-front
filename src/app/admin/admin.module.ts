@@ -26,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     AdminContractorsComponent, AdminContractorsEditComponent,
     AdminUsersComponent, AdminUsersEditComponent,
     AdminReviewsComponent,
-    AdminFooterComponent ]
+    AdminFooterComponent,
+   ]
 })
 export class AdminModule {}
