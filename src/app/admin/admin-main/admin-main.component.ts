@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { ActivityService } from '../../shared/activity.service';
-import { Activity } from '../../shared/activity';
+import { Activity, ActivityService } from '../../shared/activity.service';
 
 @Component({
   selector: 'my-admin-main',

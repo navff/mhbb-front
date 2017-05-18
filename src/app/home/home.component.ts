@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { ActivityService } from '../shared/activity.service';
-import { Activity } from '../shared/activity';
+import { Activity, ActivityService } from '../shared/activity.service';
+import { InterestService } from '../shared/interest.service';
 @Component({
   selector: 'my-home',
   templateUrl: './home.component.html',
-  providers: [ActivityService],
+  providers: [ActivityService, InterestService],
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
-  interests = [{name: 'Interest 1'}, {name: 'Interest 2'}];
   cities = [{name: 'Череповец'}, {name: 'Вологда'}];
+  interests = [];
+  activities: Activity[] = [];
 
-
-    activities: Activity[] = [];
-    constructor(private httpService: ActivityService) {}
+    constructor(private activityService: ActivityService, private interestService: InterestService) {}
 
     ngOnInit() {
-
-        this.httpService.getAllActivities().subscribe((data: Response) => this.activities = data.json());
+        this.activityService.getAllActivities().subscribe((data: Response) => this.activities = data.json());
+        this.interestService.getAllInterests().subscribe((data: Response) => this.interests = data.json());
     };
 }
