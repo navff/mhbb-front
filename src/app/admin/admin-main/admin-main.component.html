@@ -35,7 +35,7 @@
 		<div class="hobby-bottom-descr">
 			<h6 class="hobby-name">{{activity.Name}}</h6>
 			<p class="hobby-company">{{activity.Organizer.Name}}</p>
-			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="!activity.Prices">
+			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="activity.Free">
 		</div>
 	</div>		
 </div>
@@ -51,7 +51,7 @@
 		<div class="hobby-bottom-descr">
 			<h6 class="hobby-name">{{activity.Name}}</h6>
 			<p class="hobby-company">{{activity.Organizer.Name}}</p>
-			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="!activity.Prices">
+			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="activity.Free">
 		</div>
 	</div>		
 </div>

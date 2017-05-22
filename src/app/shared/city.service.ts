@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Injectable()
-export class ActivityService {
+export class CityService {
     constructor(private http: Http) {}
 
-    getAllActivities() {
-        return this.http.get('http://test.mhbb.ru/b/api/activity/search');
+    getAllCities() {
+        return this.http.get('http://test.mhbb.ru/b/api/city');
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { Activity, ActivityService } from '../../shared/activity.service';
+import { ActivityService } from '../../shared/activity.service';
 
 @Component({
   selector: 'my-admin-main',
@@ -13,7 +13,7 @@ export class AdminMainComponent implements OnInit {
   cities = [{name: 'Череповец'}, {name: 'Вологда'}];
 
 
-    activities: Activity[] = [];
+    activities = [];
     constructor(private httpService: ActivityService) {}
 
     ngOnInit() {

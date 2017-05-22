@@ -9,9 +9,9 @@
 </form>
 
 <section class="container">
-    <div class="contractors">
-        <a routerLink='../contractors/edit' class="contractor">МБУК «Ледовый дворец»</a>
-        <a routerLink='../contractors/edit' class="contractor">ОАО «Череповецкий камерный театр»</a>
-        <a routerLink='../contractors/edit' class="contractor">МБУК «Дворец металлургов»</a>
+    <div class="organizers">
+        <div *ngFor="let organizer of organizers" class="organizer"> 
+            <a  routerLink='../organizers/edit'>{{organizer.Name}}</a>
+        </div>
     </div>
 </section>
