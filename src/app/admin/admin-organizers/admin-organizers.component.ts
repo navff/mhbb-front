@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../shared/organizer.service';
-import { SharedIdService } from '../../shared/shared-id.service';
 
 @Component({
   selector: 'my-admin-organizers',
@@ -11,10 +10,10 @@ import { SharedIdService } from '../../shared/shared-id.service';
 export class AdminOrganizersComponent implements OnInit {
   organizers;
   page = 1;
-constructor(private organizerService: OrganizerService, private sharedIdService: SharedIdService) {}
-saveId(id) {
-  this.sharedIdService.setId(id);
-}
+constructor(private organizerService: OrganizerService) {}
+  saveOrganizerId(id) {
+    localStorage.setItem('organizerId', id);
+  }
 ngOnInit() {
     this.organizerService.getOrganizersByPage(this.page)
     .then(result => this.organizers = result);

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../../shared/organizer.service';
-import { SharedIdService } from '../../../shared/shared-id.service';
 import { CityService } from '../../../shared/city.service';
 import { Response } from '@angular/http';
 @Component({
@@ -14,14 +13,14 @@ export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
   organizer: any = {};
   selectedCity: string;
+  organizerId = parseInt(localStorage.getItem('organizerId'), 10);
 constructor(private organizerService: OrganizerService,
-            private sharedIdService: SharedIdService,
             private cityService: CityService) {}
 
 ngOnInit() {
   let that = this;
   this.cityService.getAllCities().subscribe((data: Response) => this.cities = data.json());
-  this.organizerService.getOrganizerById(this.sharedIdService.id)
+  this.organizerService.getOrganizerById(this.organizerId)
   .then(result => this.organizer = result)
   .then(() => that.selectedCity = that.organizer.City.Name);
 }

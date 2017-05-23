@@ -16,13 +16,14 @@ export class AdminMainComponent implements OnInit {
 
 
   activities = [];
-  constructor(private httpService: ActivityService,
+  uncheckedActivities = [];
+  constructor(private activityService: ActivityService,
               private cityService: CityService,
               private interestService: InterestService) {}
 
 ngOnInit() {
   this.cityService.getAllCities().subscribe((data: Response) => this.cities = data.json());
   this.interestService.getAllInterests().subscribe((data: Response) => this.interests = data.json());
-  this.httpService.getAllActivities().subscribe((data: Response) => this.activities = data.json());
+  this.activityService.getAllUncheckedActivities().subscribe((data: Response) => this.uncheckedActivities = data.json());
     };
 }
