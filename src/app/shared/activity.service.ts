@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
+import { Http, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class ActivityService {
     constructor(private http: Http) {}
@@ -23,7 +22,12 @@ export class ActivityService {
         q = [w, i, c, s, a, f].filter(function(x) { return x !== ''; }).join('&');
         return this.http.get(`http://test.mhbb.ru/b/api/activity/search?${q}`);
     }
+
+
     getAllUncheckedActivities() {
-        return this.http.get('http://test.mhbb.ru/b/api/activity/searchunchecked');
+        let headers = new Headers({'Authorization': 'Token Abrakadabra'});
+        let options = new RequestOptions({ headers: headers });
+        let url = 'http://test.mhbb.ru/b/api/activity/searchunchecked';
+        return this.http.get(url, options);
     }
 }

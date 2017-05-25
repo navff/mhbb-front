@@ -24,6 +24,7 @@ export class AdminMainComponent implements OnInit {
 ngOnInit() {
   this.cityService.getAllCities().subscribe((data: Response) => this.cities = data.json());
   this.interestService.getAllInterests().subscribe((data: Response) => this.interests = data.json());
+  this.activityService.searchActivities().subscribe((data: Response) => this.activities = data.json());
   this.activityService.getAllUncheckedActivities().subscribe((data: Response) => this.uncheckedActivities = data.json());
     };
 }

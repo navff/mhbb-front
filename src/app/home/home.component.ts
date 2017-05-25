@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   cities = [];
   interests = [];
   activities = [];
-  args: any[] = [null, null, null, null, null, null];
+  args: any[] = [];
     constructor(private activityService: ActivityService,
                 private interestService: InterestService,
                 private cityService: CityService) {}
