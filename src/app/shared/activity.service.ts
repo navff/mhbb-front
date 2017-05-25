@@ -5,21 +5,17 @@ import { Http } from '@angular/http';
 export class ActivityService {
     constructor(private http: Http) {}
     searchActivities(
+
         word?: any,
         age?: any,
-        interest?: any,
-        city?: any,
-        sobriety?: any,
         free?: any) {
-        let w, a, i, c, s, f;
-        w = word ? `word=${word}&` : '';
-        a = age ? `age=${age}&` : '';
-        i = interest ? `interestId=${interest}&` : '';
-        c = city ? `cityId=${city}&` : '';
-        s = sobriety ? `sobriety=${sobriety}&` : '';
-        f = free ? `free=${free}&` : '';
+        let w, a, f, q;
 
-        return this.http.get(`http://test.mhbb.ru/b/api/activity/search?${w}${a}${i}${c}${s}${f}`);
+        w = word     ? `word=${word}` : '';
+        a = age      ? `age=${age}` : '';
+        f = free     ? `free=${free}` : '';
+        q = [w, a, f].filter(function(x) { return x !== '' }).join('&');
+        return this.http.get(`http://test.mhbb.ru/b/api/activity/search?${q}`);
     }
     getAllUncheckedActivities() {
         return this.http.get('http://test.mhbb.ru/b/api/activity/searchunchecked');

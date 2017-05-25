@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   cities = [];
   interests = [];
   activities = [];
-  args: any[] = [];
+  args: any[] = [null, null, null];
     constructor(private activityService: ActivityService,
                 private interestService: InterestService,
                 private cityService: CityService) {}
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
       this.args[index] = value;
       console.log(this.args, index, value);
       this.activityService
-      .searchActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5], )
+      .searchActivities(this.args[0], this.args[1], this.args[2])
       .subscribe((data: Response) => this.activities = data.json());
     }
 
