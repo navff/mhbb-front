@@ -7,9 +7,15 @@ import 'rxjs/add/operator/toPromise';
 export class OrganizerService {
     constructor(private http: Http) {}
 
-    getOrganizersByPage(page: number) {
+    getOrganizers(page?: any, word?: any, cityId?: any) {
+        let w, c, p, q;
+        w = word     ? `word=${word}` : '';
+        c = cityId      ? `cityId=${cityId}` : '';
+        p = page      ? `page=${page}` : '';
+        q = [w, c, p].filter(function(x) { return x !== ''; }).join('&');
+
         return this.http
-        .get(`http://test.mhbb.ru/b/api/organizer/getall?page=${page}`)
+        .get(`http://test.mhbb.ru/b/api/organizer/search?${q}`)
         .map((response) => response.json())
         .toPromise();
     }

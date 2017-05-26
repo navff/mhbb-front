@@ -12,15 +12,17 @@ import { Response } from '@angular/http';
 export class AdminUsersEditComponent implements OnInit {
   cities = [];
   selectedCity: string;
+  role: string;
   user: any = {};
   userEmail = localStorage.getItem('userEmail');
-  constructor(private organizerService: UserService, private cityService: CityService) {}
+  constructor(private userService: UserService, private cityService: CityService) {}
 ngOnInit() {
   let that = this;
   this.cityService.getCities().subscribe((data: Response) => this.cities = data.json());
-  this.organizerService.getUserByEmail(this.userEmail)
+  this.userService.getUserByEmail(this.userEmail)
   .then(result => this.user = result)
-  .then(() => that.selectedCity = that.user.CityName);
+  .then(() => that.selectedCity = that.user.CityName)
+  .then(() => that.role = that.user.RoleName);
 
 }
 }

@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 
     setArgument(index, value) {
       this.args[index] = value;
-      console.log(this.args, index, value);
       this.activityService
       .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
       .subscribe((data: Response) => this.activities = data.json());
