@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 export class InterestService {
     constructor(private http: Http) {}
 
-    getAllInterests() {
+    getInterests() {
         return this.http.get('http://test.mhbb.ru/b/api/interest/getall');
     }
 }

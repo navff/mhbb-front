@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 export class CityService {
     constructor(private http: Http) {}
 
-    getAllCities() {
+    getCities() {
         return this.http.get('http://test.mhbb.ru/b/api/city');
     }
 }

@@ -4,23 +4,23 @@
 <section class="hobbies container">
 	<form class="hobbies-form">
 		<md-input-container class="hobbies-search">
-			<input mdInput placeholder="Поисковое слово">
+			<input (focusout)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
 		</md-input-container>
 		
 		<md-input-container class="hobbies-age">
-			<input mdInput placeholder="Возраст">
+			<input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст">
 		</md-input-container>
 		
 		<md-select class="hobbies-interests" placeholder="Интересы" floatPlaceholder="never">
-			<md-option *ngFor="let interest of interests" [value]="interest.Name">{{ interest.Name }}</md-option>
+			<md-option (click)="setArgument(3, interest.Id)" *ngFor="let interest of interests" [value]="interest.Name">{{ interest.Name }}</md-option>
 		</md-select>
 
 		<md-select class="hobbies-cities" placeholder="Город" floatPlaceholder="never">
-			<md-option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</md-option>
+			<md-option (click)="setArgument(3, city.Id)" *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</md-option>
 		</md-select>
 		
-		<md-checkbox color="primary" class="hobbies-soberness">Трезвость</md-checkbox>
-		<md-checkbox color="primary">Бесплатно</md-checkbox>
+		<md-checkbox (click)="setArgument(4, !IsSober)" [(ngModel)]="IsSober" name="sober"color="primary" class="hobbies-soberness">Трезвость</md-checkbox>
+		<md-checkbox (click)="setArgument(5, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary">Бесплатно</md-checkbox>
 			<a class="hobbies-add" routerLink='/addhobby' md-fab></a>
 	</form>
 

@@ -11,8 +11,8 @@
 
 <section class="container">
     <div class="users">
-        <div class="user">
-            <a routerLink='../users/edit'>var@33kita.ru</a>
+        <div class="user" *ngFor="let user of users">
+            <a (click)="saveUserEmail(user.Email)" routerLink='../users/edit'>{{user.Name}}</a>
         </div> 
     </div>
 </section>

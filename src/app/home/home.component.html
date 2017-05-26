@@ -27,8 +27,8 @@
 			<md-option (click)="setArgument(3, city.Id)" *ngFor="let city of cities" [value]="city.Name" >{{ city.Name }}</md-option>
 		</md-select>
 		
-		<md-checkbox (click)="setArgument(4, !IsSober)" color="primary" class="hobbies-soberness" [(ngModel)]="IsSober" name="sober">Трезвость</md-checkbox>
-		<md-checkbox (click)="setArgument(5, !IsFree)" color="primary" [(ngModel)]="IsFree" name="free">Бесплатно</md-checkbox>
+		<md-checkbox (click)="setArgument(4, !IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="hobbies-soberness">Трезвость</md-checkbox>
+		<md-checkbox (click)="setArgument(5, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary" >Бесплатно</md-checkbox>
 			<a class="hobbies-add" routerLink='/addhobby' md-fab></a>
 	</form>
 
