@@ -13,7 +13,7 @@ export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
   selectedCity: string;
   organizer: any = {};
-  organizerId = parseInt(localStorage.getItem('organizerId'), 10);
+  organizerId = localStorage.getItem('organizerId');
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
 
 ngOnInit() {

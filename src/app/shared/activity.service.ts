@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ActivityService {
     constructor(private http: Http) {}
@@ -44,5 +46,10 @@ export class ActivityService {
         let options = new RequestOptions({ headers: headers });
         let url = `http://test.mhbb.ru/b/api/activity/searchunchecked?${q}`;
         return this.http.get(url, options);
+    }
+    getActivity(id) {
+        return this.http.get(`http://test.mhbb.ru/b/api/activity/${id}`)
+        .map((response) => response.json())
+        .toPromise();
     }
 }

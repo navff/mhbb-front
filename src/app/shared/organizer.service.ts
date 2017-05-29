@@ -20,7 +20,7 @@ export class OrganizerService {
         .toPromise();
     }
 
-    getOrganizerById(id: number) {
+    getOrganizerById(id: string) {
         return this.http.get(`http://test.mhbb.ru/b/api/organizer/${id}`)
         .map((response) => response.json())
         .toPromise();

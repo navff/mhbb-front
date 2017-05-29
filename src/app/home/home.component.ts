@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
     constructor(private activityService: ActivityService,
                 private interestService: InterestService,
                 private cityService: CityService) {}
-
+    saveActivityId(id) {
+      localStorage.setItem('activityId', id);
+    }
     setArgument(index, value) {
       this.args[index] = value;
       this.activityService
