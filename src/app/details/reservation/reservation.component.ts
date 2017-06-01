@@ -5,7 +5,7 @@ import { ActivityService } from '../../shared/activity.service';
   selector: 'my-reservation',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.sass'],
-    providers: [ActivityService],
+  providers: [ActivityService]
 })
 export class ReservationComponent implements OnInit {
 activity: any = {};

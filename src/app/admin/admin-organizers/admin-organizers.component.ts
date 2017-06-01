@@ -17,8 +17,6 @@ export class AdminOrganizersComponent implements OnInit {
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
   setArgument(index, value) {
       this.args[index] = value;
-      console.log(this.args, index, value);
-
       this.organizerService.getOrganizers(this.page, this.args[0], this.args[1])
       .then(result => this.organizers = result);
     }
