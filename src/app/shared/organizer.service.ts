@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -24,5 +24,10 @@ export class OrganizerService {
         return this.http.get(`http://test.mhbb.ru/b/api/organizer/${id}`)
         .map((response) => response.json())
         .toPromise();
+    }
+    putOrganizer(id: any, body: any) {
+        let headers = new Headers({'Authorization': 'Token Abrakadabra'});
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(`http://test.mhbb.ru/b/api/organizer/${id}`, body, options);
     }
 }
