@@ -1,12 +1,12 @@
 <h1 class="admin-heading container">Пользователи</h1>
 <form class="container">
     <md-input-container class="form-item">
-        <input mdInput placeholder="Email">
+        <input (focusout)="setArgument(2, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
     </md-input-container>
     <md-select class="form-item-cities" placeholder="Город" floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</md-option>
     </md-select>
-    <md-checkbox color="primary">Представители в городах</md-checkbox>
+    <md-checkbox (click)="!admin ? setArgument(0, 0, 1, 1) : setArgument(0, undefined, 1, undefined)" [(ngModel)]="admin" name="admin" color="primary">Представители в городах</md-checkbox>
 </form>
 
 <section class="container">

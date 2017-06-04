@@ -11,6 +11,12 @@ export class AdminUsersComponent implements OnInit {
   users = [];
   args: any[] = [];
     constructor(private userService: UserService) {}
+  setArgument(index, value, index2?, value2?) {
+    this.args[index] = value;
+    this.args[index2] = value2;
+    this.userService.getUsers(this.args[0], this.args[1], this.args[2])
+    .then(result => this.users = result);
+  }
   saveUserEmail(email) {
     localStorage.setItem('userEmail', email);
   }
