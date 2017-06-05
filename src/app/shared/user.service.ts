@@ -16,7 +16,7 @@ export class UserService {
         p = page     ? `page=${page}` : '';
         q = [r1, r2, w, p].filter(function(x) { return x !== ''; }).join('&');
 
-        let headers = new Headers({'Authorization': 'Token Abrakadabra'});
+        let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
         let options = new RequestOptions({ headers: headers });
         let url = `http://test.mhbb.ru/b/api/user/search?${q}`;
         return this.http
@@ -25,7 +25,7 @@ export class UserService {
         .toPromise();
     }
     getUserByEmail(email: string) {
-        let headers = new Headers({'Authorization': 'Token Abrakadabra'});
+        let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
         let options = new RequestOptions({ headers: headers });
         let url = `http://test.mhbb.ru/b/api/user?email=${email}`;
         return this.http.get(url, options)

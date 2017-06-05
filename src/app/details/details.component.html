@@ -9,7 +9,7 @@
 					<div (click)="votePositive()" class="thumb-up">
 							<img src="img/thumbs-up-black.svg" alt="">
 					</div>
-						<p class="amount">{{activity.Voices}}</p>
+						<p class="amount">{{voteAmount}}</p>
 
 					<div (click)="voteNegative()" class="thumb-down">
 						<img src="img/thumbs-up-black.svg" alt="">
@@ -41,7 +41,11 @@
 				</li>
 				<li>
 					<h4 class="bold">Цены:</h4>
-					<p>{{activity.Prices}}</p>
+					<div class="prices">
+						<p>{{activity.Prices}}</p>
+						<img class="hobby-free-icon" src="img/free-withborder.svg" alt="" *ngIf="activity.Free">
+					</div>
+					
 				</li>
 				<li>
 					<h4 class="bold">Трезвость:</h4>

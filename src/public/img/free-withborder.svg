@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3606 1071 26 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #95989a;
+      }
+
+      .cls-2 {
+        fill: #795548;
+        font-size: 22px;
+        font-family: SegoeUI, Segoe UI;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: red;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Group_142" data-name="Group 142" transform="translate(2448 -126)">
+    <path id="Path_20" data-name="Path 20" class="cls-1" d="M13,.5A12.579,12.579,0,0,1,25.39,11.333,11.521,11.521,0,0,1,25.5,13a12.662,12.662,0,0,1-2.73,7.8A12.329,12.329,0,0,1,13,25.5a12.5,12.5,0,0,1,0-25Z" transform="translate(1158 1200)"/>
+    <text id="_" data-name="₽" class="cls-2" transform="translate(1166 1221)"><tspan x="0" y="0">₽</tspan></text>
+    <line id="Line_66" data-name="Line 66" class="cls-3" x2="15" y2="16" transform="translate(1163.5 1204.5)"/>
+  </g>
+</svg>

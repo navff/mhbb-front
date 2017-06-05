@@ -44,7 +44,7 @@ export class ActivityService {
         f = free     ? `free=${free}` : '';
 
         q = [w, i, c, s, a, f].filter(function(x) { return x !== ''; }).join('&');
-        let headers = new Headers({'Authorization': 'Token Abrakadabra'});
+        let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
         let options = new RequestOptions({ headers: headers });
         let url = `http://test.mhbb.ru/b/api/activity/searchunchecked?${q}`;
         return this.http.get(url, options)

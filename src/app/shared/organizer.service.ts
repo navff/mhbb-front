@@ -26,8 +26,10 @@ export class OrganizerService {
         .toPromise();
     }
     putOrganizer(id: any, body: any) {
-        let headers = new Headers({'Authorization': 'Token Abrakadabra'});
+        let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(`http://test.mhbb.ru/b/api/organizer/${id}`, body, options);
+        return this.http.put(`http://test.mhbb.ru/b/api/organizer/${id}`, body, options)
+        .map((response) => response.json())
+        .toPromise();
     }
 }

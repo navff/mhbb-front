@@ -5,7 +5,12 @@ import { CityService } from '../../../shared/city.service';
 export class OrganizerPutBody {
     Name: string;
     CityId: any;
-    Sobriety: any;
+    Sobriety: boolean;
+    constructor(name: string, cityid: number, sobriety: boolean) {
+      this.Name = name;
+      this.CityId = cityid;
+      this.Sobriety = sobriety;
+}
 }
 
 @Component({
@@ -17,22 +22,21 @@ export class OrganizerPutBody {
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
-  organizerName: string;
   organizerCityName: string;
-  organizerSobriety: any;
+  organizerName: string;
+  organizerSobriety: boolean;
+  cityId: number;
   organizer: any = {};
-
-  organizerPutBody: OrganizerPutBody = {
-    Name: this.organizerName,
-    CityId: 1,
-    Sobriety: this.organizerSobriety
-  };
   organizerId = localStorage.getItem('organizerId');
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
 
   putOrganizer() {
-    this.organizerService.putOrganizer(this.organizerId, this.organizerPutBody)
-    .subscribe((response) => console.log(response));
+    let body = new OrganizerPutBody(this.organizerName, this.cityId, this.organizerSobriety);
+    this.organizerService.putOrganizer(this.organizerId, body)
+    .then(result => this.organizer = result);
+  }
+  saveId(id) {
+    this.cityId = id;
   }
 ngOnInit() {
   let that = this;
