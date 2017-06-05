@@ -20,15 +20,15 @@ export class DetailsComponent implements OnInit {
     .then(() => {
     this.activityService.getActivity(this.activityId)
     .then(result => this.activity = result);
-    })
+    });
 
   }
   voteNegative() {
-    this.voicesService.voteNegative(this.activityId)    
+    this.voicesService.voteNegative(this.activityId)
     .then(() => {
     this.activityService.getActivity(this.activityId)
     .then(result => this.activity = result);
-    })
+    });
   }
 
   ngOnInit() {

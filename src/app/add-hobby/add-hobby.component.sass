@@ -5,20 +5,56 @@
 	margin-right: 140px
 .button-back
 	display: inline-block
-	margin: 24px 0 41px 0
+	margin: 30px 0 45px 0
 	width: 86px
 	font-size: 20px
 	text-decoration: underline
 	&:hover
 		text-decoration: none
-
 .form-item-course-name
 	width: 650px
+	margin-bottom: 22px
+.add-photo-main
+	width: 650px
+	height: 460px
+	box-sizing: border-box
+	border: 2px solid #795548
+	position: relative
+	transition: 0.4s
+	cursor: pointer
+	&:before
+		content: ""
+		display: block
+		position: absolute
+		top: 215px
+		right: 323px
+		width: 2px
+		height: 30px
+		background-color: #795548
+		transition: 0.4s
+	&:after
+		content: ""
+		display: block
+		position: absolute
+		top: 229px
+		right: 309px
+		width: 30px
+		height: 2px
+		background-color: #795548
+		transition: 0.4s
+	&:hover
+		background-color: rgba(#795548, .1)
+	&:hover:before
+		transform: scale(1.2)
+	&:hover:after
+		transform: scale(1.2)
 .form-right
 	width: 500px
 	position: absolute
 	display: inline-block
 	margin-top: 145px
+	[class^='form-item']
+		margin-bottom: 20px
 .form-item-organizer
 	width: 233px
 	margin-right: 40px
@@ -37,8 +73,13 @@
 	width: 484px	
 .form-item-price
 	width: 484px
-	
+.form-item-free-checkbox
+	font-size: 20px
+
 .form-bottom
+.form-item-sobriety-checkbox
+	font-size: 20px
+	line-height: 27px
 .form-item-description
 	width: 1070px
 	display: block	
@@ -51,4 +92,4 @@
 	height: 44px
 	font-size: 20px
 	font-weight: 400
-	margin: 30px 0
+	margin: 50px 0

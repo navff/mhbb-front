@@ -8,7 +8,6 @@ import { AdminOrganizersEditComponent }     from './admin-organizers/admin-organ
 import { AdminUsersComponent }     from './admin-users/admin-users.component';
 import { AdminUsersEditComponent }     from './admin-users/admin-users-edit/admin-users-edit.component';
 import { AdminReviewsComponent }     from './admin-reviews/admin-reviews.component';
-import { AdminFooterComponent }      from './shared/admin-footer/admin-footer.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -25,8 +24,7 @@ import { SharedModule } from '../shared/shared.module';
     AdminMainComponent,
     AdminOrganizersComponent, AdminOrganizersEditComponent,
     AdminUsersComponent, AdminUsersEditComponent,
-    AdminReviewsComponent,
-    AdminFooterComponent,
+    AdminReviewsComponent
    ]
 })
 export class AdminModule {}

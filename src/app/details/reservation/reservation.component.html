@@ -9,10 +9,6 @@
 				<p>{{organizer}}</p>
 			</li>
 			<li>
-				<h4 class="bold">Возраст:</h4>
-				<p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
-			</li>
-			<li>
 				<h4 class="bold">Телефоны:</h4>
 				<p>{{activity.Phones}}</p>
 			</li>
@@ -23,14 +19,6 @@
 			<li>
 				<h4 class="bold">Цены:</h4>
 				<p>{{activity.Prices}}</p>
-			</li>
-			<li>
-				<h4 class="bold">Трезвость:</h4>
-				<p>Преподаватели не пьют и не курят</p>
-			</li>
-			<li>
-				<h4 class="bold">Ведущий:</h4>
-				<p>{{activity.Mentor}}</p>
 			</li>
 		</ul>
 	</section>
@@ -49,6 +37,6 @@
 			<input mdInput placeholder="Пожелания, комментарии">
 		</md-input-container>
 		<button routerLink='/details/reservation/reservationsuccess' md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
-		<p>С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
+		<p class="message-link">С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
 	</form>
 </div>
