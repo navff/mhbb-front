@@ -32,4 +32,26 @@ export class UserService {
         .map((response) => response.json())
         .toPromise();
     }
+    putUser(email: any, body: any) {
+    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(`http://test.mhbb.ru/b/api/organizer/${email}`, body, options)
+    .map((response) => response.json())
+    .toPromise();
+    }
+}
+export class UserPutBody {
+    Email: string;
+    Name: string;
+    Phone: string;
+    Role: string;
+    Picture: null;
+    CityId: any;
+    constructor(email: string, name: string, phone: string, role: string, cityid: number) {
+      this.Email = email;
+      this.Name = name;
+      this.Phone = phone;
+      this.Role = role;
+      this.CityId = cityid;
+}
 }

@@ -1,17 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizerService } from '../../../shared/organizer.service';
+import { OrganizerService, OrganizerPutBody } from '../../../shared/organizer.service';
 import { CityService } from '../../../shared/city.service';
-
-export class OrganizerPutBody {
-    Name: string;
-    CityId: any;
-    Sobriety: boolean;
-    constructor(name: string, cityid: number, sobriety: boolean) {
-      this.Name = name;
-      this.CityId = cityid;
-      this.Sobriety = sobriety;
-}
-}
 
 @Component({
   selector: 'my-admin-organizers-edit',
@@ -22,10 +11,12 @@ export class OrganizerPutBody {
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
+
   organizerCityName: string;
   organizerName: string;
   organizerSobriety: boolean;
   cityId: number;
+
   organizer: any = {};
   organizerId = localStorage.getItem('organizerId');
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
@@ -45,6 +36,7 @@ ngOnInit() {
   .then(result => this.organizer = result)
   .then(() => that.organizerCityName = that.organizer.City.Name)
   .then(() => that.organizerName = that.organizer.Name)
+  .then(() => that.cityId = that.organizer.City.Id)
   .then(() => that.organizerSobriety = that.organizer.Sobriety);
 }
 }
