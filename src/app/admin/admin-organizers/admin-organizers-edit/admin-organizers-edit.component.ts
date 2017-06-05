@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../../shared/organizer.service';
 import { CityService } from '../../../shared/city.service';
-import { Response } from '@angular/http';
 
 export class OrganizerPutBody {
     Name: string;
@@ -37,7 +36,7 @@ constructor(private organizerService: OrganizerService, private cityService: Cit
   }
 ngOnInit() {
   let that = this;
-  this.cityService.getCities().subscribe((data: Response) => this.cities = data.json());
+  this.cityService.getCities().then(result => this.cities = result);
   this.organizerService.getOrganizerById(this.organizerId)
   .then(result => this.organizer = result)
   .then(() => that.organizerCityName = that.organizer.City.Name)

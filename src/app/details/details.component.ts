@@ -30,7 +30,6 @@ export class DetailsComponent implements OnInit {
     .then(result => this.activity = result);
     });
   }
-
   ngOnInit() {
     let that = this;
     this.activityService.getActivity(this.activityId)

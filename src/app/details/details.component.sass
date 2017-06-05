@@ -9,22 +9,27 @@
 	text-decoration: underline
 	&:hover
 		text-decoration: none
-.heading-list
-	height: 300px
-[class^=heading-item]
-	display: inline-block
-.heading-item-heading
+.heading
+	position: relative
+	.voicing
+		position: absolute
+		right: 0
+		top: 4px
+		.thumb-up
+		.thumb-down
+			transform: rotate(180deg)
+		[class^='thumb']
+			width: 27px
+			cursor: pointer
+			display: inline-block
+		.amount
+			font-size: 26px
+			margin: 0 5px
+			display: inline-block
+	h1
 		font-size: 35px
-.heading-item-amount
-	font-size: 26px
-	margin: 0 5px
-[class^='heading-item-thumb']
-	width: 27px
-	cursor: pointer
-.heading-item-thumb-up
-	margin-left: 30px
-.heading-item-thumb-down
-	transform: rotate(180deg)
+		width: 520px
+
 
 .info
 	margin-top: 150px

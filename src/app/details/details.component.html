@@ -2,20 +2,20 @@
 	<div class="container">
 		<section class="gallery">
 			<a routerLink='' class="button-back">&larr; Поиск</a>
-			<ul class="heading-list">
-				<li class="heading-item-heading">
-					<h1>{{activity.Name}}</h1>
-				</li>
-				<li (click)="votePositive()" class="heading-item-thumb-up">
+			<div class="heading">
+				<h1>{{activity.Name}}</h1>
+
+				<div class="voicing">
+					<div (click)="votePositive()" class="thumb-up">
+							<img src="img/thumbs-up-black.svg" alt="">
+					</div>
+						<p class="amount">{{activity.Voices}}</p>
+
+					<div (click)="voteNegative()" class="thumb-down">
 						<img src="img/thumbs-up-black.svg" alt="">
-				</li>
-				<li class="heading-item-amount">
-					<p>{{activity.Voices}}</p>
-				</li>
-				<li (click)="voteNegative()" class="heading-item-thumb-down">
-					<img src="img/thumbs-up-black.svg" alt="">
-				</li>
-			</ul>
+					</div>
+				</div>
+			</div>
 		</section>
 		<section class="info">
 			<ul class="info-list">

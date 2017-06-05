@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../shared/organizer.service';
 import { CityService } from '../../shared/city.service';
-import { Response } from '@angular/http';
 
 @Component({
   selector: 'my-admin-organizers',
@@ -24,7 +23,7 @@ constructor(private organizerService: OrganizerService, private cityService: Cit
     localStorage.setItem('organizerId', id);
   }
 ngOnInit() {
-    this.cityService.getCities().subscribe((data: Response) => this.cities = data.json());
+    this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizers(this.page)
     .then(result => this.organizers = result);
     };

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
 import { ActivityService } from '../shared/activity.service';
 import { InterestService } from '../shared/interest.service';
 import { CityService } from '../shared/city.service';
@@ -24,12 +23,12 @@ export class HomeComponent implements OnInit {
       this.args[index] = value;
       this.activityService
       .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
-      .subscribe((data: Response) => this.activities = data.json());
+      .then(result => this.activities = result);
     }
 
     ngOnInit() {
-        this.activityService.getActivities().subscribe((data: Response) => this.activities = data.json());
-        this.interestService.getInterests().subscribe((data: Response) => this.interests = data.json());
-        this.cityService.getCities().subscribe((data: Response) => this.cities = data.json());
+        this.activityService.getActivities().then(result => this.activities = result);
+        this.interestService.getInterests().then(result => this.interests = result);
+        this.cityService.getCities().then(result => this.cities = result);
     };
 }

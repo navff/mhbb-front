@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/user.service';
 import { CityService } from '../../../shared/city.service';
-import { Response } from '@angular/http';
 
 @Component({
   selector: 'my-admin-users-edit',
@@ -18,7 +17,7 @@ export class AdminUsersEditComponent implements OnInit {
   constructor(private userService: UserService, private cityService: CityService) {}
 ngOnInit() {
   let that = this;
-  this.cityService.getCities().subscribe((data: Response) => this.cities = data.json());
+  this.cityService.getCities().then(result => this.cities = result);
   this.userService.getUserByEmail(this.userEmail)
   .then(result => this.user = result)
   .then(() => that.selectedCity = that.user.CityName)

@@ -22,7 +22,9 @@ export class ActivityService {
         f = free     ? `free=${free}` : '';
 
         q = [w, i, c, s, a, f].filter(function(x) { return x !== ''; }).join('&');
-        return this.http.get(`http://test.mhbb.ru/b/api/activity/search?${q}`);
+        return this.http.get(`http://test.mhbb.ru/b/api/activity/search?${q}`)
+        .map((response) => response.json())
+        .toPromise();
     }
 
 
@@ -45,7 +47,9 @@ export class ActivityService {
         let headers = new Headers({'Authorization': 'Token Abrakadabra'});
         let options = new RequestOptions({ headers: headers });
         let url = `http://test.mhbb.ru/b/api/activity/searchunchecked?${q}`;
-        return this.http.get(url, options);
+        return this.http.get(url, options)
+        .map((response) => response.json())
+        .toPromise();
     }
     getActivity(id) {
         return this.http.get(`http://test.mhbb.ru/b/api/activity/${id}`)

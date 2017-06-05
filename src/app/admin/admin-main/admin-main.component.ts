@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
 import { ActivityService } from '../../shared/activity.service';
 import { CityService } from '../../shared/city.service';
 import { InterestService } from '../../shared/interest.service';
@@ -25,15 +24,15 @@ export class AdminMainComponent implements OnInit {
     this.args[index] = value;
     this.activityService
     .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
-    .subscribe((data: Response) => this.activities = data.json());
+    .then(result => this.activities = result);
     this.activityService
     .getUncheckedActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
-    .subscribe((data: Response) => this.uncheckedActivities = data.json());
+    .then(result => this.activities = result);
   }
 ngOnInit() {
-  this.cityService.getCities().subscribe((data: Response) => this.cities = data.json());
-  this.interestService.getInterests().subscribe((data: Response) => this.interests = data.json());
-  this.activityService.getActivities().subscribe((data: Response) => this.activities = data.json());
-  this.activityService.getUncheckedActivities().subscribe((data: Response) => this.uncheckedActivities = data.json());
+  this.cityService.getCities().then(result => this.cities = result);
+  this.interestService.getInterests().then(result => this.interests = result);
+  this.activityService.getActivities().then(result => this.activities = result);
+  this.activityService.getUncheckedActivities().then(result => this.uncheckedActivities = result);
     };
 }
