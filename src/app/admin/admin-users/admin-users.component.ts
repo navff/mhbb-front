@@ -6,7 +6,7 @@ import { CityService } from '../../shared/city.service';
   selector: 'my-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.sass'],
-  providers: [UserService, CityService],
+  providers: [UserService, CityService]
 })
 export class AdminUsersComponent implements OnInit {
   cities = [];
@@ -14,7 +14,9 @@ export class AdminUsersComponent implements OnInit {
   reserveContent = [1];
   args: any[] = [];
   page = 1;
-    constructor(private userService: UserService, private cityService: CityService) {}
+
+  constructor(private userService: UserService, private cityService: CityService) {}
+
   concatPage() {
     this.page += 1;
     let reservePage = this.page + 1;
@@ -26,10 +28,10 @@ export class AdminUsersComponent implements OnInit {
     });
     console.log(this.reserveContent);
   }
-    reset() {
-      this.page = 1;
-      this.reserveContent[0] = 1;
-    }
+  reset() {
+    this.page = 1;
+    this.reserveContent[0] = 1;
+  }
   setArgument(index, value, index2?, value2?) {
     this.reset();
     this.args[index] = value;
@@ -40,9 +42,9 @@ export class AdminUsersComponent implements OnInit {
   saveUserEmail(email) {
     localStorage.setItem('userEmail', email);
   }
-    ngOnInit() {
-      this.cityService.getCities().then(result => this.cities = result);
-      this.userService.getUsers()
-      .then(result => this.users = result);
-    };
-}
+
+  ngOnInit() {
+    this.cityService.getCities().then(result => this.cities = result);
+    this.userService.getUsers()
+    .then(result => this.users = result);
+}}

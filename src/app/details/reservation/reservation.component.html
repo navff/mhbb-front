@@ -1,42 +1,43 @@
 <my-header></my-header>
-<div class="container">
-	<section class="info">
-		<a routerLink='/details' class="button-back">&larr; Назад</a>
-		<h1 class="heading">{{activity.Name}}</h1>
-		<ul class="info-list">
-			<li>
-				<h4 class="bold">Организатор:</h4>
-				<p>{{organizer}}</p>
-			</li>
-			<li>
-				<h4 class="bold">Телефоны:</h4>
-				<p>{{activity.Phones}}</p>
-			</li>
-			<li>
-				<h4 class="bold">Адрес:</h4>
-				<p>{{activity.Address}}</p>
-			</li>
-			<li>
-				<h4 class="bold">Цены:</h4>
-				<p>{{activity.Prices}}</p>
-			</li>
-		</ul>
-	</section>
 
-	<form>
-		<md-input-container class="form-item">
-			<input mdInput placeholder="Имя, Фамилия" required>
-		</md-input-container>
-		<md-input-container class="form-item">
-			<input mdInput placeholder="Сотовый телефон" required>
-		</md-input-container>
-		<md-input-container class="form-item">
-			<input mdInput placeholder="Электронная почта" required type="email">
-		</md-input-container>
-		<md-input-container class="form-item form-item-commentary">
-			<input mdInput placeholder="Пожелания, комментарии">
-		</md-input-container>
-		<button routerLink='/details/reservation/reservationsuccess' md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
-		<p class="message-link">С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
-	</form>
+<div class="container">
+    <section class="info">
+        <a routerLink='/details' class="button-back">&larr; Назад</a>
+        <h1 class="heading">{{activity.Name}}</h1>
+        <ul class="info-list">
+            <li>
+                <h4 class="bold">Организатор:</h4>
+                <p>{{organizer}}</p>
+            </li>
+            <li>
+                <h4 class="bold">Телефоны:</h4>
+                <p>{{activity.Phones}}</p>
+            </li>
+            <li>
+                <h4 class="bold">Адрес:</h4>
+                <p>{{activity.Address}}</p>
+            </li>
+            <li>
+                <h4 class="bold">Цены:</h4>
+                <p>{{activity.Prices}}</p>
+            </li>
+        </ul>
+    </section>
+
+    <form>
+        <md-input-container class="form-item">
+            <input mdInput placeholder="Имя, Фамилия" required>
+        </md-input-container>
+        <md-input-container class="form-item">
+            <input mdInput placeholder="Сотовый телефон" required>
+        </md-input-container>
+        <md-input-container class="form-item">
+            <input mdInput placeholder="Электронная почта" required type="email">
+        </md-input-container>
+        <md-input-container class="form-item form-item-commentary">
+            <input mdInput placeholder="Пожелания, комментарии">
+        </md-input-container>
+        <button routerLink='/details/reservation/reservationsuccess' md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        <p class="message-link">С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
+    </form>
 </div>

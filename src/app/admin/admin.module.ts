@@ -12,19 +12,18 @@ import { AdminReviewsComponent }     from './admin-reviews/admin-reviews.compone
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-
 @NgModule({
   imports:      [
     CommonModule,
     SharedModule,
     AdminRoutingModule,
-   ],
+  ],
   declarations: [
     AdminComponent,
     AdminMainComponent,
     AdminOrganizersComponent, AdminOrganizersEditComponent,
     AdminUsersComponent, AdminUsersEditComponent,
     AdminReviewsComponent
-   ]
+  ]
 })
 export class AdminModule {}

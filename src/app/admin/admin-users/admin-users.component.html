@@ -15,5 +15,5 @@
             <a (click)="saveUserEmail(user.Email)" routerLink='../users/edit'>{{user.Name}}</a>
         </div> 
     </div>
-		<button *ngIf="reserveContent.length > 0 && users.length > 98" (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
+        <button *ngIf="reserveContent.length > 0 && users.length > 98" (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
 </section>

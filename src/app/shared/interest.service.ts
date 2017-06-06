@@ -5,11 +5,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class InterestService {
-    constructor(private http: Http) {}
+  constructor(private http: Http) {}
 
-    getInterests() {
-        return this.http.get('http://test.mhbb.ru/b/api/interest/getall')
-        .map((response) => response.json())
-        .toPromise();
-    }
-}
+  getInterests() {
+    return this.http.get('http://test.mhbb.ru/b/api/interest/getall')
+    .map((response) => response.json())
+    .toPromise();
+}}

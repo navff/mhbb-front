@@ -7,7 +7,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddHobbyComponent } from './add-hobby.component';
 import { AddHobbySuccessComponent } from './add-hobby-success/add-hobby-success.component';
 
-
 const routes: Routes = [
   { path: '', component: AddHobbyComponent },
   { path: 'success', component: AddHobbySuccessComponent }

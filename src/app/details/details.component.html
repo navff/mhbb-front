@@ -1,65 +1,66 @@
 <my-header></my-header>
-	<div class="container">
-		<section class="gallery">
-			<a routerLink='' class="button-back">&larr; Поиск</a>
-			<div class="heading">
-				<h1>{{activity.Name}}</h1>
 
-				<div class="voicing">
-					<div (click)="votePositive()" class="thumb-up">
-							<img src="img/thumbs-up-black.svg" alt="">
-					</div>
-						<p class="amount">{{voteAmount}}</p>
+    <div class="container">
+        <section class="gallery">
+            <a routerLink='' class="button-back">&larr; Поиск</a>
+            <div class="heading">
+                <h1>{{activity.Name}}</h1>
 
-					<div (click)="voteNegative()" class="thumb-down">
-						<img src="img/thumbs-up-black.svg" alt="">
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="info">
-			<ul class="info-list">
-				<li>
-					<h4 class="bold">Организатор:</h4>
-					<p>{{organizer}}</p>
-				</li>
-				<li>
-					<h4 class="bold">Возраст:</h4>
-					<p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
-				</li>
-				<li>
-					<h4 class="bold">Телефоны:</h4>
-					<p>
-						{{activity.Phones}}
-					</p>
-				</li>
-				<li>
-					<h4 class="bold">Адрес:</h4>
-					<p>
-						{{activity.Address}}
-					</p>
-				</li>
-				<li>
-					<h4 class="bold">Цены:</h4>
-					<div class="prices">
-						<p>{{activity.Prices}}</p>
-						<img class="hobby-free-icon" src="img/free-withborder.svg" alt="" *ngIf="activity.Free">
-					</div>
-					
-				</li>
-				<li>
-					<h4 class="bold">Трезвость:</h4>
-					<p>Преподаватели не пьют и не курят</p>
-				</li>
-				<li>
-					<h4 class="bold">Ведущий:</h4>
-					<p>{{activity.Mentor}}</p>
-				</li>
-			</ul>
-			<button routerLink='/details/reservation' md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
-		</section>
-		<p class="description">
-			{{activity.Description}}
-		</p>
-	</div>
-	
+                <div class="voicing">
+                    <div (click)="votePositive()" class="thumb-up">
+                            <img src="img/thumbs-up-black.svg" alt="">
+                    </div>
+                        <p class="amount">{{voteAmount}}</p>
+
+                    <div (click)="voteNegative()" class="thumb-down">
+                        <img src="img/thumbs-up-black.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="info">
+            <ul class="info-list">
+                <li>
+                    <h4 class="bold">Организатор:</h4>
+                    <p>{{organizer}}</p>
+                </li>
+                <li>
+                    <h4 class="bold">Возраст:</h4>
+                    <p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
+                </li>
+                <li>
+                    <h4 class="bold">Телефоны:</h4>
+                    <p>
+                        {{activity.Phones}}
+                    </p>
+                </li>
+                <li>
+                    <h4 class="bold">Адрес:</h4>
+                    <p>
+                        {{activity.Address}}
+                    </p>
+                </li>
+                <li>
+                    <h4 class="bold">Цены:</h4>
+                    <div class="prices">
+                        <p>{{activity.Prices}}</p>
+                        <img class="hobby-free-icon" src="img/free-withborder.svg" alt="" *ngIf="activity.Free">
+                    </div>
+                    
+                </li>
+                <li>
+                    <h4 class="bold">Трезвость:</h4>
+                    <p>Преподаватели не пьют и не курят</p>
+                </li>
+                <li>
+                    <h4 class="bold">Ведущий:</h4>
+                    <p>{{activity.Mentor}}</p>
+                </li>
+            </ul>
+            <button routerLink='/details/reservation' md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        </section>
+        <p class="description">
+            {{activity.Description}}
+        </p>
+    </div>
+    

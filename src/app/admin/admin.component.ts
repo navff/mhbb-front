@@ -11,10 +11,11 @@ import { ActivityService } from '../shared/activity.service';
 export class AdminComponent implements OnInit {
   activities = [];
   activitiesCount: number;
-    constructor(private activityService: ActivityService) {}
-    ngOnInit() {
-        this.activityService.getUncheckedActivities()
-        .then(result => this.activities = result)
-        .then(() => this.activitiesCount = this.activities.length);
-    };
-}
+
+  constructor(private activityService: ActivityService) {}
+
+  ngOnInit() {
+    this.activityService.getUncheckedActivities()
+    .then(result => this.activities = result)
+    .then(() => this.activitiesCount = this.activities.length);
+}}

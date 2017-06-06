@@ -11,6 +11,7 @@ export class ReservationComponent implements OnInit {
 activity: any = {};
 organizer: string;
 activityId = localStorage.getItem('activityId');
+
 constructor(private activityService: ActivityService) {}
 
 ngOnInit() {

@@ -14,7 +14,9 @@ export class AdminOrganizersComponent implements OnInit {
   reserveContent = [1];
   page = 1;
   args: any[] = [];
-constructor(private organizerService: OrganizerService, private cityService: CityService) {}
+
+  constructor(private organizerService: OrganizerService, private cityService: CityService) {}
+
   concatPage() {
     this.page += 1;
     let reservePage = this.page + 1;
@@ -38,9 +40,8 @@ constructor(private organizerService: OrganizerService, private cityService: Cit
   saveOrganizerId(id) {
     localStorage.setItem('organizerId', id);
   }
-ngOnInit() {
+  ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizers(this.page)
     .then(result => this.organizers = result);
-    };
-}
+}}

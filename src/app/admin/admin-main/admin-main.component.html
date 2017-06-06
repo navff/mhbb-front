@@ -2,57 +2,57 @@
 
 
 <section class="hobbies container">
-	<form class="hobbies-form">
-		<md-input-container class="hobbies-search">
-			<input (focusout)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
-		</md-input-container>
-		
-		<md-input-container class="hobbies-age">
-			<input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст">
-		</md-input-container>
-		
-		<md-select (change)="setArgument(3, interest.Id)" [(ngModel)]="interest" name="interest"  class="hobbies-interests" placeholder="Интересы" floatPlaceholder="never">
-			<md-option *ngFor="let interest of interests" [value]="interest">{{ interest.Name }}</md-option>
-		</md-select>
+    <form class="hobbies-form">
+        <md-input-container class="hobbies-search">
+            <input (focusout)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+        </md-input-container>
+        
+        <md-input-container class="hobbies-age">
+            <input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст">
+        </md-input-container>
+        
+        <md-select (change)="setArgument(3, interest.Id)" [(ngModel)]="interest" name="interest"  class="hobbies-interests" placeholder="Интересы" floatPlaceholder="never">
+            <md-option *ngFor="let interest of interests" [value]="interest">{{ interest.Name }}</md-option>
+        </md-select>
 
-		<md-select (change)="setArgument(3, city.Id)" [(ngModel)]="city" name="city" class="hobbies-cities" placeholder="Город" floatPlaceholder="never">
-			<md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
-		</md-select>
-		
-		<md-checkbox (click)="setArgument(4, !IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="hobbies-soberness">Трезвость</md-checkbox>
-		<md-checkbox (click)="setArgument(5, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary">Бесплатно</md-checkbox>
-			<a class="hobbies-add" routerLink='/addhobby' md-fab></a>
-	</form>
+        <md-select (change)="setArgument(3, city.Id)" [(ngModel)]="city" name="city" class="hobbies-cities" placeholder="Город" floatPlaceholder="never">
+            <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
+        </md-select>
+        
+        <md-checkbox (click)="setArgument(4, !IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="hobbies-soberness">Трезвость</md-checkbox>
+        <md-checkbox (click)="setArgument(5, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary">Бесплатно</md-checkbox>
+            <a class="hobbies-add" routerLink='/addhobby' md-fab></a>
+    </form>
 
 <h2 class="admin-heading">На проверку</h2>
 <div class="hobbies-flex">
-	<div routerLink='/details' class="hobby-wrapper" *ngFor="let unchecked of uncheckedActivities">
-		<img src="" alt="" class="hobby-image">
-		<div class="hobby-top-descr">
-			<p class="hobby-age">От {{unchecked.AgeFrom}} до {{unchecked.AgeTo}} лет</p>
-		</div>
-		<div class="hobby-bottom-descr">
-			<h6 class="hobby-name">{{unchecked.Name}}</h6>
-			<p class="hobby-company">{{unchecked.Organizer.Name}}</p>
-			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="unchecked.Free">
-		</div>
-	</div>		
+    <div class="hobby-wrapper" *ngFor="let unchecked of uncheckedActivities">
+        <img src="" alt="" class="hobby-image">
+        <div class="hobby-top-descr">
+            <p class="hobby-age">От {{unchecked.AgeFrom}} до {{unchecked.AgeTo}} лет</p>
+        </div>
+        <div class="hobby-bottom-descr">
+            <h6 class="hobby-name">{{unchecked.Name}}</h6>
+            <p class="hobby-company">{{unchecked.Organizer.Name}}</p>
+            <img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="unchecked.Free">
+        </div>
+    </div>		
 </div>
 
 <h2 class="admin-heading">Проверенные</h2>
 <div class="hobbies-flex">
-	<div routerLink='/details' class="hobby-wrapper" *ngFor="let activity of activities">
-		<img src="" alt="" class="hobby-image">
-		<div class="hobby-top-descr">
-			<p class="hobby-age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
-			<p class="hobby-likes">{{activity.Voices}}</p>
-		</div>
-		<div class="hobby-bottom-descr">
-			<h6 class="hobby-name">{{activity.Name}}</h6>
-			<p class="hobby-company">{{activity.Organizer.Name}}</p>
-			<img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="activity.Free">
-		</div>
-	</div>		
+    <div routerLink='/details' class="hobby-wrapper" *ngFor="let activity of activities">
+        <img src="" alt="" class="hobby-image">
+        <div class="hobby-top-descr">
+            <p class="hobby-age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
+            <p class="hobby-likes">{{activity.Voices}}</p>
+        </div>
+        <div class="hobby-bottom-descr">
+            <h6 class="hobby-name">{{activity.Name}}</h6>
+            <p class="hobby-company">{{activity.Organizer.Name}}</p>
+            <img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="activity.Free">
+        </div>
+    </div>		
 </div>
 
 </section>

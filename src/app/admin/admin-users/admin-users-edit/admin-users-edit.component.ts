@@ -19,6 +19,7 @@ export class AdminUsersEditComponent implements OnInit {
   userRole: string;
 
   user: any = {};
+
   constructor(private userService: UserService, private cityService: CityService) {}
 
   putUser() {
@@ -26,12 +27,11 @@ export class AdminUsersEditComponent implements OnInit {
   this.user.putUser(this.searchEmail, body)
   .then(result => this.user = result);
   }
-ngOnInit() {
-  let that = this;
-  this.cityService.getCities().then(result => this.cities = result);
-  this.userService.getUserByEmail(this.searchEmail)
-  .then(result => this.user = result)
-  .then(() => that.selectedCity = that.user.CityName)
-  .then(() => that.userRole = that.user.RoleName);
-}
-}
+  ngOnInit() {
+    let that = this;
+    this.cityService.getCities().then(result => this.cities = result);
+    this.userService.getUserByEmail(this.searchEmail)
+    .then(result => this.user = result)
+    .then(() => that.selectedCity = that.user.CityName)
+    .then(() => that.userRole = that.user.RoleName);
+}}

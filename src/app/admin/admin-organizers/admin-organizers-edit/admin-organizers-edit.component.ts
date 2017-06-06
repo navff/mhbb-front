@@ -6,8 +6,7 @@ import { CityService } from '../../../shared/city.service';
   selector: 'my-admin-organizers-edit',
   templateUrl: './admin-organizers-edit.component.html',
   styleUrls: ['./admin-organizers-edit.component.sass'],
-  providers: [OrganizerService, CityService],
-
+  providers: [OrganizerService, CityService]
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
@@ -19,6 +18,7 @@ export class AdminOrganizersEditComponent implements OnInit {
 
   organizer: any = {};
   organizerId = localStorage.getItem('organizerId');
+
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
 
   putOrganizer() {
@@ -29,14 +29,13 @@ constructor(private organizerService: OrganizerService, private cityService: Cit
   saveId(id) {
     this.cityId = id;
   }
-ngOnInit() {
-  let that = this;
-  this.cityService.getCities().then(result => this.cities = result);
-  this.organizerService.getOrganizerById(this.organizerId)
-  .then(result => this.organizer = result)
-  .then(() => that.organizerCityName = that.organizer.City.Name)
-  .then(() => that.organizerName = that.organizer.Name)
-  .then(() => that.cityId = that.organizer.City.Id)
-  .then(() => that.organizerSobriety = that.organizer.Sobriety);
-}
-}
+  ngOnInit() {
+    let that = this;
+    this.cityService.getCities().then(result => this.cities = result);
+    this.organizerService.getOrganizerById(this.organizerId)
+    .then(result => this.organizer = result)
+    .then(() => that.organizerCityName = that.organizer.City.Name)
+    .then(() => that.organizerName = that.organizer.Name)
+    .then(() => that.cityId = that.organizer.City.Id)
+    .then(() => that.organizerSobriety = that.organizer.Sobriety);
+}}

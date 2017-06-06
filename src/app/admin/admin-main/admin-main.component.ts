@@ -20,6 +20,7 @@ export class AdminMainComponent implements OnInit {
   constructor(private activityService: ActivityService,
               private cityService: CityService,
               private interestService: InterestService) {}
+
   setArgument(index, value) {
     this.args[index] = value;
     this.activityService
@@ -29,10 +30,9 @@ export class AdminMainComponent implements OnInit {
     .getUncheckedActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
     .then(result => this.activities = result);
   }
-ngOnInit() {
-  this.cityService.getCities().then(result => this.cities = result);
-  this.interestService.getInterests().then(result => this.interests = result);
-  this.activityService.getActivities().then(result => this.activities = result);
-  this.activityService.getUncheckedActivities().then(result => this.uncheckedActivities = result);
-    };
-}
+  ngOnInit() {
+    this.cityService.getCities().then(result => this.cities = result);
+    this.interestService.getInterests().then(result => this.interests = result);
+    this.activityService.getActivities().then(result => this.activities = result);
+    this.activityService.getUncheckedActivities().then(result => this.uncheckedActivities = result);
+}}
