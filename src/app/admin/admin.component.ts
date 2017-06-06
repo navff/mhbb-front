@@ -1,4 +1,5 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, HostListener, Inject }      from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { CityService } from '../shared/city.service';
 import { ActivityService } from '../shared/activity.service';
 
@@ -11,11 +12,22 @@ import { ActivityService } from '../shared/activity.service';
 export class AdminComponent implements OnInit {
   activities = [];
   activitiesCount: number;
+  scrolled: boolean;
 
-  constructor(private activityService: ActivityService) {}
+  constructor(private activityService: ActivityService,
+  @Inject(DOCUMENT) private document: Document) {}
 
+  scrollToTop() {
+    window.scrollTo(0, 0);
+  }
   ngOnInit() {
     this.activityService.getUncheckedActivities()
     .then(result => this.activities = result)
     .then(() => this.activitiesCount = this.activities.length);
-}}
+  }
+  @HostListener('window:scroll', [])
+    onWindowScroll() {
+      let number = this.document.body.scrollTop;
+      this.scrolled = number > 700 ? true : false;
+  }
+}
