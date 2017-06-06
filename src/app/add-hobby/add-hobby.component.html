@@ -5,7 +5,8 @@
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса">
         </md-input-container>
-        <div class="add-photo-main"></div>
+        <div class="add-photo-main-design"></div>
+        <input (change)="fileChange($event)" type="file" class="add-photo-input" accept=".png,.jpg,.jpeg">
     </section>
 
     <form class='form-right'>

@@ -14,14 +14,13 @@
 .form-item-course-name
     width: 650px
     margin-bottom: 22px
-.add-photo-main
+.add-photo-main-design
     width: 650px
     height: 460px
     box-sizing: border-box
     border: 2px solid #795548
     position: relative
     transition: 0.4s
-    cursor: pointer
     &:before
         content: ""
         display: block
@@ -48,6 +47,14 @@
         transform: scale(1.2)
     &:hover:after
         transform: scale(1.2)
+.add-photo-input
+    position: relative
+    top: -460px
+    z-index: 2
+    opacity: 0
+    cursor: pointer
+    width: 650px
+    height: 460px
 .form-right
     width: 500px
     position: absolute

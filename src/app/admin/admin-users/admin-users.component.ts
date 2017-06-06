@@ -26,7 +26,6 @@ export class AdminUsersComponent implements OnInit {
       this.userService.getUsers(reservePage, this.args[0], this.args[1], this.args[2], this.args[3])
       .then(result => this.reserveContent = result);
     });
-    console.log(this.reserveContent);
   }
   reset() {
     this.page = 1;
