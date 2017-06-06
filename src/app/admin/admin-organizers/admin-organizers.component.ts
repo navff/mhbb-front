@@ -11,10 +11,26 @@ import { CityService } from '../../shared/city.service';
 export class AdminOrganizersComponent implements OnInit {
   cities = [];
   organizers = [];
+  reserveContent = [1];
   page = 1;
   args: any[] = [];
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
+  concatPage() {
+    this.page += 1;
+    let reservePage = this.page + 1;
+    this.organizerService.getOrganizers(this.page, this.args[0], this.args[1])
+    .then(result => this.organizers = this.organizers.concat(result))
+    .then(() => {
+      this.organizerService.getOrganizers(reservePage, this.args[0], this.args[1])
+      .then(result => this.reserveContent = result);
+    });
+  }
+  reset() {
+    this.page = 1;
+    this.reserveContent[0] = 1;
+  }
   setArgument(index, value) {
+      this.reset();
       this.args[index] = value;
       this.organizerService.getOrganizers(this.page, this.args[0], this.args[1])
       .then(result => this.organizers = result);

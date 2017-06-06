@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class OrganizerService {
     constructor(private http: Http) {}
 
-    getOrganizers(page?: any, word?: any, cityId?: any) {
+    getOrganizers(page?: number, word?: string, cityId?: number) {
         let w, c, p, q;
         w = word     ? `word=${word}` : '';
         c = cityId      ? `cityId=${cityId}` : '';

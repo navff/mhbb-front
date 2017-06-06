@@ -13,5 +13,6 @@
         <div *ngFor="let organizer of organizers" class="organizer"> 
             <a (click)="saveOrganizerId(organizer.Id)"  routerLink='../organizers/edit'>{{organizer.Name}}</a>
         </div>
+        <button *ngIf="reserveContent.length > 0 && organizers.length > 98" (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
     </div>
 </section>

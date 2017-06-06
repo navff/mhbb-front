@@ -7,14 +7,15 @@ import 'rxjs/add/operator/toPromise';
 export class UserService {
     constructor(private http: Http) {}
 
-    getUsers(role1?: any, role2?: any, word?: string, page?: any) {
-        let r1, r2, w, p, q;
+    getUsers(page?: number, role1?: any, role2?: any, cityId?: number, word?: string) {
+        let r1, r2, c, w, p, q;
 
         r1 = (role1 !== undefined)   ? `roles=${role1}` : '';
         r2 = (role2 !== undefined)   ? `roles=${role2}` : '';
+        c = cityId     ? `cityId=${cityId}` : '';
         w = word     ? `word=${word}` : '';
         p = page     ? `page=${page}` : '';
-        q = [r1, r2, w, p].filter(function(x) { return x !== ''; }).join('&');
+        q = [r1, r2, c, w, p].filter(function(x) { return x !== ''; }).join('&');
 
         let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
         let options = new RequestOptions({ headers: headers });
