@@ -57,3 +57,24 @@ export class ActivityService {
     .map((response) => response.json())
     .toPromise();
 }}
+
+export class UserPutBody {
+  Name: string
+  OrganizerId: number
+  Organizer: {
+    Name: string
+    CityId: number
+    Sobriety: boolean
+  }
+  AgeFrom: number
+  AgeTo: number
+  Phones: string
+  Address: string
+  Prices: string
+  Mentor: string
+  Description: string
+  InterestId: number
+  IsChecked: boolean
+  Free: boolean
+  FormId: number
+}

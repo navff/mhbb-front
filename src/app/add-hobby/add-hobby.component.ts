@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CityService } from '../shared/city.service';
+import { InterestService } from '../shared/interest.service';
 // import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -17,15 +19,20 @@ export class TempFilePutBody {
 @Component({
   selector: 'my-add-hobby',
   templateUrl: './add-hobby.component.html',
+  providers: [InterestService, CityService],
   styleUrls: ['./add-hobby.component.sass']
 })
-export class AddHobbyComponent {
+export class AddHobbyComponent implements OnInit {
+  cities = [];
+  interests = [];
+
   formId: string;
   isMain: true;
   fileName: string;
   fileData: any;
 
-  constructor() {}
+  constructor(private interestService: InterestService,
+              private cityService: CityService) {}
 
   encodeImage(file) {
     let reader = new FileReader();
@@ -53,5 +60,9 @@ export class AddHobbyComponent {
       // .map((response) => response.json())
       // .toPromise()
       // .then(result =>  console.log(result));
-  }
-}}
+  }}
+  ngOnInit() {
+    this.interestService.getInterests().then(result => this.interests = result);
+    this.cityService.getCities().then(result => this.cities = result);
+  };
+}
