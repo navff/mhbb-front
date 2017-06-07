@@ -14,12 +14,41 @@
 .form-item-course-name
     width: 650px
     margin-bottom: 22px
-.add-photo-main-design
+
+.wrapper
+    position: absolute
+    z-index: -1
+    top: 174px
+    right: 0
+    bottom: 0
+    left: 0
+    overflow: hidden
     width: 650px
     height: 460px
-    box-sizing: border-box
-    border: 2px solid #795548
+    .image-preview
+        position: absolute
+        top: 50%
+        left: 50%
+
+        width: auto
+        height: auto
+        max-height: none
+        max-width: none
+
+        min-height: 100%
+        min-width: 100%
+
+        transform: translate(-50%, -50%)
+        -ms-transform: translate(-50%, -50%)
+        -webkit-transform: translate(-50%, -50%)
+.input-design
+    cursor: pointer
     position: relative
+    box-sizing: border-box
+    display: block
+    width: 650px
+    height: 460px
+    border: solid 2px #795548
     transition: 0.4s
     &:before
         content: ""
@@ -42,19 +71,13 @@
         background-color: #795548
         transition: 0.4s
     &:hover
-        background-color: rgba(#795548, .1)
+        background-color: rgba(#795548, .15)
     &:hover:before
         transform: scale(1.2)
     &:hover:after
         transform: scale(1.2)
-.add-photo-input
-    position: relative
-    top: -460px
-    z-index: 2
+.add-image-input
     opacity: 0
-    cursor: pointer
-    width: 650px
-    height: 460px
 .form-right
     width: 500px
     position: absolute
@@ -62,6 +85,8 @@
     margin-top: 145px
     [class^='form-item']
         margin-bottom: 20px
+.add-image-input
+    z-index: 999
 .form-item-organizer
     width: 233px
     margin-right: 40px

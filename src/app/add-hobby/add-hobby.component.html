@@ -5,8 +5,12 @@
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса">
         </md-input-container>
-        <div class="add-photo-main-design"></div>
-        <input (change)="fileChange($event)" type="file" class="add-photo-input" accept=".png,.jpg,.jpeg">
+        <div class="wrapper">
+            <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="image-preview">
+        </div>
+        <label  class="input-design">
+            <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+        </label>
     </section>
 
     <form class='form-right'>
