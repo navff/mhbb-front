@@ -56,25 +56,45 @@ export class ActivityService {
     return this.http.get(`http://test.mhbb.ru/b/api/activity/${id}`)
     .map((response) => response.json())
     .toPromise();
+  }
+  postTempFile(body) {
+    let headers = new Headers({ 'Authorization': 'Token ABRAKADABRA',
+                                'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(`http://test.mhbb.ru/b/api/tempfile`, body, options)
+    .map((response) => response.json())
+    .toPromise();
+  }
+}
+export class TempFilePutBody {
+  FormId: string;
+  Filename: string;
+  Data: any;
+  IsMain: boolean;
+  constructor (formid: string, name: string, data: any, ismain: boolean) {
+    this.FormId = formid;
+    this.Filename = name;
+    this.Data = data;
+    this.IsMain = ismain;
 }}
 
-export class UserPutBody {
-  Name: string
-  OrganizerId: number
+export class ActivityPutBody {
+  Name: string;
+  OrganizerId: number;
   Organizer: {
-    Name: string
-    CityId: number
-    Sobriety: boolean
-  }
-  AgeFrom: number
-  AgeTo: number
-  Phones: string
-  Address: string
-  Prices: string
-  Mentor: string
-  Description: string
-  InterestId: number
-  IsChecked: boolean
-  Free: boolean
-  FormId: number
+    Name: string;
+    CityId: number;
+    Sobriety: boolean;
+  };
+  AgeFrom: number;
+  AgeTo: number;
+  Phones: string;
+  Address: string;
+  Prices: string;
+  Mentor: string;
+  Description: string;
+  InterestId: number;
+  IsChecked: boolean;
+  Free: boolean;
+  FormId: number;
 }

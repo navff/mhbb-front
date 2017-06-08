@@ -5,12 +5,34 @@
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса">
         </md-input-container>
-        <div class="wrapper">
-            <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="image-preview">
-        </div>
-        <label  class="input-design">
+        <label  class="main-input-design">
+            <div class="main-image-wrapper">
+                <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="main-image-preview">
+            </div>
             <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
         </label>
+        <div class="secondary-inputs">
+            <label  class="secondary-input-design-1">
+                <div class="secondary-image-wrapper">
+                    <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="secondary-image-preview">
+                </div>
+                <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+            </label>
+            <label  class="secondary-input-design-2">
+                <div class="secondary-image-wrapper">
+                    <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="secondary-image-preview">
+                </div>
+                <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+            </label>
+            <label  class="secondary-input-design-3">
+                <div class="secondary-image-wrapper">
+                    <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="secondary-image-preview">
+                </div>
+                <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+            </label>
+        </div>
+
+
     </section>
 
     <form class='form-right'>

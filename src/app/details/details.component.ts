@@ -13,7 +13,7 @@ export class DetailsComponent implements OnInit {
   activityId = localStorage.getItem('activityId');
   organizer: string;
   voteAmount: number;
-
+  picUrls = [];
   constructor(private activityService: ActivityService, private voicesService: VoicesService) {}
 
   votePositive() {
@@ -25,11 +25,14 @@ export class DetailsComponent implements OnInit {
     .then(result => this.voteAmount = result);
   }
   ngOnInit() {
-    let that = this;
     this.activityService.getActivity(this.activityId)
-    .then(result => this.activity = result)
-    .then(() => that.organizer = that.activity.Organizer.Name)
-    .then(() => that.voteAmount = that.activity.Voices);
-
+    .then(result => {
+          this.activity = result;
+          this.organizer = this.activity.Organizer.Name;
+          this.voteAmount = this.activity.Voices;
+          this.activity.Pictures.forEach((pic, i) => {
+              this.picUrls[i] = pic.Url;
+          });
+    });
   }
 }
