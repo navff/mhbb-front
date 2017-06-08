@@ -16,39 +16,39 @@ export class AddHobbyComponent implements OnInit {
   cities = [];
   interests = [];
 
-  formId: string;
-  isMain: boolean;
-  fileName: string;
-  fileData: string;
+
+  fileNames = [];
+  fileData = [];
+  formId: any;
 
   constructor(private interestService: InterestService,
               private cityService: CityService,
               // private activityService: ActivityService
               ) {}
 
-  encodeImage(file) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      this.fileData = reader.result;
-    };
-  }
-  fileChange(event) {
-    let fileList = event.target.files;
+  fileChange(event, index, isMain) {
+      let data, body, file: File;
+      file = event.target.files[0];
+      if (!this.formId) {
+        this.formId = Date.now().toString(10);
+      }
+      this.fileNames[index] = file.name;
 
-    if (fileList.length > 0) {
-      let file: File = fileList[0], data, body;
-      this.fileName = file.name;
-      this.encodeImage(file);
-      setTimeout(() => {
-        data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
-        body = new TempFilePutBody('1', this.fileName, data, true);
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        this.fileData[index] = reader.result;
+        data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
+        body = new TempFilePutBody(this.formId, this.fileNames[index], data, isMain);
+        console.log(body);
       //   this.activityService.postTempFile(body)
       //  .then(result =>  console.log(result));
-      }, 3000);
-
-
-  }}
+      };
+  }
+  removeImage(index) {
+    this.fileNames[index] = null;
+    this.fileData[index] = null;
+  }
   ngOnInit() {
     this.interestService.getInterests().then(result => this.interests = result);
     this.cityService.getCities().then(result => this.cities = result);

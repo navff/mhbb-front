@@ -5,32 +5,46 @@
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса">
         </md-input-container>
-        <label  class="main-input-design">
-            <div class="main-image-wrapper">
-                <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="main-image-preview">
+
+            <div class="main-image">
+                <div (click)="removeImage(0)" class="delete-image-button"></div>
+                <label  class="main-input-design">
+                    <div class="main-wrapper">
+                        <img [src]="fileData[0] ? fileData[0] : 'img/fallback.jpg'" alt="" class="main-preview">
+                    </div>
+                    <input (change)="fileChange($event, 0, true)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                </label>
             </div>
-            <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
-        </label>
-        <div class="secondary-inputs">
-            <label  class="secondary-input-design-1">
-                <div class="secondary-image-wrapper">
-                    <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="secondary-image-preview">
-                </div>
-                <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
-            </label>
-            <label  class="secondary-input-design-2">
-                <div class="secondary-image-wrapper">
-                    <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="secondary-image-preview">
-                </div>
-                <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
-            </label>
-            <label  class="secondary-input-design-3">
-                <div class="secondary-image-wrapper">
-                    <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="secondary-image-preview">
-                </div>
-                <input (change)="fileChange($event)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
-            </label>
-        </div>
+
+            <div *ngIf="fileData[0] || fileData[1]" class="secondary-image-1">
+                <div (click)="removeImage(1)" class="delete-image-button"></div>                
+                <label class="secondary-input-design">
+                    <div class="secondary-wrapper">
+                        <img [src]="fileData[1] ? fileData[1] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                    </div>
+                    <input (change)="fileChange($event, 1, false)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                </label>
+            </div>
+
+            <div *ngIf="fileData[1] || fileData[2]" class="secondary-image-2">
+                <div (click)="removeImage(2)" class="delete-image-button"></div>
+                <label  class="secondary-input-design">
+                    <div class="secondary-wrapper">
+                        <img [src]="fileData[2] ? fileData[2] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                    </div>
+                    <input (change)="fileChange($event, 2, false)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                </label>
+            </div>
+            
+            <div *ngIf="fileData[2] || fileData[3]" class="secondary-image-3">
+                <div (click)="removeImage(3)" class="delete-image-button"></div>
+                <label class="secondary-input-design">
+                    <div class="secondary-wrapper">
+                        <img [src]="fileData[3] ? fileData[3] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                    </div>
+                    <input (change)="fileChange($event, 3, false)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                </label>
+            </div>
 
 
     </section>

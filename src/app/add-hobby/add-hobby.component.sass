@@ -1,24 +1,61 @@
 .photos
-    width: 670px
+    width: 650px
     height: 850px
     display: inline-block
     margin-right: 140px
-.button-back
-    display: inline-block
-    margin: 30px 0 45px 0
-    width: 86px
-    font-size: 20px
-    text-decoration: underline
-    &:hover
-        text-decoration: none
-.form-item-course-name
-    width: 650px
-    margin-bottom: 22px
+    .button-back
+        display: inline-block
+        margin: 30px 0 45px 0
+        width: 86px
+        font-size: 20px
+        text-decoration: underline
+        &:hover
+            text-decoration: none
+    .form-item-course-name
+        width: 650px
+        margin-bottom: 22px
 
 .add-image-input
     opacity: 0
-    z-index: 999    
-
+    z-index: 10   
+.delete-image-button
+    position: absolute
+    right: 0
+    z-index: 20
+    cursor: pointer
+    width: 0
+    height: 0
+    border-style: solid
+    border-width: 0 50px 50px 0
+    border-color: transparent #795548 transparent transparent
+    &:before
+        content: ""
+        display: block
+        position: absolute
+        top: 10px
+        right: -35px
+        width: 1px
+        height: 11px
+        background-color: white
+        transition: 0.4s
+        transform: rotate(135deg)
+    &:after
+        content: ""
+        display: block
+        position: absolute
+        top: 15px
+        right: -40px
+        width: 11px
+        height: 1px
+        background-color: white
+        transition: 0.4s
+        transform: rotate(-45deg)        
+    &:hover:before
+        transform: rotate(135deg) scale(1.2)
+    &:hover:after
+        transform: rotate(-45deg) scale(1.2)
+.main-image
+    position: relative
 .main-input-design
     cursor: pointer
     position: relative
@@ -54,17 +91,17 @@
         transform: scale(1.2)
     &:hover:after
         transform: scale(1.2)
-    .main-image-wrapper
+    .main-wrapper
         position: absolute
         z-index: -1
-        top: 0
+        top: -1px
         right: 0
         bottom: 0
-        left: 0
+        left: -1px
         overflow: hidden
         width: 650px
         height: 460px
-        .main-image-preview
+        .main-preview
             position: absolute
             top: 50%
             left: 50%
@@ -78,13 +115,50 @@
             min-width: 100%
 
             transform: translate(-50%, -50%)
-[class^="secondary-input-design"]
+
+[class^="secondary-image"]
+    position: relative
+    width: 206px
+    height: 137px    
     margin-top: 20px
+    margin-right: 12px
     display: inline-block
+
+    .delete-image-button
+        border-width: 0 30px 30px 0
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            top: 4px
+            right: -22px
+            width: 1px
+            height: 9px
+            background-color: white
+            transition: 0.4s
+            transform: rotate(135deg)
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            top: 8px
+            right: -26px
+            width: 9px
+            height: 1px
+            background-color: white
+            transition: 0.4s
+            transform: rotate(-45deg)        
+        &:hover:before
+            transform: rotate(135deg) scale(1.2)
+        &:hover:after
+            transform: rotate(-45deg) scale(1.2)
+.secondary-image-3
+    margin-right: 0
+.secondary-input-design
+    display: block
     cursor: pointer
     position: relative
     box-sizing: border-box
-    margin-right: 12px
     width: 206px
     height: 137px
     border: solid 1px #795548
@@ -115,17 +189,17 @@
         transform: scale(1.2)
     &:hover:after
         transform: scale(1.2)
-    .secondary-image-wrapper
+    .secondary-wrapper
         position: absolute
         z-index: -1
-        top: 0
+        top: -1px
         right: 0
         bottom: 0
-        left: 0
+        left: -1px
         overflow: hidden
         width: 206px
         height: 137px
-        .secondary-image-preview
+        .secondary-preview
             position: absolute
             top: 50%
             left: 50%
@@ -139,8 +213,6 @@
             min-width: 100%
 
             transform: translate(-50%, -50%)
-.secondary-input-design-3
-    margin-right: 0
 .form-right
     width: 500px
     position: absolute
