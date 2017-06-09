@@ -12,37 +12,37 @@
                     <div class="main-wrapper">
                         <img [src]="fileData[0] ? fileData[0] : 'img/fallback.jpg'" alt="" class="main-preview">
                     </div>
-                    <input (change)="fileChange($event, 0, true)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                    <input (change)="fileChange($event, 0, true)" type="file"  id="input-0" class="add-image-input" accept=".png,.jpg,.jpeg">
                 </label>
             </div>
 
-            <div *ngIf="fileData[0] || fileData[1]" class="secondary-image-1">
+            <div *ngIf="counter > 0" class="secondary-image-1">
                 <div (click)="removeImage(1)" class="delete-image-button"></div>                
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper">
                         <img [src]="fileData[1] ? fileData[1] : 'img/fallback.jpg'" alt="" class="secondary-preview">
                     </div>
-                    <input (change)="fileChange($event, 1, false)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                    <input (change)="fileChange($event, 1, false)" type="file" id="input-1" class="add-image-input" accept=".png,.jpg,.jpeg">
                 </label>
             </div>
 
-            <div *ngIf="fileData[1] || fileData[2]" class="secondary-image-2">
+            <div *ngIf="counter > 1" class="secondary-image-2">
                 <div (click)="removeImage(2)" class="delete-image-button"></div>
                 <label  class="secondary-input-design">
                     <div class="secondary-wrapper">
                         <img [src]="fileData[2] ? fileData[2] : 'img/fallback.jpg'" alt="" class="secondary-preview">
                     </div>
-                    <input (change)="fileChange($event, 2, false)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                    <input (change)="fileChange($event, 2, false)" type="file" id="input-2" class="add-image-input" accept=".png,.jpg,.jpeg">
                 </label>
             </div>
             
-            <div *ngIf="fileData[2] || fileData[3]" class="secondary-image-3">
+            <div *ngIf="counter > 2" class="secondary-image-3">
                 <div (click)="removeImage(3)" class="delete-image-button"></div>
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper">
                         <img [src]="fileData[3] ? fileData[3] : 'img/fallback.jpg'" alt="" class="secondary-preview">
                     </div>
-                    <input (change)="fileChange($event, 3, false)" type="file"   class="add-image-input" accept=".png,.jpg,.jpeg">
+                    <input (change)="fileChange($event, 3, false)" type="file" id="input-3" class="add-image-input" accept=".png,.jpg,.jpeg">
                 </label>
             </div>
 

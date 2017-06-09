@@ -15,7 +15,7 @@ import 'rxjs/add/operator/toPromise';
 export class AddHobbyComponent implements OnInit {
   cities = [];
   interests = [];
-
+  counter = 0;
 
   fileNames = [];
   fileData = [];
@@ -27,6 +27,7 @@ export class AddHobbyComponent implements OnInit {
               ) {}
 
   fileChange(event, index, isMain) {
+      this.counter += 1;
       let data, body, file: File;
       file = event.target.files[0];
       if (!this.formId) {
@@ -46,6 +47,7 @@ export class AddHobbyComponent implements OnInit {
       };
   }
   removeImage(index) {
+    (<HTMLScriptElement>document.getElementById(`input-${index}`))["value"] = null
     this.fileNames[index] = null;
     this.fileData[index] = null;
   }
