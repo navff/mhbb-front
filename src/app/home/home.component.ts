@@ -33,5 +33,4 @@ export class HomeComponent implements OnInit {
     this.activityService.getActivities().then(result => this.activities = result);
     this.interestService.getInterests().then(result => this.interests = result);
     this.cityService.getCities().then(result => this.cities = result);
-  };
-}
+}}

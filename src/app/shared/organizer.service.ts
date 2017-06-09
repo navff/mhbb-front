@@ -32,13 +32,10 @@ export class OrganizerService {
     .toPromise();
   }
 }
-export class OrganizerPutBody {
-  Name: string;
-  CityId: number;
-  Sobriety: boolean;
-  constructor(name: string, cityid: number, sobriety: boolean) {
-    this.Name = name;
-    this.CityId = cityid;
-    this.Sobriety = sobriety;
-}}
+export class Organizer {
+  constructor (
+    public Name: string,
+    public Cityid: number,
+    public Sobriety: boolean) {}
+}
 

@@ -22,8 +22,10 @@ export class AdminComponent implements OnInit {
   }
   ngOnInit() {
     this.activityService.getUncheckedActivities()
-    .then(result => this.activities = result)
-    .then(() => this.activitiesCount = this.activities.length);
+    .then(result => {
+      this.activities = result;
+      this.activitiesCount = this.activities.length;
+    });
   }
   @HostListener('window:scroll', [])
     onWindowScroll() {

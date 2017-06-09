@@ -3,7 +3,7 @@
     <section class="photos">
         <a routerLink='' class="button-back">&larr; Назад</a>
         <md-input-container class="form-item-course-name">
-            <input mdInput placeholder="Название курса">
+            <input mdInput placeholder="Название курса" [(ngModel)]="name" name="name">
         </md-input-container>
 
             <div class="main-image">
@@ -51,40 +51,41 @@
 
     <form class='form-right'>
         <md-input-container class="form-item-organizer">
-            <input mdInput placeholder="Организатор">
+            <input mdInput placeholder="Организатор" [(ngModel)]="organizerName" name="organizerName">
         </md-input-container>
         <md-select class="form-item-cities" placeholder="Город" floatPlaceholder="never">
             <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
         </md-select>
         <md-input-container class="form-item-age-from">
-            <input mdInput placeholder="Возраст От">
+            <input mdInput placeholder="Возраст От" type="number" [(ngModel)]="ageFrom" name="ageFrom">
         </md-input-container>
         <md-input-container class="form-item-age-to">
-            <input mdInput placeholder="До">
+            <input mdInput placeholder="До" type="number" [(ngModel)]="ageTo" name="ageTo">
         </md-input-container>
         <md-select class="form-item-interests" placeholder="Интересы" floatPlaceholder="never">
             <md-option *ngFor="let interest of interests" [value]="interest">{{ interest.Name }}</md-option>
         </md-select>
         <md-input-container class="form-item-phones">
-            <textarea mdInput rows="3" placeholder="Телефоны"></textarea>
+            <textarea mdInput rows="3" placeholder="Телефоны" [(ngModel)]="phones" name="phones"></textarea>
         </md-input-container>
         <md-input-container class="form-item-address">
-            <textarea mdInput rows="3" placeholder="Адрес"></textarea>
+            <textarea mdInput rows="3" placeholder="Адрес" [(ngModel)]="address" name="address"></textarea>
         </md-input-container>
         <md-input-container class="form-item-price">
-            <input mdInput placeholder="Цены">
+            <input mdInput placeholder="Цены" [(ngModel)]="prices" name="prices">
         </md-input-container>
-        <md-checkbox color="primary" class="form-item-free-checkbox">Бесплатно</md-checkbox>
+        <md-checkbox color="primary" class="form-item-free-checkbox" [(ngModel)]="free" name="free">Бесплатно</md-checkbox>
     </form>
     
     <form class='form-bottom'>
         <md-input-container class="form-item-description">
-            <textarea mdInput rows="10" placeholder="Подробное описание"></textarea>
+            <textarea mdInput rows="10" placeholder="Подробное описание" [(ngModel)]="description" name="description"></textarea>
         </md-input-container>
         <md-input-container class="form-item-guides">
-            <textarea mdInput rows="3" placeholder="Ведущие"></textarea>
+            <textarea mdInput rows="3" placeholder="Ведущие" [(ngModel)]="mentor" name="mentor"></textarea>
         </md-input-container>
-        <md-checkbox color="primary" class="form-item-sobriety-checkbox">Преподаватели не пьют и не курят</md-checkbox>
-        <button routerLink='/addhobby/success' md-raised-button color="primary" class="button-publish">ОПУБЛИКОВАТЬ</button>
+        <md-checkbox color="primary" class="form-item-sobriety-checkbox" [(ngModel)]="sobriety" name="sobriety">Преподаватели не пьют и не курят</md-checkbox>
+        <button (click)="publishActivity()" md-raised-button color="primary" class="button-publish">ОПУБЛИКОВАТЬ</button>
+        <!--routerLink='/addhobby/success'-->
     </form>
 </div>

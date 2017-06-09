@@ -42,6 +42,5 @@ export class AdminOrganizersComponent implements OnInit {
   }
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
-    this.organizerService.getOrganizers(this.page)
-    .then(result => this.organizers = result);
+    this.organizerService.getOrganizers(this.page).then(result => this.organizers = result);
 }}

@@ -41,17 +41,12 @@ export class UserService {
     .map((response) => response.json())
     .toPromise();
 }}
-export class UserPutBody {
-  Email: string;
-  Name: string;
-  Phone: string;
-  Role: string;
+export class User {
   Picture: null;
-  CityId: any;
-  constructor(email: string, name: string, phone: string, role: string, cityid: number) {
-    this.Email = email;
-    this.Name = name;
-    this.Phone = phone;
-    this.Role = role;
-    this.CityId = cityid;
-}}
+  constructor (
+  public Email: string,
+  public Name: string,
+  public Phone: string,
+  public Role: string,
+  public CityId: any) {}
+}

@@ -44,6 +44,5 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
-    this.userService.getUsers()
-    .then(result => this.users = result);
+    this.userService.getUsers().then(result => this.users = result);
 }}

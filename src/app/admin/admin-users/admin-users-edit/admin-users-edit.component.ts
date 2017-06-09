@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, UserPutBody } from '../../../shared/user.service';
+import { UserService, User } from '../../../shared/user.service';
 import { CityService } from '../../../shared/city.service';
 
 @Component({
@@ -23,15 +23,16 @@ export class AdminUsersEditComponent implements OnInit {
   constructor(private userService: UserService, private cityService: CityService) {}
 
   putUser() {
-  let body = new UserPutBody(this.userEmail, this.userName, this.userPhone, this.userRole, 1);
-  this.user.putUser(this.searchEmail, body)
-  .then(result => this.user = result);
+    let body = new User(this.userEmail, this.userName, this.userPhone, this.userRole, 1);
+    this.user.putUser(this.searchEmail, body)
+    .then(result => this.user = result);
   }
   ngOnInit() {
-    let that = this;
     this.cityService.getCities().then(result => this.cities = result);
     this.userService.getUserByEmail(this.searchEmail)
-    .then(result => this.user = result)
-    .then(() => that.selectedCity = that.user.CityName)
-    .then(() => that.userRole = that.user.RoleName);
+    .then(result => {
+      this.user = result;
+      this.selectedCity = this.user.CityName;
+      this.userRole = this.user.RoleName;
+    });
 }}

@@ -58,43 +58,44 @@ export class ActivityService {
     .toPromise();
   }
   postTempFile(body) {
-    let headers = new Headers({ 'Authorization': 'Token ABRAKADABRA',
-                                'Content-Type': 'application/json'});
+    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/tempfile`, body, options)
     .map((response) => response.json())
     .toPromise();
   }
-}
-export class TempFilePutBody {
-  FormId: string;
-  Filename: string;
-  Data: any;
-  IsMain: boolean;
-  constructor (formid: string, name: string, data: any, ismain: boolean) {
-    this.FormId = formid;
-    this.Filename = name;
-    this.Data = data;
-    this.IsMain = ismain;
-}}
 
-export class ActivityPutBody {
-  Name: string;
-  OrganizerId: number;
-  Organizer: {
-    Name: string;
-    CityId: number;
-    Sobriety: boolean;
-  };
-  AgeFrom: number;
-  AgeTo: number;
-  Phones: string;
-  Address: string;
-  Prices: string;
-  Mentor: string;
-  Description: string;
-  InterestId: number;
-  IsChecked: boolean;
-  Free: boolean;
-  FormId: number;
+  postActivity(body) {
+    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(`http://test.mhbb.ru/b/api/activity`, body, options)
+    .map((response) => response.json())
+    .toPromise();
+  }
+}
+
+export class TempFile {
+  constructor (
+    public FormId: string,
+    public Filename: string,
+    public Data: any,
+    public IsMain: boolean) {}
+}
+
+export class Activity {
+  constructor (
+    public Name: string,
+    public Organizer: any,
+    public AgeFrom: number,
+    public AgeTo: number,
+    public Phones: string,
+    public Address: string,
+    public Prices: string,
+    public Mentor: string,
+    public Description: string,
+    public InterestId: number,
+    public IsChecked: boolean,
+    public Free: boolean,
+    public FormId: string,
+  ) {}
 }

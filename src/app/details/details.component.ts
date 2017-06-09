@@ -27,12 +27,11 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.activityService.getActivity(this.activityId)
     .then(result => {
-          this.activity = result;
-          this.organizer = this.activity.Organizer.Name;
-          this.voteAmount = this.activity.Voices;
-          this.activity.Pictures.forEach((pic, i) => {
-              this.picUrls[i] = pic.Url;
-          });
+      this.activity = result;
+      this.organizer = this.activity.Organizer.Name;
+      this.voteAmount = this.activity.Voices;
+      this.activity.Pictures.forEach((pic, i) => {
+      this.picUrls[i] = pic.Url;
+      });
     });
-  }
-}
+}}

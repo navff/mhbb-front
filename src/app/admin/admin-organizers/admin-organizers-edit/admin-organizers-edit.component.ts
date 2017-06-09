@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizerService, OrganizerPutBody } from '../../../shared/organizer.service';
+import { OrganizerService, Organizer } from '../../../shared/organizer.service';
 import { CityService } from '../../../shared/city.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class AdminOrganizersEditComponent implements OnInit {
 constructor(private organizerService: OrganizerService, private cityService: CityService) {}
 
   putOrganizer() {
-    let body = new OrganizerPutBody(this.organizerName, this.cityId, this.organizerSobriety);
+    let body = new Organizer(this.organizerName, this.cityId, this.organizerSobriety);
     this.organizerService.putOrganizer(this.organizerId, body)
     .then(result => this.organizer = result);
   }
@@ -30,12 +30,13 @@ constructor(private organizerService: OrganizerService, private cityService: Cit
     this.cityId = id;
   }
   ngOnInit() {
-    let that = this;
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizerById(this.organizerId)
-    .then(result => this.organizer = result)
-    .then(() => that.organizerCityName = that.organizer.City.Name)
-    .then(() => that.organizerName = that.organizer.Name)
-    .then(() => that.cityId = that.organizer.City.Id)
-    .then(() => that.organizerSobriety = that.organizer.Sobriety);
+    .then(result => {
+      this.organizer = result;
+      this.organizerCityName = this.organizer.City.Name;
+      this.organizerName = this.organizer.Name;
+      this.cityId = this.organizer.City.Id;
+      this.organizerSobriety = this.organizer.Sobriety;
+    });
 }}
