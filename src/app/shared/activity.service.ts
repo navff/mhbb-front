@@ -64,6 +64,13 @@ export class ActivityService {
     .map((response) => response.json())
     .toPromise();
   }
+  deleteTempfile(id) {
+    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(`http://test.mhbb.ru/b/api/tempfile/${id}`, options)
+    .map((response) => response.json())
+    .toPromise();
+  }
 
   postActivity(body) {
     let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
