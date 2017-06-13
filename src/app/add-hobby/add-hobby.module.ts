@@ -1,7 +1,7 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AddHobbyComponent } from './add-hobby.component';
@@ -16,7 +16,8 @@ const routes: Routes = [
   imports:      [
     RouterModule.forChild(routes),
     CommonModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
    ],
   declarations: [
     AddHobbyComponent, AddHobbySuccessComponent,

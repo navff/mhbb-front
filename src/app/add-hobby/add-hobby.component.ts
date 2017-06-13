@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { CityService } from '../shared/city.service';
 import { InterestService } from '../shared/interest.service';
-import { ActivityService, TempFile, Activity  } from '../shared/activity.service';
+import { ActivityService, TempFile, Activity } from '../shared/activity.service';
 
 @Component({
   selector: 'my-add-hobby',
@@ -12,58 +14,61 @@ import { ActivityService, TempFile, Activity  } from '../shared/activity.service
 export class AddHobbyComponent implements OnInit {
   cities = [];
   interests = [];
-  counter = 0;
 
   fileNames = [];
   fileData = [];
   fileId = [];
   formId: any;
-
-  name: string;
-  organizerName: string;
-  cityId = 1;
-  sobriety: boolean;
-  ageFrom: number;
-  ageTo: number;
-  phones: string;
-  address: string;
-  prices: string;
-  mentor: string;
-  description: string;
-  interestId = 1;
   isChecked = false;
-  free: boolean;
+  addHobby: FormGroup;
 
   constructor(private interestService: InterestService,
               private cityService: CityService,
+              fb: FormBuilder,
               // private activityService: ActivityService
-              ) {}
-  publishActivity() {
+              ) {
+    this.addHobby = fb.group({
+      'name' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'organizerName' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'cityId' : ['', Validators.required],
+      'ageFrom' : ['', Validators.required],
+      'ageTo' : ['', Validators.required],
+      'interestId' : ['', Validators.required],
+      'phones' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'address' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'prices' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'mentor' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'description' : ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
+      'free' : [false, Validators.required],
+      'sobriety' : [false, Validators.required]
+    });
+  }
+  submitForm(value: any): void {
+    console.log('Reactive Form Data: ');
+    console.log(value);
     let body = new Activity(
-      this.name,
-      {Name: this.organizerName,
-      CityId: this.cityId,
-      Sobriety: this.sobriety},
-      this.ageFrom,
-      this.ageTo,
-      this.phones,
-      this.address,
-      this.prices,
-      this.mentor,
-      this.description,
-      this.interestId,
+      this.addHobby.get('name').value,
+      {Name: this.addHobby.get('organizerName').value,
+      CityId: this.addHobby.get('cityId').value,
+      Sobriety: this.addHobby.get('sobriety').value},
+      this.addHobby.get('ageFrom').value,
+      this.addHobby.get('ageTo').value,
+      this.addHobby.get('interestId').value,
+      this.addHobby.get('phones').value,
+      this.addHobby.get('address').value,
+      this.addHobby.get('prices').value,
+      this.addHobby.get('mentor').value,
+      this.addHobby.get('description').value,
       this.isChecked,
-      this.free,
+      this.addHobby.get('free').value,
       this.formId
     );
     console.log(body);
     // this.activityService.postTempFile(body)
+
   }
 
-  fileChange(event, index, isMain) {
-      if (index >= this.counter) {
-        this.counter += 1;
-      }
+  addImage(event, index, isMain) {
 
       let data, body, file: File;
       file = event.target.files[0];
@@ -89,13 +94,13 @@ export class AddHobbyComponent implements OnInit {
   }
 
   removeImage(index) {
-    if (this.fileId[index]) {
+    // if (this.fileId[index]) {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
       this.fileNames[index] = null;
       this.fileData[index] = null;
       // this.activityService.deleteTempfile(this.fileId[index])
       // .then((result) => console.log(result));
-    }
+    // }
   }
   ngOnInit() {
     this.interestService.getInterests().then(result => this.interests = result);
