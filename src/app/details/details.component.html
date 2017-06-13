@@ -65,7 +65,7 @@
                 </li>
                 <li>
                     <h4 class="bold">Трезвость:</h4>
-                    <p>Преподаватели не пьют и не курят</p>
+                    <p>{{sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
                 </li>
                 <li>
                     <h4 class="bold">Ведущий:</h4>
@@ -77,5 +77,20 @@
         <p class="description">
             {{activity.Description}}
         </p>
+        <section class="reviews">
+            <h2 class="reviews-heading">Отзывы</h2>
+            <div class="reviews-item" *ngFor="let review of reviews">
+                <div class="image">
+                </div>
+                <p class="name">Олеся</p>
+                <p class="date">{{review.DateCreated | myDate}}</p>
+                <p class="content">{{review.Text}}</p>
+            </div>
+            <md-input-container>
+                <textarea mdInput placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
+            </md-input-container>
+            <button *ngIf="!published" [disabled]="!reviewText" (click)="publishReview()" md-raised-button color="primary" class="button-publish">Опубликовать</button>
+            <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
+        </section>
     </div>
     
