@@ -20,7 +20,7 @@ const routes: Routes = [
     ReactiveFormsModule
    ],
   declarations: [
-    AddHobbyComponent, AddHobbySuccessComponent,
+    AddHobbyComponent, AddHobbySuccessComponent
    ]
 })
 export class AddHobbyModule {}

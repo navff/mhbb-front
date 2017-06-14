@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -5,10 +6,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ReviewService {
-  constructor(private http: Http) {}
+  constructor(private http: Http, private auth: AuthService) {}
 
   postReview(body: any) {
-    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(`http://test.mhbb.ru/b/api/review`, body, options)

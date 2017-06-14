@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../shared/activity.service';
 import { InterestService } from '../shared/interest.service';
 import { CityService } from '../shared/city.service';
+import { AuthService } from './../shared/auth.service';
 
 @Component({
   selector: 'my-home',
@@ -14,10 +15,11 @@ export class HomeComponent implements OnInit {
   interests = [];
   activities = [];
   args: any[] = [];
-
+  userEmail: string;
   constructor(private activityService: ActivityService,
               private interestService: InterestService,
-              private cityService: CityService) {}
+              private cityService: CityService,
+              private auth: AuthService) {}
 
   saveActivityId(id) {
     localStorage.setItem('activityId', id);
@@ -33,4 +35,6 @@ export class HomeComponent implements OnInit {
     this.activityService.getActivities().then(result => this.activities = result);
     this.interestService.getInterests().then(result => this.interests = result);
     this.cityService.getCities().then(result => this.cities = result);
+    this.auth.getUserByToken()
+    .then(result => this.userEmail = result.Email);
 }}

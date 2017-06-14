@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -5,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
-  constructor(private http: Http) {}
+  constructor(private http: Http, private auth: AuthService) {}
 
   getUsers(page?: number, role1?: any, role2?: any, cityId?: number, word?: string) {
     let r1, r2, c, w, p, q;
@@ -17,7 +18,7 @@ export class UserService {
     p = page     ? `page=${page}` : '';
     q = [r1, r2, c, w, p].filter(function(x) { return x !== ''; }).join('&');
 
-    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
     let options = new RequestOptions({ headers: headers });
     let url = `http://test.mhbb.ru/b/api/user/search?${q}`;
     return this.http
@@ -26,7 +27,7 @@ export class UserService {
     .toPromise();
   }
   getUserByEmail(email: string) {
-    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
     let options = new RequestOptions({ headers: headers });
     let url = `http://test.mhbb.ru/b/api/user?email=${email}`;
     return this.http.get(url, options)
@@ -34,7 +35,7 @@ export class UserService {
     .toPromise();
   }
   putUser(email: any, body: any) {
-    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
     let options = new RequestOptions({ headers: headers });
 
     return this.http.put(`http://test.mhbb.ru/b/api/organizer/${email}`, body, options)

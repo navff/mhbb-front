@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthService } from './shared/auth.service';
+import { Component, OnInit } from '@angular/core';
 
 import '../style/app.sass';
 
@@ -6,7 +7,14 @@ import '../style/app.sass';
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
+  providers: [AuthService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  constructor(private auth: AuthService) {}
+
+  ngOnInit() {
+    // localStorage.setItem('token', 'ABRAKADABRA');
+    this.auth.setToken();
+  }
 }

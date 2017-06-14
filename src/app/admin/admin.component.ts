@@ -1,3 +1,4 @@
+import { AuthService } from './../shared/auth.service';
 import { Component, OnInit, HostListener, Inject }      from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { CityService } from '../shared/city.service';
@@ -13,8 +14,9 @@ export class AdminComponent implements OnInit {
   activities = [];
   activitiesCount: number;
   scrolled: boolean;
-
+  userEmail: string;
   constructor(private activityService: ActivityService,
+  private auth: AuthService,
   @Inject(DOCUMENT) private document: Document) {}
 
   scrollToTop() {
@@ -26,6 +28,8 @@ export class AdminComponent implements OnInit {
       this.activities = result;
       this.activitiesCount = this.activities.length;
     });
+    this.auth.getUserByToken()
+    .then(result => this.userEmail = result.Email);
   }
   @HostListener('window:scroll', [])
     onWindowScroll() {
