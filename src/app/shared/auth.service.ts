@@ -18,11 +18,9 @@ export class AuthService {
     .toPromise();
   }
   setToken() {
-    let token = window.location.href
-                .match(/token=(.)+/)[0]
-                .substr(6);
-    if (token) {
-    console.log(token);
+    let match = window.location.href.match(/token=(.)+/);
+    if (match) {
+    let token = match[0].substr(6);
     localStorage.setItem('token', token[0]);
     }
   }
