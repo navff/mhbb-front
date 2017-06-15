@@ -28,8 +28,10 @@ export class AdminComponent implements OnInit {
       this.activities = result;
       this.activitiesCount = this.activities.length;
     });
+    if (this.auth.token) {
     this.auth.getUserByToken()
     .then(result => this.userEmail = result.Email);
+    }
   }
   @HostListener('window:scroll', [])
     onWindowScroll() {

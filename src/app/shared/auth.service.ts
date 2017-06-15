@@ -21,7 +21,7 @@ export class AuthService {
     let match = window.location.href.match(/token=(.)+/);
     if (match) {
     let token = match[0].substr(6);
-    localStorage.setItem('token', token[0]);
+    localStorage.setItem('token', token);
     }
   }
   getUserByToken() {

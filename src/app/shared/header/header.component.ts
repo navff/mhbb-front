@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
 ngOnInit() {
+    if (this.auth.token) {
     this.auth.getUserByToken()
     .then(result => this.userEmail = result.Email);
+    }
 }}
