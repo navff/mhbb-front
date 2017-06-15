@@ -14,7 +14,7 @@ import { ReservationSuccessComponent } from './details/reservation/reservation-s
 import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
-import { DatePipe } from './shared/date.pipe';
+import { DatePipe } from './shared/_date.pipe';
 
 @NgModule({
   imports: [

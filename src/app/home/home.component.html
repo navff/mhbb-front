@@ -17,7 +17,7 @@
         </md-input-container>
         
         <md-input-container class="hobbies-age">
-            <input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" type="number">
+            <input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" type="text" myOnlyNumber maxlength="3">
         </md-input-container>
         
         <md-select (change)="setArgument(3, interest.Id)" [(ngModel)]="interest" name="interest" class="hobbies-interests" placeholder="Интересы" floatPlaceholder="never">
@@ -36,7 +36,9 @@
 
     <div class="hobbies-flex">
         <div routerLink='details' (click)="saveActivityId(activity.Id)" class="hobby-wrapper" *ngFor="let activity of activities">
-            <img src="" alt="" class="hobby-image">
+            <div class="hobby-image-wrapper">
+                <img [src]="activity.MainPicture?.Url" alt="" class="hobby-image">
+            </div>
             <div class="hobby-top-descr">
                 <p class="hobby-age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
                 <p class="hobby-likes">{{activity.Voices}}</p>

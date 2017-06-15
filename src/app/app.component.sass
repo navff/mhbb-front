@@ -14,6 +14,12 @@ footer
 	margin-right: 20px
 	width: 87px
 	float: left
+	user-drag: none
+	user-select: none
+	-moz-user-select: none	
+	-webkit-user-drag: none
+	-webkit-user-select: none
+	-ms-user-select: none
 .text-project
 	margin-right: 9%
 	float: left
@@ -22,17 +28,23 @@ footer
 	width: 382px
 	left: 50%
 	margin-left: -191px
-	right
 	.boomstarter-logo
 		display: inline-block
 		width: 151px
 		margin-right: 20px
+		user-drag: none
+		user-select: none
+		-moz-user-select: none	
+		-webkit-user-drag: none
+		-webkit-user-select: none
+		-ms-user-select: none
 	.text-money
 		display: inline-block
 .text-mail
 	float: right
 	cursor: pointer
 	position: relative
+	
 	&:before
 		position: absolute
 		top: -4px
@@ -48,3 +60,11 @@ footer
 .admin
 	position: absolute
 	right: 0
+
+/deep/ .mat-select-placeholder
+    font-size: 20px
+/deep/ .mat-select
+	position: relative
+	top: 2px
+/deep/ .mat-select-value
+    font-size: 20px

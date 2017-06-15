@@ -5,19 +5,18 @@ import { HttpModule }          from '@angular/http';
 import { RouterModule }        from '@angular/router';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule } from '@angular/material';
 import { HeaderComponent }     from './header/header.component';
-
-
+import { OnlyNumberDirective } from './_only-number.directive';
 @NgModule({
   imports:      [ HttpModule, FormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule,
     RouterModule,
     CommonModule
   ],
-  declarations: [ HeaderComponent ],
+  declarations: [ HeaderComponent, OnlyNumberDirective ],
   exports:      [
     HttpModule, FormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule,
-    HeaderComponent
+    HeaderComponent, OnlyNumberDirective
   ]
 })
 export class SharedModule { }

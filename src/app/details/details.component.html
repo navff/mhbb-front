@@ -45,15 +45,11 @@
                 </li>
                 <li>
                     <h4 class="bold">Телефоны:</h4>
-                    <p>
-                        {{activity.Phones}}
-                    </p>
+                    <pre>{{activity.Phones}}</pre>
                 </li>
                 <li>
                     <h4 class="bold">Адрес:</h4>
-                    <p>
-                        {{activity.Address}}
-                    </p>
+                    <pre>{{activity.Address}}</pre>
                 </li>
                 <li>
                     <h4 class="bold">Цены:</h4>
@@ -69,22 +65,20 @@
                 </li>
                 <li>
                     <h4 class="bold">Ведущий:</h4>
-                    <p>{{activity.Mentor}}</p>
+                    <pre>{{activity.Mentor}}</pre>
                 </li>
             </ul>
             <button routerLink='/details/reservation' md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
         </section>
-        <p class="description">
-            {{activity.Description}}
-        </p>
+        <pre class="description">{{activity.Description}}</pre>
         <section class="reviews">
             <h2 class="reviews-heading">Отзывы</h2>
             <div class="reviews-item" *ngFor="let review of reviews">
                 <div class="image">
                 </div>
-                <p class="name">Олеся</p>
+                <p class="name"></p>
                 <p class="date">{{review.DateCreated | myDate}}</p>
-                <p class="content">{{review.Text}}</p>
+                <pre class="content">{{review.Text}}</pre>
             </div>
             <md-input-container>
                 <textarea mdInput placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>

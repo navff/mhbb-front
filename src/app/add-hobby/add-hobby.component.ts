@@ -25,7 +25,7 @@ export class AddHobbyComponent implements OnInit {
   constructor(private interestService: InterestService,
               private cityService: CityService,
               fb: FormBuilder,
-              // private activityService: ActivityService
+              private activityService: ActivityService
               ) {
     this.addHobby = fb.group({
       'name' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
@@ -43,29 +43,27 @@ export class AddHobbyComponent implements OnInit {
       'sobriety' : [false, Validators.required]
     });
   }
-  submitForm(value: any): void {
-    console.log('Reactive Form Data: ');
-    console.log(value);
+  submitForm() {
     let body = new Activity(
       this.addHobby.get('name').value,
       {Name: this.addHobby.get('organizerName').value,
       CityId: this.addHobby.get('cityId').value,
       Sobriety: this.addHobby.get('sobriety').value},
-      this.addHobby.get('ageFrom').value,
-      this.addHobby.get('ageTo').value,
-      this.addHobby.get('interestId').value,
+      +this.addHobby.get('ageFrom').value,
+      +this.addHobby.get('ageTo').value,
       this.addHobby.get('phones').value,
       this.addHobby.get('address').value,
       this.addHobby.get('prices').value,
       this.addHobby.get('mentor').value,
       this.addHobby.get('description').value,
+      this.addHobby.get('interestId').value,
       this.isChecked,
       this.addHobby.get('free').value,
       this.formId
     );
     console.log(body);
-    // this.activityService.postTempFile(body)
-
+    this.activityService.postActivity(body)
+    .then(result => console.log(result));
   }
 
   addImage(event, index, isMain) {
@@ -85,22 +83,22 @@ export class AddHobbyComponent implements OnInit {
         data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
         body = new TempFile(this.formId, this.fileNames[index], data, isMain);
         console.log(body);
-      //   this.activityService.postTempFile(body)
-      //  .then(result =>  {
-      //    console.log(result);
-      //    this.fileId[index] = result.Id;
-      //  });
+        this.activityService.postTempFile(body)
+       .then(result =>  {
+         console.log(result);
+         this.fileId[index] = result.Id;
+       });
       };
   }
 
   removeImage(index) {
-    // if (this.fileId[index]) {
+    if (this.fileId[index]) {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
       this.fileNames[index] = null;
       this.fileData[index] = null;
-      // this.activityService.deleteTempfile(this.fileId[index])
-      // .then((result) => console.log(result));
-    // }
+      this.activityService.deleteTempfile(this.fileId[index])
+      .then((result) => console.log(result));
+    }
   }
   ngOnInit() {
     this.interestService.getInterests().then(result => this.interests = result);

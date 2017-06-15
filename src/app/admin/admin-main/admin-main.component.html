@@ -8,7 +8,7 @@
         </md-input-container>
         
         <md-input-container class="hobbies-age">
-            <input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст">
+            <input (focusout)="setArgument(1, age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" myOnlyNumber maxlength="3">
         </md-input-container>
         
         <md-select (change)="setArgument(3, interest.Id)" [(ngModel)]="interest" name="interest"  class="hobbies-interests" placeholder="Интересы" floatPlaceholder="never">
@@ -54,5 +54,4 @@
         </div>
     </div>		
 </div>
-
 </section>
