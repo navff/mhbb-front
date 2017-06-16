@@ -18,8 +18,7 @@ export class AuthService {
     .toPromise();
   }
   setToken() {
-    let match =
-    'https://test.mhbb.ru/#/validate-token?token=447b60fde3fa6528adbe103056372a785f86d77af81e7f690597279257663603'.match(/token=(.)+/);
+    let match = window.location.href.match(/token=(.)+/);
     if (match) {
     let token = match[0].substr(6);
     localStorage.setItem('token', token);

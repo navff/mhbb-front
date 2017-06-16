@@ -27,20 +27,20 @@
         </ul>
     </section>
 
-    <form>
+    <form [formGroup]="reservation" (ngSubmit)="postReservation()">
         <md-input-container class="form-item">
-            <input mdInput placeholder="Имя, Фамилия" required>
+            <input mdInput [formControl]="reservation.controls['name']" placeholder="Имя, Фамилия">
         </md-input-container>
         <md-input-container class="form-item">
-            <input mdInput placeholder="Сотовый телефон" required>
+            <input mdInput [formControl]="reservation.controls['phone']" placeholder="Сотовый телефон">
         </md-input-container>
         <md-input-container class="form-item">
-            <input mdInput placeholder="Электронная почта" required type="email">
+            <input mdInput [formControl]="reservation.controls['email']" placeholder="Электронная почта" type="email">
         </md-input-container>
         <md-input-container class="form-item form-item-commentary">
-            <input mdInput placeholder="Пожелания, комментарии">
+            <input mdInput [formControl]="reservation.controls['comment']" placeholder="Пожелания, комментарии">
         </md-input-container>
-        <button routerLink='/details/reservation/reservationsuccess' md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        <button [disabled]="!reservation.valid" type="submit" md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
         <p class="message-link">С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
     </form>
 </div>

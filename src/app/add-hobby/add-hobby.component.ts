@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CityService } from '../shared/city.service';
 import { InterestService } from '../shared/interest.service';
 import { ActivityService, TempFile, Activity } from '../shared/activity.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'my-add-hobby',
@@ -25,7 +26,8 @@ export class AddHobbyComponent implements OnInit {
   constructor(private interestService: InterestService,
               private cityService: CityService,
               fb: FormBuilder,
-              private activityService: ActivityService
+              private activityService: ActivityService,
+              private router: Router
               ) {
     this.addHobby = fb.group({
       'name' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
@@ -67,7 +69,9 @@ export class AddHobbyComponent implements OnInit {
     );
     console.log(body);
     this.activityService.postActivity(body)
-    .then(result => console.log(result));
+    .then(result => {console.log(result);
+    this.router.navigate(['/addhobby/success']);
+    });
   }
 
   addImage(event, index, isMain) {

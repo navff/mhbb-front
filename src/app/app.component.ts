@@ -11,10 +11,9 @@ import '../style/app.sass';
 })
 export class AppComponent implements OnInit {
 
-  // constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit() {
-    localStorage.setItem('token', 'ABRAKADABRA');
-    // this.auth.setToken();
+    this.auth.setToken();
   }
 }
