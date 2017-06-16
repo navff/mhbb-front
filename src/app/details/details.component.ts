@@ -12,8 +12,6 @@ import { ReviewService, Review } from '../shared/review.service';
 export class DetailsComponent implements OnInit {
   activity: any = {};
   activityId = localStorage.getItem('activityId');
-  organizer: string;
-  sobriety: boolean;
   voteAmount: number;
   picUrls = [];
   reviews = [];
@@ -35,19 +33,18 @@ export class DetailsComponent implements OnInit {
   }
 
   publishReview() {
-    this.published = true;
     let body = new Review(parseInt(this.activityId, 10), this.reviewText);
     console.log(body);
     this.reviewService.postReview(body)
-    .then(result => console.log(result));
+    .then(result => {
+      console.log(result);
+      this.published = true; });
   }
 
   ngOnInit() {
     this.activityService.getActivity(this.activityId)
     .then(result => {
       this.activity = result;
-      this.organizer = this.activity.Organizer.Name;
-      this.sobriety = this.activity.Organizer.Sobriety;
       this.voteAmount = this.activity.Voices;
       this.activity.Pictures.forEach((pic, i) => {
       this.picUrls[i] = pic.Url;

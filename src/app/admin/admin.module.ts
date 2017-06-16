@@ -10,7 +10,7 @@ import { AdminUsersEditComponent }     from './admin-users/admin-users-edit/admi
 import { AdminReviewsComponent }     from './admin-reviews/admin-reviews.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared/_shared.module';
 
 @NgModule({
   imports:      [

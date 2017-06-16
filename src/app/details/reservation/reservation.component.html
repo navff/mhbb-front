@@ -4,10 +4,13 @@
     <section class="info">
         <a routerLink='/details' class="button-back">&larr; Назад</a>
         <h1 class="heading">{{activity.Name}}</h1>
+        <div class="main-wrapper"> 
+            <img [src]="mainPictureUrl ? mainPictureUrl : 'img/fallback.jpg'" alt="" class="main-picture">
+        </div>
         <ul class="info-list">
             <li>
                 <h4 class="bold">Организатор:</h4>
-                <p>{{organizer}}</p>
+                <p>{{activity.Organizer?.Name}}</p>
             </li>
             <li>
                 <h4 class="bold">Телефоны:</h4>

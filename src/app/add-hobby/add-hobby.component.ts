@@ -40,7 +40,11 @@ export class AddHobbyComponent implements OnInit {
       'mentor' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'description' : ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
       'free' : [false, Validators.required],
-      'sobriety' : [false, Validators.required]
+      'sobriety' : [false, Validators.required],
+      'image0' : ['', Validators.required],
+      'image1' : ['', Validators.required],
+      'image2' : ['', Validators.required],
+      'image3' : ['', Validators.required]
     });
   }
   submitForm() {
@@ -67,7 +71,6 @@ export class AddHobbyComponent implements OnInit {
   }
 
   addImage(event, index, isMain) {
-
       let data, body, file: File;
       file = event.target.files[0];
 
@@ -75,6 +78,7 @@ export class AddHobbyComponent implements OnInit {
         this.formId = Date.now().toString(10);
       }
       this.fileNames[index] = file.name;
+      this.addHobby.controls[`image${index}`].setValue(file.name);
 
       let reader = new FileReader();
       reader.readAsDataURL(file);
@@ -95,6 +99,7 @@ export class AddHobbyComponent implements OnInit {
     if (this.fileId[index]) {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
       this.fileNames[index] = null;
+      this.addHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
       this.activityService.deleteTempfile(this.fileId[index])
       .then((result) => console.log(result));

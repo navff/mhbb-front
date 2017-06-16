@@ -9,15 +9,14 @@ import { ActivityService } from '../../shared/activity.service';
 })
 export class ReservationComponent implements OnInit {
 activity: any = {};
-organizer: string;
 activityId = localStorage.getItem('activityId');
-
+mainPictureUrl: string;
 constructor(private activityService: ActivityService) {}
 
 ngOnInit() {
   this.activityService.getActivity(this.activityId)
   .then(result => {
     this.activity = result;
-    this.organizer = this.activity.Organizer.Name;
+    this.mainPictureUrl = this.activity.Pictures[0].Url;
   });
 }}

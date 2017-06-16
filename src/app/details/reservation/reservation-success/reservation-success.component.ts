@@ -9,7 +9,6 @@ import { ActivityService } from '../../../shared/activity.service';
 })
 export class ReservationSuccessComponent implements OnInit {
   activity: any = {};
-  organizer: string;
   activityId = localStorage.getItem('activityId');
 
   constructor(private activityService: ActivityService) {}
@@ -18,6 +17,5 @@ export class ReservationSuccessComponent implements OnInit {
     this.activityService.getActivity(this.activityId)
     .then(result => {
       this.activity = result;
-      this.organizer = this.activity.Organizer.Name;
     });
 }}

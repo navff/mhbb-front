@@ -37,7 +37,7 @@
             <ul class="info-list">
                 <li>
                     <h4 class="bold">Организатор:</h4>
-                    <p>{{organizer}}</p>
+                    <p>{{activity.Organizer?.Name}}</p>
                 </li>
                 <li>
                     <h4 class="bold">Возраст:</h4>
@@ -61,7 +61,7 @@
                 </li>
                 <li>
                     <h4 class="bold">Трезвость:</h4>
-                    <p>{{sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
+                    <p>{{activity.Organizer?.Sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
                 </li>
                 <li>
                     <h4 class="bold">Ведущий:</h4>
@@ -81,7 +81,7 @@
                 <pre class="content">{{review.Text}}</pre>
             </div>
             <md-input-container>
-                <textarea mdInput placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
+                <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
             </md-input-container>
             <button *ngIf="!published" [disabled]="!reviewText" (click)="publishReview()" md-raised-button color="primary" class="button-publish">Опубликовать</button>
             <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
