@@ -1,11 +1,11 @@
 <h1 class="admin-heading container">Редактирование организатора</h1>
-<form class="container">
+<form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()" class="container">
     <md-input-container class="form-item-name">
-        <input mdInput [(ngModel)]="organizerName" name="name">
+        <input mdInput [formControl]="editOrganizer.controls['name']">
     </md-input-container>
-    <md-select class="form-item-cities" placeholder="Город" floatPlaceholder="never" [(ngModel)]="organizerCityName" name="city">
-        <md-option (click)="saveId(city.Id)" *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</md-option>
+    <md-select [formControl]="editOrganizer.controls['cityId']" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
     </md-select>
-    <md-checkbox [checked]="organizer.Sobriety ? true : false" color="primary" [(ngModel)]="organizerSobriety" name="sobriety">Трезвость</md-checkbox>
-    <button (click)="putOrganizer()" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
+    <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
+    <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
 </form>

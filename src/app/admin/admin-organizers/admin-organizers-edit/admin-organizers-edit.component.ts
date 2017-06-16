@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { OrganizerService, Organizer } from '../../../shared/organizer.service';
 import { CityService } from '../../../shared/city.service';
 
@@ -10,33 +11,35 @@ import { CityService } from '../../../shared/city.service';
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
-
-  organizerCityName: string;
-  organizerName: string;
-  organizerSobriety: boolean;
-  cityId: number;
-
   organizer: any = {};
   organizerId = localStorage.getItem('organizerId');
 
-constructor(private organizerService: OrganizerService, private cityService: CityService) {}
+  editOrganizer: FormGroup;
+  constructor(private organizerService: OrganizerService,
+              private cityService: CityService,
+              fb: FormBuilder) {
+    this.editOrganizer = fb.group({
+      'name': '',
+      'cityId': '',
+      'sobriety': ''
+  });
+  }
 
   putOrganizer() {
-    let body = new Organizer(this.organizerName, this.cityId, this.organizerSobriety);
+    let body = new Organizer(this.editOrganizer.get('name').value,
+                             this.editOrganizer.get('cityId').value,
+                             this.editOrganizer.get('sobriety').value);
     this.organizerService.putOrganizer(this.organizerId, body)
     .then(result => this.organizer = result);
-  }
-  saveId(id) {
-    this.cityId = id;
   }
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizerById(this.organizerId)
     .then(result => {
       this.organizer = result;
-      this.organizerCityName = this.organizer.City.Name;
-      this.organizerName = this.organizer.Name;
-      this.cityId = this.organizer.City.Id;
-      this.organizerSobriety = this.organizer.Sobriety;
+      this.editOrganizer.get('name').setValue(this.organizer.Name);
+      this.editOrganizer.get('cityId').setValue(this.organizer.City.Id);
+      this.editOrganizer.get('sobriety').setValue(this.organizer.Sobriety);
+      console.log(this.editOrganizer.value);
     });
 }}
