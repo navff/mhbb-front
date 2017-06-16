@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -8,47 +8,38 @@ import 'rxjs/add/operator/toPromise';
 export class ActivityService {
   constructor(private http: Http, private auth: AuthService) {}
 
-  getActivities(
-    word?: any,
-    age?: any,
-    interestId?: any,
-    cityId?: any,
-    sobriety?: any,
-    free?: any) {
-    let w, a, i, c, s, f, q;
+  getActivities(word?: string, age?: string, interestId?: string, cityId?: string,
+    sobriety?: string, free?: string) {
+    let search = new URLSearchParams();
 
-    w = word     ? `word=${word}` : '';
-    a = age      ? `age=${age}` : '';
-    i = interestId      ? `interestId=${interestId}` : '';
-    c = cityId      ? `cityId=${cityId}` : '';
-    s = sobriety      ? `sobriety=${sobriety}` : '';
-    f = free     ? `free=${free}` : '';
+    word ? search.append('word', word) : search.delete('word');
+    age ? search.append('age', age) : search.delete('age');
+    search.append('interestId', interestId);
+    search.append('cityId', cityId);
+    sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
+    free ? search.append('free', free) : search.delete('free');
 
-    q = [w, i, c, s, a, f].filter(function(x) { return x !== ''; }).join('&');
-    return this.http.get(`http://test.mhbb.ru/b/api/activity/search?${q}`)
+    let options = new RequestOptions({ search: search });
+    return this.http.get('http://test.mhbb.ru/b/api/activity/search', options)
     .map((response) => response.json())
     .toPromise();
 }
 
-  getUncheckedActivities(
-    word?: any,
-    age?: any,
-    interestId?: any,
-    cityId?: any,
-    sobriety?: any,
-    free?: any) {
-    let w, a, i, c, s, f, q;
-    w = word     ? `word=${word}` : '';
-    a = age      ? `age=${age}` : '';
-    i = interestId      ? `interestId=${interestId}` : '';
-    c = cityId      ? `cityId=${cityId}` : '';
-    s = sobriety      ? `sobriety=${sobriety}` : '';
-    f = free     ? `free=${free}` : '';
+  getUncheckedActivities(word?: string, age?: string, interestId?: string, cityId?: string,
+    sobriety?: string, free?: string) {
+    let search = new URLSearchParams();
 
-    q = [w, i, c, s, a, f].filter(function(x) { return x !== ''; }).join('&');
+    word ? search.append('word', word) : search.delete('word');
+    age ? search.append('age', age) : search.delete('age');
+    search.append('interestId', interestId);
+    search.append('cityId', cityId);
+    sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
+    free ? search.append('free', free) : search.delete('free');
+
+
     let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
-    let options = new RequestOptions({ headers: headers });
-    let url = `http://test.mhbb.ru/b/api/activity/searchunchecked?${q}`;
+    let options = new RequestOptions({ headers: headers, search: search });
+    let url = 'http://test.mhbb.ru/b/api/activity/searchunchecked';
     return this.http.get(url, options)
     .map((response) => response.json())
     .toPromise();

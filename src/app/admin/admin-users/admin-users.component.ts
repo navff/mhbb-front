@@ -20,10 +20,10 @@ export class AdminUsersComponent implements OnInit {
   concatPage() {
     this.page += 1;
     let reservePage = this.page + 1;
-    this.userService.getUsers(this.page, this.args[0], this.args[1], this.args[2], this.args[3])
+    this.userService.getUsers(this.page.toString(10), this.args[0], this.args[1], this.args[2], this.args[3])
     .then(result => this.users = this.users.concat(result))
     .then(() => {
-      this.userService.getUsers(reservePage, this.args[0], this.args[1], this.args[2], this.args[3])
+      this.userService.getUsers(reservePage.toString(10), this.args[0], this.args[1], this.args[2], this.args[3])
       .then(result => this.reserveContent = result);
     });
   }
@@ -35,7 +35,7 @@ export class AdminUsersComponent implements OnInit {
     this.reset();
     this.args[index] = value;
     this.args[index2] = value2;
-    this.userService.getUsers(this.page, this.args[0], this.args[1], this.args[2], this.args[3])
+    this.userService.getUsers(this.page.toString(10), this.args[0], this.args[1], this.args[2], this.args[3])
     .then(result => this.users = result);
   }
   saveUserEmail(email) {

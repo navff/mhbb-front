@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -8,15 +8,15 @@ import 'rxjs/add/operator/toPromise';
 export class OrganizerService {
   constructor(private http: Http, private auth: AuthService) {}
 
-  getOrganizers(page?: number, word?: string, cityId?: number) {
-    let w, c, p, q;
-    w = word     ? `word=${word}` : '';
-    c = cityId      ? `cityId=${cityId}` : '';
-    p = page      ? `page=${page}` : '';
-    q = [w, c, p].filter(function(x) { return x !== ''; }).join('&');
+  getOrganizers(page?: string, word?: string, cityId?: string) {
+    let search = new URLSearchParams();
+    word ? search.append('word', word) : search.delete('word');
+    search.append('cityId', cityId);
+    search.append('page', page);
 
+    let options = new RequestOptions({ search: search });
     return this.http
-    .get(`http://test.mhbb.ru/b/api/organizer/search?${q}`)
+    .get(`http://test.mhbb.ru/b/api/organizer/search`, options)
     .map((response) => response.json())
     .toPromise();
   }

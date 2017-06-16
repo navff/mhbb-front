@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -8,21 +8,18 @@ import 'rxjs/add/operator/toPromise';
 export class UserService {
   constructor(private http: Http, private auth: AuthService) {}
 
-  getUsers(page?: number, role1?: any, role2?: any, cityId?: number, word?: string) {
-    let r1, r2, c, w, p, q;
-
-    r1 = (role1 !== undefined)   ? `roles=${role1}` : '';
-    r2 = (role2 !== undefined)   ? `roles=${role2}` : '';
-    c = cityId     ? `cityId=${cityId}` : '';
-    w = word     ? `word=${word}` : '';
-    p = page     ? `page=${page}` : '';
-    q = [r1, r2, c, w, p].filter(function(x) { return x !== ''; }).join('&');
+  getUsers(page?: string, role1?: string, role2?: string, cityId?: string, word?: string) {
+    let search = new URLSearchParams();
+    word ? search.append('word', word) : search.delete('word');
+    search.append('cityId', cityId);
+    search.append('page', page);
+    search.append('roles', role1);
+    search.append('roles', role2);
 
     let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
-    let options = new RequestOptions({ headers: headers });
-    let url = `http://test.mhbb.ru/b/api/user/search?${q}`;
+    let options = new RequestOptions({ headers: headers, search: search });
     return this.http
-    .get(url, options)
+    .get('http://test.mhbb.ru/b/api/user/search', options)
     .map((response) => response.json())
     .toPromise();
   }

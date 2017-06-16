@@ -20,10 +20,10 @@ export class AdminOrganizersComponent implements OnInit {
   concatPage() {
     this.page += 1;
     let reservePage = this.page + 1;
-    this.organizerService.getOrganizers(this.page, this.args[0], this.args[1])
+    this.organizerService.getOrganizers(this.page.toString(10), this.args[0], this.args[1])
     .then(result => this.organizers = this.organizers.concat(result))
     .then(() => {
-      this.organizerService.getOrganizers(reservePage, this.args[0], this.args[1])
+      this.organizerService.getOrganizers(reservePage.toString(10), this.args[0], this.args[1])
       .then(result => this.reserveContent = result);
     });
   }
@@ -34,7 +34,7 @@ export class AdminOrganizersComponent implements OnInit {
   setArgument(index, value) {
       this.reset();
       this.args[index] = value;
-      this.organizerService.getOrganizers(this.page, this.args[0], this.args[1])
+      this.organizerService.getOrganizers(this.page.toString(10), this.args[0], this.args[1])
       .then(result => this.organizers = result);
     }
   saveOrganizerId(id) {
@@ -42,5 +42,5 @@ export class AdminOrganizersComponent implements OnInit {
   }
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
-    this.organizerService.getOrganizers(this.page).then(result => this.organizers = result);
+    this.organizerService.getOrganizers(this.page.toString(10)).then(result => this.organizers = result);
 }}
