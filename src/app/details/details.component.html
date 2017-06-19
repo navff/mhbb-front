@@ -76,7 +76,7 @@
             <div class="reviews-item" *ngFor="let review of reviews">
                 <div class="image">
                 </div>
-                <p class="name"></p>
+                <p class="name">{{review.User?.Name}}</p>
                 <p class="date">{{review.DateCreated | myDate}}</p>
                 <pre class="content">{{review.Text}}</pre>
             </div>

@@ -14,7 +14,6 @@ import { ReservationSuccessComponent } from './details/reservation/reservation-s
 import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
-import { DatePipe } from './shared/_date.pipe';
 
 @NgModule({
   imports: [
@@ -27,8 +26,7 @@ import { DatePipe } from './shared/_date.pipe';
     AppComponent,
     HomeComponent,
     EnterComponent, EnterSuccessComponent,
-    DetailsComponent, ReservationComponent, ReservationSuccessComponent,
-    DatePipe
+    DetailsComponent, ReservationComponent, ReservationSuccessComponent
   ],
   bootstrap: [AppComponent]
 })
