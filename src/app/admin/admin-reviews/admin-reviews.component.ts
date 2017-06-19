@@ -20,13 +20,14 @@ export class AdminReviewsComponent implements OnInit {
       this.reviewService.getUncheckedReviews(this.args[0], this.args[1])
       .then(result => this.reviews = result);
   }
-  delete(id) {
+  delete(id, index) {
+    this.reviews[index].state = -1;
     this.reviewService.deleteReview(id)
     .then(result => console.log(result));
   }
-  accept(id) {
-    console.log(id);
-    this.reviewService.putSetChecked()
+  accept(id, index) {
+    this.reviews[index].state = 1;
+    this.reviewService.putSetChecked(id, 'true')
     .then(result => console.log(result));
   }
   ngOnInit() {

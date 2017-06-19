@@ -33,11 +33,11 @@ export class ReviewService {
     .map((response) => response.json())
     .toPromise();
   }
-  putSetChecked() {
-    let headers = new Headers({'Authorization': 'Token ABRAKADABRA'});
+  putSetChecked(id: string, isChecked: string) {
+    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.put('http://test.mhbb.ru/b/api/review/setchecked?reviewId=140&isChecked=true', options)
+    return this.http.put(`http://test.mhbb.ru/b/api/review/setchecked?reviewId=${id}&isChecked=${isChecked}`, null, options)
     .map((response) => response.json())
     .toPromise();
   }

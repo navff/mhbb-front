@@ -8,13 +8,15 @@
     </md-select>
 </form>
 <div class="container reviews">
-    <div *ngFor="let review of reviews" class="review">
-        <p class="review-name-date"><a href="javascript:void(0);">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}.</p>
+    <div *ngFor="let review of reviews; let i = index" class="review">
+        <p class="review-name-date"><a href="javascript:void(0);">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}г.</p>
         <pre class="review-text">{{review.Text}}</pre>
         <p class="review-descr">Отзыв о <a href="javascript:void(0);">«База отдыха «Нижневартовский камыш»</a></p>
         <div class="buttons">
-            <a (click)="accept()" class="button-accept">ПРИНЯТЬ</a>
-            <a (click)="delete(review.Id)" class="button-reject">ОТКЛОНИТЬ</a>
+            <a (click)="accept(review.Id, i)" *ngIf="!review.state" class="button-accept">ПРИНЯТЬ</a>
+            <a (click)="delete(review.Id, i)" *ngIf="!review.state" class="button-reject">ОТКЛОНИТЬ</a>
+            <p *ngIf="review.state === 1" class="text-accept">Отзыв принят</p>
+            <p *ngIf="review.state === -1" class="text-reject">Отзыв отклонен</p>
         </div>
     </div>
 </div>
