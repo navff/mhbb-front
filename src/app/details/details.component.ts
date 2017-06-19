@@ -45,6 +45,7 @@ export class DetailsComponent implements OnInit {
     this.activityService.getActivity(this.activityId)
     .then(result => {
       this.activity = result;
+      console.log(result);
       this.voteAmount = this.activity.Voices;
       this.activity.Pictures.forEach((pic, i) => {
       this.picUrls[i] = pic.Url;

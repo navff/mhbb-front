@@ -6,7 +6,7 @@ import { CityService } from '../../shared/city.service';
   selector: 'my-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.sass'],
-  providers: [UserService, CityService]
+  providers: [CityService]
 })
 export class AdminUsersComponent implements OnInit {
   cities = [];

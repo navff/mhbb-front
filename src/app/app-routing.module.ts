@@ -7,6 +7,7 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
+import { AuthGuard } from './shared/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,7 +17,7 @@ export const routes: Routes = [
   { path: 'details/reservation', component: ReservationComponent },
   { path: 'details/reservation/reservationsuccess', component: ReservationSuccessComponent },
 
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+  { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard]},
   { path: 'addhobby', loadChildren: './add-hobby/add-hobby.module#AddHobbyModule'},
 ];
 

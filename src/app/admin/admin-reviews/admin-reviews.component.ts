@@ -21,14 +21,18 @@ export class AdminReviewsComponent implements OnInit {
       .then(result => this.reviews = result);
   }
   delete(id, index) {
-    this.reviews[index].state = -1;
     this.reviewService.deleteReview(id)
-    .then(result => console.log(result));
+    .then(result => {
+    console.log(result);
+    this.reviews[index].state = -1;
+    });
   }
   accept(id, index) {
-    this.reviews[index].state = 1;
     this.reviewService.putSetChecked(id, 'true')
-    .then(result => console.log(result));
+    .then(result => {
+    console.log(result);
+    this.reviews[index].state = 1;
+    });
   }
   ngOnInit() {
       this.cityService.getCities().then(result => this.cities = result);

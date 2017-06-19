@@ -11,9 +11,14 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
+
 import { AppRoutingModule } from './app-routing.module';
 
+
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
+import { AuthGuard } from './shared/auth.guard';
+import { UserService } from './shared/user.service';
+import { AuthService } from './shared/auth.service';
 
 @NgModule({
   imports: [
@@ -28,6 +33,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     EnterComponent, EnterSuccessComponent,
     DetailsComponent, ReservationComponent, ReservationSuccessComponent
   ],
+  providers: [ AuthGuard, UserService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
