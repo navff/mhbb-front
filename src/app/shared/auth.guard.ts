@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     if (this.auth.token) {
       return this.userService.getUserByToken()
       .then((result) => {
-        if (result.RoleName === 'PortalAdmin') {
+        if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
           return true;
         }
         this.router.navigate(['']);

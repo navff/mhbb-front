@@ -3,10 +3,12 @@
 <div class="container form">
     <a routerLink='' class="button-back">&larr; Назад</a>
     <h2>Вход и регистрация</h2>
+    <form #f="ngForm" (ngSubmit)="registerUser()">
     <md-input-container>
-        <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email">
+        <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
     </md-input-container>
-    <button (click)="registerUser()" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+    <button type="submit" [disabled]="!f.valid" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+    </form>
     <p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять кружки и курсы.
         Если вы не были зарегистрированы, — зарегистрируем. 
     </p>
