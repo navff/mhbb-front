@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -6,7 +5,9 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class OrganizerService {
-  constructor(private http: Http, private auth: AuthService) {}
+  token = localStorage.getItem('token');
+
+  constructor(private http: Http) {}
 
   getOrganizers(page?: string, word?: string, cityId?: string) {
     let search = new URLSearchParams();
@@ -26,7 +27,7 @@ export class OrganizerService {
     .toPromise();
   }
   putOrganizer(id: any, body: any) {
-    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
     let options = new RequestOptions({ headers: headers });
     return this.http.put(`http://test.mhbb.ru/b/api/organizer/${id}`, body, options)
     .map((response) => response.json())

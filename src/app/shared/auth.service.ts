@@ -5,11 +5,9 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
-  public token: string;
+  public token = localStorage.getItem('token');
 
-  constructor(private http: Http) {
-    this.token = localStorage.getItem('token');
-  }
+  constructor(private http: Http) {}
 
   postUser(email) {
     let body = { 'Email': email };

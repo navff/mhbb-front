@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -6,7 +5,9 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ActivityService {
-  constructor(private http: Http, private auth: AuthService) {}
+  token = localStorage.getItem('token');
+
+  constructor(private http: Http) {}
 
   getActivities(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: string, free?: string) {
@@ -37,7 +38,7 @@ export class ActivityService {
     free ? search.append('free', free) : search.delete('free');
 
 
-    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
     let options = new RequestOptions({ headers: headers, search: search });
     let url = 'http://test.mhbb.ru/b/api/activity/searchunchecked';
     return this.http.get(url, options)
@@ -50,14 +51,14 @@ export class ActivityService {
     .toPromise();
   }
   postTempFile(body) {
-    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/tempfile`, body, options)
     .map((response) => response.json())
     .toPromise();
   }
   deleteTempfile(id) {
-    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
     let options = new RequestOptions({ headers: headers });
     return this.http.delete(`http://test.mhbb.ru/b/api/tempfile/${id}`, options)
     .map((response) => response.json())
@@ -65,7 +66,7 @@ export class ActivityService {
   }
 
   postActivity(body) {
-    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/activity`, body, options)
     .map((response) => response.json())

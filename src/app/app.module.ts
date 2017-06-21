@@ -33,7 +33,7 @@ import { AuthService } from './shared/auth.service';
     DetailsComponent, ReservationComponent, ReservationSuccessComponent
   ],
   providers: [ AuthGuard, AuthService ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef) {}

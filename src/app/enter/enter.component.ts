@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'my-enter',
   templateUrl: './enter.component.html',
-  styleUrls: ['./enter.component.sass'],
-  providers: [AuthService],
+  styleUrls: ['./enter.component.sass']
 })
 export class EnterComponent {
   email: string;

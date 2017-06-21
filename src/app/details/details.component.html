@@ -17,10 +17,10 @@
                     </div>
                 </div>
             </div>
-            <div class="main-wrapper"> 
+            <div *ngIf="loaded" class="main-wrapper"> 
                 <img [src]="picUrls[0] ? picUrls[0] : 'img/fallback.jpg'" alt="" class="main-picture">
             </div>
-            <div class="other-pictures">
+            <div *ngIf="loaded" class="other-pictures">
                 <div class="wrapper-1">
                     <img [src]="picUrls[1] ? picUrls[1] : 'img/fallback.jpg'" alt="" class="other-picture">
                 </div>
@@ -31,8 +31,9 @@
                     <img [src]="picUrls[3] ? picUrls[3] : 'img/fallback.jpg'" alt="" class="other-picture">
                 </div>
             </div>
-           
+            <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="pictures-loading-spinner"></md-progress-spinner>           
         </section>
+
         <section class="info">
             <ul class="info-list">
                 <li>

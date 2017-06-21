@@ -14,10 +14,10 @@ export class DetailsComponent implements OnInit {
   activityId = localStorage.getItem('activityId');
   voteAmount: number;
   picUrls = [];
+  loaded = false;
   reviews = [];
   reviewText: string;
   published = false;
-
   constructor(
     private activityService: ActivityService,
     private reviewService: ReviewService,
@@ -31,7 +31,6 @@ export class DetailsComponent implements OnInit {
     this.voicesService.voteNegative(this.activityId)
     .then(result => this.voteAmount = result);
   }
-
   publishReview() {
     let body = new Review(parseInt(this.activityId, 10), this.reviewText);
     console.log(body);
@@ -50,6 +49,7 @@ export class DetailsComponent implements OnInit {
       this.activity.Pictures.forEach((pic, i) => {
       this.picUrls[i] = pic.Url;
       });
+      this.loaded = true;
     });
     this.reviewService.getReviewsByActivity(this.activityId)
     .then(result => this.reviews = result)
