@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
   activities = [];
   args: any[] = [];
   userEmail: string;
+  loaded = false;
+
   constructor(private activityService: ActivityService,
               private interestService: InterestService,
               private cityService: CityService,
@@ -35,7 +37,9 @@ export class HomeComponent implements OnInit {
     console.log(localStorage.getItem('token'));
   }
   ngOnInit() {
-    this.activityService.getActivities().then(result => this.activities = result);
+    this.activityService.getActivities().then(result => {
+      this.activities = result;
+      this.loaded = true; });
     this.interestService.getInterests().then(result => this.interests = result);
     this.cityService.getCities().then(result => this.cities = result);
     if (this.auth.token) {

@@ -23,13 +23,6 @@ export class UserService {
     .map((response) => response.json())
     .toPromise();
   }
-  getUserByToken() {
-    let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get('http://test.mhbb.ru/b/api/user', options)
-    .map((response) => response.json())
-    .toPromise();
-  }
   getUserByEmail(email: string) {
     let headers = new Headers({'Authorization': 'Token ' + this.auth.token});
     let options = new RequestOptions({ headers: headers });

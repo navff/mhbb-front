@@ -17,7 +17,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthGuard } from './shared/auth.guard';
-import { UserService } from './shared/user.service';
 import { AuthService } from './shared/auth.service';
 
 @NgModule({
@@ -33,7 +32,7 @@ import { AuthService } from './shared/auth.service';
     EnterComponent, EnterSuccessComponent,
     DetailsComponent, ReservationComponent, ReservationSuccessComponent
   ],
-  providers: [ AuthGuard, UserService, AuthService ],
+  providers: [ AuthGuard, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
