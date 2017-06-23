@@ -36,7 +36,7 @@
     </form>
 
     <div class="hobbies-flex">
-        <div routerLink='details' (click)="saveActivityId(activity.Id)" class="hobby-wrapper" *ngFor="let activity of activities">
+        <div [routerLink]="['/details', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">
             <div class="hobby-image-wrapper">
                 <img [src]="activity.MainPicture?.Url ? activity.MainPicture?.Url : 'img/fallback.jpg'" alt="" class="hobby-image">
             </div>

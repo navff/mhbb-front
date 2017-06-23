@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../shared/activity.service';
 import { VoicesService } from '../shared/voices.service';
 import { ReviewService, Review } from '../shared/review.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'my-details',
@@ -11,7 +12,7 @@ import { ReviewService, Review } from '../shared/review.service';
 })
 export class DetailsComponent implements OnInit {
   activity: any = {};
-  activityId = localStorage.getItem('activityId');
+  activityId: string;
   voteAmount: number;
   picUrls = [];
   loaded = false;
@@ -21,7 +22,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private activityService: ActivityService,
     private reviewService: ReviewService,
-    private voicesService: VoicesService) {}
+    private voicesService: VoicesService,
+    private route: ActivatedRoute) {}
 
   votePositive() {
     this.voicesService.votePositive(this.activityId)
@@ -41,6 +43,7 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params =>  this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
     .then(result => {
       this.activity = result;

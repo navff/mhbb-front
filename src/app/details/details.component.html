@@ -69,7 +69,7 @@
                     <pre>{{activity.Mentor}}</pre>
                 </li>
             </ul>
-            <button routerLink='/details/reservation' md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+            <button [routerLink]="['/details', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
         </section>
         <pre class="description">{{activity.Description}}</pre>
         <section class="reviews">

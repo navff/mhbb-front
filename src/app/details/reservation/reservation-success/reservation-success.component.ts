@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../../shared/activity.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'my-reservation-success',
@@ -9,11 +10,13 @@ import { ActivityService } from '../../../shared/activity.service';
 })
 export class ReservationSuccessComponent implements OnInit {
   activity: any = {};
-  activityId = localStorage.getItem('activityId');
+  activityId: string;
 
-  constructor(private activityService: ActivityService) {}
+  constructor(private activityService: ActivityService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.params.subscribe(params =>  this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
     .then(result => {
       this.activity = result;

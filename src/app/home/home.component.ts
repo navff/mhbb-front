@@ -23,9 +23,6 @@ export class HomeComponent implements OnInit {
               private cityService: CityService,
               private auth: AuthService) {}
 
-  saveActivityId(id) {
-    localStorage.setItem('activityId', id);
-  }
   setArgument(index, value) {
     this.args[index] = value;
     this.activityService

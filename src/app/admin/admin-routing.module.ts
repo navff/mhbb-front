@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'main', pathMatch: 'full'},
       { path: 'main',   component: AdminMainComponent },
       { path: 'organizers', component: AdminOrganizersComponent },
-      { path: 'organizers/edit', component: AdminOrganizersEditComponent },
+      { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
       { path: 'users', component: AdminUsersComponent },
       { path: 'users/edit', component: AdminUsersEditComponent },
       { path: 'reviews', component: AdminReviewsComponent }
