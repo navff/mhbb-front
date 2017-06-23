@@ -4,7 +4,7 @@
     <li><a href="javascript:void(0);" class="main-nav__link">Стать спонсором</a></li>
     <li><a href="javascript:void(0);" class="main-nav__link">Стать представителем</a></li>
     <li><a routerLink='enter' class="main-nav__link-enter">Вход</a></li>
-    <li *ngIf="userEmail"><a href="javascript:void(0);" class="main-nav__link-enter">{{userEmail}}</a></li>
+    <li *ngIf="userEmail"><a routerLink='user' class="main-nav__link-enter">{{userEmail}}</a></li>
     <li><a (click)="admin()" href="javascript:void(0);" class="main-nav__link-enter">Админ</a></li>
     <!--*ngIf="userEmail"-->
 </ul>

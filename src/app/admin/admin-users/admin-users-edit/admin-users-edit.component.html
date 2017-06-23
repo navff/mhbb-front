@@ -1,7 +1,7 @@
 <h1 class="admin-heading container">Редактирование пользователя</h1>
 <div class="container">
     <form>
-        <md-input-container class="form-item-name">
+        <md-input-container class="form-item-email">
             <input mdInput placeholder="Электропочта" value="{{user.Email}}">
         </md-input-container>
         <md-select class="form-item-cities" placeholder="Город" [(ngModel)]="selectedCity" name="city">
@@ -11,7 +11,7 @@
         <md-input-container class="form-item-name">
             <input mdInput placeholder="Имя" value="{{user.Name}}" [(ngModel)]="userName" name="name">
         </md-input-container>
-        <md-input-container class="form-item-name" >
+        <md-input-container class="form-item-phone" >
             <input mdInput placeholder="Телефон" value="{{user.Phone}}" [(ngModel)]="userPhone" name="phone">
         </md-input-container>
         <button (click)="putUser()" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>

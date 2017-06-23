@@ -7,15 +7,17 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 import { AuthGuard } from './shared/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'enter', component: EnterComponent },
   { path: 'enter/entersuccess', component: EnterSuccessComponent },
-  { path: `details/:id`, component: DetailsComponent },
+  { path: 'details/:id', component: DetailsComponent },
   { path: 'details/reservation/:id', component: ReservationComponent },
   { path: 'details/reservation/reservationsuccess/:id', component: ReservationSuccessComponent },
+  { path: 'user', component: UserEditComponent },
 
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard]},
   { path: 'addhobby', loadChildren: './add-hobby/add-hobby.module#AddHobbyModule'},

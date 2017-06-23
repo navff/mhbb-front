@@ -11,6 +11,7 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -30,7 +31,8 @@ import { AuthService } from './shared/auth.service';
     AppComponent,
     HomeComponent,
     EnterComponent, EnterSuccessComponent,
-    DetailsComponent, ReservationComponent, ReservationSuccessComponent
+    DetailsComponent, ReservationComponent, ReservationSuccessComponent,
+    UserEditComponent
   ],
   providers: [ AuthGuard, AuthService ],
   bootstrap: [ AppComponent ]
