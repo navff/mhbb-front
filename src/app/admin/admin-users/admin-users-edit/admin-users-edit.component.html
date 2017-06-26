@@ -7,13 +7,16 @@
         <md-select class="form-item-cities" placeholder="Город" [(ngModel)]="selectedCity" name="city">
             <md-option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</md-option>
         </md-select>
-        <md-checkbox [checked]="userRole === 'PortalAdmin'" color="primary" [(ngModel)]="userRole" name="role">Представитель в городе</md-checkbox>
+        <md-checkbox [checked]="userRole === 'PortalAdmin' || userRole === 'PortalManager'" color="primary" (ngModel)="userRole" name="role">Представитель в городе</md-checkbox>
         <md-input-container class="form-item-name">
             <input mdInput placeholder="Имя" value="{{user.Name}}" [(ngModel)]="userName" name="name">
         </md-input-container>
         <md-input-container class="form-item-phone" >
             <input mdInput placeholder="Телефон" value="{{user.Phone}}" [(ngModel)]="userPhone" name="phone">
         </md-input-container>
-        <button (click)="putUser()" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
+        <div class="button-wrapper">
+            <button (click)="putUser()" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
+            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+        </div>
     </form>
 </div>

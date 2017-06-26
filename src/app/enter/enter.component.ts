@@ -8,13 +8,19 @@ import { Router } from '@angular/router';
 })
 export class EnterComponent {
   email: string;
+  responding = false;
+
   constructor(
     private auth: AuthService,
     private router: Router
     ) {}
+
   registerUser() {
+    this.responding = true;
     this.auth.postUser(this.email)
-    .then(result => console.log(result));
-    this.router.navigate(['/enter/entersuccess']);
+    .then(result => {console.log(result);
+      this.router.navigate(['/enter/entersuccess']);
+      this.responding = false;
+    });
   }
 }

@@ -15,5 +15,10 @@
             <a (click)="saveUserEmail(user.Email)" routerLink='../users/edit'>{{user.Name}}</a>
         </div> 
     </div>
+    <div class="button-wrapper">
         <button *ngIf="reserveContent.length > 0 && users.length > 98" (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
+        <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+    </div>
+    <h2 class="no-results" *ngIf="loaded && users.length === 0">По вашему запросу ничего не найдено.</h2>
+    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 </section>

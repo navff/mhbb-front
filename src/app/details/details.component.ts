@@ -19,6 +19,8 @@ export class DetailsComponent implements OnInit {
   reviews = [];
   reviewText: string;
   published = false;
+  responding = false;
+
   constructor(
     private activityService: ActivityService,
     private reviewService: ReviewService,
@@ -34,12 +36,14 @@ export class DetailsComponent implements OnInit {
     .then(result => this.voteAmount = result);
   }
   publishReview() {
+    this.responding = true;
     let body = new Review(parseInt(this.activityId, 10), this.reviewText);
     console.log(body);
     this.reviewService.postReview(body)
     .then(result => {
       console.log(result);
-      this.published = true; });
+      this.published = true;
+      this.responding = false; });
   }
 
   ngOnInit() {

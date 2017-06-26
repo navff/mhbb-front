@@ -16,6 +16,9 @@ activity: any = {};
 activityId: string;
 mainPictureUrl: string;
 
+loaded = false;
+responding = false;
+
 reservation: FormGroup;
 constructor(private activityService: ActivityService,
             private reservationService: ReservationService,
@@ -31,6 +34,7 @@ constructor(private activityService: ActivityService,
   });
   }
   postReservation() {
+    this.responding = true;
     let body = new Reservation(this.activityId,
       this.reservation.get('email').value,
       this.reservation.get('name').value,
@@ -39,7 +43,9 @@ constructor(private activityService: ActivityService,
     console.log(body);
     this.reservationService.postReservation(body)
     .then(result => {console.log(result);
-    this.router.navigate(['/details/reservation/reservationsuccess', this.activityId]); });
+      this.router.navigate(['/act/reservation/success', this.activityId]);
+      this.responding = false;
+    });
   }
 ngOnInit() {
   this.route.params.subscribe(params =>  this.activityId = params['id']);
@@ -47,5 +53,6 @@ ngOnInit() {
   .then(result => {
     this.activity = result;
     this.mainPictureUrl = this.activity.Pictures[0].Url;
+    this.loaded = true;
   });
 }}

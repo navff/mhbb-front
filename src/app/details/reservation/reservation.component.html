@@ -2,10 +2,11 @@
 
 <div class="container">
     <section class="info">
-        <a routerLink='/details' class="button-back">&larr; Назад</a>
+        <a [routerLink]="['/act', activity.Id]" class="button-back">&larr; Назад</a>
         <h1 class="heading">{{activity.Name}}</h1>
         <div class="main-wrapper"> 
             <img [src]="mainPictureUrl ? mainPictureUrl : 'img/fallback.jpg'" alt="" class="main-picture">
+            <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>
         </div>
         <ul class="info-list">
             <li>
@@ -40,7 +41,10 @@
         <md-input-container class="form-item form-item-commentary">
             <input mdInput [formControl]="reservation.controls['comment']" placeholder="Пожелания, комментарии">
         </md-input-container>
-        <button [disabled]="!reservation.valid" type="submit" md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        <div class="button-wrapper">
+            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+            <button [disabled]="!reservation.valid" type="submit" md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        </div>
         <p class="message-link">С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
     </form>
 </div>

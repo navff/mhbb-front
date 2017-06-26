@@ -16,6 +16,8 @@ export class AdminOrganizersEditComponent implements OnInit {
   organizer: any = {};
   organizerId: string;
 
+  responding = false;
+
   editOrganizer: FormGroup;
   constructor(private organizerService: OrganizerService,
               private cityService: CityService,
@@ -30,12 +32,14 @@ export class AdminOrganizersEditComponent implements OnInit {
   }
 
   putOrganizer() {
+    this.responding = true;
     let body = new Organizer(this.editOrganizer.get('name').value,
                              this.editOrganizer.get('cityId').value,
                              this.editOrganizer.get('sobriety').value);
     this.organizerService.putOrganizer(this.organizerId, body)
     .then(result => {this.organizer = result;
       this.router.navigate(['/admin/organizers']);
+      this.responding = false;
     });
   }
   ngOnInit() {

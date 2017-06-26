@@ -36,7 +36,7 @@
     </form>
 
     <div class="hobbies-flex">
-        <div [routerLink]="['/details', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">
+        <div [routerLink]="['/act', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">
             <div class="hobby-image-wrapper">
                 <img [src]="activity.MainPicture?.Url ? activity.MainPicture?.Url : 'img/fallback.jpg'" alt="" class="hobby-image">
             </div>
@@ -51,6 +51,6 @@
             </div>
         </div>		
     </div>
-    <h2 class="hobbies-nothing" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
-    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="hobby-loading-spinner"></md-progress-spinner>
+    <h2 class="no-results" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
+    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 </section>

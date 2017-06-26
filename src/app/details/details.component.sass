@@ -56,7 +56,7 @@
             left: 222px
         .wrapper-3
             left: 444px
-.pictures-loading-spinner
+.image-spinner
     margin: 200px auto 0
 .button-back
     display: inline-block
@@ -166,12 +166,23 @@ md-input-container
     width: 890px
     margin: 70px 0 0 110px
     display: block
-.button-publish
+
+.button-wrapper
     margin-left: 110px
     width: 133px
-    height: 34px
-    font-size: 15px
-    font-weight: 500
+    position: relative
+    .button-spinner
+        position: absolute
+        top: 0
+        right: -50px
+        width: 34px
+        height: 34px
+    .button-publish
+        width: 133px
+        height: 34px
+        font-size: 15px
+        font-weight: 500
+
 .publish-success
     color: #4CAF50
     font-size: 17px

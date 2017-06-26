@@ -7,7 +7,10 @@
     <md-input-container>
         <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
     </md-input-container>
-    <button type="submit" [disabled]="!f.valid" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+    <div class="button-wrapper">
+        <button type="submit" [disabled]="!f.valid" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+        <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+    </div>
     </form>
     <p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять кружки и курсы.
         Если вы не были зарегистрированы, — зарегистрируем. 

@@ -14,9 +14,9 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'enter', component: EnterComponent },
   { path: 'enter/entersuccess', component: EnterSuccessComponent },
-  { path: 'details/:id', component: DetailsComponent },
-  { path: 'details/reservation/:id', component: ReservationComponent },
-  { path: 'details/reservation/reservationsuccess/:id', component: ReservationSuccessComponent },
+  { path: 'act/:id', component: DetailsComponent },
+  { path: 'act/reservation/:id', component: ReservationComponent },
+  { path: 'act/reservation/success/:id', component: ReservationSuccessComponent },
   { path: 'user', component: UserEditComponent },
 
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard]},

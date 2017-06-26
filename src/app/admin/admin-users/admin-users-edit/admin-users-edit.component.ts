@@ -20,6 +20,8 @@ export class AdminUsersEditComponent implements OnInit {
 
   user: any = {};
 
+  responding = true;
+
   constructor(private userService: UserService, private cityService: CityService) {}
 
   putUser() {
@@ -32,6 +34,7 @@ export class AdminUsersEditComponent implements OnInit {
     this.userService.getUserByEmail(this.searchEmail)
     .then(result => {
       this.user = result;
+      console.log(this.user);
       this.selectedCity = this.user.CityName;
       this.userRole = this.user.RoleName;
     });

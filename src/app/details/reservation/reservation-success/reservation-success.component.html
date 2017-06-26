@@ -1,10 +1,10 @@
 <my-header></my-header>
 
 <div class="container info">
-        <a routerLink='/details/reservation' class="button-back">&larr; Назад</a>
+        <a [routerLink]="['/act/reservation', activity.Id]" class="button-back">&larr; Назад</a>
         <h1 class="heading">Вы записаны</h1>
         <p>Мы отправили письмо в <strong>{{activity.Organizer?.Name}}</strong> о вашем желании записаться на «Курсы кулинарного искусства». Если они не
-            напишут и не перезвонят вам в течение 2 дней, — напишите отзыв на <a routerLink='/details'>их странице.</a></p>
+            напишут и не перезвонят вам в течение 2 дней, — напишите отзыв на <a [routerLink]="['/act', activity.Id]">их странице.</a></p>
         <p class="access">На вашу почту мы отправили ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы и голосовать. </p>
         
         <button routerLink='' md-raised-button color="accent" class="button-to-home">НА ГЛАВНУЮ</button>

@@ -13,7 +13,7 @@
         <md-select class="form-item-cities" placeholder="Город" [(ngModel)]="selectedCity" name="city">
                 <md-option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</md-option>
         </md-select>
-        <md-checkbox *ngIf="userRole === 'PortalAdmin'" [checked]="userRole === 'PortalAdmin'" color="primary" [(ngModel)]="userRole" name="role">Представитель в городе</md-checkbox>
+        <md-checkbox *ngIf="userRole === 'PortalAdmin' || userRole === 'PortalManager'" [checked]="true" color="primary" (ngModel)="userRole" name="role">Представитель в городе</md-checkbox>
 
         <div class="user-image">
             <div (click)="removeImage()" *ngIf="fileData" class="delete-image-button"></div>                

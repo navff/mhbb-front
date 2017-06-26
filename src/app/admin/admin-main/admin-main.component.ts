@@ -14,7 +14,9 @@ export class AdminMainComponent implements OnInit {
   cities = [];
 
   activities = [];
+  loaded = false;
   uncheckedActivities = [];
+  uncheckedLoaded = false;
   args: any[] = [];
 
   constructor(private activityService: ActivityService,
@@ -22,18 +24,33 @@ export class AdminMainComponent implements OnInit {
               private interestService: InterestService) {}
 
   setArgument(index, value) {
+    this.loaded = false;
+    this.uncheckedLoaded = false;
+    this.activities = [];
+    this.uncheckedActivities = [];
+
     this.args[index] = value;
     this.activityService
     .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
-    .then(result => this.activities = result);
+    .then(result => {this.activities = result;
+      this.loaded = true;
+    });
 
     this.activityService
     .getUncheckedActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
-    .then(result => this.uncheckedActivities = result);
+    .then(result => {this.uncheckedActivities = result;
+      this.uncheckedLoaded = true;
+    });
   }
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.interestService.getInterests().then(result => this.interests = result);
-    this.activityService.getActivities().then(result => this.activities = result);
-    this.activityService.getUncheckedActivities().then(result => this.uncheckedActivities = result);
+    this.activityService.getActivities()
+    .then(result => {this.activities = result;
+      this.loaded = true;
+    });
+    this.activityService.getUncheckedActivities()
+    .then(result => {this.uncheckedActivities = result;
+      this.uncheckedLoaded = true;
+    });
 }}

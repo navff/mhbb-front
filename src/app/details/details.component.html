@@ -31,7 +31,7 @@
                     <img [src]="picUrls[3] ? picUrls[3] : 'img/fallback.jpg'" alt="" class="other-picture">
                 </div>
             </div>
-            <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="pictures-loading-spinner"></md-progress-spinner>           
+            <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>           
         </section>
 
         <section class="info">
@@ -69,7 +69,7 @@
                     <pre>{{activity.Mentor}}</pre>
                 </li>
             </ul>
-            <button [routerLink]="['/details', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+            <button [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
         </section>
         <pre class="description">{{activity.Description}}</pre>
         <section class="reviews">
@@ -84,7 +84,10 @@
             <md-input-container>
                 <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
             </md-input-container>
-            <button *ngIf="!published" [disabled]="!reviewText" (click)="publishReview()" md-raised-button color="primary" class="button-publish">Опубликовать</button>
+            <div class="button-wrapper">
+                <button *ngIf="!published" [disabled]="!reviewText" (click)="publishReview()" md-raised-button color="primary" class="button-publish">Опубликовать</button>
+                <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+            </div>
             <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
         </section>
     </div>

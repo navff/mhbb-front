@@ -21,6 +21,7 @@ export class AddHobbyComponent implements OnInit {
   fileId = [];
   formId: any;
   isChecked = false;
+  responding = false;
   addHobby: FormGroup;
 
   constructor(private interestService: InterestService,
@@ -50,6 +51,8 @@ export class AddHobbyComponent implements OnInit {
     });
   }
   submitForm() {
+    this.responding = true;
+
     let body = new Activity(
       this.addHobby.get('name').value,
       {Name: this.addHobby.get('organizerName').value,
@@ -71,6 +74,7 @@ export class AddHobbyComponent implements OnInit {
     this.activityService.postActivity(body)
     .then(result => {console.log(result);
     this.router.navigate(['/addhobby/success']);
+    this.responding = false;
     });
   }
 

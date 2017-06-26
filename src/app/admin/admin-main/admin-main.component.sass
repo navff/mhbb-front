@@ -1,6 +1,6 @@
 .hobbies-flex
     display: flex
-    justify-content: space-between
+    justify-content: start
     flex-wrap: wrap
 
 .hobbies-form
@@ -46,12 +46,15 @@
 
 .hobby-wrapper
     margin-bottom: 60px
-    width: 476.82px
+    width: 476px
     height: 337.75px
     background-color: #eee
     position: relative
     cursor: pointer
     overflow: hidden
+    margin-right: calc((100% - 1428px) / 2)
+    &:nth-child(3n)
+        margin-right: 0
     &:before
         content: ''
         display: block
@@ -128,3 +131,9 @@
     right: 28px
     width: 26px
     height: 30px
+
+
+.search-spinner
+    margin: 90px auto 0
+.no-results
+    font-size: 24px

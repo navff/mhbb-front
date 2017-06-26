@@ -12,13 +12,18 @@ export class AdminReviewsComponent implements OnInit {
   reviews = [];
   cities = [];
   args: any[] = [];
+  loaded = false;
 
   constructor(private reviewService: ReviewService, private cityService: CityService) {}
 
   setArgument(index, value) {
-      this.args[index] = value;
-      this.reviewService.getUncheckedReviews(this.args[0], this.args[1])
-      .then(result => this.reviews = result);
+    this.reviews = [];
+    this.loaded = false;
+    this.args[index] = value;
+    this.reviewService.getUncheckedReviews(this.args[0], this.args[1])
+    .then(result => {this.reviews = result;
+      this.loaded = true;
+    });
   }
   delete(id, index) {
     this.reviewService.deleteReview(id)
@@ -36,6 +41,9 @@ export class AdminReviewsComponent implements OnInit {
   }
   ngOnInit() {
       this.cityService.getCities().then(result => this.cities = result);
-      this.reviewService.getUncheckedReviews().then(result => {this.reviews = result;
-      console.log(result); });
+      this.reviewService.getUncheckedReviews()
+      .then(result => {this.reviews = result;
+        this.loaded = true;
+        console.log(result);
+      });
 }}
