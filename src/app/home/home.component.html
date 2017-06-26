@@ -51,5 +51,6 @@
             </div>
         </div>		
     </div>
+    <h2 class="hobbies-nothing" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
     <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="hobby-loading-spinner"></md-progress-spinner>
 </section>

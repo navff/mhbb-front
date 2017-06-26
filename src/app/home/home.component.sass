@@ -79,16 +79,19 @@ header
 
 .hobbies-flex
     display: flex
-    justify-content: space-between
+    justify-content: start
     flex-wrap: wrap
 .hobby-wrapper
     margin-bottom: 60px
-    width: 476.82px
+    width: 476px
     height: 337.75px
     position: relative
     cursor: pointer
     overflow: hidden
     outline: none
+    margin-right: calc((100% - 1428px) / 2)
+    &:nth-child(3n)
+        margin-right: 0
     &:before
         content: ''
         display: block
@@ -190,4 +193,6 @@ header
     height: 30px
 
 .hobby-loading-spinner
-    margin: 150px auto
+    margin: 90px auto 0
+.hobbies-nothing
+    font-size: 24px
