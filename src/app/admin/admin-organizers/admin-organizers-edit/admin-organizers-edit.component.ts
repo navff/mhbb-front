@@ -39,7 +39,6 @@ export class AdminOrganizersEditComponent implements OnInit {
     this.organizerService.putOrganizer(this.organizerId, body)
     .then(result => {this.organizer = result;
       this.router.navigate(['/admin/organizers']);
-      this.responding = false;
     });
   }
   ngOnInit() {

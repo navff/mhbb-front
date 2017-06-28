@@ -36,16 +36,16 @@ export class UserService {
     let headers = new Headers({'Authorization': 'Token ' + this.token});
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.put(`http://test.mhbb.ru/b/api/organizer/${email}`, body, options)
+    return this.http.put(`http://test.mhbb.ru/b/api/user?email=${email}`, body, options)
     .map((response) => response.json())
     .toPromise();
 }}
 export class User {
-  Picture: null;
   constructor (
   public Email: string,
   public Name: string,
   public Phone: string,
-  public Role: string,
-  public CityId: any) {}
+  public Role: number,
+  public CityId: any,
+  public pictureId: any) {}
 }

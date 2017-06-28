@@ -60,7 +60,7 @@ export class UserEditComponent implements OnInit {
   }
 
   putUser() {
-    let body = new User(this.user.Email, this.userName, this.userPhone, this.userRole, 1);
+    let body = new User(this.user.Email, this.userName, this.userPhone, 0, 1, null);
     this.userService.putUser(this.user.Email, body)
     .then(result => {this.user = result;
       console.log(result);
