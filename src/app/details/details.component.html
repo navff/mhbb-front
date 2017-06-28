@@ -15,6 +15,7 @@
                     <div (click)="voteNegative()" class="thumb-down">
                         <img src="img/thumbs-up-black.svg" alt="">
                     </div>
+                    <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
                 </div>
             </div>
             <div *ngIf="loaded" class="main-wrapper"> 

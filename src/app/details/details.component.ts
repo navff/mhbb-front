@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit {
   reviewText: string;
   published = false;
   responding = false;
-
+  voted = false;
   constructor(
     private activityService: ActivityService,
     private reviewService: ReviewService,
@@ -28,12 +28,18 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute) {}
 
   votePositive() {
+    let oldAmount = this.voteAmount;
     this.voicesService.votePositive(this.activityId)
-    .then(result => this.voteAmount = result);
+    .then(result => {this.voteAmount = result;
+      oldAmount === result ? this.voted = true : this.voted = false;
+    });
   }
   voteNegative() {
+    let oldAmount = this.voteAmount;
     this.voicesService.voteNegative(this.activityId)
-    .then(result => this.voteAmount = result);
+    .then(result => {this.voteAmount = result;
+      oldAmount === result ? this.voted = true : this.voted = false;
+    });
   }
   publishReview() {
     this.responding = true;
@@ -43,7 +49,8 @@ export class DetailsComponent implements OnInit {
     .then(result => {
       console.log(result);
       this.published = true;
-      this.responding = false; });
+      this.responding = false;
+    });
   }
 
   ngOnInit() {

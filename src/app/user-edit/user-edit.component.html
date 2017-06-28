@@ -3,17 +3,17 @@
 <div class="container form">
     <a routerLink='' class="button-back">&larr; Назад</a>
     <h2>Редактирование личной информации</h2>
-    <form>
+    <form [formGroup]="editUser" (ngSubmit)="putUser()">
         <md-input-container class="form-item-name">
-            <input mdInput placeholder="Имя" value="{{user.Name}}" [(ngModel)]="userName" name="userName">
+            <input [formControl]="editUser.controls['name']" mdInput placeholder="Имя">
         </md-input-container>
         <md-input-container class="form-item-phone">
-            <input mdInput placeholder="Номер телефона" value="{{user.Phone}}" [(ngModel)]="userPhone" name="userPhone">
+            <input [formControl]="editUser.controls['phone']" mdInput placeholder="Номер телефона">
         </md-input-container>
-        <md-select class="form-item-cities" placeholder="Город" [(ngModel)]="selectedCity" name="city">
-                <md-option *ngFor="let city of cities" [value]="city.Name">{{ city.Name }}</md-option>
+        <md-select [formControl]="editUser.controls['cityId']" class="form-item-cities" placeholder="Город">
+                <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
         </md-select>
-        <md-checkbox *ngIf="userRole === 'PortalAdmin' || userRole === 'PortalManager'" [checked]="true" color="primary" (ngModel)="userRole" name="role">Представитель в городе</md-checkbox>
+        <md-checkbox [formControl]="editUser.controls['role']" *ngIf="user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager'">Представитель в городе</md-checkbox>
 
         <div class="user-image">
             <div (click)="removeImage()" *ngIf="fileData" class="delete-image-button"></div>                
@@ -22,11 +22,11 @@
                     <img [src]="fileData ? fileData : 'img/fallback.jpg'" alt="" class="user-image-preview">
                 </div>
                 <input (change)="addImage($event, 1, false)" [disabled]="fileName" type="file" id="input" class="add-image-input" accept=".png,.jpg,.jpeg">
-                <input type="hidden">
             </label>
         </div>
-
-        <button (click)="putUser()" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
-        
+        <div class="button-wrapper">
+            <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
+            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+        </div>
     </form>
 </div>

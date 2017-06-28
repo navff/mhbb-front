@@ -61,7 +61,11 @@ export class AdminUsersEditComponent implements OnInit {
       this.editUser.get('email').setValue(this.user.Email);
       this.editUser.get('name').setValue(this.user.Name);
       this.editUser.get('phone').setValue(this.user.Phone);
-      this.editUser.get('role').setValue(this.user.Role);
+      if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
+        this.editUser.get('role').setValue(true);
+      } else {
+        this.editUser.get('role').setValue(false);
+      }
       this.editUser.get('cityId').setValue(this.user.CityId);
       console.log(this.user);
     });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../shared/auth.service';
 import { CityService } from '../shared/city.service';
 import { UserService, User } from '../shared/user.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,28 +15,34 @@ import { Router } from '@angular/router';
 })
 export class UserEditComponent implements OnInit {
   cities = [];
-  selectedCity: string;
-
-  userName: string;
-  userPhone: string;
-  userRole: string;
 
   fileName: string;
   fileData: string;
 
   user: any = {};
 
+  responding = false;
+
+  editUser: FormGroup;
   constructor(
     private auth: AuthService,
     private userService: UserService,
     private cityService: CityService,
-    private router: Router) {}
+    private router: Router,
+    fb: FormBuilder) {
+      this.editUser = fb.group({
+          'name': '',
+          'phone': '',
+          'role': '',
+          'cityId': ''
+      });
+    }
   addImage(event) {
       let data, file: File;
       file = event.target.files[0];
 
       this.fileName = file.name;
-      // this.addHobby.controls[`image${index}`].setValue(file.name);
+      // this.editUser.controls[`image`].setValue(file.name);
 
       let reader = new FileReader();
       reader.readAsDataURL(file);
@@ -55,15 +62,27 @@ export class UserEditComponent implements OnInit {
   removeImage() {
       (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
       this.fileName = null;
-      // this.addHobby.controls[`image${index}`].setValue('');
+      // this.editUser.controls[`image`].setValue('');
       this.fileData = null;
   }
 
   putUser() {
-    let body = new User(this.user.Email, this.userName, this.userPhone, 0, 1, null);
+    this.responding = true;
+    let role = 0;
+    let body = new User(
+      this.user.Email,
+      this.editUser.get('name').value,
+      this.editUser.get('phone').value,
+      role,
+      this.editUser.get('cityId').value,
+      null
+      );
+    console.log(body);
     this.userService.putUser(this.user.Email, body)
     .then(result => {this.user = result;
       console.log(result);
+      this.responding = false;
+      this.router.navigate(['']);
     });
   }
 
@@ -75,8 +94,14 @@ export class UserEditComponent implements OnInit {
     this.auth.getUserByToken()
     .then(result => {
       this.user = result;
-      this.selectedCity = this.user.CityName;
-      this.userRole = this.user.RoleName;
+      this.editUser.get('name').setValue(this.user.Name);
+      this.editUser.get('phone').setValue(this.user.Phone);
+      if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
+        this.editUser.get('role').setValue(true);
+      } else {
+        this.editUser.get('role').setValue(false);
+      }
+      this.editUser.get('cityId').setValue(this.user.CityId);
     });
   }
 }
