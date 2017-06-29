@@ -1,95 +1,93 @@
-<my-header></my-header>
+<div class="container">
+    <section class="gallery">
+        <a routerLink='' class="button-back">&larr; Поиск</a>
+        <div class="heading">
+            <h1>{{activity.Name}}</h1>
 
-    <div class="container">
-        <section class="gallery">
-            <a routerLink='' class="button-back">&larr; Поиск</a>
-            <div class="heading">
-                <h1>{{activity.Name}}</h1>
-
-                <div class="voicing">
-                    <div (click)="votePositive()" class="thumb-up">
-                            <img src="img/thumbs-up-black.svg" alt="">
-                    </div>
-                        <p class="amount">{{voteAmount}}</p>
-
-                    <div (click)="voteNegative()" class="thumb-down">
+            <div class="voicing">
+                <div (click)="votePositive()" class="thumb-up">
                         <img src="img/thumbs-up-black.svg" alt="">
-                    </div>
-                    <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
                 </div>
-            </div>
-            <div *ngIf="loaded" class="main-wrapper"> 
-                <img [src]="picUrls[0] ? picUrls[0] : 'img/fallback.jpg'" alt="" class="main-picture">
-            </div>
-            <div *ngIf="loaded" class="other-pictures">
-                <div class="wrapper-1">
-                    <img [src]="picUrls[1] ? picUrls[1] : 'img/fallback.jpg'" alt="" class="other-picture">
-                </div>
-                <div class="wrapper-2">
-                    <img [src]="picUrls[2] ? picUrls[2] : 'img/fallback.jpg'" alt="" class="other-picture">
-                </div>
-                <div class="wrapper-3">
-                    <img [src]="picUrls[3] ? picUrls[3] : 'img/fallback.jpg'" alt="" class="other-picture">
-                </div>
-            </div>
-            <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>           
-        </section>
+                    <p class="amount">{{voteAmount}}</p>
 
-        <section class="info">
-            <ul class="info-list">
-                <li>
-                    <h4 class="bold">Организатор:</h4>
-                    <p>{{activity.Organizer?.Name}}</p>
-                </li>
-                <li>
-                    <h4 class="bold">Возраст:</h4>
-                    <p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
-                </li>
-                <li>
-                    <h4 class="bold">Телефоны:</h4>
-                    <pre>{{activity.Phones}}</pre>
-                </li>
-                <li>
-                    <h4 class="bold">Адрес:</h4>
-                    <pre>{{activity.Address}}</pre>
-                </li>
-                <li>
-                    <h4 class="bold">Цены:</h4>
-                    <div class="prices">
-                        <p>{{activity.Prices}}</p>
-                        <img class="hobby-free-icon" src="img/free-withborder.svg" alt="" *ngIf="activity.Free">
-                    </div>
-                    
-                </li>
-                <li>
-                    <h4 class="bold">Трезвость:</h4>
-                    <p>{{activity.Organizer?.Sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
-                </li>
-                <li>
-                    <h4 class="bold">Ведущий:</h4>
-                    <pre>{{activity.Mentor}}</pre>
-                </li>
-            </ul>
-            <button [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
-        </section>
-        <pre class="description">{{activity.Description}}</pre>
-        <section class="reviews">
-            <h2 class="reviews-heading">Отзывы</h2>
-            <div class="reviews-item" *ngFor="let review of reviews">
-                <div class="image">
+                <div (click)="voteNegative()" class="thumb-down">
+                    <img src="img/thumbs-up-black.svg" alt="">
                 </div>
-                <p class="name">{{review.User?.Name}}</p>
-                <p class="date">{{review.DateCreated | myDate}}</p>
-                <pre class="content">{{review.Text}}</pre>
+                <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
             </div>
-            <md-input-container>
-                <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
-            </md-input-container>
-            <div class="button-wrapper">
-                <button *ngIf="!published" [disabled]="!reviewText" (click)="publishReview()" md-raised-button color="primary" class="button-publish">Опубликовать</button>
-                <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+        </div>
+        <div *ngIf="loaded" class="main-wrapper"> 
+            <img [src]="picUrls[0] ? picUrls[0] : 'img/fallback.jpg'" alt="" class="main-picture">
+        </div>
+        <div *ngIf="loaded" class="other-pictures">
+            <div class="wrapper-1">
+                <img [src]="picUrls[1] ? picUrls[1] : 'img/fallback.jpg'" alt="" class="other-picture">
             </div>
-            <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
-        </section>
-    </div>
+            <div class="wrapper-2">
+                <img [src]="picUrls[2] ? picUrls[2] : 'img/fallback.jpg'" alt="" class="other-picture">
+            </div>
+            <div class="wrapper-3">
+                <img [src]="picUrls[3] ? picUrls[3] : 'img/fallback.jpg'" alt="" class="other-picture">
+            </div>
+        </div>
+        <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>           
+    </section>
+
+    <section class="info">
+        <ul class="info-list">
+            <li>
+                <h4 class="bold">Организатор:</h4>
+                <p>{{activity.Organizer?.Name}}</p>
+            </li>
+            <li>
+                <h4 class="bold">Возраст:</h4>
+                <p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
+            </li>
+            <li>
+                <h4 class="bold">Телефоны:</h4>
+                <pre>{{activity.Phones}}</pre>
+            </li>
+            <li>
+                <h4 class="bold">Адрес:</h4>
+                <pre>{{activity.Address}}</pre>
+            </li>
+            <li>
+                <h4 class="bold">Цены:</h4>
+                <div class="prices">
+                    <p>{{activity.Prices}}</p>
+                    <img class="hobby-free-icon" src="img/free-withborder.svg" alt="" *ngIf="activity.Free">
+                </div>
+                
+            </li>
+            <li>
+                <h4 class="bold">Трезвость:</h4>
+                <p>{{activity.Organizer?.Sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
+            </li>
+            <li>
+                <h4 class="bold">Ведущий:</h4>
+                <pre>{{activity.Mentor}}</pre>
+            </li>
+        </ul>
+        <button [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+    </section>
+    <pre class="description">{{activity.Description}}</pre>
+    <section class="reviews">
+        <h2 class="reviews-heading">Отзывы</h2>
+        <div class="reviews-item" *ngFor="let review of reviews">
+            <div class="image">
+            </div>
+            <p class="name">{{review.User?.Name}}</p>
+            <p class="date">{{review.DateCreated | myDate}}</p>
+            <pre class="content">{{review.Text}}</pre>
+        </div>
+        <md-input-container>
+            <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
+        </md-input-container>
+        <div class="button-wrapper">
+            <button *ngIf="!published" [disabled]="!reviewText" (click)="publishReview()" md-raised-button color="primary" class="button-publish">Опубликовать</button>
+            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+        </div>
+        <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
+    </section>
+</div>
     

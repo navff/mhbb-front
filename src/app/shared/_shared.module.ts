@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }          from '@angular/http';
 import { RouterModule }        from '@angular/router';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdProgressSpinnerModule } from '@angular/material';
-import { HeaderComponent }     from './header/header.component';
 import { OnlyNumberDirective } from './_only-number.directive';
 import { DatePipe } from './_date.pipe';
 
@@ -14,11 +13,11 @@ import { DatePipe } from './_date.pipe';
     RouterModule,
     CommonModule
   ],
-  declarations: [ HeaderComponent, OnlyNumberDirective, DatePipe ],
+  declarations: [ OnlyNumberDirective, DatePipe ],
   exports:      [
     HttpModule, FormsModule, ReactiveFormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule,
-    HeaderComponent, OnlyNumberDirective, DatePipe
+    OnlyNumberDirective, DatePipe
   ]
 })
 export class SharedModule { }

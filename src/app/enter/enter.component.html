@@ -1,14 +1,12 @@
-<my-header></my-header>
-
 <div class="container form">
-    <a routerLink='' class="button-back">&larr; Назад</a>
+    <a class="button-back" (click)="back()">&larr; Назад</a>
     <h2>Вход и регистрация</h2>
     <form #f="ngForm" (ngSubmit)="registerUser()">
     <md-input-container>
         <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
     </md-input-container>
     <div class="button-wrapper">
-        <button type="submit" [disabled]="!f.valid" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
+        <button type="submit" md-raised-button color="accent" class="button-send">ОТПРАВИТЬ ССЫЛКУ</button>
         <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
     </div>
     </form>

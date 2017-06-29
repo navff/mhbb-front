@@ -1,17 +1,3 @@
-<header>
-<ul class="main-nav container">
-    <li><a href="javascript:void(0);" class="main-nav__link">О проекте</a></li>
-    <li><a href="javascript:void(0);" class="main-nav__link">Стать спонсором</a></li>
-    <li><a href="javascript:void(0);" class="main-nav__link">Стать представителем</a></li>
-    <li><a routerLink='enter' class="main-nav__link-enter">Вход</a></li>
-    <li *ngIf="userEmail"><a routerLink='user' class="main-nav__link-enter">{{userEmail}}</a></li>
-    <li><a (click)="admin()" href="javascript:void(0);" class="main-nav__link-enter">Админ</a></li>
-    <!--*ngIf="userEmail"-->
-</ul>
-<img routerLink='' src="img/logo.svg" alt="" class="header-logo">
-<h1 class="header-text">Находим хобби по вкусу и возрасту</h1>
-</header>
-
 <section class="hobbies container">
     <form class="hobbies-form">
         <md-input-container class="hobbies-search">

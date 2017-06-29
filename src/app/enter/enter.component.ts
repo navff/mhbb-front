@@ -9,11 +9,14 @@ import { Router } from '@angular/router';
 export class EnterComponent {
   email: string;
   responding = false;
-
   constructor(
     private auth: AuthService,
     private router: Router
     ) {}
+
+  back() {
+    this.router.navigate(['']);
+  }
 
   registerUser() {
     this.responding = true;
