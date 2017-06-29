@@ -1,10 +1,10 @@
 <div class="container">
     <section class="gallery">
-        <a routerLink='' class="button-back">&larr; Поиск</a>
+        <a [routerLink]="admin.isActive ? '/admin/main' : ''" class="button-back">&larr; Поиск</a>
         <div class="heading">
             <h1>{{activity.Name}}</h1>
 
-            <div class="voicing">
+            <div class="voicing" *ngIf="activity.IsChecked">
                 <div (click)="votePositive()" class="thumb-up">
                         <img src="img/thumbs-up-black.svg" alt="">
                 </div>
@@ -68,10 +68,12 @@
                 <pre>{{activity.Mentor}}</pre>
             </li>
         </ul>
-        <button [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
+        <button *ngIf="!admin.isActive" [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        <button *ngIf="admin.isActive" [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="primary" class="button-enroll button-edit">РЕДАКТИРОВАТЬ</button>
     </section>
     <pre class="description">{{activity.Description}}</pre>
-    <section class="reviews">
+    <section class="reviews" *ngIf="activity.IsChecked">
         <h2 class="reviews-heading">Отзывы</h2>
         <div class="reviews-item" *ngFor="let review of reviews">
             <div class="image">

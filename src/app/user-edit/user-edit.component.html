@@ -1,5 +1,6 @@
 <div class="container form">
-    <a routerLink='' class="button-back">&larr; Назад</a>
+    <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
+    <a [routerLink]="admin.isActive ? '/admin' : ''" class="button-back">&larr; Назад</a>
     <h2>Редактирование личной информации</h2>
     <form [formGroup]="editUser" (ngSubmit)="putUser()">
         <div class="inputs">

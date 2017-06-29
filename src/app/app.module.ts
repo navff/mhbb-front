@@ -8,10 +8,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EnterComponent } from './enter/enter.component';
 import { EnterSuccessComponent } from './enter/enter-success/enter-success.component';
-import { DetailsComponent } from './details/details.component';
 import { ReservationComponent } from './details/reservation/reservation.component';
 import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -31,8 +29,7 @@ import { AuthService } from './shared/auth.service';
     AppComponent,
     HomeComponent,
     EnterComponent, EnterSuccessComponent,
-    DetailsComponent, ReservationComponent, ReservationSuccessComponent,
-    UserEditComponent
+    ReservationComponent, ReservationSuccessComponent
   ],
   providers: [ AuthGuard, AuthService ],
   bootstrap: [ AppComponent ]

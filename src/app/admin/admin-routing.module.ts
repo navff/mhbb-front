@@ -9,12 +9,17 @@ import { AdminUsersComponent }     from './admin-users/admin-users.component';
 import { AdminUsersEditComponent }     from './admin-users/admin-users-edit/admin-users-edit.component';
 import { AdminReviewsComponent }     from './admin-reviews/admin-reviews.component';
 
+import { DetailsComponent } from './../details/details.component';
+import { UserEditComponent } from './../user-edit/user-edit.component';
+
 const routes: Routes = [
   { path: '',
     component: AdminComponent,
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full'},
       { path: 'main',   component: AdminMainComponent },
+      { path: 'edit',   component: UserEditComponent },
+      { path: 'main/act/:id',   component: DetailsComponent },
       { path: 'organizers', component: AdminOrganizersComponent },
       { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
       { path: 'users', component: AdminUsersComponent },
