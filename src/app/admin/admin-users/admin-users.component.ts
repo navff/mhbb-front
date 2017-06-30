@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { CityService } from '../../shared/city.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'my-admin-users',
@@ -18,8 +19,12 @@ export class AdminUsersComponent implements OnInit {
   loaded = false;
   responding = false;
 
-  constructor(private userService: UserService, private cityService: CityService) {}
-
+  constructor(private userService: UserService,
+              private cityService: CityService,
+              private router: Router) {}
+  toUserEdit(url) {
+    this.router.navigate(['/admin/users/edit'], { queryParams: { email: url}});
+  }
   concatPage() {
     this.responding = true;
     this.page += 1;
@@ -45,9 +50,6 @@ export class AdminUsersComponent implements OnInit {
     this.userService.getUsers(this.page.toString(10), this.args[0], this.args[1], this.args[2], this.args[3])
     .then(result => {this.users = result;
       this.loaded = true; });
-  }
-  saveUserEmail(email) {
-    localStorage.setItem('userEmail', email);
   }
 
   ngOnInit() {

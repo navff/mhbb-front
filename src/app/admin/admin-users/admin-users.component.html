@@ -12,7 +12,7 @@
 <section class="container">
     <div class="users">
         <div class="user" *ngFor="let user of users">
-            <a (click)="saveUserEmail(user.Email)" routerLink='../users/edit'>{{user.Name}}</a>
+            <a (click)="toUserEdit(user.Email)">{{user.Name}}</a>
         </div> 
     </div>
     <div class="button-wrapper">

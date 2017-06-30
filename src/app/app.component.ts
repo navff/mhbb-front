@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.auth.setToken();
-    console.log('pathname = ' + window.location.pathname);
     if (window.location.pathname === '/') {
     if (!this.auth.token) {
       this.router.navigate(['']);

@@ -46,9 +46,6 @@ export class AdminOrganizersComponent implements OnInit {
       .then(result => {this.organizers = result;
         this.loaded = true; });
     }
-  saveOrganizerId(id) {
-    localStorage.setItem('organizerId', id);
-  }
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizers(this.page.toString(10))

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService, User } from '../../../shared/user.service';
 import { CityService } from '../../../shared/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'my-admin-users-edit',
@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AdminUsersEditComponent implements OnInit {
   cities = [];
-  searchEmail = localStorage.getItem('userEmail');
+  searchEmail: string;
+  email: string;
 
   user: any = {};
 
@@ -22,6 +23,7 @@ export class AdminUsersEditComponent implements OnInit {
   constructor(private userService: UserService,
               private cityService: CityService,
               private router: Router,
+              private route: ActivatedRoute,
               fb: FormBuilder) {
     this.editUser = fb.group({
         'email': '',
@@ -54,6 +56,9 @@ export class AdminUsersEditComponent implements OnInit {
     });
   }
   ngOnInit() {
+    let params: any = this.route.queryParams;
+    this.searchEmail = params.value.email;
+    console.log(this.searchEmail);
     this.cityService.getCities().then(result => this.cities = result);
     this.userService.getUserByEmail(this.searchEmail)
     .then(result => {
