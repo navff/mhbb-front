@@ -5,12 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/_shared.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { EnterComponent } from './enter/enter.component';
-import { EnterSuccessComponent } from './enter/enter-success/enter-success.component';
-import { ReservationComponent } from './details/reservation/reservation.component';
-import { ReservationSuccessComponent } from './details/reservation/reservation-success/reservation-success.component';
-
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -25,12 +19,7 @@ import { AuthService } from './shared/auth.service';
     SharedModule,
     AppRoutingModule
   ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    EnterComponent, EnterSuccessComponent,
-    ReservationComponent, ReservationSuccessComponent
-  ],
+  declarations: [ AppComponent ],
   providers: [ AuthGuard, AuthService ],
   bootstrap: [ AppComponent ]
 })

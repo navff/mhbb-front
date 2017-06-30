@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from '../shared/activity.service';
-import { InterestService } from '../shared/interest.service';
-import { CityService } from '../shared/city.service';
+import { ActivityService } from '../../shared/activity.service';
+import { InterestService } from '../../shared/interest.service';
+import { CityService } from '../../shared/city.service';
 
 @Component({
-  selector: 'my-home',
-  templateUrl: './home.component.html',
+  selector: 'my-main',
+  templateUrl: './main.component.html',
   providers: [ActivityService, InterestService, CityService],
-  styleUrls: ['./home.component.sass']
+  styleUrls: ['./main.component.sass']
 })
-export class HomeComponent implements OnInit {
+export class MainComponent implements OnInit {
   cities = [];
   interests = [];
   activities = [];

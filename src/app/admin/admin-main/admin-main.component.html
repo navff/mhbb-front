@@ -26,7 +26,7 @@
 
 <h2 class="admin-heading">На проверку</h2>
 <div class="hobbies-flex">
-    <div [routerLink]="['/admin/main/act', unchecked.Id]" class="hobby-wrapper" *ngFor="let unchecked of uncheckedActivities">
+    <div [routerLink]="['/admin/act', unchecked.Id]" class="hobby-wrapper" *ngFor="let unchecked of uncheckedActivities">
         <img src="" alt="" class="hobby-image">
         <div class="hobby-top-descr">
             <p class="hobby-age">От {{unchecked.AgeFrom}} до {{unchecked.AgeTo}} лет</p>
@@ -43,7 +43,7 @@
 
 <h2 class="admin-heading">Проверенные</h2>
 <div class="hobbies-flex">
-    <div [routerLink]="['/admin/main/act', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">
+    <div [routerLink]="['/admin/act', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">
         <img src="" alt="" class="hobby-image">
         <div class="hobby-top-descr">
             <p class="hobby-age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>

@@ -1,6 +1,8 @@
 import { AuthService } from './shared/auth.service';
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import '../style/app.sass';
 
 @Component({
@@ -11,17 +13,24 @@ import '../style/app.sass';
 export class AppComponent implements OnInit {
   userEmail: string;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService,
+              private router: Router) {}
 
-  setAdmin() {
-    localStorage.setItem('token', 'ABRAKADABRA');
-    console.log(localStorage.getItem('token'));
-  }
   ngOnInit() {
     this.auth.setToken();
-
-    if (this.auth.token) {
+    console.log('pathname = ' + window.location.pathname);
+    if (window.location.pathname === '/') {
+    if (!this.auth.token) {
+      this.router.navigate(['']);
+    } else {
       this.auth.getUserByToken()
-      .then(result => this.userEmail = result.Email);
+      .then(result => {
+        if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
+          this.router.navigate(['admin']);
+        } else {
+          this.router.navigate(['']);
+        }
+      });
     }
+  }
 }}

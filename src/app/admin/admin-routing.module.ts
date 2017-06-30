@@ -16,10 +16,9 @@ const routes: Routes = [
   { path: '',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'main', pathMatch: 'full'},
-      { path: 'main',   component: AdminMainComponent },
+      { path: '',   component: AdminMainComponent },
       { path: 'edit',   component: UserEditComponent },
-      { path: 'main/act/:id',   component: DetailsComponent },
+      { path: 'act/:id',   component: DetailsComponent },
       { path: 'organizers', component: AdminOrganizersComponent },
       { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
       { path: 'users', component: AdminUsersComponent },
