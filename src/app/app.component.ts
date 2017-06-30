@@ -12,7 +12,8 @@ export class AppComponent implements OnInit {
   userEmail: string;
 
   constructor(private auth: AuthService) {}
-  admin() {
+
+  setAdmin() {
     localStorage.setItem('token', 'ABRAKADABRA');
     console.log(localStorage.getItem('token'));
   }

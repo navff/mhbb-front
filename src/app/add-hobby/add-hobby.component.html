@@ -1,8 +1,8 @@
 <div class="container">
-
-
+    
     <form [formGroup]="addHobby" (ngSubmit)="submitForm()">
-        <a routerLink='' class="button-back">&larr; Назад</a>
+        <a style="display: none" routerLink="/admin" routerLinkActive #admin="routerLinkActive" ></a>
+        <a [routerLink]="admin.isActive ? '/admin/main' : ''" class="button-back">&larr; Назад</a>
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса" [formControl]="addHobby.controls['name']">
         </md-input-container>

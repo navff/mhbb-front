@@ -24,7 +24,9 @@ const routes: Routes = [
       { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
       { path: 'users', component: AdminUsersComponent },
       { path: 'users/edit', component: AdminUsersEditComponent },
-      { path: 'reviews', component: AdminReviewsComponent }
+      { path: 'reviews', component: AdminReviewsComponent },
+
+      { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule'},
     ]
   }
 ];

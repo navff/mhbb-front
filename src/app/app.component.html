@@ -9,7 +9,7 @@
 			<li><a href="javascript:void(0);" class="main-nav__link">Стать представителем</a></li>
 			<li><a routerLink='/enter' class="main-nav__link-enter">Вход</a></li>
 			<!--*ngIf="!userEmail"-->
-			<li><a (click)="admin()" href="javascript:void(0);" class="main-nav__link-enter">Админ</a></li>
+			<li><a (click)="setAdmin()" href="javascript:void(0);" class="main-nav__link-enter">Админ</a></li>
 			<li *ngIf="userEmail"><a routerLink="/user" class="main-nav__link-enter">{{userEmail}}</a></li>
 		</ul>
 		<h1 *ngIf="home.isActive" class="header-text">Находим хобби по вкусу и возрасту</h1>

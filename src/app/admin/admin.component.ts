@@ -22,6 +22,9 @@ export class AdminComponent implements OnInit {
   scrollToTop() {
     window.scrollTo(0, 0);
   }
+  resetToken() {
+    localStorage.setItem('token' , '');
+  }
   ngOnInit() {
     this.activityService.getUncheckedActivities()
     .then(result => {

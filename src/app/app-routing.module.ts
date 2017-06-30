@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'user', component: UserEditComponent },
 
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard]},
-  { path: 'addhobby', loadChildren: './add-hobby/add-hobby.module#AddHobbyModule'},
+  { path: 'addhobby', loadChildren: './add-hobby/add-hobby.module#AddHobbyModule'}
 ];
 
 @NgModule({
