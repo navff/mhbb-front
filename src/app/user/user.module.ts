@@ -2,7 +2,7 @@ import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 
 import { UserComponent } from './user.component';
-import { MainComponent } from './home/main.component';
+import { MainComponent } from './main/main.component';
 import { EnterComponent } from './enter/enter.component';
 import { EnterSuccessComponent } from './enter/enter-success/enter-success.component';
 import { ReservationComponent } from './reservation/reservation.component';

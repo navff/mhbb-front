@@ -72,6 +72,13 @@ export class ActivityService {
     .map((response) => response.json())
     .toPromise();
   }
+  putActivity(body, id) {
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(`http://test.mhbb.ru/b/api/activity/${id}`, body, options)
+    .map((response) => response.json())
+    .toPromise();
+  }
 }
 
 export class TempFile {

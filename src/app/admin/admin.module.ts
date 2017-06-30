@@ -3,6 +3,7 @@ import { CommonModule }   from '@angular/common';
 
 import { AdminComponent } from './admin.component';
 import { AdminMainComponent }     from './admin-main/admin-main.component';
+import { AdminActEditComponent } from './admin-main/admin-act-edit/admin-act-edit.component';
 import { AdminOrganizersComponent }     from './admin-organizers/admin-organizers.component';
 import { AdminOrganizersEditComponent }     from './admin-organizers/admin-organizers-edit/admin-organizers-edit.component';
 import { AdminUsersComponent }     from './admin-users/admin-users.component';
@@ -20,7 +21,7 @@ import { SharedModule } from '../shared/_shared.module';
   ],
   declarations: [
     AdminComponent,
-    AdminMainComponent,
+    AdminMainComponent, AdminActEditComponent,
     AdminOrganizersComponent, AdminOrganizersEditComponent,
     AdminUsersComponent, AdminUsersEditComponent,
     AdminReviewsComponent

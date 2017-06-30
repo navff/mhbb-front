@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent }       from './admin.component';
 import { AdminMainComponent }     from './admin-main/admin-main.component';
+import { AdminActEditComponent } from './admin-main/admin-act-edit/admin-act-edit.component';
 import { AdminOrganizersComponent }     from './admin-organizers/admin-organizers.component';
 import { AdminOrganizersEditComponent }     from './admin-organizers/admin-organizers-edit/admin-organizers-edit.component';
 import { AdminUsersComponent }     from './admin-users/admin-users.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: '',   component: AdminMainComponent },
       { path: 'edit',   component: UserEditComponent },
       { path: 'act/:id',   component: DetailsComponent },
+      { path: 'act/edit/:id',   component: AdminActEditComponent },
       { path: 'organizers', component: AdminOrganizersComponent },
       { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
       { path: 'users', component: AdminUsersComponent },

@@ -19,17 +19,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {
-    if (!this.auth.token) {
-      this.router.navigate(['']);
-    } else {
-      this.auth.getUserByToken()
-      .then(result => {
-        if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
-          this.router.navigate(['admin']);
-        } else {
-          this.router.navigate(['']);
-        }
-      });
+      if (!this.auth.token) {
+        this.router.navigate(['']);
+      } else {
+        this.auth.getUserByToken()
+        .then(result => {
+          if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
+            this.router.navigate(['admin']);
+          } else {
+            this.router.navigate(['']);
+          }
+        });
+      }
     }
-  }
 }}

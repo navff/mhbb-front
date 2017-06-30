@@ -1,0 +1,270 @@
+form
+    font-size: 20px
+.form-item-course-name
+    display: block
+    width: 650px
+    margin-bottom: 22px
+
+.photos
+    width: 650px
+    height: 650px
+    margin-right: 140px
+    display: block
+    .add-image-input
+        opacity: 0
+        z-index: 10   
+    .delete-image-button
+        position: absolute
+        right: 0
+        z-index: 20
+        cursor: pointer
+        width: 0
+        height: 0
+        border-style: solid
+        border-width: 0 50px 50px 0
+        border-color: transparent #795548 transparent transparent
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            top: 10px
+            right: -35px
+            width: 1px
+            height: 11px
+            background-color: white
+            transition: 0.4s
+            transform: rotate(135deg)
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            top: 15px
+            right: -40px
+            width: 11px
+            height: 1px
+            background-color: white
+            transition: 0.4s
+            transform: rotate(-45deg)        
+        &:hover:before
+            transform: rotate(135deg) scale(1.2)
+        &:hover:after
+            transform: rotate(-45deg) scale(1.2)
+    .main-image
+        position: relative
+    .main-input-design
+        cursor: pointer
+        position: relative
+        box-sizing: border-box
+        display: block
+        width: 650px
+        height: 460px
+        border: solid 1px #795548
+        transition: 0.4s
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            top: 216px
+            right: 322px
+            width: 1px
+            height: 30px
+            background-color: #795548
+            transition: 0.4s
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            top: 230px
+            right: 308px
+            width: 30px
+            height: 1px
+            background-color: #795548
+            transition: 0.4s
+        &:hover
+            background-color: rgba(#795548, .15)
+        &:hover:before
+            transform: scale(1.2)
+        &:hover:after
+            transform: scale(1.2)
+        .main-wrapper
+            position: absolute
+            z-index: -1
+            top: -1px
+            right: 0
+            bottom: 0
+            left: -1px
+            overflow: hidden
+            width: 650px
+            height: 460px
+            cursor: default
+            .main-preview
+                position: absolute
+                top: 50%
+                left: 50%
+                width: auto
+                height: auto
+                max-height: 900px
+                max-width: 900px
+
+                min-height: 100%
+                min-width: 100%
+
+                transform: translate(-50%, -50%)
+        .cover
+            z-index: 15
+    [class^="secondary-image"]
+        position: relative
+        width: 206px
+        height: 137px    
+        margin-top: 20px
+        margin-right: 11px
+        display: inline-block
+
+        .delete-image-button
+            border-width: 0 30px 30px 0
+            &:before
+                content: ""
+                display: block
+                position: absolute
+                top: 4px
+                right: -22px
+                width: 1px
+                height: 9px
+                background-color: white
+                transition: 0.4s
+                transform: rotate(135deg)
+            &:after
+                content: ""
+                display: block
+                position: absolute
+                top: 8px
+                right: -26px
+                width: 9px
+                height: 1px
+                background-color: white
+                transition: 0.4s
+                transform: rotate(-45deg)        
+            &:hover:before
+                transform: rotate(135deg) scale(1.2)
+            &:hover:after
+                transform: rotate(-45deg) scale(1.2)
+    .secondary-image-3
+        margin-right: 0
+    .secondary-input-design
+        display: block
+        cursor: pointer
+        position: relative
+        box-sizing: border-box
+        width: 206px
+        height: 137px
+        border: solid 1px #795548
+        transition: 0.4s
+        &:before
+            content: ""
+            display: block
+            position: absolute
+            top: 62px
+            right: 101px
+            width: 1px
+            height: 13px
+            background-color: #795548
+            transition: 0.4s
+        &:after
+            content: ""
+            display: block
+            position: absolute
+            top: 68px
+            right: 95px
+            width: 13px
+            height: 1px
+            background-color: #795548
+            transition: 0.4s
+        &:hover
+            background-color: rgba(#795548, .15)
+        &:hover:before
+            transform: scale(1.2)
+        &:hover:after
+            transform: scale(1.2)
+        .secondary-wrapper
+            position: absolute
+            z-index: -1
+            top: -1px
+            right: 0
+            bottom: 0
+            left: -1px
+            overflow: hidden
+            width: 206px
+            height: 137px
+            cursor: default
+            .secondary-preview
+                position: absolute
+                top: 50%
+                left: 50%
+
+                width: auto
+                height: auto
+                max-height: 260px
+                max-width: 260px
+
+                min-height: 100%
+                min-width: 100%
+
+                transform: translate(-50%, -50%)
+        .cover
+            z-index: 15
+
+.form-right
+    width: 502px
+    height: 650px
+    display: inline-block
+    position: absolute
+    top: 110px
+    left: 800px
+    [class^='form-item']
+        margin-bottom: 20px
+    .form-item-organizer
+        width: 248px
+        margin-right: 40px
+    .form-item-cities
+        width: 208px
+    [class^='form-item-age']
+        width: 105px
+        margin-right: 33px
+    .form-item-age-to
+        margin-right: 40px
+    .form-item-interests
+        width: 208px
+    .form-item-phones
+        width: 499px
+    .form-item-address
+        width: 499px	
+    .form-item-price
+        width: 499px
+    .form-item-free-checkbox
+        font-size: 20px
+
+.form-bottom
+    .form-item-sobriety-checkbox
+        font-size: 20px
+        line-height: 27px
+    .form-item-description
+        width: 1070px
+        display: block	
+    .form-item-guides
+        width: 1070px
+        display: block
+    .button-wrapper
+        margin: 50px 0
+        width: 206px
+        position: relative
+        .button-spinner
+            position: absolute
+            top: 0
+            right: -60px
+            width: 44px
+            height: 44px
+        .button-save
+            width: 180px
+            height: 44px
+            font-size: 20px
+            font-weight: 400

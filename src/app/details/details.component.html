@@ -70,7 +70,7 @@
         </ul>
         <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
         <button *ngIf="!admin.isActive" [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
-        <button *ngIf="admin.isActive" [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="primary" class="button-enroll button-edit">РЕДАКТИРОВАТЬ</button>
+        <button *ngIf="admin.isActive" [routerLink]="['/admin/act/edit', activity.Id]" md-raised-button color="primary" class="button-enroll button-edit">РЕДАКТИРОВАТЬ</button>
     </section>
     <pre class="description">{{activity.Description}}</pre>
     <section class="reviews" *ngIf="activity.IsChecked">

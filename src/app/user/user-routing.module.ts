@@ -6,7 +6,7 @@ import { ReservationSuccessComponent } from './reservation/reservation-success/r
 import { ReservationComponent } from './reservation/reservation.component';
 import { EnterSuccessComponent } from './enter/enter-success/enter-success.component';
 import { EnterComponent } from './enter/enter.component';
-import { MainComponent } from './home/main.component';
+import { MainComponent } from './main/main.component';
 
 import { DetailsComponent } from './../details/details.component';
 import { UserEditComponent } from './../user-edit/user-edit.component';
