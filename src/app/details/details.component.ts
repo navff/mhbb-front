@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../shared/activity.service';
 import { VoicesService } from '../shared/voices.service';
 import { ReviewService, Review } from '../shared/review.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'my-details',
@@ -25,21 +25,30 @@ export class DetailsComponent implements OnInit {
     private activityService: ActivityService,
     private reviewService: ReviewService,
     private voicesService: VoicesService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   votePositive() {
-    let oldAmount = this.voteAmount;
-    this.voicesService.votePositive(this.activityId)
-    .then(result => {this.voteAmount = result;
-      oldAmount === result ? this.voted = true : this.voted = false;
-    });
+    if (localStorage.getItem('token')) {
+      let oldAmount = this.voteAmount;
+      this.voicesService.votePositive(this.activityId)
+      .then(result => {this.voteAmount = result;
+        oldAmount === result ? this.voted = true : this.voted = false;
+      });
+    } else {
+      this.router.navigate(['enter']);
+    }
   }
   voteNegative() {
+    if (localStorage.getItem('token')) {
     let oldAmount = this.voteAmount;
     this.voicesService.voteNegative(this.activityId)
     .then(result => {this.voteAmount = result;
       oldAmount === result ? this.voted = true : this.voted = false;
     });
+    } else {
+      this.router.navigate(['enter']);
+    }
   }
   publishReview() {
     this.responding = true;

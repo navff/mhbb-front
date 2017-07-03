@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './shared/auth.service';
+import { SharedService } from './shared/shared.service';
 
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Router, NavigationEnd } from '@angular/router';
 
 import '../style/app.sass';
 
@@ -12,11 +12,16 @@ import '../style/app.sass';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  userEmail: string;
-  footerLoaded: boolean;
-  sub: Subscription;
+
   constructor(private auth: AuthService,
-              private router: Router) {}
+              private router: Router,
+              private shared: SharedService) {
+                this.router.events
+                .filter(e => e instanceof NavigationEnd)
+                .pairwise().subscribe((e: any) => {
+                  this.shared.updateUrl(e[0].url);
+                });
+              }
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {

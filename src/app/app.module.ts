@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthService } from './shared/auth.service';
-import { FooterService } from './shared/footer.service';
+import { SharedService } from './shared/shared.service';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { FooterService } from './shared/footer.service';
     AppRoutingModule
   ],
   declarations: [ AppComponent ],
-  providers: [ AuthGuard, AuthService, FooterService ],
+  providers: [ AuthGuard, AuthService, SharedService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

@@ -64,6 +64,13 @@ export class ActivityService {
     .map((response) => response.json())
     .toPromise();
   }
+  deletePicture(id) {
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(`http://test.mhbb.ru/b/api/picture/${id}`, options)
+    .map((response) => response.json())
+    .toPromise();
+  }
 
   postActivity(body) {
     let headers = new Headers({'Authorization': 'Token ' + this.token});
@@ -104,5 +111,6 @@ export class Activity {
     public IsChecked: boolean,
     public Free: boolean,
     public FormId: string,
+    public OrganizerId?: number
   ) {}
 }

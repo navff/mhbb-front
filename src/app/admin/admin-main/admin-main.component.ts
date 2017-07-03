@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/activity.service';
 import { CityService } from '../../shared/city.service';
 import { InterestService } from '../../shared/interest.service';
-import { FooterService } from './../../shared/footer.service';
+import { SharedService } from './../../shared/shared.service';
 
 @Component({
   selector: 'my-admin-main',
@@ -23,8 +23,8 @@ export class AdminMainComponent implements OnInit {
   constructor(private activityService: ActivityService,
               private cityService: CityService,
               private interestService: InterestService,
-              private footer: FooterService) {
-                this.footer.destroy();
+              private shared: SharedService) {
+                this.shared.destroyFooter();
               }
   setArgument(index, value) {
     this.loaded = false;
@@ -54,7 +54,7 @@ export class AdminMainComponent implements OnInit {
       this.activityService.getActivities()
       .then(acts => {this.activities = acts;
         this.loaded = true;
-        this.footer.load();
+        this.shared.loadFooter();
       });
     });
 }}

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../shared/auth.service';
 import { CityService } from '../shared/city.service';
+import { SharedService } from './../shared/shared.service';
 import { UserService, User } from '../shared/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -23,13 +25,18 @@ export class UserEditComponent implements OnInit {
 
   responding = false;
 
+  sub: Subscription;
+  previousUrl: string;
+
   editUser: FormGroup;
   constructor(
     private auth: AuthService,
     private userService: UserService,
     private cityService: CityService,
     private router: Router,
+    private shared: SharedService,
     fb: FormBuilder) {
+      this.sub = this.shared.previousUrl.subscribe(result => this.previousUrl = result);
       this.editUser = fb.group({
           'name': '',
           'phone': '',
@@ -37,6 +44,9 @@ export class UserEditComponent implements OnInit {
           'cityId': ''
       });
     }
+  back() {
+    this.router.navigate([this.previousUrl]);
+  }
   addImage(event) {
       let data, file: File;
       file = event.target.files[0];

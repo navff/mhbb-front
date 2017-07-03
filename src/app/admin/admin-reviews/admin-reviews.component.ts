@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../../shared/city.service';
 import { ReviewService } from '../../shared/review.service';
-import { FooterService } from './../../shared/footer.service';
+import { SharedService } from './../../shared/shared.service';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'my-admin-reviews',
@@ -14,13 +15,17 @@ export class AdminReviewsComponent implements OnInit {
   cities = [];
   args: any[] = [];
   loaded = false;
+  userUrl: string;
 
   constructor(private reviewService: ReviewService,
               private cityService: CityService,
-              private footer: FooterService) {
-                this.footer.destroy();
+              // private router: Router,
+              private shared: SharedService) {
+                this.shared.destroyFooter();
               }
-
+  // toUserEdit() {
+  //   this.router.navigate(['/admin/users/edit'], { queryParams: { email: userUrl}});
+  // }
   setArgument(index, value) {
     this.reviews = [];
     this.loaded = false;
@@ -50,6 +55,6 @@ export class AdminReviewsComponent implements OnInit {
       .then(result => {this.reviews = result;
         this.loaded = true;
         console.log(result);
-        this.footer.load();
+        this.shared.loadFooter();
       });
 }}

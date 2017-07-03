@@ -1,6 +1,10 @@
-import { AuthService } from '../../shared/auth.service';
 import { Component } from '@angular/core';
+import { AuthService } from '../../shared/auth.service';
+import { SharedService } from './../../shared/shared.service';
+
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'my-enter',
   templateUrl: './enter.component.html',
@@ -9,13 +13,20 @@ import { Router } from '@angular/router';
 export class EnterComponent {
   email: string;
   responding = false;
+  sub: Subscription;
+
+  previousUrl: string;
+
   constructor(
     private auth: AuthService,
-    private router: Router
-    ) {}
+    private router: Router,
+    private shared: SharedService
+    ) {
+      this.sub = this.shared.previousUrl.subscribe(result => this.previousUrl = result);
+    }
 
   back() {
-    this.router.navigate(['']);
+    this.router.navigate([this.previousUrl]);
   }
 
   registerUser() {

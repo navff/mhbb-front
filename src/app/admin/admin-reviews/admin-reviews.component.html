@@ -9,9 +9,9 @@
 </form>
 <div class="container reviews">
     <div *ngFor="let review of reviews; let i = index" class="review">
-        <p class="review-name-date"><a href="javascript:void(0);">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}г.</p>
+        <p class="review-name-date"><a (click)="toUserEdit">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}г.</p>
         <pre class="review-text">{{review.Text}}</pre>
-        <p class="review-descr">Отзыв о <a [routerLink]="['/admin/main/act', review.ActivityId]">{{review.ActivityName}}</a></p>
+        <p class="review-descr">Отзыв о <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a></p>
         <div class="buttons">
             <a (click)="accept(review.Id, i)" *ngIf="!review.state" class="button-accept">ПРИНЯТЬ</a>
             <a (click)="delete(review.Id, i)" *ngIf="!review.state" class="button-reject">ОТКЛОНИТЬ</a>
