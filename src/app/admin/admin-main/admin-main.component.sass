@@ -2,7 +2,7 @@
     display: flex
     justify-content: start
     flex-wrap: wrap
-
+    min-height: 70px
 .hobbies-form
     font-size: 20px
     margin: 0 0 40px
@@ -153,8 +153,15 @@
     width: 26px
     height: 30px
 
-
-.search-spinner
-    margin: 90px auto 0
+.spinner-wrapper
+    display: inline-block
+    position: relative
+    width: auto
+    .search-spinner
+        position: absolute
+        top: 36px
+        right: -60px
+        width: 36px
+        height: 36px
 .no-results
     font-size: 24px

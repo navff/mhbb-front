@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../../shared/city.service';
 import { ReviewService } from '../../shared/review.service';
+import { FooterService } from './../../shared/footer.service';
 
 @Component({
   selector: 'my-admin-reviews',
@@ -14,7 +15,11 @@ export class AdminReviewsComponent implements OnInit {
   args: any[] = [];
   loaded = false;
 
-  constructor(private reviewService: ReviewService, private cityService: CityService) {}
+  constructor(private reviewService: ReviewService,
+              private cityService: CityService,
+              private footer: FooterService) {
+                this.footer.destroy();
+              }
 
   setArgument(index, value) {
     this.reviews = [];
@@ -45,5 +50,6 @@ export class AdminReviewsComponent implements OnInit {
       .then(result => {this.reviews = result;
         this.loaded = true;
         console.log(result);
+        this.footer.load();
       });
 }}

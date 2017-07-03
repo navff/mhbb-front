@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/activity.service';
 import { CityService } from '../../shared/city.service';
 import { InterestService } from '../../shared/interest.service';
+import { FooterService } from './../../shared/footer.service';
 
 @Component({
   selector: 'my-admin-main',
@@ -21,8 +22,10 @@ export class AdminMainComponent implements OnInit {
 
   constructor(private activityService: ActivityService,
               private cityService: CityService,
-              private interestService: InterestService) {}
-
+              private interestService: InterestService,
+              private footer: FooterService) {
+                this.footer.destroy();
+              }
   setArgument(index, value) {
     this.loaded = false;
     this.uncheckedLoaded = false;
@@ -31,26 +34,27 @@ export class AdminMainComponent implements OnInit {
 
     this.args[index] = value;
     this.activityService
-    .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
-    .then(result => {this.activities = result;
-      this.loaded = true;
-    });
-
-    this.activityService
     .getUncheckedActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
     .then(result => {this.uncheckedActivities = result;
       this.uncheckedLoaded = true;
+      this.activityService
+      .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
+      .then(act => {this.activities = act;
+        this.loaded = true;
+      });
     });
+
   }
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.interestService.getInterests().then(result => this.interests = result);
-    this.activityService.getActivities()
-    .then(result => {this.activities = result;
-      this.loaded = true;
-    });
     this.activityService.getUncheckedActivities()
     .then(result => {this.uncheckedActivities = result;
       this.uncheckedLoaded = true;
+      this.activityService.getActivities()
+      .then(acts => {this.activities = acts;
+        this.loaded = true;
+        this.footer.load();
+      });
     });
 }}

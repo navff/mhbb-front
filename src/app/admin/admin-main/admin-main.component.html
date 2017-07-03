@@ -24,7 +24,10 @@
             <a class="hobbies-add" routerLink='/admin/addhobby' md-fab></a>
     </form>
 
-<h2 class="admin-heading">На проверку</h2>
+<div class="spinner-wrapper">
+    <h2 class="admin-heading">На проверку</h2>
+    <md-progress-spinner *ngIf="!uncheckedLoaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+</div>
 <div class="hobbies-flex">
     <div [routerLink]="['/admin/act', unchecked.Id]" class="hobby-wrapper" *ngFor="let unchecked of uncheckedActivities">
         <div class="hobby-image-wrapper">
@@ -39,11 +42,13 @@
             <img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="unchecked.Free">
         </div>
     </div>		
+    <h2 class="no-results" *ngIf="uncheckedLoaded && uncheckedActivities.length === 0">По вашему запросу ничего не найдено.</h2>
 </div>
-<h2 class="no-results" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
-<md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 
+<div class="spinner-wrapper">
 <h2 class="admin-heading">Проверенные</h2>
+<md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+</div>
 <div class="hobbies-flex">
     <div [routerLink]="['/admin/act', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">
         <div class="hobby-image-wrapper">
@@ -59,7 +64,6 @@
             <img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="activity.Free">
         </div>
     </div>		
+    <h2 class="no-results" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
 </div>
-<h2 class="no-results" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
-<md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 </section>

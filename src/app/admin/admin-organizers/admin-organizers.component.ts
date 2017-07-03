@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../shared/organizer.service';
 import { CityService } from '../../shared/city.service';
+import { FooterService } from './../../shared/footer.service';
 
 @Component({
   selector: 'my-admin-organizers',
@@ -18,7 +19,11 @@ export class AdminOrganizersComponent implements OnInit {
   loaded = false;
   responding = false;
 
-  constructor(private organizerService: OrganizerService, private cityService: CityService) {}
+  constructor(private organizerService: OrganizerService,
+              private cityService: CityService,
+              private footer: FooterService) {
+                this.footer.destroy();
+              }
 
   concatPage() {
     this.responding = true;
@@ -50,5 +55,6 @@ export class AdminOrganizersComponent implements OnInit {
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizers(this.page.toString(10))
     .then(result => {this.organizers = result;
-      this.loaded = true; });
+      this.loaded = true;
+      this.footer.load(); });
 }}

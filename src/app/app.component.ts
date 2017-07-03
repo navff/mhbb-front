@@ -1,7 +1,8 @@
-import { AuthService } from './shared/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './shared/auth.service';
 
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import '../style/app.sass';
 
@@ -12,10 +13,10 @@ import '../style/app.sass';
 })
 export class AppComponent implements OnInit {
   userEmail: string;
-
+  footerLoaded: boolean;
+  sub: Subscription;
   constructor(private auth: AuthService,
               private router: Router) {}
-
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {

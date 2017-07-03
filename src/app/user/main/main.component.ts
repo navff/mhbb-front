@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/activity.service';
 import { InterestService } from '../../shared/interest.service';
 import { CityService } from '../../shared/city.service';
+import { FooterService } from './../../shared/footer.service';
 
 @Component({
   selector: 'my-main',
@@ -18,8 +19,10 @@ export class MainComponent implements OnInit {
 
   constructor(private activityService: ActivityService,
               private interestService: InterestService,
-              private cityService: CityService) {}
-
+              private cityService: CityService,
+              private footer: FooterService) {
+                this.footer.destroy();
+              }
   setArgument(index, value) {
     this.activities = [];
     this.loaded = false;
@@ -33,7 +36,8 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.activityService.getActivities().then(result => {
       this.activities = result;
-      this.loaded = true; });
+      this.loaded = true;
+      this.footer.load(); });
     this.interestService.getInterests().then(result => this.interests = result);
     this.cityService.getCities().then(result => this.cities = result);
 }}

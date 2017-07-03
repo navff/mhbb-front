@@ -8,6 +8,7 @@ import { OnlyNumberDirective } from './_only-number.directive';
 import { DatePipe } from './_date.pipe';
 import { DetailsComponent } from './../details/details.component';
 import { UserEditComponent } from './../user-edit/user-edit.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports:      [ HttpModule, FormsModule, ReactiveFormsModule,
@@ -15,11 +16,11 @@ import { UserEditComponent } from './../user-edit/user-edit.component';
     RouterModule,
     CommonModule
   ],
-  declarations: [ OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent ],
+  declarations: [ OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent ],
   exports:      [
     HttpModule, FormsModule, ReactiveFormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule,
-    OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent
+    OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent
   ]
 })
 export class SharedModule { }

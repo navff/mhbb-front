@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { CityService } from '../../shared/city.service';
+import { FooterService } from './../../shared/footer.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +22,10 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(private userService: UserService,
               private cityService: CityService,
-              private router: Router) {}
+              private router: Router,
+              private footer: FooterService) {
+                this.footer.destroy();
+              }
   toUserEdit(url) {
     this.router.navigate(['/admin/users/edit'], { queryParams: { email: url}});
   }
@@ -56,5 +60,6 @@ export class AdminUsersComponent implements OnInit {
     this.cityService.getCities().then(result => this.cities = result);
     this.userService.getUsers()
     .then(result => {this.users = result;
-      this.loaded = true; });
+      this.loaded = true;
+      this.footer.load(); });
 }}

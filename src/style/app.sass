@@ -16,6 +16,8 @@ body
 	position: relative
 	max-width: 1568px
 	margin: 0 auto
+.content
+    min-height: calc(100vh - 124px)
 
 .button-back
     display: inline-block
@@ -33,3 +35,11 @@ body
 
 a
 	outline: none
+
+/deep/ .mat-select-placeholder
+    font-size: 20px
+/deep/ .mat-select
+	position: relative
+	top: 2px
+/deep/ .mat-select-value
+    font-size: 20px
