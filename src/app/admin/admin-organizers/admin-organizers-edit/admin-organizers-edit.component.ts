@@ -13,11 +13,12 @@ import { Router } from '@angular/router';
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
+  currentUrl: string;
   organizer: any = {};
   organizerId: string;
 
   responding = false;
-  loaded = false;
+  loaded = true;
 
   editOrganizer: FormGroup;
   constructor(private organizerService: OrganizerService,
@@ -33,6 +34,7 @@ export class AdminOrganizersEditComponent implements OnInit {
   }
 
   putOrganizer() {
+    if (this.currentUrl !== '/admin/organizers/add') {
     this.responding = true;
     let body = new Organizer(this.editOrganizer.get('name').value,
                              this.editOrganizer.get('cityId').value,
@@ -41,18 +43,26 @@ export class AdminOrganizersEditComponent implements OnInit {
     .then(result => {this.organizer = result;
       this.router.navigate(['/admin/organizers']);
     });
+    } else {
+      return;
+    }
   }
   ngOnInit() {
-    this.loaded = false;
-    this.route.params.subscribe(params =>  this.organizerId = params['id']);
+    this.currentUrl = this.router.url;
     this.cityService.getCities().then(result => this.cities = result);
-    this.organizerService.getOrganizerById(this.organizerId)
-    .then(result => {
-      this.organizer = result;
-      this.editOrganizer.get('name').setValue(this.organizer.Name);
-      this.editOrganizer.get('cityId').setValue(this.organizer.City.Id);
-      this.editOrganizer.get('sobriety').setValue(this.organizer.Sobriety);
-      console.log(this.editOrganizer.value);
-      this.loaded = true;
-    });
+    if (this.currentUrl === '/admin/organizers/add') {
+
+    } else {
+      this.loaded = false;
+      this.route.params.subscribe(params =>  this.organizerId = params['id']);
+      this.organizerService.getOrganizerById(this.organizerId)
+      .then(result => {
+        this.organizer = result;
+        this.editOrganizer.get('name').setValue(this.organizer.Name);
+        this.editOrganizer.get('cityId').setValue(this.organizer.City.Id);
+        this.editOrganizer.get('sobriety').setValue(this.organizer.Sobriety);
+        console.log(this.editOrganizer.value);
+        this.loaded = true;
+      });
+    }
 }}

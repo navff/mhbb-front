@@ -1,5 +1,6 @@
 import { AuthService } from './../shared/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'my-user',
@@ -9,11 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class UserComponent implements OnInit {
   userEmail: string;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   setAdmin() {
     localStorage.setItem('token', 'ABRAKADABRA');
     console.log(localStorage.getItem('token'));
+    this.router.navigate(['']);
     window.location.reload();
   }
   ngOnInit() {

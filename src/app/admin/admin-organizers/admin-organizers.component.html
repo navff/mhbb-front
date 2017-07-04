@@ -1,23 +1,26 @@
-<h1 class="admin-heading container">Организаторы</h1>
-<form class="container">
-    <md-input-container class="form-item">
-        <input (focusout)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
-    </md-input-container>
-    <md-select (change)="setArgument(1, city.Id)" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
-        <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
-    </md-select>
-</form>
+<div class="container">
+    <h1 class="admin-heading">Организаторы</h1>
+    <button class="hobbies-add" routerLink='/admin/organizers/add' md-fab></button>
+    <form>
+        <md-input-container class="form-item">
+            <input (focusout)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+        </md-input-container>
+        <md-select (change)="setArgument(1, city.Id)" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+            <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
+        </md-select>
+    </form>
 
-<section class="container">
-    <div class="organizers">
-        <div *ngFor="let organizer of organizers" class="organizer"> 
-            <a [routerLink]="['/admin/organizers/edit', organizer.Id]">{{organizer.Name}}</a>
+    <section>
+        <div class="organizers">
+            <div *ngFor="let organizer of organizers" class="organizer"> 
+                <a [routerLink]="['/admin/organizers/edit', organizer.Id]">{{organizer.Name}}</a>
+            </div>
+            <div *ngIf="checkLength > 98" class="button-wrapper">
+                <button (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
+                <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+            </div>
         </div>
-        <div *ngIf="checkLength > 98" class="button-wrapper">
-            <button (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
-            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-        </div>
-    </div>
-    <h2 class="no-results" *ngIf="loaded && organizers.length === 0">По вашему запросу ничего не найдено.</h2>
-    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
-</section>
+        <h2 class="no-results" *ngIf="loaded && organizers.length === 0">По вашему запросу ничего не найдено.</h2>
+        <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+    </section>
+</div>

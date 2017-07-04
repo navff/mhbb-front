@@ -10,7 +10,7 @@
         </md-select>
         <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
         <div class="button-wrapper">
-            <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
+            <button type="submit" md-raised-button color="accent" class="button-save">{{currentUrl === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</button>
             <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
         </div>
     </form>

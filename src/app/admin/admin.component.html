@@ -6,7 +6,7 @@
         <li><a routerLink='organizers' class="main-nav__link">Организаторы</a></li>
         <li><a routerLink='users' class="main-nav__link">Пользователи</a></li>
         <li><a routerLink='reviews' class="main-nav__link">Отзывы на проверку</a></li>
-        <li><a (click)="exitAdmin()" href="javascript:void(0);" class="main-nav__link-enter">Выход</a></li>
+        <li><a (click)="exitAdmin()" href="javascript:void(0);" class="main-nav__link-exit">Выход</a></li>
         <li *ngIf="userEmail"><a routerLink="edit" class="main-nav__link-enter">{{userEmail}}</a></li>
         <div class="activities-count">{{activitiesCount}}</div>
     </ul>

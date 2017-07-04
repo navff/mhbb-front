@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: 'act/edit/:id',   component: AdminActEditComponent },
       { path: 'organizers', component: AdminOrganizersComponent },
       { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
+      { path: 'organizers/add', component: AdminOrganizersEditComponent },
       { path: 'users', component: AdminUsersComponent },
       { path: 'users/edit', component: AdminUsersEditComponent },
       { path: 'reviews', component: AdminReviewsComponent },
