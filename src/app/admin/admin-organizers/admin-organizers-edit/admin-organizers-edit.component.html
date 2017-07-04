@@ -1,14 +1,17 @@
-<h1 class="admin-heading container">Редактирование организатора</h1>
-<form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()" class="container">
-    <md-input-container class="form-item-name">
-        <input mdInput [formControl]="editOrganizer.controls['name']" placeholder="Название">
-    </md-input-container>
-    <md-select [formControl]="editOrganizer.controls['cityId']" class="form-item-cities" placeholder="Город">
-        <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
-    </md-select>
-    <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
-    <div class="button-wrapper">
-        <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
-        <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-    </div>
-</form>
+<div class="container">
+    <h1 class="admin-heading">Редактирование организатора</h1>
+    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+    <form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()">
+        <md-input-container class="form-item-name">
+            <input mdInput [formControl]="editOrganizer.controls['name']" placeholder="Название">
+        </md-input-container>
+        <md-select [formControl]="editOrganizer.controls['cityId']" class="form-item-cities" placeholder="Город">
+            <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
+        </md-select>
+        <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
+        <div class="button-wrapper">
+            <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
+            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+        </div>
+    </form>
+</div>

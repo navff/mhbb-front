@@ -17,6 +17,7 @@ export class AdminUsersEditComponent implements OnInit {
 
   user: any = {};
 
+  loaded = true;
   responding = false;
 
   editUser: FormGroup;
@@ -56,6 +57,7 @@ export class AdminUsersEditComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.loaded = false;
     let params: any = this.route.queryParams;
     this.searchEmail = params.value.email;
     console.log(this.searchEmail);
@@ -73,5 +75,6 @@ export class AdminUsersEditComponent implements OnInit {
       }
       this.editUser.get('cityId').setValue(this.user.CityId);
       console.log(this.user);
+      this.loaded = true;
     });
 }}

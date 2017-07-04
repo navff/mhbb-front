@@ -46,8 +46,8 @@
 </div>
 
 <div class="spinner-wrapper">
-<h2 class="admin-heading">Проверенные</h2>
-<md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+    <h2 class="admin-heading">Проверенные</h2>
+    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 </div>
 <div class="hobbies-flex">
     <div [routerLink]="['/admin/act', activity.Id]" class="hobby-wrapper" *ngFor="let activity of activities">

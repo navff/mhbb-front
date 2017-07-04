@@ -1,6 +1,9 @@
 <div class="container form">
     <a (click)="back()" class="button-back">&larr; Назад</a>
-    <h2>Редактирование личной информации</h2>
+    <div class="spinner-wrapper">
+        <h2>Редактирование личной информации</h2>
+        <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+    </div>
     <form [formGroup]="editUser" (ngSubmit)="putUser()">
         <div class="inputs">
             <md-input-container class="form-item-name">

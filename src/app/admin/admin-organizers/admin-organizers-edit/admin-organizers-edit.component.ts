@@ -17,6 +17,7 @@ export class AdminOrganizersEditComponent implements OnInit {
   organizerId: string;
 
   responding = false;
+  loaded = false;
 
   editOrganizer: FormGroup;
   constructor(private organizerService: OrganizerService,
@@ -42,6 +43,7 @@ export class AdminOrganizersEditComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.loaded = false;
     this.route.params.subscribe(params =>  this.organizerId = params['id']);
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizerById(this.organizerId)
@@ -51,5 +53,6 @@ export class AdminOrganizersEditComponent implements OnInit {
       this.editOrganizer.get('cityId').setValue(this.organizer.City.Id);
       this.editOrganizer.get('sobriety').setValue(this.organizer.Sobriety);
       console.log(this.editOrganizer.value);
+      this.loaded = true;
     });
 }}
