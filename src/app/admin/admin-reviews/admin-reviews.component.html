@@ -9,7 +9,7 @@
 </form>
 <div class="container reviews">
     <div *ngFor="let review of reviews; let i = index" class="review">
-        <p class="review-name-date"><a (click)="toUserEdit">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}г.</p>
+        <p class="review-name-date"><a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: review.User.Email }">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}г.</p>
         <pre class="review-text">{{review.Text}}</pre>
         <p class="review-descr">Отзыв о <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a></p>
         <div class="buttons">
@@ -17,6 +17,7 @@
             <a (click)="delete(review.Id, i)" *ngIf="!review.state" class="button-reject">ОТКЛОНИТЬ</a>
             <p *ngIf="review.state === 1" class="text-accept">Отзыв принят</p>
             <p *ngIf="review.state === -1" class="text-reject">Отзыв отклонен</p>
+            <md-progress-spinner *ngIf="responding === i" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
         </div>
     </div>
     <h2 class="no-results" *ngIf="loaded && reviews.length === 0">По вашему запросу ничего не найдено.</h2>

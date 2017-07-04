@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { CityService } from '../../shared/city.service';
 import { SharedService } from './../../shared/shared.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'my-admin-users',
@@ -23,13 +22,10 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(private userService: UserService,
               private cityService: CityService,
-              private router: Router,
               private shared: SharedService) {
                 this.shared.destroyFooter();
               }
-  toUserEdit(url) {
-    this.router.navigate(['/admin/users/edit'], { queryParams: { email: url}});
-  }
+
   concatPage() {
     this.responding = true;
     this.page += 1;

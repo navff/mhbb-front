@@ -12,8 +12,8 @@
 <section class="container">
     <div class="users">
         <div class="user" *ngFor="let user of users">
-            <a (click)="toUserEdit(user.Email)">{{user.Name}}</a>
-        </div> 
+            <a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: user.Email }">{{user.Name}}</a>
+        </div>
     </div>
     <div *ngIf="checkLength > 98" class="button-wrapper">
         <button (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
