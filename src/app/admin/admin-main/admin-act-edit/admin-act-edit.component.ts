@@ -133,7 +133,7 @@ export class AdminActEditComponent implements OnInit {
     this.activityService.putActivity(body, this.activityId)
     .then(result => {console.log(result);
       this.responding = false;
-      this.router.navigate(['/admin/act/edit', this.activityId]);
+      this.router.navigate(['/admin/act', this.activityId]);
     });
   }
 

@@ -86,6 +86,13 @@ export class ActivityService {
     .map((response) => response.json())
     .toPromise();
   }
+  putApproveActivity(isChecked, id) {
+    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(`http://test.mhbb.ru/b/api/activity/setchecked?activityId=${id}&isChecked=${isChecked}`, null, options)
+    .map((response) => response.json())
+    .toPromise();
+  }
 }
 
 export class TempFile {

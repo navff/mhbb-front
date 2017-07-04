@@ -20,7 +20,9 @@ export class DetailsComponent implements OnInit {
   reviewText: string;
   published = false;
   responding = false;
+  approveResponding = false;
   voted = false;
+
   constructor(
     private activityService: ActivityService,
     private reviewService: ReviewService,
@@ -61,7 +63,15 @@ export class DetailsComponent implements OnInit {
       this.responding = false;
     });
   }
-
+  actApprove() {
+    this.approveResponding = true;
+    this.activityService.putApproveActivity(true, this.activityId)
+    .then(result => {
+      console.log(result);
+      this.approveResponding = false;
+      this.router.navigate(['/admin']);
+    });
+  }
   ngOnInit() {
     this.route.params.subscribe(params =>  this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)

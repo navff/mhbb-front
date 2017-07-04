@@ -1,3 +1,4 @@
+// import { Router } from '@angular/router';
 import { AuthService } from './../shared/auth.service';
 import { Component, OnInit, HostListener, Inject }      from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -16,14 +17,16 @@ export class AdminComponent implements OnInit {
   scrolled: boolean;
   userEmail: string;
   constructor(private activityService: ActivityService,
-  private auth: AuthService,
+              private auth: AuthService,
+              // private router: Router,
   @Inject(DOCUMENT) private document: Document) {}
 
   scrollToTop() {
     window.scrollTo(0, 0);
   }
-  resetToken() {
+  exitAdmin() {
     localStorage.setItem('token' , '');
+    window.location.reload();
   }
   ngOnInit() {
     this.activityService.getUncheckedActivities()

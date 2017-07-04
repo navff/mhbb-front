@@ -14,6 +14,7 @@ export class UserComponent implements OnInit {
   setAdmin() {
     localStorage.setItem('token', 'ABRAKADABRA');
     console.log(localStorage.getItem('token'));
+    window.location.reload();
   }
   ngOnInit() {
     if (this.auth.token) {
