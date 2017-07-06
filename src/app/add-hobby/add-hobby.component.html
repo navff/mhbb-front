@@ -23,7 +23,7 @@
                 <div (click)="removeImage(1)" *ngIf="fileData[1]" class="delete-image-button"></div>                
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[1]}">
-                        <img [src]="fileData[1] ? fileData[1] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                        <div [ngStyle]="{'background-image': 'url(' + fileData[1] + ')'}" class="secondary-preview"></div>
                     </div>
                     <input (change)="addImage($event, 1, false)" [disabled]="fileNames[1]" type="file" id="input-1" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="addHobby.controls['image1']">

@@ -98,7 +98,7 @@ export class UserEditComponent implements OnInit {
     .then(result => {this.user = result;
       console.log(result);
       this.responding = false;
-      this.router.navigate(['']);
+      this.router.url === '/admin/edit' ? this.router.navigate(['/admin']) : this.router.navigate(['']);
     });
   }
 

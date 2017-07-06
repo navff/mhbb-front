@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { CityService } from '../../../shared/city.service';
 import { InterestService } from '../../../shared/interest.service';
+import { OrganizerService } from './../../../shared/organizer.service';
 import { ActivityService, TempFile, Activity } from '../../../shared/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,13 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'my-admin-act-edit',
   templateUrl: './admin-act-edit.component.html',
-  providers: [InterestService, CityService, ActivityService],
+  providers: [InterestService, ActivityService, OrganizerService],
   styleUrls: ['./admin-act-edit.component.sass']
 })
 export class AdminActEditComponent implements OnInit {
   activityId: string;
   picUrls = [];
-  cities = [];
   interests = [];
   fileNames = [];
   fileData = [];
@@ -24,6 +23,7 @@ export class AdminActEditComponent implements OnInit {
   formId: any = null;
   isChecked: boolean;
   organizerId: number;
+  organizers = [];
   responding = false;
   editHobby: FormGroup;
 
@@ -31,8 +31,8 @@ export class AdminActEditComponent implements OnInit {
   picsToDelete: boolean[] = [];
   constructor(
               private interestService: InterestService,
-              private cityService: CityService,
               fb: FormBuilder,
+              private organizerService: OrganizerService,
               private activityService: ActivityService,
               private route: ActivatedRoute,
               private router: Router
@@ -40,7 +40,6 @@ export class AdminActEditComponent implements OnInit {
     this.editHobby = fb.group({
       'name' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'organizerName' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'cityId' : ['', Validators.required],
       'ageFrom' : ['', Validators.required],
       'ageTo' : ['', Validators.required],
       'interestId' : ['', Validators.required],
@@ -50,7 +49,6 @@ export class AdminActEditComponent implements OnInit {
       'mentor' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'description' : ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
       'free' : [false, Validators.required],
-      'sobriety' : [false, Validators.required],
       'image0' : ['', Validators.required],
       'image1' : ['', Validators.required],
       'image2' : ['', Validators.required],
@@ -109,9 +107,6 @@ export class AdminActEditComponent implements OnInit {
 
     let body = new Activity(
       this.editHobby.get('name').value,
-      {Name: this.editHobby.get('organizerName').value,
-      CityId: this.editHobby.get('cityId').value,
-      Sobriety: this.editHobby.get('sobriety').value},
       +this.editHobby.get('ageFrom').value,
       +this.editHobby.get('ageTo').value,
       this.editHobby.get('phones').value,
@@ -136,14 +131,13 @@ export class AdminActEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params =>  this.activityId = params['id']);
     this.interestService.getInterests().then(result => this.interests = result);
-    this.cityService.getCities().then(result => this.cities = result);
+    this.organizerService.getOrganizers().then(result => this.organizers = result);
 
     this.activityService.getActivity(this.activityId)
     .then((result) => {
       console.log(result);
       this.editHobby.controls['name'].setValue(result.Name);
       this.editHobby.controls['organizerName'].setValue(result.Organizer.Name);
-      this.editHobby.controls['cityId'].setValue(result.Organizer.CityId);
       this.editHobby.controls['ageFrom'].setValue(result.AgeFrom);
       this.editHobby.controls['ageTo'].setValue(result.AgeTo);
       this.editHobby.controls['interestId'].setValue(result.Interest.Id);
@@ -153,7 +147,6 @@ export class AdminActEditComponent implements OnInit {
       this.editHobby.controls['mentor'].setValue(result.Mentor);
       this.editHobby.controls['description'].setValue(result.Description);
       this.editHobby.controls['free'].setValue(result.Free);
-      this.editHobby.controls['sobriety'].setValue(result.Organizer.Sobriety);
       result.Pictures.forEach((pic, i) => {
         if (i < 4) {
           this.editHobby.controls[`image${i}`].setValue(pic.Url);

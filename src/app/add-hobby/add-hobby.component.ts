@@ -55,9 +55,6 @@ export class AddHobbyComponent implements OnInit {
 
     let body = new Activity(
       this.addHobby.get('name').value,
-      {Name: this.addHobby.get('organizerName').value,
-      CityId: this.addHobby.get('cityId').value,
-      Sobriety: this.addHobby.get('sobriety').value},
       +this.addHobby.get('ageFrom').value,
       +this.addHobby.get('ageTo').value,
       this.addHobby.get('phones').value,
@@ -68,12 +65,15 @@ export class AddHobbyComponent implements OnInit {
       this.addHobby.get('interestId').value,
       this.isChecked,
       this.addHobby.get('free').value,
-      this.formId
+      this.formId,
+      {Name: this.addHobby.get('organizerName').value,
+      CityId: this.addHobby.get('cityId').value,
+      Sobriety: this.addHobby.get('sobriety').value},
     );
     console.log(body);
     this.activityService.postActivity(body)
     .then(result => {console.log(result);
-    this.router.navigate(['/addhobby/success']);
+    this.router.url === '/admin/addhobby' ? this.router.navigate(['/admin/addhobby/success']) : this.router.navigate(['/addhobby/success']);
     this.responding = false;
     });
   }
@@ -95,11 +95,11 @@ export class AddHobbyComponent implements OnInit {
         data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
         body = new TempFile(this.formId, this.fileNames[index], data, isMain);
         console.log(body);
-      //   this.activityService.postTempFile(body)
-      //  .then(result =>  {
-      //    console.log(result);
-      //    this.fileId[index] = result.Id;
-      //  });
+        this.activityService.postTempFile(body)
+       .then(result =>  {
+         console.log(result);
+         this.fileId[index] = result.Id;
+       });
       };
   }
 
@@ -108,8 +108,8 @@ export class AddHobbyComponent implements OnInit {
       this.fileNames[index] = null;
       this.addHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
-      // this.activityService.deleteTempfile(this.fileId[index])
-      // .then((result) => console.log(result));
+      this.activityService.deleteTempfile(this.fileId[index])
+      .then((result) => console.log(result));
   }
   ngOnInit() {
     this.interestService.getInterests().then(result => this.interests = result);

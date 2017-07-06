@@ -69,9 +69,9 @@
             </li>
         </ul>
         <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
-        <button *ngIf="!admin.isActive" [routerLink]="['/act/reservation', activity.Id]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
+        <button *ngIf="!admin.isActive" [routerLink]="['/act/reservation', activityId]" md-raised-button color="accent" class="button-enroll">ЗАПИСАТЬСЯ</button>
         <div class="admin-buttons" *ngIf="admin.isActive">
-            <button [routerLink]="['/admin/act/edit', activity.Id]" md-raised-button color="primary" class="button-enroll button-edit">РЕДАКТИРОВАТЬ</button>
+            <button [routerLink]="['/admin/act/edit', activityId]" md-raised-button color="primary" class="button-enroll button-edit">РЕДАКТИРОВАТЬ</button>
             <div *ngIf="activity.IsChecked === false" class="button-approve-wrapper">
                 <button (click)="actApprove()" md-raised-button color="accent" class="button-enroll button-approve">ПОДТВЕРДИТЬ</button>
                 <md-progress-spinner *ngIf="approveResponding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>

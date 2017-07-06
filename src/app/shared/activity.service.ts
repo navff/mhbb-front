@@ -106,7 +106,6 @@ export class TempFile {
 export class Activity {
   constructor (
     public Name: string,
-    public Organizer: any,
     public AgeFrom: number,
     public AgeTo: number,
     public Phones: string,
@@ -118,6 +117,7 @@ export class Activity {
     public IsChecked: boolean,
     public Free: boolean,
     public FormId: string,
+    public Organizer?: any,
     public OrganizerId?: number
   ) {}
 }

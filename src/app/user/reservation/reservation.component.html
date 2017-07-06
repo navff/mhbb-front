@@ -3,7 +3,7 @@
         <a [routerLink]="['/act', activity.Id]" class="button-back">&larr; Назад</a>
         <h1 class="heading">{{activity.Name}}</h1>
         <div class="main-wrapper"> 
-            <img [src]="mainPictureUrl ? mainPictureUrl : 'img/fallback.jpg'" alt="" class="main-picture">
+            <div [ngStyle]="{'background-image': 'url(' +  mainPictureUrl + ')'}" class="main-picture"></div>
             <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>
         </div>
         <ul class="info-list">

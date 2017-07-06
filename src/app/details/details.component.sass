@@ -46,17 +46,21 @@
         position: absolute
         right: 0
         top: 4px
-        .thumb-up
-        .thumb-down
-            transform: rotate(180deg)
         [class^='thumb']
             width: 27px
             cursor: pointer
             display: inline-block
+            position: relative
+        .thumb-up
+            top: 0.5px
+        .thumb-down
+            transform: rotate(180deg)
+            top: 5px
         .amount
-            width: 14px
+            min-width: 30px
+            margin: 0 3px
+            text-align: center
             font-size: 26px
-            margin: 0 5px
             display: inline-block
         .voted
             font-size: 14px
