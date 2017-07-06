@@ -79,7 +79,12 @@ export class UserEditComponent implements OnInit {
 
   putUser() {
     this.responding = true;
-    let role = 0;
+    let role: number;
+    if (this.editUser.get('role').value === true) {
+      role = 1;
+    } else {
+      role = 2;
+    }
     let body = new User(
       this.user.Email,
       this.editUser.get('name').value,

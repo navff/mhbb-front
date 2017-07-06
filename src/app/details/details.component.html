@@ -17,17 +17,17 @@
             </div>
         </div>
         <div *ngIf="loaded" class="main-wrapper"> 
-            <img [src]="picUrls[0] ? picUrls[0] : 'img/fallback.jpg'" alt="" class="main-picture">
+            <div [ngStyle]="{'background-image': 'url(' +  picUrls[0] + ')'}" class="main-picture"></div>
         </div>
         <div *ngIf="loaded" class="other-pictures">
             <div class="wrapper-1">
-                <img [src]="picUrls[1] ? picUrls[1] : 'img/fallback.jpg'" alt="" class="other-picture">
+                <div [ngStyle]="{'background-image': 'url(' +  picUrls[1] + ')'}" class="other-picture"></div>
             </div>
             <div class="wrapper-2">
-                <img [src]="picUrls[2] ? picUrls[2] : 'img/fallback.jpg'" alt="" class="other-picture">
+                <div [ngStyle]="{'background-image': 'url(' +  picUrls[2] + ')'}" class="other-picture"></div>
             </div>
             <div class="wrapper-3">
-                <img [src]="picUrls[3] ? picUrls[3] : 'img/fallback.jpg'" alt="" class="other-picture">
+                <div [ngStyle]="{'background-image': 'url(' +  picUrls[3] + ')'}" class="other-picture"></div>
             </div>
         </div>
         <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>           

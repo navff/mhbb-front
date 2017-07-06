@@ -95,23 +95,21 @@ export class AddHobbyComponent implements OnInit {
         data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
         body = new TempFile(this.formId, this.fileNames[index], data, isMain);
         console.log(body);
-        this.activityService.postTempFile(body)
-       .then(result =>  {
-         console.log(result);
-         this.fileId[index] = result.Id;
-       });
+      //   this.activityService.postTempFile(body)
+      //  .then(result =>  {
+      //    console.log(result);
+      //    this.fileId[index] = result.Id;
+      //  });
       };
   }
 
   removeImage(index) {
-    if (this.fileId[index]) {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
       this.fileNames[index] = null;
       this.addHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
-      this.activityService.deleteTempfile(this.fileId[index])
-      .then((result) => console.log(result));
-    }
+      // this.activityService.deleteTempfile(this.fileId[index])
+      // .then((result) => console.log(result));
   }
   ngOnInit() {
     this.interestService.getInterests().then(result => this.interests = result);

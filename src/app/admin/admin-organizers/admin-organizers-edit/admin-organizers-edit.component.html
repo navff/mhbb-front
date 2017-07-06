@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="admin-heading">Редактирование организатора</h1>
+    <h1 class="admin-heading">{{currentUrl === "/admin/organizers/add" ? 'Добавление' : 'Редактирование'}} организатора</h1>
     <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
     <form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()">
         <md-input-container class="form-item-name">

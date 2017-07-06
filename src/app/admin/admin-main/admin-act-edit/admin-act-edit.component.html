@@ -11,7 +11,7 @@
                 <div (click)="removeImage(0)" *ngIf="fileData[0] || picUrls[0]" class="delete-image-button"></div>
                 <label  class="main-input-design">
                     <div class="main-wrapper" [ngClass]="{'cover': fileData[0] || picUrls[0]}">
-                        <img [src]="picUrls[0] ? picUrls[0] : fileData[0] ? fileData[0] : 'img/fallback.jpg'" alt="" class="main-preview">
+                        <div [ngStyle]="{'background-image': picUrls[0] ? 'url(' +  picUrls[0] + ')' : 'url(' +  fileData[0] + ')'}" class="main-preview"></div>
                     </div>
                     <input (change)="addImage($event, 0, true)" [disabled]="fileNames[0] || picUrls[0]" type="file"  id="input-0" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="editHobby.controls['image0']">
@@ -22,7 +22,7 @@
                 <div (click)="removeImage(1)" *ngIf="fileData[1] || picUrls[1]" class="delete-image-button"></div>                
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[1] || picUrls[1]}">
-                        <img [src]="picUrls[1] ? picUrls[1] : fileData[1] ? fileData[1] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                        <div [ngStyle]="{'background-image': picUrls[1] ? 'url(' +  picUrls[1] + ')' : 'url(' +  fileData[1] + ')'}" class="secondary-preview"></div>                        
                     </div>
                     <input (change)="addImage($event, 1, false)" [disabled]="fileNames[1] || picUrls[1]" type="file" id="input-1" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="editHobby.controls['image1']">
@@ -33,7 +33,7 @@
                 <div (click)="removeImage(2)" *ngIf="fileData[2] || picUrls[2]" class="delete-image-button"></div>
                 <label  class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[2] || picUrls[2]}">
-                        <img [src]="picUrls[2] ? picUrls[2] : fileData[2] ? fileData[2] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                        <div [ngStyle]="{'background-image': picUrls[2] ? 'url(' +  picUrls[2] + ')' : 'url(' +  fileData[2] + ')'}" class="secondary-preview"></div>                        
                     </div>
                     <input (change)="addImage($event, 2, false)" [disabled]="fileNames[2] || picUrls[2]" type="file" id="input-2" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="editHobby.controls['image2']">
@@ -44,7 +44,7 @@
                 <div (click)="removeImage(3)" *ngIf="fileData[3] || picUrls[3]" class="delete-image-button"></div>
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[3] || picUrls[3]}">
-                        <img [src]="picUrls[3] ? picUrls[3] : fileData[3] ? fileData[3] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                        <div [ngStyle]="{'background-image': picUrls[3] ? 'url(' +  picUrls[3] + ')' : 'url(' +  fileData[3] + ')'}" class="secondary-preview"></div>                        
                     </div>
                     <input (change)="addImage($event, 3, false)" [disabled]="fileNames[3] || picUrls[3]" type="file" id="input-3" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="editHobby.controls['image3']">

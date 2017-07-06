@@ -43,7 +43,7 @@ export class AdminActEditComponent implements OnInit {
       'cityId' : ['', Validators.required],
       'ageFrom' : ['', Validators.required],
       'ageTo' : ['', Validators.required],
-      'interestId' : [1, Validators.required],
+      'interestId' : ['', Validators.required],
       'phones' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'address' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'prices' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
@@ -51,10 +51,10 @@ export class AdminActEditComponent implements OnInit {
       'description' : ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
       'free' : [false, Validators.required],
       'sobriety' : [false, Validators.required],
-      'image0' : [''],
-      'image1' : [''],
-      'image2' : [''],
-      'image3' : ['']
+      'image0' : ['', Validators.required],
+      'image1' : ['', Validators.required],
+      'image2' : ['', Validators.required],
+      'image3' : ['', Validators.required]
     });
   }
 
@@ -88,11 +88,13 @@ export class AdminActEditComponent implements OnInit {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
       this.picUrls[index] = null;
       this.fileNames[index] = null;
-      this.picId[index] = null;
       this.editHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
-      this.picsToDelete[index] = true;
-    } else {
+      this.activityService.deletePicture(this.picId[index])
+      .then((result) => console.log(result));
+      this.picId[index] = null;
+    }
+    if (this.tempfileId[index]) {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
       this.fileNames[index] = null;
       this.editHobby.controls[`image${index}`].setValue('');
@@ -124,12 +126,6 @@ export class AdminActEditComponent implements OnInit {
       this.organizerId
     );
     console.log(body);
-    this.picsToDelete.forEach((pic, i) => {
-      if (pic) {
-      this.activityService.deletePicture(this.picId[i])
-      .then((result) => console.log(result));
-      }
-    });
     this.activityService.putActivity(body, this.activityId)
     .then(result => {console.log(result);
       this.responding = false;
@@ -150,7 +146,7 @@ export class AdminActEditComponent implements OnInit {
       this.editHobby.controls['cityId'].setValue(result.Organizer.CityId);
       this.editHobby.controls['ageFrom'].setValue(result.AgeFrom);
       this.editHobby.controls['ageTo'].setValue(result.AgeTo);
-      // this.editHobby.controls['interestId'].setValue(result.);
+      this.editHobby.controls['interestId'].setValue(result.Interest.Id);
       this.editHobby.controls['phones'].setValue(result.Phones);
       this.editHobby.controls['address'].setValue(result.Address);
       this.editHobby.controls['prices'].setValue(result.Prices);

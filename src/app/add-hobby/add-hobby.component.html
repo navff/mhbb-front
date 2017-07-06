@@ -12,7 +12,7 @@
                 <div (click)="removeImage(0)" *ngIf="fileData[0]" class="delete-image-button"></div>
                 <label  class="main-input-design">
                     <div class="main-wrapper" [ngClass]="{'cover': fileData[0]}">
-                        <img [src]="fileData[0] ? fileData[0] : 'img/fallback.jpg'" alt="" class="main-preview">
+                        <div [ngStyle]="{'background-image': 'url(' + fileData[0] + ')'}" class="main-preview"></div>
                     </div>
                     <input (change)="addImage($event, 0, true)" [disabled]="fileNames[0]" type="file"  id="input-0" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="addHobby.controls['image0']">
@@ -34,7 +34,7 @@
                 <div (click)="removeImage(2)" *ngIf="fileData[2]" class="delete-image-button"></div>
                 <label  class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[2]}">
-                        <img [src]="fileData[2] ? fileData[2] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                        <div [ngStyle]="{'background-image': 'url(' + fileData[2] + ')'}" class="secondary-preview"></div>
                     </div>
                     <input (change)="addImage($event, 2, false)" [disabled]="fileNames[2]" type="file" id="input-2" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="addHobby.controls['image2']">
@@ -45,7 +45,7 @@
                 <div (click)="removeImage(3)" *ngIf="fileData[3]" class="delete-image-button"></div>
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[3]}">
-                        <img [src]="fileData[3] ? fileData[3] : 'img/fallback.jpg'" alt="" class="secondary-preview">
+                        <div [ngStyle]="{'background-image': 'url(' + fileData[3] + ')'}" class="secondary-preview"></div>
                     </div>
                     <input (change)="addImage($event, 3, false)" [disabled]="fileNames[3]" type="file" id="input-3" class="add-image-input" accept=".png,.jpg,.jpeg">
                     <input type="hidden" [formControl]="addHobby.controls['image3']">
