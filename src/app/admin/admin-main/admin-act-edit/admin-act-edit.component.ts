@@ -23,9 +23,8 @@ export class AdminActEditComponent implements OnInit {
   formId: any = null;
   isChecked: boolean;
   organizerId: number;
+  organizerName: string;
   organizers = [];
-  filteredOrganizers: any;
-  myContent: any[] = [];
   responding = false;
   editHobby: FormGroup;
 
@@ -52,19 +51,18 @@ export class AdminActEditComponent implements OnInit {
       'mentor' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'description' : ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
       'free' : [false, Validators.required],
-      'image0' : [''],
-      'image1' : [''],
-      'image2' : [''],
-      'image3' : ['']
+      'image0' : ['', Validators.required],
+      'image1' : ['', Validators.required],
+      'image2' : ['', Validators.required],
+      'image3' : ['', Validators.required]
     });
   }
   filterOrganizers (value) {
     console.log(value);
-    this.organizerService.getOrganizers('1', value).then(result =>  this.filteredOrganizers = result );
+    this.organizerService.getOrganizers('1', value).then(result =>  this.organizers = result );
   }
   setOrganizerId(id) {
     this.organizerId = id;
-    console.log(this.organizerId);
   }
   addImage(event, index, isMain) {
       let data, body, file: File;
@@ -112,6 +110,11 @@ export class AdminActEditComponent implements OnInit {
   submitForm() {
     this.responding = true;
 
+    this.organizers.forEach((org) => {
+        if (org.Name.toLowerCase() === this.editHobby.get('organizer').value.toLowerCase()) {
+          this.organizerId = org.Id;
+        }
+      });
     let body = new Activity(
       this.editHobby.get('name').value,
       +this.editHobby.get('ageFrom').value,
@@ -149,7 +152,6 @@ export class AdminActEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params =>  this.activityId = params['id']);
     this.interestService.getInterests().then(result => this.interests = result);
-    this.organizerService.getOrganizers().then(result => this.organizers = result);
 
     this.activityService.getActivity(this.activityId)
     .then((result) => {
@@ -175,5 +177,7 @@ export class AdminActEditComponent implements OnInit {
       });
       this.isChecked = result.IsChecked;
       this.organizerId = result.Organizer.Id;
+      this.organizerName = result.Organizer.Name;
     });
+    this.organizerService.getOrganizers('1', this.organizerName).then(result => this.organizers = result);
 }}
