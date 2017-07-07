@@ -24,11 +24,13 @@ export class AdminActEditComponent implements OnInit {
   isChecked: boolean;
   organizerId: number;
   organizers = [];
+  filteredOrganizers: any;
   responding = false;
   editHobby: FormGroup;
 
   picId = [];
   picsToDelete: boolean[] = [];
+
   constructor(
               private interestService: InterestService,
               fb: FormBuilder,
@@ -39,7 +41,7 @@ export class AdminActEditComponent implements OnInit {
               ) {
     this.editHobby = fb.group({
       'name' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'organizerName' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
+      'organizer' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'ageFrom' : ['', Validators.required],
       'ageTo' : ['', Validators.required],
       'interestId' : ['', Validators.required],
@@ -49,13 +51,23 @@ export class AdminActEditComponent implements OnInit {
       'mentor' : ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       'description' : ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
       'free' : [false, Validators.required],
-      'image0' : ['', Validators.required],
-      'image1' : ['', Validators.required],
-      'image2' : ['', Validators.required],
-      'image3' : ['', Validators.required]
+      'image0' : [''],
+      'image1' : [''],
+      'image2' : [''],
+      'image3' : ['']
     });
+      this.filteredOrganizers = this.editHobby.get('organizer').valueChanges.
+      startWith(null)
+      .map(name => this.filterOrganizers(name));
   }
-
+  filterOrganizers(val: any) {
+    return val ? this.organizers.filter(s => s.Name.toLowerCase().indexOf(val.toLowerCase()) === 0)
+               : this.organizers;
+  }
+  setOrganizerId(id) {
+    this.organizerId = id;
+    console.log(this.organizerId);
+  }
   addImage(event, index, isMain) {
       let data, body, file: File;
       file = event.target.files[0];
@@ -88,9 +100,7 @@ export class AdminActEditComponent implements OnInit {
       this.fileNames[index] = null;
       this.editHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
-      this.activityService.deletePicture(this.picId[index])
-      .then((result) => console.log(result));
-      this.picId[index] = null;
+      this.picsToDelete[index] = true;
     }
     if (this.tempfileId[index]) {
       (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
@@ -101,7 +111,6 @@ export class AdminActEditComponent implements OnInit {
       .then((result) => console.log(result));
     }
   }
-
   submitForm() {
     this.responding = true;
 
@@ -118,14 +127,25 @@ export class AdminActEditComponent implements OnInit {
       this.isChecked,
       this.editHobby.get('free').value,
       this.formId,
+      null,
       this.organizerId
     );
     console.log(body);
-    this.activityService.putActivity(body, this.activityId)
-    .then(result => {console.log(result);
-      this.responding = false;
-      this.router.navigate(['/admin/act', this.activityId]);
-    });
+
+    let that = this;
+    (function loop(i) {
+      if (i < 4) {
+        console.log(i, that.picsToDelete[i]);
+        that.picsToDelete[i] ? that.activityService.deletePicture(that.picId[i])
+        .then(() => loop(++i)) : loop(++i);
+      } else {
+        that.activityService.putActivity(body, that.activityId)
+        .then(result => {console.log(result);
+          that.responding = false;
+          that.router.navigate(['/admin/act', that.activityId]);
+        });
+      }
+    })(0);
   }
 
   ngOnInit() {
@@ -137,7 +157,7 @@ export class AdminActEditComponent implements OnInit {
     .then((result) => {
       console.log(result);
       this.editHobby.controls['name'].setValue(result.Name);
-      this.editHobby.controls['organizerName'].setValue(result.Organizer.Name);
+      this.editHobby.controls['organizer'].setValue(result.Organizer.Name);
       this.editHobby.controls['ageFrom'].setValue(result.AgeFrom);
       this.editHobby.controls['ageTo'].setValue(result.AgeTo);
       this.editHobby.controls['interestId'].setValue(result.Interest.Id);
