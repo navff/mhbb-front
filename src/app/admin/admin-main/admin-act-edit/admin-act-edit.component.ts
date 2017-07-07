@@ -25,6 +25,7 @@ export class AdminActEditComponent implements OnInit {
   organizerId: number;
   organizers = [];
   filteredOrganizers: any;
+  myContent: any[] = [];
   responding = false;
   editHobby: FormGroup;
 
@@ -56,13 +57,10 @@ export class AdminActEditComponent implements OnInit {
       'image2' : [''],
       'image3' : ['']
     });
-      this.filteredOrganizers = this.editHobby.get('organizer').valueChanges.
-      startWith(null)
-      .map(name => this.filterOrganizers(name));
   }
-  filterOrganizers(val: any) {
-    return val ? this.organizers.filter(s => s.Name.toLowerCase().indexOf(val.toLowerCase()) === 0)
-               : this.organizers;
+  filterOrganizers (value) {
+    console.log(value);
+    this.organizerService.getOrganizers('1', value).then(result =>  this.filteredOrganizers = result );
   }
   setOrganizerId(id) {
     this.organizerId = id;

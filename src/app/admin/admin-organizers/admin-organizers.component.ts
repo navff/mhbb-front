@@ -50,7 +50,8 @@ export class AdminOrganizersComponent implements OnInit {
       this.checkLength = result.length;
       this.loaded = true;
     });
-    }
+  }
+
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizers(this.page.toString(10))
