@@ -3,13 +3,15 @@
     <md-input-container class="form-item">
         <input (focusout)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
     </md-input-container>
-    <md-select (change)="setArgument(1, city.Id)" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+    <md-select (change)="setArgument(1, city.Id)" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город"
+        floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
     </md-select>
 </form>
 <div class="container reviews">
     <div *ngFor="let review of reviews; let i = index" class="review">
-        <p class="review-name-date"><a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: review.User.Email }">{{review.User?.Name}}</a>, {{review.DateCreated | myDate }}г.</p>
+        <p class="review-name-date"><a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: review.User.Email }">{{review.User?.Name}}</a>, {{review.DateCreated
+            | myDate }}г.</p>
         <pre class="review-text">{{review.Text}}</pre>
         <p class="review-descr">Отзыв о <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a></p>
         <div class="buttons">

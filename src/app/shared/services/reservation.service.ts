@@ -5,19 +5,20 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ReservationService {
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   postReservation(body: any) {
     return this.http.post(`http://test.mhbb.ru/b/api/reservation`, body)
-    .map((response) => response.json())
-    .toPromise();
-}}
+      .map((response) => response.json())
+      .toPromise();
+  }
+}
 export class Reservation {
-  constructor (
-  public ActivityId: string,
-  public UserEmail: string,
-  public Name: string,
-  public Phone: string,
-  public Comment: any
-) {}
+  constructor(
+    public ActivityId: string,
+    public UserEmail: string,
+    public Name: string,
+    public Phone: string,
+    public Comment: any
+  ) { }
 }

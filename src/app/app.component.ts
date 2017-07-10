@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './shared/auth.service';
-import { SharedService } from './shared/shared.service';
+import { AuthService } from './shared/services/auth.service';
+import { SharedService } from './shared/services/shared.service';
 
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -13,15 +13,16 @@ import '../style/app.sass';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private auth: AuthService,
-              private router: Router,
-              private shared: SharedService) {
-                this.router.events
-                .filter(e => e instanceof NavigationEnd)
-                .pairwise().subscribe((e: any) => {
-                  this.shared.updateUrl(e[0].url);
-                });
-              }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private shared: SharedService) {
+    this.router.events
+      .filter(e => e instanceof NavigationEnd)
+      .pairwise().subscribe((e: any) => {
+        this.shared.updateUrl(e[0].url);
+      });
+  }
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {
@@ -29,13 +30,14 @@ export class AppComponent implements OnInit {
         this.router.navigate(['']);
       } else {
         this.auth.getUserByToken()
-        .then(result => {
-          if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
-            this.router.navigate(['admin']);
-          } else {
-            this.router.navigate(['']);
-          }
-        });
+          .then(result => {
+            if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
+              this.router.navigate(['admin']);
+            } else {
+              this.router.navigate(['']);
+            }
+          });
       }
     }
-}}
+  }
+}

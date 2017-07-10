@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../shared/user.service';
-import { CityService } from '../../shared/city.service';
-import { SharedService } from './../../shared/shared.service';
+import { UserService } from '../../shared/services/user.service';
+import { CityService } from '../../shared/services/city.service';
+import { SharedService } from './../../shared/services/shared.service';
 
 @Component({
   selector: 'my-admin-users',

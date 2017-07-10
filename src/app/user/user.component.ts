@@ -1,4 +1,4 @@
-import { AuthService } from './../shared/auth.service';
+import { AuthService } from './../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class UserComponent implements OnInit {
   userEmail: string;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   setAdmin() {
     localStorage.setItem('token', 'ABRAKADABRA');
@@ -21,6 +21,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     if (this.auth.token) {
       this.auth.getUserByToken()
-      .then(result => this.userEmail = result.Email);
+        .then(result => this.userEmail = result.Email);
+    }
   }
-}}
+}

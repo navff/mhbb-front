@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizerService } from '../../shared/organizer.service';
-import { CityService } from '../../shared/city.service';
-import { SharedService } from './../../shared/shared.service';
+import { OrganizerService } from '../../shared/services/organizer.service';
+import { CityService } from '../../shared/services/city.service';
+import { SharedService } from './../../shared/services/shared.service';
 
 @Component({
   selector: 'my-admin-organizers',
@@ -19,21 +19,22 @@ export class AdminOrganizersComponent implements OnInit {
 
   loaded = false;
   responding = false;
-  constructor(private organizerService: OrganizerService,
-              private cityService: CityService,
-              private shared: SharedService) {
-                this.shared.destroyFooter();
-              }
+  constructor(
+    private organizerService: OrganizerService,
+    private cityService: CityService,
+    private shared: SharedService) {
+    this.shared.destroyFooter();
+  }
 
   concatPage() {
     this.responding = true;
     this.page += 1;
     this.organizerService.getOrganizers(this.page.toString(10), this.args[0], this.args[1])
-    .then(result => {
-      this.organizers = this.organizers.concat(result);
-      this.checkLength = result.length;
-      this.responding = false;
-    });
+      .then(result => {
+        this.organizers = this.organizers.concat(result);
+        this.checkLength = result.length;
+        this.responding = false;
+      });
   }
   reset() {
     this.page = 1;
@@ -45,20 +46,21 @@ export class AdminOrganizersComponent implements OnInit {
     this.reset();
     this.args[index] = value;
     this.organizerService.getOrganizers(this.page.toString(10), this.args[0], this.args[1])
-    .then(result => {
-      this.organizers = result;
-      this.checkLength = result.length;
-      this.loaded = true;
-    });
+      .then(result => {
+        this.organizers = result;
+        this.checkLength = result.length;
+        this.loaded = true;
+      });
   }
 
   ngOnInit() {
     this.cityService.getCities().then(result => this.cities = result);
     this.organizerService.getOrganizers(this.page.toString(10))
-    .then(result => {
-      this.organizers = result;
-      this.checkLength = result.length;
-      this.loaded = true;
-      this.shared.loadFooter();
-    });
-}}
+      .then(result => {
+        this.organizers = result;
+        this.checkLength = result.length;
+        this.loaded = true;
+        this.shared.loadFooter();
+      });
+  }
+}

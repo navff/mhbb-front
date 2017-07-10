@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User } from '../../../shared/user.service';
-import { CityService } from '../../../shared/city.service';
+import { UserService, User } from '../../../shared/services/user.service';
+import { CityService } from '../../../shared/services/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -21,19 +21,20 @@ export class AdminUsersEditComponent implements OnInit {
   responding = false;
 
   editUser: FormGroup;
-  constructor(private userService: UserService,
-              private cityService: CityService,
-              private router: Router,
-              private route: ActivatedRoute,
-              fb: FormBuilder) {
+  constructor(
+    private userService: UserService,
+    private cityService: CityService,
+    private router: Router,
+    private route: ActivatedRoute,
+    fb: FormBuilder) {
     this.editUser = fb.group({
-        'email': '',
-        'name': '',
-        'phone': '',
-        'role': '',
-        'cityId': '',
+      'email': '',
+      'name': '',
+      'phone': '',
+      'role': '',
+      'cityId': '',
     });
-    }
+  }
 
   putUser() {
     this.responding = true;
@@ -52,9 +53,10 @@ export class AdminUsersEditComponent implements OnInit {
       null
     );
     this.userService.putUser(this.searchEmail, body)
-    .then(result => {this.user = result;
-      this.router.navigate(['/admin/users']);
-    });
+      .then(result => {
+      this.user = result;
+        this.router.navigate(['/admin/users']);
+      });
   }
   ngOnInit() {
     this.loaded = false;
@@ -63,18 +65,19 @@ export class AdminUsersEditComponent implements OnInit {
     console.log(this.searchEmail);
     this.cityService.getCities().then(result => this.cities = result);
     this.userService.getUserByEmail(this.searchEmail)
-    .then(result => {
-      this.user = result;
-      this.editUser.get('email').setValue(this.user.Email);
-      this.editUser.get('name').setValue(this.user.Name);
-      this.editUser.get('phone').setValue(this.user.Phone);
-      if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
-        this.editUser.get('role').setValue(true);
-      } else {
-        this.editUser.get('role').setValue(false);
-      }
-      this.editUser.get('cityId').setValue(this.user.CityId);
-      console.log(this.user);
-      this.loaded = true;
-    });
-}}
+      .then(result => {
+        this.user = result;
+        this.editUser.get('email').setValue(this.user.Email);
+        this.editUser.get('name').setValue(this.user.Name);
+        this.editUser.get('phone').setValue(this.user.Phone);
+        if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
+          this.editUser.get('role').setValue(true);
+        } else {
+          this.editUser.get('role').setValue(false);
+        }
+        this.editUser.get('cityId').setValue(this.user.CityId);
+        console.log(this.user);
+        this.loaded = true;
+      });
+  }
+}

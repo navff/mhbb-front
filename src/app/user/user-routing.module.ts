@@ -1,4 +1,4 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { UserComponent } from './user.component';
@@ -8,11 +8,12 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { EnterComponent } from './enter/enter.component';
 import { MainComponent } from './main/main.component';
 
-import { DetailsComponent } from './../details/details.component';
-import { UserEditComponent } from './../user-edit/user-edit.component';
+import { DetailsComponent } from './../shared/components/details/details.component';
+import { UserEditComponent } from './../shared/components/user-edit/user-edit.component';
 
 const routes: Routes = [
-  { path: '',
+  {
+    path: '',
     component: UserComponent,
     children: [
       { path: '', component: MainComponent },
@@ -23,7 +24,7 @@ const routes: Routes = [
       { path: 'act/reservation/success/:id', component: ReservationSuccessComponent },
       { path: 'user', component: UserEditComponent },
 
-      { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule'},
+      { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule' },
     ]
   }
 ];
@@ -32,4 +33,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule {}
+export class UserRoutingModule { }

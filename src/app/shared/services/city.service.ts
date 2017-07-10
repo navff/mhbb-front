@@ -5,10 +5,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CityService {
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   getCities() {
     return this.http.get('http://test.mhbb.ru/b/api/city')
-    .map((response) => response.json())
-    .toPromise();
-}}
+      .map((response) => response.json())
+      .toPromise();
+  }
+}

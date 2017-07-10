@@ -1,15 +1,15 @@
 <div class="content">
     <header>
-    <ul class="main-nav container">
-        <li><img routerLink='/admin' src="img/logo.svg" alt="" class="main-nav__link-logo"></li>
-        <li><a routerLink='/admin' class="main-nav__link">Хобби</a></li>
-        <li><a routerLink='organizers' class="main-nav__link">Организаторы</a></li>
-        <li><a routerLink='users' class="main-nav__link">Пользователи</a></li>
-        <li><a routerLink='reviews' class="main-nav__link">Отзывы на проверку</a></li>
-        <li><a (click)="exitAdmin()" href="javascript:void(0);" class="main-nav__link-exit">Выход</a></li>
-        <li *ngIf="userEmail"><a routerLink="edit" class="main-nav__link-enter">{{userEmail}}</a></li>
-        <div class="activities-count">{{activitiesCount}}</div>
-    </ul>
+        <ul class="main-nav container">
+            <li><img routerLink='/admin' src="img/logo.svg" alt="" class="main-nav__link-logo"></li>
+            <li><a routerLink='/admin' class="main-nav__link">Хобби</a></li>
+            <li><a routerLink='organizers' class="main-nav__link">Организаторы</a></li>
+            <li><a routerLink='users' class="main-nav__link">Пользователи</a></li>
+            <li><a routerLink='reviews' class="main-nav__link">Отзывы на проверку</a></li>
+            <li><a (click)="exitAdmin()" href="javascript:void(0);" class="main-nav__link-exit">Выход</a></li>
+            <li *ngIf="userEmail"><a routerLink="edit" class="main-nav__link-enter">{{userEmail}}</a></li>
+            <div class="activities-count">{{activitiesCount}}</div>
+        </ul>
     </header>
 
     <a (click)="scrollToTop()" class="button-to-top" *ngIf="scrolled" md-fab color="accent"></a>

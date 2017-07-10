@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SharedService } from '../shared.service';
+import { SharedService } from '../../services/shared.service';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,7 +13,7 @@ export class FooterComponent {
   footerLoaded: boolean;
   sub: Subscription;
   constructor(private shared: SharedService) {
-                this.sub = shared.footerLoaded.subscribe(result => this.footerLoaded = result);
-                this.shared.loadFooter();
+    this.sub = shared.footerLoaded.subscribe(result => this.footerLoaded = result);
+    this.shared.loadFooter();
   }
 }

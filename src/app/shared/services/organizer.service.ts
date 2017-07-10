@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class OrganizerService {
   token = localStorage.getItem('token');
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   getOrganizers(page?: string, word?: string, cityId?: string) {
     let search = new URLSearchParams();
@@ -17,27 +17,27 @@ export class OrganizerService {
 
     let options = new RequestOptions({ search: search });
     return this.http
-    .get(`http://test.mhbb.ru/b/api/organizer/search`, options)
-    .map((response) => response.json())
-    .toPromise();
+      .get(`http://test.mhbb.ru/b/api/organizer/search`, options)
+      .map((response) => response.json())
+      .toPromise();
   }
   getOrganizerById(id: string) {
     return this.http.get(`http://test.mhbb.ru/b/api/organizer/${id}`)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   putOrganizer(id: any, body: any) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(`http://test.mhbb.ru/b/api/organizer/${id}`, body, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
 }
 export class Organizer {
-  constructor (
+  constructor(
     public Name: string,
     public Cityid: number,
-    public Sobriety: boolean) {}
+    public Sobriety: boolean) { }
 }
 

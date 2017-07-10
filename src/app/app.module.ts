@@ -10,8 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthGuard } from './shared/auth.guard';
-import { AuthService } from './shared/auth.service';
-import { SharedService } from './shared/shared.service';
+import { AuthService } from './shared/services/auth.service';
+import { SharedService } from './shared/services/shared.service';
 
 @NgModule({
   imports: [
@@ -20,12 +20,12 @@ import { SharedService } from './shared/shared.service';
     SharedModule,
     AppRoutingModule
   ],
-  declarations: [ AppComponent ],
-  providers: [ AuthGuard, AuthService, SharedService ],
-  bootstrap: [ AppComponent ]
+  declarations: [AppComponent],
+  providers: [AuthGuard, AuthService, SharedService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef) {}
+  constructor(public appRef: ApplicationRef) { }
   hmrOnInit(store) {
     console.log('HMR store', store);
   }

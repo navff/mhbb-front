@@ -12,7 +12,7 @@
 
     <section>
         <div class="organizers">
-            <div *ngFor="let organizer of organizers" class="organizer"> 
+            <div *ngFor="let organizer of organizers" class="organizer">
                 <a [routerLink]="['/admin/organizers/edit', organizer.Id]">{{organizer.Name}}</a>
             </div>
             <div *ngIf="checkLength > 98" class="button-wrapper">

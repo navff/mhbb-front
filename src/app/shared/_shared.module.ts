@@ -7,9 +7,9 @@ import { MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule,
          MdIconModule, MdProgressSpinnerModule, MdAutocompleteModule } from '@angular/material';
 import { OnlyNumberDirective } from './_only-number.directive';
 import { DatePipe } from './_date.pipe';
-import { DetailsComponent } from './../details/details.component';
-import { UserEditComponent } from './../user-edit/user-edit.component';
-import { FooterComponent } from './footer/footer.component';
+import { DetailsComponent } from './components/details/details.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   imports:      [ HttpModule, FormsModule, ReactiveFormsModule,

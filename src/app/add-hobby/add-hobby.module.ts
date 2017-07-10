@@ -1,7 +1,6 @@
-import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/_shared.module';
-import {  } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AddHobbyComponent } from './add-hobby.component';
@@ -13,13 +12,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports:      [
+  imports: [
     RouterModule.forChild(routes),
     CommonModule,
     SharedModule
-   ],
+  ],
   declarations: [
     AddHobbyComponent, AddHobbySuccessComponent
-   ]
+  ]
 })
-export class AddHobbyModule {}
+export class AddHobbyModule { }

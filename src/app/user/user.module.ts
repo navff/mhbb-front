@@ -1,5 +1,5 @@
-import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { UserComponent } from './user.component';
 import { MainComponent } from './main/main.component';
@@ -12,16 +12,16 @@ import { SharedModule } from '../shared/_shared.module';
 import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
-  imports:      [
+  imports: [
     CommonModule,
     SharedModule,
     UserRoutingModule
-   ],
+  ],
   declarations: [
     UserComponent,
     MainComponent,
     EnterComponent, EnterSuccessComponent,
     ReservationComponent, ReservationSuccessComponent
-   ]
+  ]
 })
-export class UserModule {}
+export class UserModule { }

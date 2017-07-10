@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from '../../../shared/activity.service';
+import { ActivityService } from '../../../shared/services/activity.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,13 +12,16 @@ export class ReservationSuccessComponent implements OnInit {
   activity: any = {};
   activityId: string;
 
-  constructor(private activityService: ActivityService,
-              private route: ActivatedRoute) {}
+  constructor(
+    private activityService: ActivityService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params =>  this.activityId = params['id']);
+    this.route.params.subscribe(params => this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
-    .then(result => {
-      this.activity = result;
-    });
-}}
+      .then(result => {
+        this.activity = result;
+      });
+  }
+}

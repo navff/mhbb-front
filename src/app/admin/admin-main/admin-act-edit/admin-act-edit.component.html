@@ -1,15 +1,15 @@
 <div class="container">
-    
+
     <form [formGroup]="editHobby" (ngSubmit)="submitForm()">
-        <a [routerLink]="['/admin/act', activityId]" class="button-back">&larr; Назад</a>
+        <a [routerLink]="['/admin/act', activityId]" class="my-button-back">&larr; Назад</a>
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса" [formControl]="editHobby.controls['name']">
         </md-input-container>
-        
+
         <div class="photos">
             <div class="main-image">
                 <div (click)="removeImage(0)" *ngIf="fileData[0] || picUrls[0]" class="delete-image-button"></div>
-                <label  class="main-input-design">
+                <label class="main-input-design">
                     <div class="main-wrapper" [ngClass]="{'cover': fileData[0] || picUrls[0]}">
                         <div [ngStyle]="{'background-image': picUrls[0] ? 'url(' +  picUrls[0] + ')' : 'url(' +  fileData[0] + ')'}" class="main-preview"></div>
                     </div>
@@ -19,7 +19,7 @@
             </div>
 
             <div *ngIf="fileNames[0] || fileNames[1] || fileNames[2] || fileNames[3]" class="secondary-image-1">
-                <div (click)="removeImage(1)" *ngIf="fileData[1] || picUrls[1]" class="delete-image-button"></div>                
+                <div (click)="removeImage(1)" *ngIf="fileData[1] || picUrls[1]" class="delete-image-button"></div>
                 <label class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[1] || picUrls[1]}">
                         <div [ngStyle]="{'background-image': picUrls[1] ? 'url(' +  picUrls[1] + ')' : 'url(' +  fileData[1] + ')'}" class="secondary-preview"></div>                        
@@ -31,7 +31,7 @@
 
             <div *ngIf="fileNames[1] || fileNames[3] || fileNames[2]" class="secondary-image-2">
                 <div (click)="removeImage(2)" *ngIf="fileData[2] || picUrls[2]" class="delete-image-button"></div>
-                <label  class="secondary-input-design">
+                <label class="secondary-input-design">
                     <div class="secondary-wrapper" [ngClass]="{'cover': fileData[2] || picUrls[2]}">
                         <div [ngStyle]="{'background-image': picUrls[2] ? 'url(' +  picUrls[2] + ')' : 'url(' +  fileData[2] + ')'}" class="secondary-preview"></div>                        
                     </div>
@@ -39,7 +39,7 @@
                     <input type="hidden" [formControl]="editHobby.controls['image2']">
                 </label>
             </div>
-            
+
             <div *ngIf="fileNames[2] || fileNames[3]" class="secondary-image-3">
                 <div (click)="removeImage(3)" *ngIf="fileData[3] || picUrls[3]" class="delete-image-button"></div>
                 <label class="secondary-input-design">
@@ -54,9 +54,8 @@
 
         <div class='form-right'>
             <md-input-container class="form-item-organizer">
-                <input (keyup)="filterOrganizers(editHobby.get('organizer').value)" 
-                (mousedown)="filterOrganizers(editHobby.get('organizer').value)" 
-                mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="editHobby.controls['organizer']">
+                <input (keyup)="filterOrganizers(editHobby.get('organizer').value)" (mousedown)="filterOrganizers(editHobby.get('organizer').value)"
+                    mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="editHobby.controls['organizer']">
             </md-input-container>
             <md-autocomplete #org="mdAutocomplete">
                 <md-option (click)="setOrganizerId(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivityService } from '../../shared/activity.service';
-import { ReservationService, Reservation } from '../../shared/reservation.service';
+import { ActivityService } from '../../shared/services/activity.service';
+import { ReservationService, Reservation } from '../../shared/services/reservation.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,26 +12,27 @@ import { ActivatedRoute } from '@angular/router';
   providers: [ActivityService, ReservationService]
 })
 export class ReservationComponent implements OnInit {
-activity: any = {};
-activityId: string;
-mainPictureUrl: string;
+  activity: any = {};
+  activityId: string;
+  mainPictureUrl: string;
 
-loaded = false;
-responding = false;
+  loaded = false;
+  responding = false;
 
-reservation: FormGroup;
-constructor(private activityService: ActivityService,
-            private reservationService: ReservationService,
-            private router: Router,
-            private route: ActivatedRoute,
-            fb: FormBuilder,
-            ) {
-  this.reservation = fb.group({
-    'email': ['', Validators.required],
-    'name': ['', Validators.required],
-    'phone': ['', Validators.required],
-    'comment': '',
-  });
+  reservation: FormGroup;
+  constructor(
+    private activityService: ActivityService,
+    private reservationService: ReservationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    fb: FormBuilder,
+  ) {
+    this.reservation = fb.group({
+      'email': ['', Validators.required],
+      'name': ['', Validators.required],
+      'phone': ['', Validators.required],
+      'comment': '',
+    });
   }
   postReservation() {
     this.responding = true;
@@ -42,17 +43,19 @@ constructor(private activityService: ActivityService,
       this.reservation.get('comment').value);
     console.log(body);
     this.reservationService.postReservation(body)
-    .then(result => {console.log(result);
-      this.router.navigate(['/act/reservation/success', this.activityId]);
-      this.responding = false;
-    });
+      .then(result => {
+        console.log(result);
+        this.router.navigate(['/act/reservation/success', this.activityId]);
+        this.responding = false;
+      });
   }
-ngOnInit() {
-  this.route.params.subscribe(params =>  this.activityId = params['id']);
-  this.activityService.getActivity(this.activityId)
-  .then(result => {
-    this.activity = result;
-    this.mainPictureUrl = this.activity.Pictures[0].Url;
-    this.loaded = true;
-  });
-}}
+  ngOnInit() {
+    this.route.params.subscribe(params => this.activityId = params['id']);
+    this.activityService.getActivity(this.activityId)
+      .then(result => {
+        this.activity = result;
+        this.mainPictureUrl = this.activity.Pictures[0].Url;
+        this.loaded = true;
+      });
+  }
+}

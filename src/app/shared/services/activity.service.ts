@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class ActivityService {
   token = localStorage.getItem('token');
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   getActivities(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: string, free?: string) {
@@ -22,9 +22,9 @@ export class ActivityService {
 
     let options = new RequestOptions({ search: search });
     return this.http.get('http://test.mhbb.ru/b/api/activity/search', options)
-    .map((response) => response.json())
-    .toPromise();
-}
+      .map((response) => response.json())
+      .toPromise();
+  }
 
   getUncheckedActivities(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: string, free?: string) {
@@ -38,73 +38,73 @@ export class ActivityService {
     free ? search.append('free', free) : search.delete('free');
 
 
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers, search: search });
     let url = 'http://test.mhbb.ru/b/api/activity/searchunchecked';
     return this.http.get(url, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   getActivity(id) {
     return this.http.get(`http://test.mhbb.ru/b/api/activity/${id}`)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   postTempFile(body) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/tempfile`, body, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   deleteTempfile(id) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.delete(`http://test.mhbb.ru/b/api/tempfile/${id}`, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   deletePicture(id) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.delete(`http://test.mhbb.ru/b/api/picture/${id}`, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
 
   postActivity(body) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/activity`, body, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   putActivity(body, id) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(`http://test.mhbb.ru/b/api/activity/${id}`, body, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
   putApproveActivity(isChecked, id) {
-    let headers = new Headers({'Authorization': 'Token ' + this.token});
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(`http://test.mhbb.ru/b/api/activity/setchecked?activityId=${id}&isChecked=${isChecked}`, null, options)
-    .map((response) => response.json())
-    .toPromise();
+      .map((response) => response.json())
+      .toPromise();
   }
 }
 
 export class TempFile {
-  constructor (
+  constructor(
     public FormId: string,
     public Filename: string,
     public Data: any,
-    public IsMain: boolean) {}
+    public IsMain: boolean) { }
 }
 
 export class Activity {
-  constructor (
+  constructor(
     public Name: string,
     public AgeFrom: number,
     public AgeTo: number,
@@ -119,5 +119,5 @@ export class Activity {
     public FormId: string,
     public Organizer?: any,
     public OrganizerId?: number
-  ) {}
+  ) { }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from '../shared/activity.service';
-import { VoicesService } from '../shared/voices.service';
-import { ReviewService, Review } from '../shared/review.service';
+import { ActivityService } from '../../services/activity.service';
+import { VoicesService } from '../../services/voices.service';
+import { ReviewService, Review } from '../../services/review.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -28,26 +28,28 @@ export class DetailsComponent implements OnInit {
     private reviewService: ReviewService,
     private voicesService: VoicesService,
     private route: ActivatedRoute,
-    private router: Router) {}
+    private router: Router) { }
 
   votePositive() {
     if (localStorage.getItem('token')) {
       let oldAmount = this.voteAmount;
       this.voicesService.votePositive(this.activityId)
-      .then(result => {this.voteAmount = result;
-        oldAmount === result ? this.voted = true : this.voted = false;
-      });
+        .then(result => {
+        this.voteAmount = result;
+          oldAmount === result ? this.voted = true : this.voted = false;
+        });
     } else {
       this.router.navigate(['enter']);
     }
   }
   voteNegative() {
     if (localStorage.getItem('token')) {
-    let oldAmount = this.voteAmount;
-    this.voicesService.voteNegative(this.activityId)
-    .then(result => {this.voteAmount = result;
-      oldAmount === result ? this.voted = true : this.voted = false;
-    });
+      let oldAmount = this.voteAmount;
+      this.voicesService.voteNegative(this.activityId)
+        .then(result => {
+        this.voteAmount = result;
+          oldAmount === result ? this.voted = true : this.voted = false;
+        });
     } else {
       this.router.navigate(['enter']);
     }
@@ -57,34 +59,35 @@ export class DetailsComponent implements OnInit {
     let body = new Review(parseInt(this.activityId, 10), this.reviewText);
     console.log(body);
     this.reviewService.postReview(body)
-    .then(result => {
-      console.log(result);
-      this.published = true;
-      this.responding = false;
-    });
+      .then(result => {
+        console.log(result);
+        this.published = true;
+        this.responding = false;
+      });
   }
   actApprove() {
     this.approveResponding = true;
     this.activityService.putApproveActivity(true, this.activityId)
-    .then(result => {
-      console.log(result);
-      this.approveResponding = false;
-      this.router.navigate(['/admin']);
-    });
+      .then(result => {
+        console.log(result);
+        this.approveResponding = false;
+        this.router.navigate(['/admin']);
+      });
   }
   ngOnInit() {
-    this.route.params.subscribe(params =>  this.activityId = params['id']);
+    this.route.params.subscribe(params => this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
-    .then(result => {
-      this.activity = result;
-      console.log(result);
-      this.voteAmount = this.activity.Voices;
-      this.activity.Pictures.forEach((pic, i) => {
-      this.picUrls[i] = pic.Url;
+      .then(result => {
+        this.activity = result;
+        console.log(result);
+        this.voteAmount = this.activity.Voices;
+        this.activity.Pictures.forEach((pic, i) => {
+          this.picUrls[i] = pic.Url;
+        });
+        this.loaded = true;
       });
-      this.loaded = true;
-    });
     this.reviewService.getReviewsByActivity(this.activityId)
-    .then(result => this.reviews = result)
-    .then(() => console.log(this.reviews));
-}}
+      .then(result => this.reviews = result)
+      .then(() => console.log(this.reviews));
+  }
+}
