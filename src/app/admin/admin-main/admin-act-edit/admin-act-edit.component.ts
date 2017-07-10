@@ -178,6 +178,6 @@ export class AdminActEditComponent implements OnInit {
       this.isChecked = result.IsChecked;
       this.organizerId = result.Organizer.Id;
       this.organizerName = result.Organizer.Name;
+      this.organizerService.getOrganizers('1', this.organizerName).then(res => this.organizers = res);
     });
-    this.organizerService.getOrganizers('1', this.organizerName).then(result => this.organizers = result);
 }}

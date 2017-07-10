@@ -42,4 +42,8 @@
     </div>
     <h2 class="no-results" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
     <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+    <div *ngIf="checkLength > 11" class="button-wrapper">
+        <button (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
+        <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+    </div>
 </section>
