@@ -45,7 +45,6 @@ export class AdminUsersEditComponent implements OnInit {
       role = 2;
     }
     let body = new User(
-      this.editUser.get('email').value,
       this.editUser.get('name').value,
       this.editUser.get('phone').value,
       role,

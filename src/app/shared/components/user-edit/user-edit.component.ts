@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityService, TempFile } from './../../services/activity.service';
 import { AuthService } from '../../services/auth.service';
 import { CityService } from '../../services/city.service';
 import { SharedService } from '../../services/shared.service';
@@ -6,21 +7,22 @@ import { UserService, User } from '../../services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'my-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.sass'],
-  providers: [CityService, UserService]
+  providers: [CityService, UserService, ActivityService]
 })
 export class UserEditComponent implements OnInit {
   cities = [];
 
   fileName: string;
   fileData: string;
-
+  fileId: string;
+  tempFileId: string;
+  formId: any;
+  fileToDelete = false;
   user: any = {};
 
   responding = false;
@@ -34,6 +36,7 @@ export class UserEditComponent implements OnInit {
     private auth: AuthService,
     private userService: UserService,
     private cityService: CityService,
+    private activityService: ActivityService,
     private router: Router,
     private shared: SharedService,
     fb: FormBuilder) {
@@ -49,32 +52,41 @@ export class UserEditComponent implements OnInit {
     this.router.navigate([this.previousUrl]);
   }
   addImage(event) {
-    let data, file: File;
+    let data, body, file: File;
     file = event.target.files[0];
 
+    this.formId = Date.now().toString(10);
     this.fileName = file.name;
-    // this.editUser.controls[`image`].setValue(file.name);
 
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       this.fileData = reader.result;
       data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
-      //   body = new TempFile(this.formId, this.fileNames[index], data, isMain);
-      //   console.log(body);
-      //   this.activityService.postTempFile(body)
-      //  .then(result =>  {
-      //    console.log(result);
-      //    this.fileId[index] = result.Id;
-      //  });
-      // };
+        body = new TempFile(this.formId, this.fileName, data, true);
+        console.log(body);
+        this.activityService.postTempFile(body)
+       .then(result =>  {
+         console.log(result);
+         this.tempFileId = result.Id;
+       });
+      };
     };
-  }
   removeImage() {
-    (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
-    this.fileName = null;
-    // this.editUser.controls[`image`].setValue('');
-    this.fileData = null;
+    if (this.tempFileId) {
+      (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
+      this.fileName = null;
+      this.fileData = null;
+      this.fileToDelete = true;
+      this.activityService.deleteTempfile(this.tempFileId)
+        .then((result) => console.log(result));
+    }
+    if (this.fileId) {
+      (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
+      this.fileName = null;
+      this.fileData = null;
+      this.fileToDelete = true;
+    }
   }
 
   putUser() {
@@ -86,14 +98,14 @@ export class UserEditComponent implements OnInit {
       role = 2;
     }
     let body = new User(
-      this.user.Email,
       this.editUser.get('name').value,
       this.editUser.get('phone').value,
       role,
       this.editUser.get('cityId').value,
-      null
+      this.formId
     );
     console.log(body);
+    if (this.fileId && this.fileToDelete) {this.activityService.deletePicture(this.fileId); }
     this.userService.putUser(this.user.Email, body)
       .then(result => {
         this.user = result;
@@ -120,6 +132,10 @@ export class UserEditComponent implements OnInit {
         }
         this.editUser.get('cityId').setValue(this.user.CityId);
         this.loaded = true;
+        if (result.Picture) {
+          this.fileData = result.Picture.Url;
+          this.fileId = result.Picture.Id;
+        }
       });
   }
 }

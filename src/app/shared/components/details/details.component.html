@@ -82,11 +82,12 @@
     <section class="reviews" *ngIf="activity.IsChecked">
         <h2 class="reviews-heading">Отзывы</h2>
         <div class="reviews-item" *ngFor="let review of reviews">
-            <div class="image">
+            <div class="user-image-wrapper" [ngClass]="{'cover': fileData}">
+                <div [ngStyle]="{'background-image': 'url(' +  review.User?.Picture?.Url + ')'}" class="user-image-preview"></div>
             </div>
             <p class="name">{{review.User?.Name}}</p>
             <p class="date">{{review.DateCreated | myDate}}</p>
-            <pre class="content">{{review.Text}}</pre>
+            <pre class="text">{{review.Text}}</pre>
         </div>
         <md-input-container>
             <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>

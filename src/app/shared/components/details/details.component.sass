@@ -143,13 +143,21 @@
     height: auto
     min-height: 99px
     width: 1000px
-    .image
+    .user-image-wrapper
         position: absolute
+        border-radius: 50%
+        z-index: -1
+        top: 0
         left: 0
-        background-color: #aaa
         width: 80px
         height: 80px
-        border-radius: 50%
+        cursor: default
+        overflow: hidden
+        .user-image-preview
+            background-size: cover
+            background-position: 50% 50%
+            width: 80px
+            height: 80px
     p
         display: inline-block
     .name
@@ -159,7 +167,7 @@
         font-size: 17px
     .date
         font-size: 13px
-    .content
+    .text
         margin-left: 110px
         line-height: 22px
         display: block

@@ -45,9 +45,9 @@ export class AddHobbyComponent implements OnInit {
       'free': [false, Validators.required],
       'sobriety': [false, Validators.required],
       'image0': ['', Validators.required],
-      'image1': ['', Validators.required],
-      'image2': ['', Validators.required],
-      'image3': ['', Validators.required]
+      'image1': '',
+      'image2': '',
+      'image3': ''
     });
   }
   submitForm() {
