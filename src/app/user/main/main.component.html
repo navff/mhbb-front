@@ -40,6 +40,9 @@
                 <img class="hobby-free-icon" src="img/free.svg" alt="" *ngIf="activity.Free">
             </div>
         </div>
+        <span class="empty-block"></span> 
+        <span class="empty-block"></span> 
+        <span class="empty-block"></span> 
     </div>
     <h2 class="no-results" *ngIf="loaded && activities.length === 0">По вашему запросу ничего не найдено.</h2>
     <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>

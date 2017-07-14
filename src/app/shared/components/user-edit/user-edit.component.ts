@@ -133,6 +133,7 @@ export class UserEditComponent implements OnInit {
         this.editUser.get('cityId').setValue(this.user.CityId);
         this.loaded = true;
         if (result.Picture) {
+          this.fileName = result.Picture.Filename;
           this.fileData = result.Picture.Url;
           this.fileId = result.Picture.Id;
         }
