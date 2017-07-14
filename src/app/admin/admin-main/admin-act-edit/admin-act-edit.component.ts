@@ -52,9 +52,9 @@ export class AdminActEditComponent implements OnInit {
       'description': ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
       'free': [false, Validators.required],
       'image0': ['', Validators.required],
-      'image1': ['', Validators.required],
-      'image2': ['', Validators.required],
-      'image3': ['', Validators.required]
+      'image1': '',
+      'image2': '',
+      'image3': ''
     });
   }
   filterOrganizers(value) {

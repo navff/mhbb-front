@@ -19,7 +19,7 @@
 
         <md-checkbox (click)="setArgument(4, !IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="hobbies-soberness">Трезвость</md-checkbox>
         <md-checkbox (click)="setArgument(5, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary">Бесплатно</md-checkbox>
-        <button class="hobbies-add" routerLink='/addhobby' md-fab></button>
+        <a class="hobbies-add" routerLink='/addhobby' md-fab></a>
     </form>
 
     <div class="hobbies-flex">
