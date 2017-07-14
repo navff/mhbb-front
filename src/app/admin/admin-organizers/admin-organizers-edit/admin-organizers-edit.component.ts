@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrganizerService, Organizer } from '../../../shared/services/organizer.service';
 import { CityService } from '../../../shared/services/city.service';
 import { ActivatedRoute } from '@angular/router';
@@ -28,9 +28,11 @@ export class AdminOrganizersEditComponent implements OnInit {
     private router: Router,
     fb: FormBuilder) {
     this.editOrganizer = fb.group({
-      'name': '',
-      'cityId': '',
-      'sobriety': ''
+      'name': ['', Validators.required],
+      'cityId': ['', Validators.required],
+      'sobriety': ['', Validators.required],
+      'email': '',
+      'phone': ''
     });
   }
 
@@ -40,14 +42,27 @@ export class AdminOrganizersEditComponent implements OnInit {
       let body = new Organizer(
         this.editOrganizer.get('name').value,
         this.editOrganizer.get('cityId').value,
-        this.editOrganizer.get('sobriety').value);
+        this.editOrganizer.get('sobriety').value,
+        this.editOrganizer.get('email').value,
+        this.editOrganizer.get('phone').value);
       this.organizerService.putOrganizer(this.organizerId, body)
         .then(result => {
           this.organizer = result;
           this.router.navigate(['/admin/organizers']);
         });
     } else {
-      return;
+      this.responding = true;
+      let body = new Organizer(
+        this.editOrganizer.get('name').value,
+        this.editOrganizer.get('cityId').value,
+        this.editOrganizer.get('sobriety').value,
+        this.editOrganizer.get('email').value,
+        this.editOrganizer.get('phone').value);
+      this.organizerService.postOrganizer(body)
+        .then(result => {
+          this.organizer = result;
+          this.router.navigate(['/admin/organizers']);
+        });
     }
   }
   ngOnInit() {
@@ -61,10 +76,12 @@ export class AdminOrganizersEditComponent implements OnInit {
       this.organizerService.getOrganizerById(this.organizerId)
         .then(result => {
           this.organizer = result;
+          console.log(result);
           this.editOrganizer.get('name').setValue(this.organizer.Name);
           this.editOrganizer.get('cityId').setValue(this.organizer.City.Id);
           this.editOrganizer.get('sobriety').setValue(this.organizer.Sobriety);
-          console.log(this.editOrganizer.value);
+          this.editOrganizer.get('email').setValue(this.organizer.Email);
+          this.editOrganizer.get('phone').setValue(this.organizer.Phone);
           this.loaded = true;
         });
     }

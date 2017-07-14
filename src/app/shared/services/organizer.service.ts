@@ -33,11 +33,21 @@ export class OrganizerService {
       .map((response) => response.json())
       .toPromise();
   }
+  postOrganizer(body: any) {
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(`http://test.mhbb.ru/b/api/organizer`, body, options)
+      .map((response) => response.json())
+      .toPromise();
+  }
 }
 export class Organizer {
   constructor(
     public Name: string,
     public Cityid: number,
-    public Sobriety: boolean) { }
+    public Sobriety: boolean,
+    public Email: string,
+    public Phone: string
+  ) { }
 }
 
