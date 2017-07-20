@@ -45,12 +45,14 @@ export class AdminUsersEditComponent implements OnInit {
       role = 2;
     }
     let body = new User(
+      this.editUser.get('email').value,
       this.editUser.get('name').value,
       this.editUser.get('phone').value,
       role,
       this.editUser.get('cityId').value,
       null
     );
+      console.log('body: ', body);
     this.userService.putUser(this.searchEmail, body)
       .then(result => {
       this.user = result;

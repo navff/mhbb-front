@@ -30,7 +30,7 @@ export class AdminOrganizersEditComponent implements OnInit {
     this.editOrganizer = fb.group({
       'name': ['', Validators.required],
       'cityId': ['', Validators.required],
-      'sobriety': ['', Validators.required],
+      'sobriety': '',
       'email': '',
       'phone': ''
     });

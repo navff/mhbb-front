@@ -50,6 +50,7 @@ export class UserService {
 }
 export class User {
   constructor(
+    public Email: string,
     public Name: string,
     public Phone: string,
     public Role: number,

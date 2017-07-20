@@ -42,6 +42,7 @@ export class UserEditComponent implements OnInit {
     fb: FormBuilder) {
     this.sub = this.shared.previousUrl.subscribe(result => this.previousUrl = result);
     this.editUser = fb.group({
+      'email': '',
       'name': '',
       'phone': '',
       'role': '',
@@ -98,6 +99,7 @@ export class UserEditComponent implements OnInit {
       role = 2;
     }
     let body = new User(
+      this.editUser.get('email').value,
       this.editUser.get('name').value,
       this.editUser.get('phone').value,
       role,
@@ -123,6 +125,7 @@ export class UserEditComponent implements OnInit {
     this.auth.getUserByToken()
       .then(result => {
         this.user = result;
+        this.editUser.get('email').setValue(this.user.Email);
         this.editUser.get('name').setValue(this.user.Name);
         this.editUser.get('phone').setValue(this.user.Phone);
         if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
