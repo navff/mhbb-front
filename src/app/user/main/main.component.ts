@@ -3,6 +3,7 @@ import { ActivityService } from '../../shared/services/activity.service';
 import { InterestService } from '../../shared/services/interest.service';
 import { CityService } from '../../shared/services/city.service';
 import { SharedService } from './../../shared/services/shared.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'my-main',
@@ -14,7 +15,14 @@ export class MainComponent implements OnInit {
   cities = [];
   interests = [];
   activities = [];
-  args: any[] = [];
+  word: string;
+  age: string;
+  sobriety: string;
+  free: string;
+  searchWord: Subject<string> = new Subject();
+  searchAge: Subject<string> = new Subject();
+  city: any = {id: undefined};
+  interest: any = {id: undefined};
   loaded = false;
 
   checkLength: number;
@@ -34,18 +42,23 @@ export class MainComponent implements OnInit {
     this.loaded = false;
     this.checkLength = 0;
   }
-  setArgument(index, value) {
+  search(...values) {
     this.reset();
-    this.activities = [];
-    this.loaded = false;
-    this.args[index] = value;
+    if (values[0] !== undefined) { this.sobriety = values[0]; }
+    if (values[1] !== undefined) { this.free = values[1]; }
     this.activityService
-      .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
+      .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
       .then(result => {
         this.activities = result;
         this.checkLength = result.length;
         this.loaded = true;
       });
+  }
+  updateWord(word: string): void {
+    this.searchWord.next(word);
+  }
+  updateAge(age: string): void {
+    this.searchWord.next(age);
   }
   concatPage() {
     this.responding = true;
@@ -58,6 +71,8 @@ export class MainComponent implements OnInit {
       });
   }
   ngOnInit() {
+    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
+    this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.activityService.getActivities().then(result => {
       this.activities = result;
       this.checkLength = result.length;

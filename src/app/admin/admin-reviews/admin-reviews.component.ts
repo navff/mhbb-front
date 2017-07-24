@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CityService } from '../../shared/services/city.service';
 import { ReviewService } from '../../shared/services/review.service';
 import { SharedService } from './../../shared/services/shared.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'my-admin-reviews',
@@ -12,7 +13,9 @@ import { SharedService } from './../../shared/services/shared.service';
 export class AdminReviewsComponent implements OnInit {
   reviews = [];
   cities = [];
-  args: any[] = [];
+  word: string;
+  searchWord: Subject<string> = new Subject();
+  city: any = {id: undefined};
   loaded = false;
   responding: number;
 
@@ -22,14 +25,16 @@ export class AdminReviewsComponent implements OnInit {
     this.shared.destroyFooter();
   }
 
-  setArgument(index, value) {
+  search() {
     this.loaded = false;
-    this.args[index] = value;
-    this.reviewService.getUncheckedReviews(this.args[0], this.args[1])
+    this.reviewService.getUncheckedReviews(this.word, this.city.Id)
       .then(result => {
         this.reviews = result;
         this.loaded = true;
       });
+  }
+  updateWord(word: string): void {
+    this.searchWord.next(word);
   }
   delete(id, index) {
     this.responding = index;
@@ -50,6 +55,7 @@ export class AdminReviewsComponent implements OnInit {
       });
   }
   ngOnInit() {
+    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().then(result => this.cities = result);
     this.reviewService.getUncheckedReviews()
       .then(result => {

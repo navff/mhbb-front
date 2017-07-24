@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { CityService } from '../../shared/services/city.service';
 import { SharedService } from './../../shared/services/shared.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'my-admin-users',
@@ -13,28 +14,32 @@ export class AdminUsersComponent implements OnInit {
   cities = [];
   users = [];
 
-  args: any[] = [];
+  word: string;
+  searchWord: Subject<string> = new Subject();
+  city: any = { id: undefined };
+  roles: any[] = [];
   page = 1;
   checkLength: number;
 
   loaded = false;
   responding = false;
 
-  constructor(private userService: UserService,
-              private cityService: CityService,
-              private shared: SharedService) {
-                this.shared.destroyFooter();
-              }
+  constructor(
+    private userService: UserService,
+    private cityService: CityService,
+    private shared: SharedService) {
+    this.shared.destroyFooter();
+  }
 
   concatPage() {
     this.responding = true;
     this.page += 1;
-    this.userService.getUsers(this.page.toString(10), this.args[0], this.args[1], this.args[2], this.args[3])
-    .then(result => {
-      this.users = this.users.concat(result);
-      this.checkLength = result.length;
-      this.responding = false;
-    });
+    this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
+      .then(result => {
+        this.users = this.users.concat(result);
+        this.checkLength = result.length;
+        this.responding = false;
+      });
 
   }
   reset() {
@@ -43,25 +48,30 @@ export class AdminUsersComponent implements OnInit {
     this.loaded = false;
     this.checkLength = 0;
   }
-  setArgument(index, value, index2?, value2?) {
+  updateWord(word: string): void {
+    this.searchWord.next(word);
+  }
+  search(...adminBools) {
     this.reset();
-    this.args[index] = value;
-    this.args[index2] = value2;
-    this.userService.getUsers(this.page.toString(10), this.args[0], this.args[1], this.args[2], this.args[3])
-    .then(result => {
-      this.users = result;
-      this.checkLength = result.length;
-      this.loaded = true;
-    });
+    if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
+    if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
+    this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
+      .then(result => {
+        this.users = result;
+        this.checkLength = result.length;
+        this.loaded = true;
+      });
   }
 
   ngOnInit() {
+    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().then(result => this.cities = result);
     this.userService.getUsers()
-    .then(result => {
-      this.users = result;
-      this.checkLength = result.length;
-      this.loaded = true;
-      this.shared.loadFooter();
-    });
-}}
+      .then(result => {
+        this.users = result;
+        this.checkLength = result.length;
+        this.loaded = true;
+        this.shared.loadFooter();
+      });
+  }
+}

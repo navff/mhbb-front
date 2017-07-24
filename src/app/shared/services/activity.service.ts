@@ -10,7 +10,7 @@ export class ActivityService {
   constructor(private http: Http) { }
 
   getActivities(word?: string, age?: string, interestId?: string, cityId?: string,
-    sobriety?: string, free?: string) {
+    sobriety?: any, free?: any) {
     let search = new URLSearchParams();
 
     word ? search.append('word', word) : search.delete('word');
@@ -27,7 +27,7 @@ export class ActivityService {
   }
 
   getUncheckedActivities(word?: string, age?: string, interestId?: string, cityId?: string,
-    sobriety?: string, free?: string) {
+    sobriety?: any, free?: any) {
     let search = new URLSearchParams();
 
     word ? search.append('word', word) : search.delete('word');

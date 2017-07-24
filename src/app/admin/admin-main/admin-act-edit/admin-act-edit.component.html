@@ -54,7 +54,7 @@
 
         <div class='form-right'>
             <md-input-container class="form-item-organizer">
-                <input (keyup)="filterOrganizers(editHobby.get('organizer').value)" (mousedown)="filterOrganizers(editHobby.get('organizer').value)"
+                <input (keyup)="filterOrganizers(editHobby.get('organizer').value)" (focus)="filterOrganizers(editHobby.get('organizer').value)"
                     mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="editHobby.controls['organizer']">
             </md-input-container>
             <md-autocomplete #org="mdAutocomplete">

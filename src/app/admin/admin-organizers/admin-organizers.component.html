@@ -3,9 +3,9 @@
     <button class="hobbies-add" routerLink='/admin/organizers/add' md-fab></button>
     <form>
         <md-input-container class="form-item">
-            <input (keyup)="setArgument(0, word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+            <input (keyup)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
         </md-input-container>
-        <md-select (change)="setArgument(1, city.Id)" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+        <md-select (change)="search()" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
             <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
         </md-select>
     </form>

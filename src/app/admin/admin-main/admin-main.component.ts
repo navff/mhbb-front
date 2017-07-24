@@ -3,6 +3,7 @@ import { ActivityService } from '../../shared/services/activity.service';
 import { CityService } from '../../shared/services/city.service';
 import { InterestService } from '../../shared/services/interest.service';
 import { SharedService } from './../../shared/services/shared.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'my-admin-main',
@@ -15,10 +16,17 @@ export class AdminMainComponent implements OnInit {
   cities = [];
 
   activities = [];
+  word: string;
+  age: string;
+  sobriety: any;
+  free: any;
+  searchWord: Subject<string> = new Subject();
+  searchAge: Subject<string> = new Subject();
+  city: any = {id: undefined};
+  interest: any = {id: undefined};
   loaded = false;
   uncheckedActivities = [];
   uncheckedLoaded = false;
-  args: any[] = [];
 
   constructor(
     private activityService: ActivityService,
@@ -27,20 +35,24 @@ export class AdminMainComponent implements OnInit {
     private shared: SharedService) {
     this.shared.destroyFooter();
   }
-  setArgument(index, value) {
+  reset() {
     this.loaded = false;
     this.uncheckedLoaded = false;
     this.activities = [];
     this.uncheckedActivities = [];
+  }
+  search(...values) {
+    this.reset();
+    if (values[0] !== undefined) { this.sobriety = values[0]; }
+    if (values[1] !== undefined) { this.free = values[1]; }
 
-    this.args[index] = value;
     this.activityService
-      .getUncheckedActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
+      .getUncheckedActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
       .then(result => {
         this.uncheckedActivities = result;
         this.uncheckedLoaded = true;
         this.activityService
-          .getActivities(this.args[0], this.args[1], this.args[2], this.args[3], this.args[4], this.args[5])
+          .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
           .then(act => {
             this.activities = act;
             this.loaded = true;
@@ -48,7 +60,15 @@ export class AdminMainComponent implements OnInit {
       });
 
   }
+  updateWord(word: string): void {
+    this.searchWord.next(word);
+  }
+  updateAge(age: string): void {
+    this.searchWord.next(age);
+  }
   ngOnInit() {
+    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
+    this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().then(result => this.cities = result);
     this.interestService.getInterests().then(result => this.interests = result);
     this.activityService.getUncheckedActivities()
