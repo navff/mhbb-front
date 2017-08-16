@@ -1,45 +1,38 @@
 footer
-	background-color: #3E2B24
 	height: 124px
+
+	background-color: #3E2B24
 	color: #fff
 	line-height: 22px
 	cursor: default
-.footer-content
-	position: relative
+.container
+	display: flex
+	justify-content: space-between
 	top: 28px
-.od-logo
-	margin-right: 20px
-	width: 87px
-	float: left
-	user-drag: none
-	user-select: none
-.text-project
-	margin-right: 9%
-	float: left
-.center-logo
-	position: absolute
-	width: 382px
-	left: 50%
-	margin-left: -191px
-	.boomstarter-logo
+.od-wrapper
+	width: 410px
+	img
+		margin-right: 20px
+		width: 87px
+	p
 		display: inline-block
+
+.boomstarter
+	margin-left: -160px
+	img
 		width: 151px
 		margin-right: 20px
-		user-drag: none
-		user-select: none
-	.text-money
+	p
 		display: inline-block
-.text-mail
-	float: right
+
+.mail
 	cursor: pointer
 	position: relative
-	
 	&:before
 		position: absolute
 		top: -4px
 		left: -40px
 		content: ''
-		display: block
 		width: 30px
 		height: 30px
 		background-image: url("img/mail.svg")

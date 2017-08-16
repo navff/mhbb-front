@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/services/activity.service';
 import { InterestService } from '../../shared/services/interest.service';
 import { CityService } from '../../shared/services/city.service';
-import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 import { Activity } from '../../models/activity.model';
 
@@ -25,8 +24,8 @@ export class MainComponent implements OnInit {
   searchWord: Subject<string> = new Subject();
   searchAge: Subject<string> = new Subject();
 
-  city: any = {id: undefined};
-  interest: any = {id: undefined};
+  city: any = { id: undefined };
+  interest: any = { id: undefined };
 
   checkLength: number;
   page = 1;
@@ -35,10 +34,8 @@ export class MainComponent implements OnInit {
   constructor(
     private activityService: ActivityService,
     private interestService: InterestService,
-    private cityService: CityService,
-    private shared: SharedService) {
-    this.shared.destroyFooter();
-  }
+    private cityService: CityService) { }
+
   reset() {
     this.page = 1;
     this.activities = [];
@@ -80,7 +77,6 @@ export class MainComponent implements OnInit {
       this.activities = result;
       this.checkLength = result.length;
       this.loading = false;
-      this.shared.loadFooter();
     });
     this.interestService.getInterests().then(result => this.interests = result);
     this.cityService.getCities().then(result => this.cities = result);

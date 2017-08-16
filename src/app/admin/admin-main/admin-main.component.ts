@@ -3,7 +3,6 @@ import { ActivityService } from '../../shared/services/activity.service';
 import { Activity } from '../../models/activity.model';
 import { CityService } from '../../shared/services/city.service';
 import { InterestService } from '../../shared/services/interest.service';
-import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -23,8 +22,8 @@ export class AdminMainComponent implements OnInit {
   free: any;
   searchWord: Subject<string> = new Subject();
   searchAge: Subject<string> = new Subject();
-  city: any = {id: undefined};
-  interest: any = {id: undefined};
+  city: any = { id: undefined };
+  interest: any = { id: undefined };
   loading = true;
   uncheckedActivities: Activity[];
   uncheckedLoading = true;
@@ -32,10 +31,8 @@ export class AdminMainComponent implements OnInit {
   constructor(
     private activityService: ActivityService,
     private cityService: CityService,
-    private interestService: InterestService,
-    private shared: SharedService) {
-    this.shared.destroyFooter();
-  }
+    private interestService: InterestService) { }
+
   reset() {
     this.loading = true;
     this.uncheckedLoading = true;
@@ -80,7 +77,6 @@ export class AdminMainComponent implements OnInit {
           .then((data: Activity[]) => {
             this.activities = data;
             this.loading = false;
-            this.shared.loadFooter();
           });
       });
   }

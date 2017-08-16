@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../shared/services/organizer.service';
 import { CityService } from '../../shared/services/city.service';
-import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -17,17 +16,15 @@ export class AdminOrganizersComponent implements OnInit {
   page = 1;
   word: string;
   searchWord: Subject<string> = new Subject();
-  city: any = {id: undefined};
+  city: any = { id: undefined };
   checkLength: number;
 
   loaded = false;
   responding = false;
+
   constructor(
     private organizerService: OrganizerService,
-    private cityService: CityService,
-    private shared: SharedService) {
-    this.shared.destroyFooter();
-  }
+    private cityService: CityService) { }
 
   concatPage() {
     this.responding = true;
@@ -66,7 +63,6 @@ export class AdminOrganizersComponent implements OnInit {
         this.organizers = result;
         this.checkLength = result.length;
         this.loaded = true;
-        this.shared.loadFooter();
       });
   }
 }

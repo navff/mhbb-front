@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { CityService } from '../../shared/services/city.service';
-import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -26,10 +25,7 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cityService: CityService,
-    private shared: SharedService) {
-    this.shared.destroyFooter();
-  }
+    private cityService: CityService) { }
 
   concatPage() {
     this.responding = true;
@@ -71,7 +67,6 @@ export class AdminUsersComponent implements OnInit {
         this.users = result;
         this.checkLength = result.length;
         this.loaded = true;
-        this.shared.loadFooter();
       });
   }
 }

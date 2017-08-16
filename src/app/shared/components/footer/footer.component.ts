@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { SharedService } from '../../services/shared.service';
-
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'mh-footer',
@@ -9,11 +6,5 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./footer.component.sass']
 })
 export class FooterComponent {
-  userEmail: string;
-  footerLoaded: boolean;
-  sub: Subscription;
-  constructor(private shared: SharedService) {
-    this.sub = shared.footerLoaded.subscribe(result => this.footerLoaded = result);
-    this.shared.loadFooter();
-  }
+  constructor() { }
 }

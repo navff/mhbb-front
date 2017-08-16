@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../../shared/services/city.service';
 import { ReviewService } from '../../shared/services/review.service';
-import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -15,15 +14,12 @@ export class AdminReviewsComponent implements OnInit {
   cities = [];
   word: string;
   searchWord: Subject<string> = new Subject();
-  city: any = {id: undefined};
+  city: any = { id: undefined };
   loaded = false;
   responding: number;
 
   constructor(private reviewService: ReviewService,
-    private cityService: CityService,
-    private shared: SharedService) {
-    this.shared.destroyFooter();
-  }
+    private cityService: CityService) { }
 
   search() {
     this.loaded = false;
@@ -62,7 +58,6 @@ export class AdminReviewsComponent implements OnInit {
         this.reviews = result;
         this.loaded = true;
         console.log(result);
-        this.shared.loadFooter();
       });
   }
 }
