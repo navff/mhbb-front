@@ -13,6 +13,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   imports: [HttpModule, FormsModule, ReactiveFormsModule,
@@ -20,11 +21,11 @@ import { ActivitiesComponent } from './components/activities/activities.componen
     RouterModule,
     CommonModule
   ],
-  declarations: [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent],
+  declarations: [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent],
   exports: [
     HttpModule, FormsModule, ReactiveFormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
-    OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent
+    OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 <div class="hobbies">
-    <div [routerLink]="['/act', activity.Id]" class="hobby" *ngFor="let activity of activities">
+    <div [routerLink]="['act', activity.Id]" class="hobby" *ngFor="let activity of activities">
         <div class="image-wrapper">
             <div [ngStyle]="{'background-image': 'url(' +  activity.MainPicture?.Url + ')'}" class="image"></div>
         </div>

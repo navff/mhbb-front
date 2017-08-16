@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Activity } from '../../../models/activity.model';
 
 @Component({
@@ -6,12 +6,9 @@ import { Activity } from '../../../models/activity.model';
   templateUrl: './activities.component.html',
   styleUrls: ['./activities.component.sass'],
 })
-export class ActivitiesComponent implements OnInit {
+export class ActivitiesComponent {
   @Input() activities: Activity[];
   @Input() loading: boolean;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 }
