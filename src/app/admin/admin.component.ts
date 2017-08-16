@@ -5,7 +5,7 @@ import { CityService } from '../shared/services/city.service';
 import { ActivityService } from '../shared/services/activity.service';
 
 @Component({
-  selector: 'my-admin-main',
+  selector: 'mh-admin-main',
   templateUrl: './admin.component.html',
   styleUrls: [ './admin.component.sass' ],
   providers: [CityService, ActivityService],

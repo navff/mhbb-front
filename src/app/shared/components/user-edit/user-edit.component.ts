@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService, TempFile } from './../../services/activity.service';
 import { AuthService } from '../../services/auth.service';
 import { CityService } from '../../services/city.service';
-import { SharedService } from '../../services/shared.service';
 import { UserService, User } from '../../services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'my-user-edit',
+  selector: 'mh-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.sass'],
   providers: [CityService, UserService, ActivityService]
@@ -29,7 +28,6 @@ export class UserEditComponent implements OnInit {
   loaded = false;
 
   sub: Subscription;
-  previousUrl: string;
 
   editUser: FormGroup;
   constructor(
@@ -38,9 +36,7 @@ export class UserEditComponent implements OnInit {
     private cityService: CityService,
     private activityService: ActivityService,
     private router: Router,
-    private shared: SharedService,
     fb: FormBuilder) {
-    this.sub = this.shared.previousUrl.subscribe(result => this.previousUrl = result);
     this.editUser = fb.group({
       'email': '',
       'name': '',
@@ -50,7 +46,7 @@ export class UserEditComponent implements OnInit {
     });
   }
   back() {
-    this.router.navigate([this.previousUrl]);
+    history.back();
   }
   addImage(event) {
     let data, body, file: File;
@@ -64,15 +60,15 @@ export class UserEditComponent implements OnInit {
     reader.onloadend = () => {
       this.fileData = reader.result;
       data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
-        body = new TempFile(this.formId, this.fileName, data, true);
-        console.log(body);
-        this.activityService.postTempFile(body)
-       .then(result =>  {
-         console.log(result);
-         this.tempFileId = result.Id;
-       });
-      };
+      body = new TempFile(this.formId, this.fileName, data, true);
+      console.log(body);
+      this.activityService.postTempFile(body)
+        .then(result => {
+          console.log(result);
+          this.tempFileId = result.Id;
+        });
     };
+  };
   removeImage() {
     if (this.tempFileId) {
       (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
@@ -107,7 +103,7 @@ export class UserEditComponent implements OnInit {
       this.formId
     );
     console.log(body);
-    if (this.fileId && this.fileToDelete) {this.activityService.deletePicture(this.fileId); }
+    if (this.fileId && this.fileToDelete) { this.activityService.deletePicture(this.fileId); }
     this.userService.putUser(this.user.Email, body)
       .then(result => {
         this.user = result;

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/services/activity.service';
+import { Activity } from '../../models/activity.model';
 import { CityService } from '../../shared/services/city.service';
 import { InterestService } from '../../shared/services/interest.service';
 import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'my-admin-main',
+  selector: 'mh-admin-main',
   templateUrl: './admin-main.component.html',
   providers: [ActivityService, CityService, InterestService],
   styleUrls: ['./admin-main.component.sass']
@@ -15,7 +16,7 @@ export class AdminMainComponent implements OnInit {
   interests = [];
   cities = [];
 
-  activities = [];
+  activities: Activity[];
   word: string;
   age: string;
   sobriety: any;
@@ -24,9 +25,9 @@ export class AdminMainComponent implements OnInit {
   searchAge: Subject<string> = new Subject();
   city: any = {id: undefined};
   interest: any = {id: undefined};
-  loaded = false;
-  uncheckedActivities = [];
-  uncheckedLoaded = false;
+  loading = true;
+  uncheckedActivities: Activity[];
+  uncheckedLoading = true;
 
   constructor(
     private activityService: ActivityService,
@@ -36,8 +37,8 @@ export class AdminMainComponent implements OnInit {
     this.shared.destroyFooter();
   }
   reset() {
-    this.loaded = false;
-    this.uncheckedLoaded = false;
+    this.loading = true;
+    this.uncheckedLoading = true;
     this.activities = [];
     this.uncheckedActivities = [];
   }
@@ -50,12 +51,12 @@ export class AdminMainComponent implements OnInit {
       .getUncheckedActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
       .then(result => {
         this.uncheckedActivities = result;
-        this.uncheckedLoaded = true;
+        this.uncheckedLoading = false;
         this.activityService
           .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
           .then(act => {
             this.activities = act;
-            this.loaded = true;
+            this.loading = false;
           });
       });
 
@@ -72,13 +73,13 @@ export class AdminMainComponent implements OnInit {
     this.cityService.getCities().then(result => this.cities = result);
     this.interestService.getInterests().then(result => this.interests = result);
     this.activityService.getUncheckedActivities()
-      .then(result => {
+      .then((result: Activity[]) => {
         this.uncheckedActivities = result;
-        this.uncheckedLoaded = true;
+        this.uncheckedLoading = false;
         this.activityService.getActivities()
-          .then(acts => {
-            this.activities = acts;
-            this.loaded = true;
+          .then((data: Activity[]) => {
+            this.activities = data;
+            this.loading = false;
             this.shared.loadFooter();
           });
       });

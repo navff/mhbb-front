@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'my-reservation',
+  selector: 'mh-reservation',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.sass'],
   providers: [ActivityService, ReservationService]

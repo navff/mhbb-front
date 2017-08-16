@@ -5,7 +5,7 @@ import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'my-admin-reviews',
+  selector: 'mh-admin-reviews',
   templateUrl: './admin-reviews.component.html',
   styleUrls: ['./admin-reviews.component.sass'],
   providers: [ReviewService, CityService]

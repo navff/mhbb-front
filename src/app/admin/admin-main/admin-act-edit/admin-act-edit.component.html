@@ -1,7 +1,7 @@
 <div class="container">
 
     <form [formGroup]="editHobby" (ngSubmit)="submitForm()">
-        <a [routerLink]="['/admin/act', activityId]" class="my-button-back">&larr; Назад</a>
+        <a [routerLink]="['/admin/act', activityId]" class="mh-button-back">&larr; Назад</a>
         <md-input-container class="form-item-course-name">
             <input mdInput placeholder="Название курса" [formControl]="editHobby.controls['name']">
         </md-input-container>

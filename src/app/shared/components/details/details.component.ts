@@ -5,7 +5,7 @@ import { ReviewService, Review } from '../../services/review.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'my-details',
+  selector: 'mh-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass'],
   providers: [ActivityService, VoicesService, ReviewService],

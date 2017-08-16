@@ -5,7 +5,7 @@ import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'my-admin-users',
+  selector: 'mh-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.sass'],
   providers: [CityService, UserService]

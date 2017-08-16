@@ -3,7 +3,7 @@ import { ActivityService } from '../../../shared/services/activity.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'my-reservation-success',
+  selector: 'mh-reservation-success',
   templateUrl: './reservation-success.component.html',
   styleUrls: ['./reservation-success.component.sass'],
   providers: [ActivityService]

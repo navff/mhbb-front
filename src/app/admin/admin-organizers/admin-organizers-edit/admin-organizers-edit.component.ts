@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'my-admin-organizers-edit',
+  selector: 'mh-admin-organizers-edit',
   templateUrl: './admin-organizers-edit.component.html',
   styleUrls: ['./admin-organizers-edit.component.sass'],
   providers: [OrganizerService, CityService]

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'my-admin-users-edit',
+  selector: 'mh-admin-users-edit',
   templateUrl: './admin-users-edit.component.html',
   styleUrls: ['./admin-users-edit.component.sass'],
   providers: [CityService, UserService]

@@ -1,0 +1,28 @@
+<div class="hobbies">
+    <div [routerLink]="['/act', activity.Id]" class="hobby" *ngFor="let activity of activities">
+        <div class="image-wrapper">
+            <div [ngStyle]="{'background-image': 'url(' +  activity.MainPicture?.Url + ')'}" class="image"></div>
+        </div>
+        <div class="top-descr">
+            <p class="age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
+            <div class="voices">
+                <img src="img/thumbs-up.svg" alt="" class="thumb-up">
+                <p class="amount">{{activity.Voices}}</p>
+            </div>
+        </div>
+        <div class="bottom-descr">
+            <h6 class="name">{{activity.Name}}</h6>
+            <p class="company">{{activity.Organizer.Name}}</p>
+            <img class="free-icon" src="img/free.svg" *ngIf="activity.Free">
+        </div>
+    </div>
+    <span class="empty-block"></span> 
+    <span class="empty-block"></span> 
+    <span class="empty-block"></span> 
+</div>
+<h2 class="no-results" *ngIf="!loading && activities.length === 0">По вашему запросу ничего не найдено.</h2>
+<md-progress-spinner *ngIf="loading" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
+<div *ngIf="checkLength > 11" class="button-wrapper">
+    <button (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
+    <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+</div>

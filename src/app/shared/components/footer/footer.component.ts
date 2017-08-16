@@ -4,7 +4,7 @@ import { SharedService } from '../../services/shared.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'my-footer',
+  selector: 'mh-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.sass']
 })

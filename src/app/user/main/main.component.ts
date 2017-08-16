@@ -4,9 +4,10 @@ import { InterestService } from '../../shared/services/interest.service';
 import { CityService } from '../../shared/services/city.service';
 import { SharedService } from './../../shared/services/shared.service';
 import { Subject } from 'rxjs/Subject';
+import { Activity } from '../../models/activity.model';
 
 @Component({
-  selector: 'my-main',
+  selector: 'mh-main',
   templateUrl: './main.component.html',
   providers: [ActivityService, InterestService, CityService],
   styleUrls: ['./main.component.sass']
@@ -14,16 +15,18 @@ import { Subject } from 'rxjs/Subject';
 export class MainComponent implements OnInit {
   cities = [];
   interests = [];
-  activities = [];
+  activities: Activity[];
+  loading = true;
+
   word: string;
   age: string;
   sobriety: string;
   free: string;
   searchWord: Subject<string> = new Subject();
   searchAge: Subject<string> = new Subject();
+
   city: any = {id: undefined};
   interest: any = {id: undefined};
-  loaded = false;
 
   checkLength: number;
   page = 1;
@@ -39,7 +42,7 @@ export class MainComponent implements OnInit {
   reset() {
     this.page = 1;
     this.activities = [];
-    this.loaded = false;
+    this.loading = true;
     this.checkLength = 0;
   }
   search(...values) {
@@ -51,7 +54,7 @@ export class MainComponent implements OnInit {
       .then(result => {
         this.activities = result;
         this.checkLength = result.length;
-        this.loaded = true;
+        this.loading = false;
       });
   }
   updateWord(word: string): void {
@@ -73,10 +76,10 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.activityService.getActivities().then(result => {
+    this.activityService.getActivities().then((result: Activity[]) => {
       this.activities = result;
       this.checkLength = result.length;
-      this.loaded = true;
+      this.loading = false;
       this.shared.loadFooter();
     });
     this.interestService.getInterests().then(result => this.interests = result);

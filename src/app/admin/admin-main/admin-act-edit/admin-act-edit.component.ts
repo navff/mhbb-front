@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { InterestService } from '../../../shared/services/interest.service';
 import { OrganizerService } from './../../../shared/services/organizer.service';
-import { ActivityService, TempFile, Activity } from '../../../shared/services/activity.service';
+import { ActivityService, TempFile } from '../../../shared/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Activity } from '../../../models/activity.model';
 
 
 @Component({
-  selector: 'my-admin-act-edit',
+  selector: 'mh-admin-act-edit',
   templateUrl: './admin-act-edit.component.html',
   providers: [InterestService, ActivityService, OrganizerService],
   styleUrls: ['./admin-act-edit.component.sass']

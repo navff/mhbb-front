@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CityService } from '../shared/services/city.service';
 import { InterestService } from '../shared/services/interest.service';
-import { ActivityService, TempFile, Activity } from '../shared/services/activity.service';
+import { ActivityService, TempFile } from '../shared/services/activity.service';
+import { Activity } from '../models/activity.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'my-add-hobby',
+  selector: 'mh-add-hobby',
   templateUrl: './add-hobby.component.html',
   providers: [InterestService, CityService, ActivityService],
   styleUrls: ['./add-hobby.component.sass']
