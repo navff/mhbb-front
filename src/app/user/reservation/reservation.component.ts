@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivityService } from '../../shared/services/activity.service';
-import { ReservationService, Reservation } from '../../shared/services/reservation.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ReservationService } from '../../shared/services/reservation.service';
+import { Reservation } from '../../models/reservation.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'mh-reservation',

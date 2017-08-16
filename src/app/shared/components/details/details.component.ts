@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../services/activity.service';
 import { VoicesService } from '../../services/voices.service';
-import { ReviewService, Review } from '../../services/review.service';
+import { ReviewService } from '../../services/review.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -56,7 +56,10 @@ export class DetailsComponent implements OnInit {
   }
   publishReview() {
     this.responding = true;
-    let body = new Review(parseInt(this.activityId, 10), this.reviewText);
+    let body = {
+      ActivityId: parseInt(this.activityId, 10),
+      Text: this.reviewText
+    };
     console.log(body);
     this.reviewService.postReview(body)
       .then(result => {

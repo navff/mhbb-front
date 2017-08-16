@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { InterestService } from '../../../shared/services/interest.service';
 import { OrganizerService } from './../../../shared/services/organizer.service';
-import { ActivityService, TempFile } from '../../../shared/services/activity.service';
+import { ActivityService } from '../../../shared/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from '../../../models/activity.model';
-
+import { TempFile } from '../../../models/tempfile.model';
 
 @Component({
   selector: 'mh-admin-act-edit',

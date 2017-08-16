@@ -51,9 +51,3 @@ export class ReviewService {
       .toPromise();
   }
 }
-export class Review {
-  constructor(
-    public ActivityId: number,
-    public Text: string
-  ) { }
-}

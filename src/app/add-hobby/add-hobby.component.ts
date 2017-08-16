@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CityService } from '../shared/services/city.service';
 import { InterestService } from '../shared/services/interest.service';
-import { ActivityService, TempFile } from '../shared/services/activity.service';
+import { ActivityService } from '../shared/services/activity.service';
 import { Activity } from '../models/activity.model';
+import { TempFile } from '../models/tempfile.model';
 import { Router } from '@angular/router';
 
 @Component({

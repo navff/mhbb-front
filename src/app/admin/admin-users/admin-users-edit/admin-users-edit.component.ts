@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User } from '../../../shared/services/user.service';
+import { UserService } from '../../../shared/services/user.service';
+import { User } from '../../../models/user.model';
 import { CityService } from '../../../shared/services/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';

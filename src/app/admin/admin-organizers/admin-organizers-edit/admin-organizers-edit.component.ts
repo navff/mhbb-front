@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OrganizerService, Organizer } from '../../../shared/services/organizer.service';
+import { OrganizerService } from '../../../shared/services/organizer.service';
+import { Organizer } from '../../../models/organizer.model';
 import { CityService } from '../../../shared/services/city.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';

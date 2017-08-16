@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService, TempFile } from './../../services/activity.service';
+import { ActivityService } from './../../services/activity.service';
+import { TempFile } from '../../../models/tempfile.model';
 import { AuthService } from '../../services/auth.service';
 import { CityService } from '../../services/city.service';
-import { UserService, User } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'mh-user-edit',
