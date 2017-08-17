@@ -89,10 +89,7 @@
                 <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="addHobby.controls['mentor']"></textarea>
             </md-input-container>
             <md-checkbox color="primary" class="form-item-sobriety-checkbox" [formControl]="addHobby.controls['sobriety']">Преподаватели не пьют и не курят</md-checkbox>
-            <div class="button-wrapper">
-                <button [disabled]="!addHobby.valid" type="submit" md-raised-button color="primary" class="button-publish">ОПУБЛИКОВАТЬ</button>
-                <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-            </div>
+            <mh-button [disabled]="!addHobby.valid" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
         </div>
     </form>
 </div>

@@ -3,6 +3,5 @@
         <a [routerLink]="admin.isActive ? '/admin/addhobby' : '/addhobby'" class="mh-button-back">&larr; Назад</a>
         <h1 class="heading">Информация добавлена</h1>
         <p>Администраторы сайта проверят и опубликуют вашу информацию. Большое спасибо за участие.</p>
-        
-        <button [routerLink]="admin.isActive ? '/admin' : ''" md-raised-button color="accent" class="button-to-home">НА ГЛАВНУЮ</button>
+        <mh-button [routerLink]="admin.isActive ? '/admin' : ''">НА ГЛАВНУЮ</mh-button>
 </div>
