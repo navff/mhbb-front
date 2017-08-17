@@ -1,3 +1,4 @@
-<button [disabled]="disabled || waiting" md-raised-button color="color">
+<button md-raised-button [disabled]="disabled || loading" *ngIf="!loading" [color]="color">
     <ng-content></ng-content>
 </button>
+<md-progress-spinner *ngIf="loading" mode="indeterminate" [color]="color" strokeWidth="14"></md-progress-spinner>

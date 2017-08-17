@@ -90,10 +90,8 @@
             <md-input-container class="form-item-guides">
                 <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="editHobby.controls['mentor']"></textarea>
             </md-input-container>
-            <div class="button-wrapper">
-                <button [disabled]="!editHobby.valid" type="submit" md-raised-button color="primary" class="button-save">СОХРАНИТЬ</button>
-                <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-            </div>
+
+            <mh-button [disabled]="!editHobby.valid" [loading]="responding">СОХРАНИТЬ</mh-button>
         </div>
     </form>
 </div>

@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() loading: boolean;
-  @Input() color = 'primary';
+  @Input() color = 'accent';
   @Input() disabled: boolean;
 
   constructor() { }

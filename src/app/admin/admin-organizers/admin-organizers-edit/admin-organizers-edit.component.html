@@ -15,9 +15,6 @@
             <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
         </md-select>
         <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
-        <div class="button-wrapper">
-            <button [disabled]="!editOrganizer.valid" type="submit" md-raised-button color="accent" class="button-save">{{currentUrl === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</button>
-            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-        </div>
+        <mh-button [disabled]="!editOrganizer.valid" [loading]="responding">{{currentUrl === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
     </form>
 </div>

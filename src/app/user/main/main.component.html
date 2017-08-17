@@ -8,8 +8,7 @@
             <input (keyup)="updateAge(age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" myOnlyNumber maxlength="3">
         </md-input-container>
 
-        <md-select (change)="search()" [(ngModel)]="interest" name="interest" class="interests" placeholder="Интересы"
-            floatPlaceholder="never">
+        <md-select (change)="search()" [(ngModel)]="interest" name="interest" class="interests" placeholder="Интересы" floatPlaceholder="never">
             <md-option *ngFor="let interest of interests" [value]="interest">{{ interest.Name }}</md-option>
         </md-select>
 

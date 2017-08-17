@@ -39,10 +39,7 @@
         <md-input-container class="form-item form-item-commentary">
             <input mdInput [formControl]="reservation.controls['comment']" placeholder="Пожелания, комментарии">
         </md-input-container>
-        <div class="button-wrapper">
-            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-            <button [disabled]="!reservation.valid" type="submit" md-raised-button color="primary" class="button-enroll">ЗАПИСАТЬСЯ</button>
-        </div>
+        <mh-button [disabled]="!reservation.valid" color="primary" [loading]="responding">ЗАПИСАТЬСЯ</mh-button>
         <p class="message-link">С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
     </form>
 </div>

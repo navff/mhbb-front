@@ -15,9 +15,6 @@
         <md-input-container class="form-item-phone" >
             <input [formControl]="editUser.controls['phone']" mdInput placeholder="Телефон">
         </md-input-container>
-        <div class="button-wrapper">
-            <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
-            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-        </div>
+        <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>
     </form>
 </div>

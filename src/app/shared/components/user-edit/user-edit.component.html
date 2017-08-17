@@ -27,9 +27,6 @@
                 <input (change)="addImage($event, 1, false)" [disabled]="fileName" type="file" id="input" class="add-image-input" accept=".png,.jpg,.jpeg">
             </label>
         </div>
-        <div class="button-wrapper">
-            <button type="submit" md-raised-button color="accent" class="button-save">СОХРАНИТЬ</button>
-            <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-        </div>
+        <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>
     </form>
 </div>
