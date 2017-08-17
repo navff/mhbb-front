@@ -1,3 +1,4 @@
+<mh-progress [loading]="!loaded"></mh-progress>
 <h1 class="admin-heading container">Отзывы на проверку</h1>
 <form class="container">
     <md-input-container class="form-item">
@@ -23,5 +24,4 @@
         </div>
     </div>
     <h2 class="no-results" *ngIf="loaded && reviews.length === 0">По вашему запросу ничего не найдено.</h2>
-    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 </div>

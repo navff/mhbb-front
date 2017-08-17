@@ -1,10 +1,11 @@
+<mh-progress [loading]="!loaded" color="accent"></mh-progress>
+
 <div class="container">
     <section class="info">
         <a [routerLink]="['/act', activity.Id]" class="mh-button-back">&larr; Назад</a>
         <h1 class="heading">{{activity.Name}}</h1>
         <div class="main-wrapper"> 
             <div [ngStyle]="{'background-image': 'url(' +  mainPictureUrl + ')'}" class="main-picture"></div>
-            <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>
         </div>
         <ul class="info-list">
             <li>

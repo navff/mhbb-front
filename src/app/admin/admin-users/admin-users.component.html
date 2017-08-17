@@ -1,3 +1,4 @@
+<mh-progress [loading]="!loaded"></mh-progress>
 <h1 class="admin-heading container">Пользователи</h1>
 <form class="container">
     <md-input-container class="form-item">
@@ -20,5 +21,4 @@
         <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
     </div>
     <h2 class="no-results" *ngIf="loaded && users.length === 0">По вашему запросу ничего не найдено.</h2>
-    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
 </section>

@@ -1,3 +1,4 @@
+<mh-progress [loading]="!loaded"></mh-progress>
 <div class="container">
     <h1 class="admin-heading">Организаторы</h1>
     <button class="hobbies-add" routerLink='/admin/organizers/add' md-fab></button>
@@ -21,6 +22,5 @@
             </div>
         </div>
         <h2 class="no-results" *ngIf="loaded && organizers.length === 0">По вашему запросу ничего не найдено.</h2>
-        <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
     </section>
 </div>

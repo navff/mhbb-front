@@ -1,5 +1,6 @@
-<h1 class="admin-heading container">Курсы и хобби</h1>
+<mh-progress [loading]="loading || uncheckedLoading"></mh-progress>
 
+<h1 class="admin-heading container">Курсы и хобби</h1>
 
 <section class="hobbies container">
     <form class="hobbies-form">
@@ -25,12 +26,9 @@
         <a class="hobbies-add" routerLink='/admin/addhobby' md-fab></a>
     </form>
 
-        <h2 class="admin-heading">На проверку</h2>
-
+    <h2 class="admin-heading">На проверку</h2>
     <mh-activities [activities]="uncheckedActivities" [loading]="uncheckedLoading"></mh-activities>
 
-        <h2 class="admin-heading">Проверенные</h2>
-    
+    <h2 class="admin-heading">Проверенные</h2>
     <mh-activities [activities]="activities" [loading]="loading"></mh-activities>
-    
 </section>

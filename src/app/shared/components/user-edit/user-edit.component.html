@@ -1,9 +1,8 @@
+<mh-progress [loading]="!loaded"></mh-progress>
+
 <div class="container form">
     <a (click)="back()" class="mh-button-back">&larr; Назад</a>
-    <div class="spinner-wrapper">
-        <h2>Редактирование личной информации</h2>
-        <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
-    </div>
+    <h2>Редактирование личной информации</h2>
     <form [formGroup]="editUser" (ngSubmit)="putUser()">
         <div class="inputs">
             <md-input-container class="form-item-name">

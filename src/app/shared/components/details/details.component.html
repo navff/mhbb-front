@@ -1,3 +1,5 @@
+<mh-progress [loading]="!loaded" [color]="admin.isActive ? 'primary' : 'accent'"></mh-progress>
+
 <div class="container">
     <section class="gallery">
         <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-button-back">&larr; Поиск</a>
@@ -30,7 +32,6 @@
                 <div [ngStyle]="{'background-image': 'url(' +  picUrls[3] + ')'}" class="other-picture"></div>
             </div>
         </div>
-        <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="image-spinner"></md-progress-spinner>
     </section>
 
     <section class="info">

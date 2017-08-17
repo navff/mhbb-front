@@ -1,5 +1,6 @@
-<div class="container">
+<mh-progress [loading]="!loaded"></mh-progress>
 
+<div class="container">
     <form [formGroup]="editHobby" (ngSubmit)="submitForm()">
         <a [routerLink]="['/admin/act', activityId]" class="mh-button-back">&larr; Назад</a>
         <md-input-container class="form-item-course-name">

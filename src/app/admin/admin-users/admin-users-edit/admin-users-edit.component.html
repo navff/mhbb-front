@@ -1,6 +1,6 @@
+<mh-progress [loading]="!loaded"></mh-progress>
 <div class="container">
     <h1 class="admin-heading">Редактирование пользователя</h1>
-    <md-progress-spinner *ngIf="!loaded" color="accent" mode="indeterminate" class="search-spinner"></md-progress-spinner>
     <form [formGroup]="editUser" (ngSubmit)="putUser()">
         <md-input-container class="form-item-email">
             <input mdInput [formControl]="editUser.controls['email']" placeholder="Электропочта">
