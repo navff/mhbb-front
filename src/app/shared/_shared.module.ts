@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import {
   MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule,
-  MdIconModule, MdProgressSpinnerModule, MdAutocompleteModule, MdProgressBarModule
+  MdIconModule, MdProgressSpinnerModule, MdAutocompleteModule, MdProgressBarModule,
+  MdTooltipModule
 } from '@angular/material';
 import { OnlyNumberDirective } from './_only-number.directive';
 import { DatePipe } from './_date.pipe';
@@ -20,7 +21,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
   imports: [
     HttpModule, FormsModule, ReactiveFormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
-    MdProgressBarModule,
+    MdProgressBarModule, MdTooltipModule,
     RouterModule,
     CommonModule
   ],
@@ -31,7 +32,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
   exports: [
     HttpModule, FormsModule, ReactiveFormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
-    MdProgressBarModule,
+    MdProgressBarModule, MdTooltipModule,
     OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent,
     ProgressBarComponent
   ]
