@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
@@ -12,8 +11,7 @@ export class AuthService {
   postUser(email) {
     let body = { 'Email': email };
     return this.http.post(`http://test.mhbb.ru/b/api/user`, body)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
   setToken() {
     let match = window.location.href.match(/token=(.)+/);
@@ -27,7 +25,6 @@ export class AuthService {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.get(`http://test.mhbb.ru/b/api/user`, options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
 }

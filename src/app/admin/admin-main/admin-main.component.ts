@@ -46,12 +46,12 @@ export class AdminMainComponent implements OnInit {
 
     this.activityService
       .getUncheckedActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
-      .then(result => {
-        this.uncheckedActivities = result;
+      .subscribe(data => {
+        this.uncheckedActivities = data;
         this.uncheckedLoading = false;
         this.activityService
           .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
-          .then(act => {
+          .subscribe(act => {
             this.activities = act;
             this.loading = false;
           });
@@ -67,15 +67,15 @@ export class AdminMainComponent implements OnInit {
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.cityService.getCities().then(result => this.cities = result);
-    this.interestService.getInterests().then(result => this.interests = result);
+    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.interestService.getInterests().subscribe(data => this.interests = data);
     this.activityService.getUncheckedActivities()
-      .then((result: Activity[]) => {
-        this.uncheckedActivities = result;
+      .subscribe((data: Activity[]) => {
+        this.uncheckedActivities = data;
         this.uncheckedLoading = false;
         this.activityService.getActivities()
-          .then((data: Activity[]) => {
-            this.activities = data;
+          .subscribe((act: Activity[]) => {
+            this.activities = act;
             this.loading = false;
           });
       });

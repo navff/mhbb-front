@@ -26,8 +26,7 @@ export class EnterComponent {
   registerUser() {
     this.responding = true;
     this.auth.postUser(this.email)
-      .then(result => {
-        console.log(result);
+      .subscribe(() => {
         this.router.navigate(['/enter/entersuccess']);
         this.responding = false;
       });

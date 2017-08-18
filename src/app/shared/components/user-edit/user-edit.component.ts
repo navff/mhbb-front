@@ -63,10 +63,8 @@ export class UserEditComponent implements OnInit {
       this.fileData = reader.result;
       data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
       body = new TempFile(this.formId, this.fileName, data, true);
-      console.log(body);
       this.activityService.postTempFile(body)
-        .then(result => {
-          console.log(result);
+        .subscribe(result => {
           this.tempFileId = result.Id;
         });
     };
@@ -77,8 +75,7 @@ export class UserEditComponent implements OnInit {
       this.fileName = null;
       this.fileData = null;
       this.fileToDelete = true;
-      this.activityService.deleteTempfile(this.tempFileId)
-        .then((result) => console.log(result));
+      this.activityService.deleteTempfile(this.tempFileId);
     }
     if (this.fileId) {
       (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
@@ -104,12 +101,10 @@ export class UserEditComponent implements OnInit {
       this.editUser.get('cityId').value,
       this.formId
     );
-    console.log(body);
     if (this.fileId && this.fileToDelete) { this.activityService.deletePicture(this.fileId); }
     this.userService.putUser(this.user.Email, body)
-      .then(result => {
+      .subscribe(result => {
         this.user = result;
-        console.log(result);
         this.responding = false;
         this.router.url === '/admin/edit' ? this.router.navigate(['/admin']) : this.router.navigate(['']);
       });
@@ -119,9 +114,9 @@ export class UserEditComponent implements OnInit {
     if (!localStorage.getItem('token')) {
       this.router.navigate(['']);
     }
-    this.cityService.getCities().then(result => this.cities = result);
+    this.cityService.getCities().subscribe(result => this.cities = result);
     this.auth.getUserByToken()
-      .then(result => {
+      .subscribe(result => {
         this.user = result;
         this.editUser.get('email').setValue(this.user.Email);
         this.editUser.get('name').setValue(this.user.Name);

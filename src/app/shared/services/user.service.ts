@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
@@ -21,30 +20,26 @@ export class UserService {
     let options = new RequestOptions({ headers: headers, search: search });
     return this.http
       .get('http://test.mhbb.ru/b/api/user/search', options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
   getUserByEmail(email: string) {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     let url = `http://test.mhbb.ru/b/api/user?email=${email}`;
     return this.http.get(url, options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
   putUser(email: any, body: any) {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.put(`http://test.mhbb.ru/b/api/user?email=${email}`, body, options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
   deletePicture(id) {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.delete(`http://test.mhbb.ru/b/api/picture/${id}`, options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class VoicesService {
@@ -13,14 +12,12 @@ export class VoicesService {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/voice/positive/${id}`, null, options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
   voteNegative(id) {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(`http://test.mhbb.ru/b/api/voice/negative/${id}`, null, options)
-      .map((response) => response.json())
-      .toPromise();
+      .map((data) => data.json());
   }
 }

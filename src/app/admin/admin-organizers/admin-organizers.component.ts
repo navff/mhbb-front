@@ -30,7 +30,7 @@ export class AdminOrganizersComponent implements OnInit {
     this.responding = true;
     this.page += 1;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
-      .then(result => {
+      .subscribe(result => {
         this.organizers = this.organizers.concat(result);
         this.checkLength = result.length;
         this.responding = false;
@@ -48,7 +48,7 @@ export class AdminOrganizersComponent implements OnInit {
   search() {
     this.reset();
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
-      .then(result => {
+      .subscribe(result => {
         this.organizers = result;
         this.checkLength = result.length;
         this.loaded = true;
@@ -57,9 +57,9 @@ export class AdminOrganizersComponent implements OnInit {
 
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.cityService.getCities().then(result => this.cities = result);
+    this.cityService.getCities().subscribe(result => this.cities = result);
     this.organizerService.getOrganizers(this.page.toString(10))
-      .then(result => {
+      .subscribe(result => {
         this.organizers = result;
         this.checkLength = result.length;
         this.loaded = true;

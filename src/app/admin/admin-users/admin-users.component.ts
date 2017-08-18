@@ -31,7 +31,7 @@ export class AdminUsersComponent implements OnInit {
     this.responding = true;
     this.page += 1;
     this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
-      .then(result => {
+      .subscribe(result => {
         this.users = this.users.concat(result);
         this.checkLength = result.length;
         this.responding = false;
@@ -52,7 +52,7 @@ export class AdminUsersComponent implements OnInit {
     if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
     if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
     this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
-      .then(result => {
+      .subscribe(result => {
         this.users = result;
         this.checkLength = result.length;
         this.loaded = true;
@@ -61,9 +61,9 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.cityService.getCities().then(result => this.cities = result);
+    this.cityService.getCities().subscribe(result => this.cities = result);
     this.userService.getUsers()
-      .then(result => {
+      .subscribe(result => {
         this.users = result;
         this.checkLength = result.length;
         this.loaded = true;

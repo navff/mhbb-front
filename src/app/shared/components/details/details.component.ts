@@ -34,7 +34,7 @@ export class DetailsComponent implements OnInit {
     if (localStorage.getItem('token')) {
       let oldAmount = this.voteAmount;
       this.voicesService.votePositive(this.activityId)
-        .then(result => {
+        .subscribe(result => {
         this.voteAmount = result;
           oldAmount === result ? this.voted = true : this.voted = false;
         });
@@ -46,7 +46,7 @@ export class DetailsComponent implements OnInit {
     if (localStorage.getItem('token')) {
       let oldAmount = this.voteAmount;
       this.voicesService.voteNegative(this.activityId)
-        .then(result => {
+        .subscribe(result => {
         this.voteAmount = result;
           oldAmount === result ? this.voted = true : this.voted = false;
         });
@@ -60,10 +60,8 @@ export class DetailsComponent implements OnInit {
       ActivityId: parseInt(this.activityId, 10),
       Text: this.reviewText
     };
-    console.log(body);
     this.reviewService.postReview(body)
-      .then(result => {
-        console.log(result);
+      .subscribe(() => {
         this.published = true;
         this.responding = false;
       });
@@ -71,8 +69,7 @@ export class DetailsComponent implements OnInit {
   actApprove() {
     this.approveResponding = true;
     this.activityService.putApproveActivity(true, this.activityId)
-      .then(result => {
-        console.log(result);
+      .subscribe(() => {
         this.approveResponding = false;
         this.router.navigate(['/admin']);
       });
@@ -80,9 +77,8 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
-      .then(result => {
+      .subscribe(result => {
         this.activity = result;
-        console.log(result);
         this.voteAmount = this.activity.Voices;
         this.activity.Pictures.forEach((pic, i) => {
           this.picUrls[i] = pic.Url;
@@ -90,7 +86,6 @@ export class DetailsComponent implements OnInit {
         this.loaded = true;
       });
     this.reviewService.getReviewsByActivity(this.activityId)
-      .then(result => this.reviews = result)
-      .then(() => console.log(this.reviews));
+      .subscribe(result => this.reviews = result);
   }
 }

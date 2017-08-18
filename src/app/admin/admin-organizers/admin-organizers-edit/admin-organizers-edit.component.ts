@@ -47,8 +47,8 @@ export class AdminOrganizersEditComponent implements OnInit {
         this.editOrganizer.get('email').value,
         this.editOrganizer.get('phone').value);
       this.organizerService.putOrganizer(this.organizerId, body)
-        .then(result => {
-          this.organizer = result;
+        .subscribe(data => {
+          this.organizer = data;
           this.router.navigate(['/admin/organizers']);
         });
     } else {
@@ -60,24 +60,23 @@ export class AdminOrganizersEditComponent implements OnInit {
         this.editOrganizer.get('email').value,
         this.editOrganizer.get('phone').value);
       this.organizerService.postOrganizer(body)
-        .then(result => {
-          this.organizer = result;
+        .subscribe(data => {
+          this.organizer = data;
           this.router.navigate(['/admin/organizers']);
         });
     }
   }
   ngOnInit() {
     this.currentUrl = this.router.url;
-    this.cityService.getCities().then(result => this.cities = result);
+    this.cityService.getCities().subscribe(data => this.cities = data);
     if (this.currentUrl === '/admin/organizers/add') {
 
     } else {
       this.loaded = false;
       this.route.params.subscribe(params => this.organizerId = params['id']);
       this.organizerService.getOrganizerById(this.organizerId)
-        .then(result => {
-          this.organizer = result;
-          console.log(result);
+        .subscribe(data => {
+          this.organizer = data;
           this.editOrganizer.get('name').setValue(this.organizer.Name);
           this.editOrganizer.get('cityId').setValue(this.organizer.City.Id);
           this.editOrganizer.get('sobriety').setValue(this.organizer.Sobriety);

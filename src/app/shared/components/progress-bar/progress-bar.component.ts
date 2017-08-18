@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 export class ProgressBarComponent {
   @Input() loading: boolean;
   @Input() color = 'primary';
+
   constructor() { }
 }

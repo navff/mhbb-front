@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
         this.router.navigate(['']);
       } else {
         this.auth.getUserByToken()
-          .then(result => {
+          .subscribe(result => {
             if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
               this.router.navigate(['admin']);
             } else {

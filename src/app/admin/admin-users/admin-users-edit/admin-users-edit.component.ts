@@ -53,10 +53,9 @@ export class AdminUsersEditComponent implements OnInit {
       this.editUser.get('cityId').value,
       null
     );
-      console.log('body: ', body);
     this.userService.putUser(this.searchEmail, body)
-      .then(result => {
-      this.user = result;
+      .subscribe(data => {
+      this.user = data;
         this.router.navigate(['/admin/users']);
       });
   }
@@ -64,11 +63,10 @@ export class AdminUsersEditComponent implements OnInit {
     this.loaded = false;
     let params: any = this.route.queryParams;
     this.searchEmail = params.value.email;
-    console.log(this.searchEmail);
-    this.cityService.getCities().then(result => this.cities = result);
+    this.cityService.getCities().subscribe(data => this.cities = data);
     this.userService.getUserByEmail(this.searchEmail)
-      .then(result => {
-        this.user = result;
+      .subscribe(data => {
+        this.user = data;
         this.editUser.get('email').setValue(this.user.Email);
         this.editUser.get('name').setValue(this.user.Name);
         this.editUser.get('phone').setValue(this.user.Phone);
@@ -78,7 +76,6 @@ export class AdminUsersEditComponent implements OnInit {
           this.editUser.get('role').setValue(false);
         }
         this.editUser.get('cityId').setValue(this.user.CityId);
-        console.log(this.user);
         this.loaded = true;
       });
   }

@@ -1,6 +1,5 @@
 import { AuthService } from './../shared/services/auth.service';
-import { Component, OnInit, HostListener, Inject }      from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Component, OnInit }      from '@angular/core';
 import { CityService } from '../shared/services/city.service';
 import { ActivityService } from '../shared/services/activity.service';
 
@@ -16,30 +15,21 @@ export class AdminComponent implements OnInit {
   scrolled: boolean;
   userEmail: string;
   constructor(private activityService: ActivityService,
-              private auth: AuthService,
-  @Inject(DOCUMENT) private document: Document) {}
+              private auth: AuthService) {}
 
-  scrollToTop() {
-    window.scrollTo(0, 0);
-  }
   exitAdmin() {
     localStorage.setItem('token' , '');
     window.location.reload();
   }
   ngOnInit() {
     this.activityService.getUncheckedActivities()
-    .then(result => {
+    .subscribe(result => {
       this.activities = result;
       this.activitiesCount = this.activities.length;
     });
     if (this.auth.token) {
     this.auth.getUserByToken()
-    .then(result => this.userEmail = result.Email);
+    .subscribe(result => this.userEmail = result.Email);
     }
-  }
-  @HostListener('window:scroll', [])
-    onWindowScroll() {
-      let number = this.document.body.scrollTop;
-      this.scrolled = number > 700 ? true : false;
   }
 }

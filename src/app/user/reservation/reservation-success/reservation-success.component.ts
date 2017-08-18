@@ -20,7 +20,7 @@ export class ReservationSuccessComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
-      .then(result => {
+      .subscribe(result => {
         this.activity = result;
       });
   }

@@ -74,10 +74,8 @@ export class AddHobbyComponent implements OnInit {
         Sobriety: this.addHobby.get('sobriety').value
       },
     );
-    console.log(body);
     this.activityService.postActivity(body)
-      .then(result => {
-        console.log(result);
+      .subscribe(() => {
         this.router.url === '/admin/addhobby' ? this.router.navigate(['/admin/addhobby/success'])
                                               : this.router.navigate(['/addhobby/success']);
         this.responding = false;
@@ -100,10 +98,8 @@ export class AddHobbyComponent implements OnInit {
       this.fileData[index] = reader.result;
       data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
       body = new TempFile(this.formId, this.fileNames[index], data, isMain);
-      console.log(body);
       this.activityService.postTempFile(body)
-        .then(result => {
-          console.log(result);
+        .subscribe(result => {
           this.fileId[index] = result.Id;
         });
     };
@@ -114,11 +110,10 @@ export class AddHobbyComponent implements OnInit {
     this.fileNames[index] = null;
     this.addHobby.controls[`image${index}`].setValue('');
     this.fileData[index] = null;
-    this.activityService.deleteTempfile(this.fileId[index])
-      .then((result) => console.log(result));
+    this.activityService.deleteTempfile(this.fileId[index]);
   }
   ngOnInit() {
-    this.interestService.getInterests().then(result => this.interests = result);
-    this.cityService.getCities().then(result => this.cities = result);
+    this.interestService.getInterests().subscribe(result => this.interests = result);
+    this.cityService.getCities().subscribe(result => this.cities = result);
   }
 }

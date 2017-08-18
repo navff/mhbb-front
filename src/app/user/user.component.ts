@@ -14,14 +14,13 @@ export class UserComponent implements OnInit {
 
   setAdmin() {
     localStorage.setItem('token', 'ABRAKADABRA');
-    console.log(localStorage.getItem('token'));
     this.router.navigate(['']);
     window.location.reload();
   }
   ngOnInit() {
     if (this.auth.token) {
       this.auth.getUserByToken()
-        .then(result => this.userEmail = result.Email);
+        .subscribe(result => this.userEmail = result.Email);
     }
   }
 }
