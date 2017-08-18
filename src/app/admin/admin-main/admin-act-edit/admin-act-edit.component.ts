@@ -60,7 +60,7 @@ export class AdminActEditComponent implements OnInit {
     });
   }
   filterOrganizers(value) {
-    this.organizerService.getOrganizers('1', value).subscribe(result => this.organizers = result);
+    this.organizerService.getOrganizers('1', value).subscribe(data => this.organizers = data);
   }
   setOrganizerId(id) {
     this.organizerId = id;
@@ -82,8 +82,8 @@ export class AdminActEditComponent implements OnInit {
       data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
       body = new TempFile(this.formId, this.fileNames[index], data, isMain);
       this.activityService.postTempFile(body)
-        .subscribe(result => {
-          this.tempfileId[index] = result.Id;
+        .subscribe(res => {
+          this.tempfileId[index] = res.Id;
         });
     };
   }
@@ -147,22 +147,22 @@ export class AdminActEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params['id']);
-    this.interestService.getInterests().subscribe(result => this.interests = result);
+    this.interestService.getInterests().subscribe(data => this.interests = data);
 
     this.activityService.getActivity(this.activityId)
-      .subscribe((result) => {
-        this.editHobby.controls['name'].setValue(result.Name);
-        this.editHobby.controls['organizer'].setValue(result.Organizer.Name);
-        this.editHobby.controls['ageFrom'].setValue(result.AgeFrom);
-        this.editHobby.controls['ageTo'].setValue(result.AgeTo);
-        this.editHobby.controls['interestId'].setValue(result.Interest.Id);
-        this.editHobby.controls['phones'].setValue(result.Phones);
-        this.editHobby.controls['address'].setValue(result.Address);
-        this.editHobby.controls['prices'].setValue(result.Prices);
-        this.editHobby.controls['mentor'].setValue(result.Mentor);
-        this.editHobby.controls['description'].setValue(result.Description);
-        this.editHobby.controls['free'].setValue(result.Free);
-        result.Pictures.forEach((pic, i) => {
+      .subscribe((data) => {
+        this.editHobby.controls['name'].setValue(data.Name);
+        this.editHobby.controls['organizer'].setValue(data.Organizer.Name);
+        this.editHobby.controls['ageFrom'].setValue(data.AgeFrom);
+        this.editHobby.controls['ageTo'].setValue(data.AgeTo);
+        this.editHobby.controls['interestId'].setValue(data.Interest.Id);
+        this.editHobby.controls['phones'].setValue(data.Phones);
+        this.editHobby.controls['address'].setValue(data.Address);
+        this.editHobby.controls['prices'].setValue(data.Prices);
+        this.editHobby.controls['mentor'].setValue(data.Mentor);
+        this.editHobby.controls['description'].setValue(data.Description);
+        this.editHobby.controls['free'].setValue(data.Free);
+        data.Pictures.forEach((pic, i) => {
           if (i < 4) {
             this.editHobby.controls[`image${i}`].setValue(pic.Url);
             this.picUrls[i] = pic.Url;
@@ -170,9 +170,9 @@ export class AdminActEditComponent implements OnInit {
             this.picId[i] = pic.Id;
           }
         });
-        this.isChecked = result.IsChecked;
-        this.organizerId = result.Organizer.Id;
-        this.organizerName = result.Organizer.Name;
+        this.isChecked = data.IsChecked;
+        this.organizerId = data.Organizer.Id;
+        this.organizerName = data.Organizer.Name;
         this.organizerService.getOrganizers('1', this.organizerName).subscribe(res => this.organizers = res);
         this.loaded = true;
       });

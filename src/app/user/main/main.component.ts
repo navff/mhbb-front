@@ -48,9 +48,9 @@ export class MainComponent implements OnInit {
     if (values[1] !== undefined) { this.free = values[1]; }
     this.activityService
       .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
-      .subscribe(result => {
-        this.activities = result;
-        this.checkLength = result.length;
+      .subscribe(data => {
+        this.activities = data;
+        this.checkLength = data.length;
         this.loading = false;
       });
   }
@@ -64,21 +64,24 @@ export class MainComponent implements OnInit {
     this.responding = true;
     this.page += 1;
     this.activityService.getActivities(this.page.toString(10))
-      .subscribe(result => {
-        this.activities = this.activities.concat(result);
-        this.checkLength = result.length;
+      .subscribe(data => {
+        this.activities = this.activities.concat(data);
+        this.checkLength = data.length;
         this.responding = false;
       });
   }
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.activityService.getActivities().subscribe((result: Activity[]) => {
-      this.activities = result;
-      this.checkLength = result.length;
+    this.activityService.getActivities().subscribe((data: Activity[]) => {
+      this.activities = data;
+      this.checkLength = data.length;
       this.loading = false;
     });
-    this.interestService.getInterests().subscribe(result => this.interests = result);
-    this.cityService.getCities().subscribe(result => this.cities = result);
+    this.interestService.getInterests().subscribe(data => {
+      this.interests = data;
+      this.interests.unshift({Id: null, Name: 'Показать все'});
+    });
+    this.cityService.getCities().subscribe(data => this.cities = data);
   }
 }

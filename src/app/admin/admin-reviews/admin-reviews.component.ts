@@ -24,8 +24,8 @@ export class AdminReviewsComponent implements OnInit {
   search() {
     this.loaded = false;
     this.reviewService.getUncheckedReviews(this.word, this.city.Id)
-      .subscribe(result => {
-        this.reviews = result;
+      .subscribe(data => {
+        this.reviews = data;
         this.loaded = true;
       });
   }
@@ -50,10 +50,10 @@ export class AdminReviewsComponent implements OnInit {
   }
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.cityService.getCities().subscribe(result => this.cities = result);
+    this.cityService.getCities().subscribe(data => this.cities = data);
     this.reviewService.getUncheckedReviews()
-      .subscribe(result => {
-        this.reviews = result;
+      .subscribe(data => {
+        this.reviews = data;
         this.loaded = true;
       });
   }

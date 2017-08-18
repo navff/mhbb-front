@@ -68,7 +68,10 @@ export class AdminMainComponent implements OnInit {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
-    this.interestService.getInterests().subscribe(data => this.interests = data);
+    this.interestService.getInterests().subscribe(data => {
+      this.interests = data;
+      this.interests.unshift({Id: null, Name: 'Показать все'});
+    });
     this.activityService.getUncheckedActivities()
       .subscribe((data: Activity[]) => {
         this.uncheckedActivities = data;

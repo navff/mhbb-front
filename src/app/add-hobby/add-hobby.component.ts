@@ -99,8 +99,8 @@ export class AddHobbyComponent implements OnInit {
       data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
       body = new TempFile(this.formId, this.fileNames[index], data, isMain);
       this.activityService.postTempFile(body)
-        .subscribe(result => {
-          this.fileId[index] = result.Id;
+        .subscribe(res => {
+          this.fileId[index] = res.Id;
         });
     };
   }
@@ -113,7 +113,7 @@ export class AddHobbyComponent implements OnInit {
     this.activityService.deleteTempfile(this.fileId[index]);
   }
   ngOnInit() {
-    this.interestService.getInterests().subscribe(result => this.interests = result);
-    this.cityService.getCities().subscribe(result => this.cities = result);
+    this.interestService.getInterests().subscribe(data => this.interests = data);
+    this.cityService.getCities().subscribe(data => this.cities = data);
   }
 }

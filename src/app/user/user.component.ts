@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     if (this.auth.token) {
       this.auth.getUserByToken()
-        .subscribe(result => this.userEmail = result.Email);
+        .subscribe(user => this.userEmail = user.Email);
     }
   }
 }

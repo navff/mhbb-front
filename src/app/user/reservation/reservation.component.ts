@@ -50,8 +50,8 @@ export class ReservationComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
-      .subscribe(result => {
-        this.activity = result;
+      .subscribe(data => {
+        this.activity = data;
         this.mainPictureUrl = this.activity.Pictures[0].Url;
         this.loaded = true;
       });

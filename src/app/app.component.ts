@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
         this.router.navigate(['']);
       } else {
         this.auth.getUserByToken()
-          .subscribe(result => {
-            if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
+          .subscribe(user => {
+            if (user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager') {
               this.router.navigate(['admin']);
             } else {
               this.router.navigate(['']);

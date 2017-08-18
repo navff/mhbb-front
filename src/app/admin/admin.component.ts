@@ -23,13 +23,13 @@ export class AdminComponent implements OnInit {
   }
   ngOnInit() {
     this.activityService.getUncheckedActivities()
-    .subscribe(result => {
-      this.activities = result;
+    .subscribe(data => {
+      this.activities = data;
       this.activitiesCount = this.activities.length;
     });
     if (this.auth.token) {
     this.auth.getUserByToken()
-    .subscribe(result => this.userEmail = result.Email);
+    .subscribe(data => this.userEmail = data.Email);
     }
   }
 }

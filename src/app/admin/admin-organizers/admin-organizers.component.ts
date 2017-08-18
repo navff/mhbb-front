@@ -30,9 +30,9 @@ export class AdminOrganizersComponent implements OnInit {
     this.responding = true;
     this.page += 1;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
-      .subscribe(result => {
-        this.organizers = this.organizers.concat(result);
-        this.checkLength = result.length;
+      .subscribe(data => {
+        this.organizers = this.organizers.concat(data);
+        this.checkLength = data.length;
         this.responding = false;
       });
   }
@@ -48,20 +48,20 @@ export class AdminOrganizersComponent implements OnInit {
   search() {
     this.reset();
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
-      .subscribe(result => {
-        this.organizers = result;
-        this.checkLength = result.length;
+      .subscribe(data => {
+        this.organizers = data;
+        this.checkLength = data.length;
         this.loaded = true;
       });
   }
 
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.cityService.getCities().subscribe(result => this.cities = result);
+    this.cityService.getCities().subscribe(data => this.cities = data);
     this.organizerService.getOrganizers(this.page.toString(10))
-      .subscribe(result => {
-        this.organizers = result;
-        this.checkLength = result.length;
+      .subscribe(data => {
+        this.organizers = data;
+        this.checkLength = data.length;
         this.loaded = true;
       });
   }

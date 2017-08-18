@@ -64,8 +64,8 @@ export class UserEditComponent implements OnInit {
       data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
       body = new TempFile(this.formId, this.fileName, data, true);
       this.activityService.postTempFile(body)
-        .subscribe(result => {
-          this.tempFileId = result.Id;
+        .subscribe(res => {
+          this.tempFileId = res.Id;
         });
     };
   };
@@ -103,8 +103,8 @@ export class UserEditComponent implements OnInit {
     );
     if (this.fileId && this.fileToDelete) { this.activityService.deletePicture(this.fileId); }
     this.userService.putUser(this.user.Email, body)
-      .subscribe(result => {
-        this.user = result;
+      .subscribe(user => {
+        this.user = user;
         this.responding = false;
         this.router.url === '/admin/edit' ? this.router.navigate(['/admin']) : this.router.navigate(['']);
       });
@@ -114,10 +114,10 @@ export class UserEditComponent implements OnInit {
     if (!localStorage.getItem('token')) {
       this.router.navigate(['']);
     }
-    this.cityService.getCities().subscribe(result => this.cities = result);
+    this.cityService.getCities().subscribe(data => this.cities = data);
     this.auth.getUserByToken()
-      .subscribe(result => {
-        this.user = result;
+      .subscribe(user => {
+        this.user = user;
         this.editUser.get('email').setValue(this.user.Email);
         this.editUser.get('name').setValue(this.user.Name);
         this.editUser.get('phone').setValue(this.user.Phone);
@@ -128,10 +128,10 @@ export class UserEditComponent implements OnInit {
         }
         this.editUser.get('cityId').setValue(this.user.CityId);
         this.loaded = true;
-        if (result.Picture) {
-          this.fileName = result.Picture.Filename;
-          this.fileData = result.Picture.Url;
-          this.fileId = result.Picture.Id;
+        if (user.Picture) {
+          this.fileName = user.Picture.Filename;
+          this.fileData = user.Picture.Url;
+          this.fileId = user.Picture.Id;
         }
       });
   }

@@ -34,9 +34,9 @@ export class DetailsComponent implements OnInit {
     if (localStorage.getItem('token')) {
       let oldAmount = this.voteAmount;
       this.voicesService.votePositive(this.activityId)
-        .subscribe(result => {
-        this.voteAmount = result;
-          oldAmount === result ? this.voted = true : this.voted = false;
+        .subscribe(data => {
+        this.voteAmount = data;
+          oldAmount === data ? this.voted = true : this.voted = false;
         });
     } else {
       this.router.navigate(['enter']);
@@ -46,9 +46,9 @@ export class DetailsComponent implements OnInit {
     if (localStorage.getItem('token')) {
       let oldAmount = this.voteAmount;
       this.voicesService.voteNegative(this.activityId)
-        .subscribe(result => {
-        this.voteAmount = result;
-          oldAmount === result ? this.voted = true : this.voted = false;
+        .subscribe(data => {
+        this.voteAmount = data;
+          oldAmount === data ? this.voted = true : this.voted = false;
         });
     } else {
       this.router.navigate(['enter']);
@@ -77,8 +77,8 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params['id']);
     this.activityService.getActivity(this.activityId)
-      .subscribe(result => {
-        this.activity = result;
+      .subscribe(data => {
+        this.activity = data;
         this.voteAmount = this.activity.Voices;
         this.activity.Pictures.forEach((pic, i) => {
           this.picUrls[i] = pic.Url;
@@ -86,6 +86,6 @@ export class DetailsComponent implements OnInit {
         this.loaded = true;
       });
     this.reviewService.getReviewsByActivity(this.activityId)
-      .subscribe(result => this.reviews = result);
+      .subscribe(data => this.reviews = data);
   }
 }
