@@ -1,45 +1,28 @@
 .gallery
+    display: inline-block
     width: 40.625rem
-    height: 53.125rem
-    .main-wrapper
-        position: absolute
-        top: 10.875rem
-        right: 0
-        bottom: 0
-        left: 0
-        z-index: -1
-        overflow: hidden
+    margin-right: 5%
+    .main-picture
         width: 40.625rem
         height: 28.75rem
-        .main-picture
-                width: 40.625rem
-                height: 28.75rem
-                background-size: cover
-                background-position: 50% 50%
-    .other-pictures
-        position: relative
-        top: 32.5rem
-        [class^="wrapper"]
-            position: absolute
-            top: 0
-            right: 0
-            bottom: 0
-            left: 0
-            z-index: -1
-            overflow: hidden
+        background-size: cover
+        background-position: 50%
+    .secondary-pictures
+        display: flex
+        justify-content: space-between
+        margin-top: 1rem
+        .secondary-picture
             width: 12.875rem
             height: 8.5625rem
-            .other-picture
-                width: 12.875rem
-                height: 8.5625rem
-                background-size: cover
-                background-position: 50% 50%
-        .wrapper-2
-            left: 13.875rem
-        .wrapper-3
-            left: 27.75rem
+            background-size: cover
+            background-position: 50%
+
 .heading
     position: relative
+    margin-bottom: 1rem
+    h1
+        font-size: 2.1875rem
+        width: 32.5rem
     .voicing
         position: absolute
         right: 0
@@ -67,98 +50,83 @@
             width: 10rem
             right: -11rem
             top: 0.1875rem
-    h1
-        font-size: 2.1875rem
-        width: 32.5rem
 
-
+p
+    line-height: 1.375rem
+    font-size: 1.0625rem
+    white-space: pre-line
 .info
-    margin-top: 9.375rem
-    width: 41rem
-    position: absolute
-    right: 0
-    top: 0
-    .bold
-        font-weight: 900
-        line-height: 2rem
-        font-size: 1.0625rem
-    p
-        line-height: 1.375rem
-        font-size: 1.0625rem
-    mh-button
-        margin-top: 0.9375rem
-    .admin-buttons mh-button
-        margin-right: 0.9375rem
-        width: 12.5rem
-.prices
+    vertical-align: top
     display: inline-block
-    position: relative
-    p
-        display: inline-block
-    .hobby-free-icon
-        position: absolute
-        top: -0.3125rem
-        right: -2.1875rem
-        width: 1.625rem
-        height: 1.875rem
-.info-list
-    li
-        margin-bottom: 1.875rem
+    max-width: 35rem
+    margin-top: 9rem
+    h4
+        font-weight: 900
+        line-height: 2.6rem
+        font-size: 1.0625rem
+        &:not(:first-child)
+            margin-top: 1rem
+    .organizer,
+    .age
         p
-            display: block
-            min-height: 1.375rem
+            display: inline-block
+            margin-left: 0.5rem
+        h4
+            display: inline-block
+    mh-button
+        margin-top: 3rem
+    .admin-buttons mh-button
+        margin-right: 1rem
+        width: 12.5rem
+    .prices
+        p
+            display: inline-block
+        .hobby-free-icon
+            position: relative
+            top: 0.5rem
+            left: 1rem
+            display: inline-block
+            width: 1.625rem
+            height: 1.875rem
+
 .description
-    width: 68.75rem
-    margin: 5rem 0
+    max-width: 68rem
+    margin: 3rem 0 5rem
 
 .reviews
     width: 62.5rem
     margin-bottom: 5rem
     position: relative
-    .reviews-heading
+    h2
         font-size: 2.1875rem
         margin-bottom: 2.0625rem
     mh-button
-        margin-left: 6.875rem
+        margin-left: 7.125rem
         height: 2.375rem
-.reviews-item
+    md-input-container
+        width: 55.625rem
+        margin: 4rem 0 0 7.125rem
+        display: block
+.review
     margin-bottom: 1.25rem
-    height: auto
     min-height: 6.1875rem
     width: 62.5rem
-    position: relative
-    .user-image-wrapper
+    .user-image-preview
         position: absolute
         border-radius: 50%
-        z-index: -1
-        top: 0
-        left: 0
+        background-size: cover
+        background-position: 50%
         width: 5rem
         height: 5rem
-        cursor: default
-        overflow: hidden
-        .user-image-preview
-            background-size: cover
-            background-position: 50% 50%
-            width: 5rem
-            height: 5rem
-    p
-        display: inline-block
+    .text
+        margin-left: 7rem
     .name
         color: #000
         font-weight: 600
-        margin: 0 1.125rem 0.9375rem 6.875rem
-        font-size: 1.0625rem
+        display: inline-block
     .date
         font-size: 0.8125rem
-    .text
-        margin-left: 6.875rem
-        line-height: 1.375rem
-        display: block
-md-input-container
-    width: 55.625rem
-    margin: 4.375rem 0 0 6.875rem
-    display: block
+        display: inline-block
 
 
 .publish-success

@@ -13,7 +13,7 @@
         <div class="bottom-descr">
             <h6 class="name">{{activity.Name}}</h6>
             <p class="company">{{activity.Organizer.Name}}</p>
-            <img class="free-icon" src="img/free.svg" *ngIf="activity.Free">
+            <img class="free-icon" src="img/free.svg" *ngIf="activity.Free && !responding">
         </div>
     </div>
     <span class="empty-block"></span> 
@@ -21,7 +21,4 @@
     <span class="empty-block"></span> 
 </div>
 <h2 class="no-results" *ngIf="!loading && activities.length === 0">По вашему запросу ничего не найдено.</h2>
-<div *ngIf="checkLength > 11" class="button-wrapper">
-    <button (click)="concatPage()" md-raised-button color="primary" class="button-show">Показать ещё</button>
-    <md-progress-spinner *ngIf="responding" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
-</div>
+<mh-button *ngIf="checkLength > 11" [loading]="responding" (click)="concatPage()">Показать ещё</mh-button>
