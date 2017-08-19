@@ -35,4 +35,10 @@ export class OrganizerService {
     return this.http.post(`http://test.mhbb.ru/b/api/organizer`, body, options)
       .map((data) => data.json());
   }
+  deleteOrganizer(id: any) {
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(`http://test.mhbb.ru/b/api/organizer/${id}`, options)
+      .map((data) => data.json());
+  }
 }

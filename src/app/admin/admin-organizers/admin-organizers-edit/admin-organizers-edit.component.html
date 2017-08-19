@@ -17,4 +17,5 @@
         <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
         <mh-button [disabled]="!editOrganizer.valid" [loading]="responding">{{currentUrl === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
     </form>
+        <mh-button *ngIf="currentUrl !== '/admin/organizers/add'" (click)="deleteOrganizer()" [loading]="deleteResponding" color="warn" class="btn-delete">УДАЛИТЬ</mh-button>
 </div>

@@ -23,7 +23,6 @@ export class ActivityService {
     return this.http.get('http://test.mhbb.ru/b/api/activity/search', options)
       .map((data) => data.json());
   }
-
   getUncheckedActivities(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: any, free?: any) {
     let search = new URLSearchParams();
@@ -64,7 +63,6 @@ export class ActivityService {
     return this.http.delete(`http://test.mhbb.ru/b/api/picture/${id}`, options)
       .map((data) => data.json());
   }
-
   postActivity(body) {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers });
@@ -82,5 +80,11 @@ export class ActivityService {
     let options = new RequestOptions({ headers: headers });
     return this.http.put(`http://test.mhbb.ru/b/api/activity/setchecked?activityId=${id}&isChecked=${isChecked}`, null, options)
       .map((data) => data.json());
+  }
+  deleteActivity(id: any) {
+    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(`http://test.mhbb.ru/b/api/activity/${id}`, options)
+    .map((data) => data.json());
   }
 }
