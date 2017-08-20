@@ -13,11 +13,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ReservationComponent implements OnInit {
   activity: any = {};
-  activityId: string;
   mainPictureUrl: string;
 
-  loaded = false;
-  responding = false;
+  loaded: boolean;
+  responding: boolean;
 
   reservation: FormGroup;
   constructor(
@@ -34,26 +33,27 @@ export class ReservationComponent implements OnInit {
       'comment': '',
     });
   }
-  postReservation() {
+  postReservation(): void {
     this.responding = true;
-    let body = new Reservation(this.activityId,
+    let body = new Reservation(
+      this.activity.Id,
       this.reservation.get('email').value,
       this.reservation.get('name').value,
       this.reservation.get('phone').value,
       this.reservation.get('comment').value);
     this.reservationService.postReservation(body)
       .subscribe(() => {
-        this.router.navigate(['/act/reservation/success', this.activityId]);
-        this.responding = false;
+        this.router.navigate(['/act/', this.activity.Id, 'reservation', 'success']);
       });
   }
   ngOnInit() {
-    this.route.params.subscribe(params => this.activityId = params['id']);
-    this.activityService.getActivity(this.activityId)
-      .subscribe(data => {
-        this.activity = data;
-        this.mainPictureUrl = this.activity.Pictures[0].Url;
-        this.loaded = true;
-      });
+    this.route.params.subscribe(params => {
+      this.activityService.getActivity(params.id)
+        .subscribe(data => {
+          this.activity = data;
+          this.mainPictureUrl = this.activity.Pictures[0].Url;
+          this.loaded = true;
+        });
+    });
   }
 }

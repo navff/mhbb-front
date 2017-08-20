@@ -1,6 +1,6 @@
-<mh-progress [loading]="loading" color="accent"></mh-progress>
+<mh-progress [loading]="!loaded" color="accent"></mh-progress>
 
-<section class="hobbies container">
+<div class="hobbies">
     <form class="form">
         <md-input-container class="search">
             <input (keyup)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
@@ -23,6 +23,5 @@
         <a class="add" routerLink='/addhobby' md-fab></a>
     </form>
 
-    <mh-activities [activities]="activities" [loading]="loading"></mh-activities>
-
-</section>
+    <mh-activities [activities]="activities" [loading]="!loaded"></mh-activities>
+</div>

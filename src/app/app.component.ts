@@ -18,18 +18,15 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {
-      if (!this.auth.token) {
-        this.router.navigate(['']);
-      } else {
+      !this.auth.token ?
+        this.router.navigate(['']) :
         this.auth.getUserByToken()
           .subscribe(user => {
-            if (user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager') {
-              this.router.navigate(['admin']);
-            } else {
+            (user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager') ?
+              this.router.navigate(['admin']) :
               this.router.navigate(['']);
             }
-          });
-      }
+          );
     }
   }
 }

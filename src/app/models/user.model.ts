@@ -5,5 +5,6 @@ export class User {
     public Phone: string,
     public Role: number,
     public CityId: any,
-    public FormId: any) { }
+    public FormId: any,
+    public RoleName?: string) { }
 }

@@ -46,9 +46,9 @@
         <p>{{activity.Mentor}}</p>
 
         <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
-        <mh-button *ngIf="!admin.isActive" [routerLink]="['/act/reservation', activityId]">ЗАПИСАТЬСЯ</mh-button>
+        <mh-button *ngIf="!admin.isActive" routerLink="reservation">ЗАПИСАТЬСЯ</mh-button>
         <div class="admin-buttons" *ngIf="admin.isActive">
-            <mh-button [routerLink]="['/admin/act/edit', activityId]" color="primary">РЕДАКТИРОВАТЬ</mh-button>
+            <mh-button routerLink="edit" color="primary">РЕДАКТИРОВАТЬ</mh-button>
             <mh-button *ngIf="!activity.IsChecked && loaded" (click)="actApprove()" [loading]="approveResponding">ПОДТВЕРДИТЬ</mh-button>
         </div>
     </section>
@@ -62,7 +62,7 @@
             <div class="text">
                 <p class="name">{{review.User?.Name}}</p>
                 <p class="date">{{review.DateCreated | myDate}}</p>
-                <p >{{review.Text}}</p>
+                <p>{{review.Text}}</p>
             </div>
         </div>
         <md-input-container>

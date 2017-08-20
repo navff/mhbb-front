@@ -13,13 +13,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AdminUsersEditComponent implements OnInit {
   cities = [];
-  searchEmail: string;
   email: string;
 
-  user: any = {};
-
-  loaded = true;
-  responding = false;
+  loaded: boolean;
+  responding: boolean;
 
   editUser: FormGroup;
   constructor(
@@ -40,11 +37,8 @@ export class AdminUsersEditComponent implements OnInit {
   putUser() {
     this.responding = true;
     let role: number;
-    if (this.editUser.get('role').value === true) {
-      role = 1;
-    } else {
-      role = 2;
-    }
+    this.editUser.get('role').value === true ? role = 1 : role = 2;
+
     let body = new User(
       this.editUser.get('email').value,
       this.editUser.get('name').value,
@@ -53,29 +47,22 @@ export class AdminUsersEditComponent implements OnInit {
       this.editUser.get('cityId').value,
       null
     );
-    this.userService.putUser(this.searchEmail, body)
-      .subscribe(data => {
-      this.user = data;
-        this.router.navigate(['/admin/users']);
-      });
+    this.userService.putUser(this.email, body)
+      .subscribe(() => this.router.navigate(['/admin/users']));
   }
+
   ngOnInit() {
-    this.loaded = false;
-    let params: any = this.route.queryParams;
-    this.searchEmail = params.value.email;
+    this.route.queryParams.subscribe((data) => this.email = data.email);
     this.cityService.getCities().subscribe(data => this.cities = data);
-    this.userService.getUserByEmail(this.searchEmail)
-      .subscribe(data => {
-        this.user = data;
-        this.editUser.get('email').setValue(this.user.Email);
-        this.editUser.get('name').setValue(this.user.Name);
-        this.editUser.get('phone').setValue(this.user.Phone);
-        if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
-          this.editUser.get('role').setValue(true);
-        } else {
+    this.userService.getUserByEmail(this.email)
+      .subscribe((data: User) => {
+        this.editUser.get('email').setValue(data.Email);
+        this.editUser.get('name').setValue(data.Name);
+        this.editUser.get('phone').setValue(data.Phone);
+        (data.RoleName === 'PortalAdmin' || data.RoleName === 'PortalManager') ?
+          this.editUser.get('role').setValue(true) :
           this.editUser.get('role').setValue(false);
-        }
-        this.editUser.get('cityId').setValue(this.user.CityId);
+        this.editUser.get('cityId').setValue(data.CityId);
         this.loaded = true;
       });
   }

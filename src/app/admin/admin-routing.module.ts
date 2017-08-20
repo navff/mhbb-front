@@ -21,7 +21,7 @@ const routes: Routes = [
       { path: '', component: AdminMainComponent },
       { path: 'edit', component: UserEditComponent },
       { path: 'act/:id', component: DetailsComponent },
-      { path: 'act/edit/:id', component: AdminActEditComponent },
+      { path: 'act/:id/edit', component: AdminActEditComponent },
       { path: 'organizers', component: AdminOrganizersComponent },
       { path: 'organizers/edit/:id', component: AdminOrganizersEditComponent },
       { path: 'organizers/add', component: AdminOrganizersEditComponent },

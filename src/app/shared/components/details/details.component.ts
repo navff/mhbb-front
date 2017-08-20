@@ -75,7 +75,7 @@ export class DetailsComponent implements OnInit {
       });
   }
   ngOnInit() {
-    this.route.params.subscribe(params => this.activityId = params['id']);
+    this.route.params.subscribe(params => this.activityId = params.id);
     this.activityService.getActivity(this.activityId)
       .subscribe(data => {
         this.activity = data;

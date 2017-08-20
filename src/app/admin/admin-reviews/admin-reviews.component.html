@@ -1,26 +1,31 @@
 <mh-progress [loading]="!loaded"></mh-progress>
-<h1 class="admin-heading container">Отзывы на проверку</h1>
 <form class="container">
-    <md-input-container class="form-item">
+    <h1 class="admin-heading">Отзывы на проверку</h1>
+    <md-input-container class="input">
         <input (keyup)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
     </md-input-container>
-    <md-select (change)="search()" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город"
-        floatPlaceholder="never">
+    <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
     </md-select>
 </form>
-<div class="container reviews">
+
+<div class="container">
     <div *ngFor="let review of reviews; let i = index" class="review">
-        <p class="review-name-date"><a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: review.User.Email }">{{review.User?.Name}}</a>, {{review.DateCreated
-            | myDate }}г.</p>
-        <pre class="review-text">{{review.Text}}</pre>
-        <p class="review-descr">Отзыв о <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a></p>
+        <p>
+            <a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: review.User.Email }">
+            {{review.User?.Name}}
+            </a>
+            , {{review.DateCreated
+            | myDate }}г.
+        </p>
+        <p class="text">{{review.Text}}</p>
+        <p >Отзыв о <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a></p>
         <div class="buttons">
-            <a (click)="accept(review.Id, i)" *ngIf="!review.state" class="button-accept">ПРИНЯТЬ</a>
-            <a (click)="delete(review.Id, i)" *ngIf="!review.state" class="button-reject">ОТКЛОНИТЬ</a>
-            <p *ngIf="review.state === 1" class="text-accept">Отзыв принят</p>
-            <p *ngIf="review.state === -1" class="text-reject">Отзыв отклонен</p>
-            <md-progress-spinner *ngIf="responding === i" color="accent" mode="indeterminate" class="button-spinner"></md-progress-spinner>
+            <a (click)="accept(review.Id, i)" *ngIf="!review.state" class="accept">ПРИНЯТЬ</a>
+            <a (click)="reject(review.Id, i)" *ngIf="!review.state" class="reject">ОТКЛОНИТЬ</a>
+            <p *ngIf="review.state === 'accepted'" class="text-accept">Отзыв принят</p>
+            <p *ngIf="review.state === 'rejected' " class="text-reject">Отзыв отклонен</p>
+            <md-progress-spinner *ngIf="review.state === 'accepting' || review.state === 'rejecting'" mode="indeterminate" [color]="review.state === 'accepting' ? 'accent' : 'warn'"></md-progress-spinner>
         </div>
     </div>
     <h2 class="no-results" *ngIf="loaded && reviews.length === 0">По вашему запросу ничего не найдено.</h2>

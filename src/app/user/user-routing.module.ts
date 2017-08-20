@@ -18,10 +18,10 @@ const routes: Routes = [
     children: [
       { path: '', component: MainComponent },
       { path: 'enter', component: EnterComponent },
-      { path: 'enter/entersuccess', component: EnterSuccessComponent },
+      { path: 'enter/success', component: EnterSuccessComponent },
       { path: 'act/:id', component: DetailsComponent },
-      { path: 'act/reservation/:id', component: ReservationComponent },
-      { path: 'act/reservation/success/:id', component: ReservationSuccessComponent },
+      { path: 'act/:id/reservation', component: ReservationComponent },
+      { path: 'act/:id/reservation/success', component: ReservationSuccessComponent },
       { path: 'user', component: UserEditComponent },
 
       { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule' },

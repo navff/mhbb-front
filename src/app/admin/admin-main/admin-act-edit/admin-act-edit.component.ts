@@ -146,7 +146,7 @@ export class AdminActEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.activityId = params['id']);
+    this.route.params.subscribe(params => this.activityId = params.id);
     this.interestService.getInterests().subscribe(data => this.interests = data);
 
     this.activityService.getActivity(this.activityId)

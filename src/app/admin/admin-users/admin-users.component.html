@@ -1,10 +1,10 @@
 <mh-progress [loading]="!loaded"></mh-progress>
-<h1 class="admin-heading container">Пользователи</h1>
 <form class="container">
-    <md-input-container class="form-item">
-        <input (keyup)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+    <h1 class="admin-heading">Пользователи</h1>
+    <md-input-container class="input">
+        <input (ngModelChange)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
     </md-input-container>
-    <md-select (change)="search()" [(ngModel)]="city" name="city" class="form-item-cities" placeholder="Город" floatPlaceholder="never">
+    <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
     </md-select>
     <md-checkbox (click)="!admin ? search(0, 1) : search(null, null)" [(ngModel)]="admin" name="admin" color="primary">Представители в городах</md-checkbox>
@@ -13,7 +13,7 @@
 <section class="container">
     <div class="users">
         <div class="user" *ngFor="let user of users">
-            <a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: user.Email }">{{user.Name}}</a>
+            <a routerLink="edit" [queryParams]="{ email: user.Email }">{{user.Email}}</a>
         </div>
     </div>
     <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>

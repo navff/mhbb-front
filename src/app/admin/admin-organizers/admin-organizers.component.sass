@@ -1,45 +1,37 @@
-form
-    font-size: 1.25rem
-.form-item-cities
-    width: 13rem
-[class^="form-item"]
-    width: 13rem
-    margin: 0 4.375rem 3.125rem 0
-
 .admin-heading
     display: inline-block
-.hobbies-add
+.btn-add
     display: inline-block
     position: relative
     transition: 0.4s
     transform: scale(.7)
     top: 0.625rem
     left: 0.625rem
-    
-    &:before
+    &:before,
+    &:after
         content: ""
-        display: block
         position: absolute
+        background-color: white
+    &:before
         top: 1rem
         right: 1.625rem
         width: 0.25rem
         height: 1.625rem
-        background-color: white
+        
     &:after
-        content: ""
-        display: block
-        position: absolute
         top: 1.6875rem
         left: 0.9375rem
         width: 1.625rem
         height: 0.25rem
-        background-color: white
     &:hover
         transform: scale(.8)
 
-.organizers
-    width: 1600
-    margin-bottom: 5rem
+form
+    font-size: 1.25rem
+    .input
+        width: 13rem
+        margin: 0 4.375rem 3.125rem 0
+
 .organizer
     display: inline-block
     font-size: 1.0625rem

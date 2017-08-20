@@ -1,35 +1,32 @@
 import { AuthService } from './../shared/services/auth.service';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CityService } from '../shared/services/city.service';
 import { ActivityService } from '../shared/services/activity.service';
 
 @Component({
   selector: 'mh-admin-main',
   templateUrl: './admin.component.html',
-  styleUrls: [ './admin.component.sass' ],
+  styleUrls: ['./admin.component.sass'],
   providers: [CityService, ActivityService],
 })
 export class AdminComponent implements OnInit {
-  activities = [];
-  activitiesCount: number;
-  scrolled: boolean;
-  userEmail: string;
-  constructor(private activityService: ActivityService,
-              private auth: AuthService) {}
+  activitiesAmount: number;
+  email: string;
 
-  exitAdmin() {
-    localStorage.setItem('token' , '');
+  constructor(private activityService: ActivityService,
+    private auth: AuthService) { }
+
+  exitAdmin(): void {
+    localStorage.setItem('token', '');
     window.location.reload();
   }
+
   ngOnInit() {
     this.activityService.getUncheckedActivities()
-    .subscribe(data => {
-      this.activities = data;
-      this.activitiesCount = this.activities.length;
-    });
+      .subscribe(data => this.activitiesAmount = data.length);
     if (this.auth.token) {
-    this.auth.getUserByToken()
-    .subscribe(data => this.userEmail = data.Email);
+      this.auth.getUserByToken()
+        .subscribe(data => this.email = data.Email);
     }
   }
 }

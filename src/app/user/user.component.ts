@@ -12,11 +12,12 @@ export class UserComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router) { }
 
-  setAdmin() {
+  setAdmin(): void {
     localStorage.setItem('token', 'ABRAKADABRA');
     this.router.navigate(['']);
     window.location.reload();
   }
+
   ngOnInit() {
     if (this.auth.token) {
       this.auth.getUserByToken()

@@ -1,33 +1,29 @@
 form
     font-size: 1.25rem
-.form-item-cities
-    width: 13rem
-[class^="form-item"]
+.input
     width: 13rem
     margin: 0 4.375rem 3.125rem 0
-
-.reviews
-    margin-bottom: 2.5rem
 .review
     padding: 1.25rem
     background-color: rgba(121,85,72,.12)
     width: 47.5rem
     position: relative
     margin-bottom: 1.3438rem
-a
-    text-decoration: underline
-    cursor: pointer
-.review-text
-    display: block
-    width: 30rem
-    margin: 0.9375rem 0 1.25rem
+    a
+        text-decoration: underline
+    .text
+        display: block
+        white-space: pre-line
+        width: 30rem
+        margin: 0.9375rem 0 1.25rem
 
 .buttons
     font-size: 0.875rem
     position: absolute
     right: 0.9375rem
     top: 0.9375rem
-    [class^="button-"]
+    .accept,
+    .reject
         text-decoration: none
         display: inline-block
         height: 2.5rem
@@ -37,10 +33,11 @@ a
         transition: .2s
         &:hover
             background-color: rgba(121,85,72,.3)
-    .button-reject
+    .reject
         color: red
         margin-left: -0.25rem
-    .text-accept
+    .text-accept,
+    .text-reject
         color: #4CAF50
         font-size: 1.0625rem
         text-align: center
@@ -48,14 +45,10 @@ a
         width: 15rem
     .text-reject
         color: #F44336
-        font-size: 1.0625rem
-        text-align: center
-        margin-top: 0.6875rem
-        width: 15rem
-    .button-spinner
+    md-progress-spinner
         position: absolute
         top: 0.0625rem
-        right: -3.75rem
+        right: 6.4rem
         width: 2.125rem
         height: 2.125rem
 .no-results

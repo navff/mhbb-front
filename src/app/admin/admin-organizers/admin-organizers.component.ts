@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../shared/services/organizer.service';
 import { CityService } from '../../shared/services/city.service';
 import { Subject } from 'rxjs/Subject';
+import { Organizer } from '../../models/organizer.model';
 
 @Component({
   selector: 'mh-admin-organizers',
@@ -11,44 +12,39 @@ import { Subject } from 'rxjs/Subject';
 })
 export class AdminOrganizersComponent implements OnInit {
   cities = [];
-  organizers = [];
+  organizers: Organizer[] = [];
 
   page = 1;
   word: string;
-  searchWord: Subject<string> = new Subject();
-  city: any = { id: undefined };
+  searchWord: Subject<any> = new Subject();
+  city: any = {};
   checkLength: number;
 
-  loaded = false;
-  responding = false;
+  loaded: boolean;
+  responding: boolean;
 
   constructor(
     private organizerService: OrganizerService,
     private cityService: CityService) { }
 
-  concatPage() {
+  concatPage(): void {
     this.responding = true;
     this.page += 1;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
-      .subscribe(data => {
+      .subscribe((data: Organizer[]) => {
         this.organizers = this.organizers.concat(data);
         this.checkLength = data.length;
         this.responding = false;
       });
   }
-  reset() {
-    this.page = 1;
-    this.organizers = [];
-    this.loaded = false;
-    this.checkLength = 0;
-  }
   updateWord(word: string): void {
     this.searchWord.next(word);
   }
-  search() {
-    this.reset();
+  search(): void {
+    this.page = 1;
+    this.loaded = false;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
-      .subscribe(data => {
+      .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;
         this.loaded = true;
@@ -58,8 +54,8 @@ export class AdminOrganizersComponent implements OnInit {
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
-    this.organizerService.getOrganizers(this.page.toString(10))
-      .subscribe(data => {
+    this.organizerService.getOrganizers()
+      .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;
         this.loaded = true;

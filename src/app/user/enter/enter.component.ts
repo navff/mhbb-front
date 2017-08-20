@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'mh-enter',
@@ -11,8 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class EnterComponent {
   email: string;
-  responding = false;
-  sub: Subscription;
+  responding: boolean;
 
   constructor(
     private auth: AuthService,
@@ -26,9 +24,6 @@ export class EnterComponent {
   registerUser() {
     this.responding = true;
     this.auth.postUser(this.email)
-      .subscribe(() => {
-        this.router.navigate(['/enter/entersuccess']);
-        this.responding = false;
-      });
+      .subscribe(() => this.router.navigate(['/enter/success']));
   }
 }

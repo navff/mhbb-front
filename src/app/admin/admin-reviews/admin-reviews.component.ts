@@ -10,18 +10,18 @@ import { Subject } from 'rxjs/Subject';
   providers: [ReviewService, CityService]
 })
 export class AdminReviewsComponent implements OnInit {
-  reviews = [];
+  reviews: any[] = [];
   cities = [];
   word: string;
-  searchWord: Subject<string> = new Subject();
-  city: any = { id: undefined };
-  loaded = false;
-  responding: number;
+  searchWord: Subject<any> = new Subject();
+  city: any = {};
+  loaded: boolean;
 
-  constructor(private reviewService: ReviewService,
+  constructor(
+    private reviewService: ReviewService,
     private cityService: CityService) { }
 
-  search() {
+  search(): void {
     this.loaded = false;
     this.reviewService.getUncheckedReviews(this.word, this.city.Id)
       .subscribe(data => {
@@ -32,22 +32,17 @@ export class AdminReviewsComponent implements OnInit {
   updateWord(word: string): void {
     this.searchWord.next(word);
   }
-  delete(id, index) {
-    this.responding = index;
+  reject(id, index): void {
+    this.reviews[index].state = 'rejecting';
     this.reviewService.deleteReview(id)
-      .subscribe(() => {
-        this.reviews[index].state = -1;
-        this.responding = null;
-      });
+      .subscribe(() => this.reviews[index].state = 'rejected');
   }
-  accept(id, index) {
-    this.responding = index;
+  accept(id, index): void {
+    this.reviews[index].state = 'accepting';
     this.reviewService.putSetChecked(id, 'true')
-      .subscribe(() => {
-        this.reviews[index].state = 1;
-        this.responding = null;
-      });
+      .subscribe(() => this.reviews[index].state = 'accepted');
   }
+
   ngOnInit() {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);

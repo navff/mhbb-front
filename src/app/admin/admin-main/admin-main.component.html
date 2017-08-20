@@ -1,33 +1,33 @@
-<mh-progress [loading]="loading || uncheckedLoading"></mh-progress>
+<mh-progress [loading]="!loaded"></mh-progress>
 
 <h1 class="admin-heading container">Курсы и хобби</h1>
 <section class="hobbies container">
-    <form class="hobbies-form">
-        <md-input-container class="hobbies-search">
+    <form>
+        <md-input-container class="search">
             <input (keyup)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
         </md-input-container>
 
-        <md-input-container class="hobbies-age">
+        <md-input-container class="age">
             <input (keyup)="updateAge(age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" myOnlyNumber maxlength="3">
         </md-input-container>
 
-        <md-select (change)="search()" [(ngModel)]="interest" name="interest" class="hobbies-interests" placeholder="Интересы"
+        <md-select (change)="search()" [(ngModel)]="interest" name="interest" class="interests" placeholder="Интересы"
             floatPlaceholder="never">
             <md-option *ngFor="let interest of interests" [value]="interest">{{ interest.Name }}</md-option>
         </md-select>
 
-        <md-select (change)="search()" [(ngModel)]="city" name="city" class="hobbies-cities" placeholder="Город" floatPlaceholder="never">
+        <md-select (change)="search()" [(ngModel)]="city" name="city" class="cities" placeholder="Город" floatPlaceholder="never">
             <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
         </md-select>
 
-        <md-checkbox (click)="search(!IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="hobbies-soberness" mdTooltip="Преподаватели не пьют и не курят">Трезвость</md-checkbox>
+        <md-checkbox (click)="search(!IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="soberness" mdTooltip="Преподаватели не пьют и не курят">Трезвость</md-checkbox>
         <md-checkbox (click)="search(null, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary">Бесплатно</md-checkbox>
-        <a class="hobbies-add" routerLink='/admin/addhobby' md-fab></a>
+        <a class="btn-add" routerLink='addhobby' md-fab></a>
     </form>
 
     <h2 class="admin-heading">На проверку</h2>
-    <mh-activities [activities]="uncheckedActivities" [loading]="uncheckedLoading"></mh-activities>
+    <mh-activities [activities]="uncheckedActivities" [loading]="!loaded"></mh-activities>
 
     <h2 class="admin-heading">Проверенные</h2>
-    <mh-activities [activities]="activities" [loading]="loading"></mh-activities>
+    <mh-activities [activities]="activities" [loading]="!loaded"></mh-activities>
 </section>

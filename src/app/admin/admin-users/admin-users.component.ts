@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import { CityService } from '../../shared/services/city.service';
 import { Subject } from 'rxjs/Subject';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'mh-admin-users',
@@ -11,48 +12,43 @@ import { Subject } from 'rxjs/Subject';
 })
 export class AdminUsersComponent implements OnInit {
   cities = [];
-  users = [];
+  users: User[] = [];
 
   word: string;
-  searchWord: Subject<string> = new Subject();
-  city: any = { id: undefined };
-  roles: any[] = [];
+  searchWord: Subject<any> = new Subject();
+  city: any = {};
+  roles = [];
   page = 1;
   checkLength: number;
 
-  loaded = false;
-  responding = false;
+  loaded: boolean;
+  responding: boolean;
 
   constructor(
     private userService: UserService,
     private cityService: CityService) { }
 
-  concatPage() {
+  updateWord(word: string): void {
+    this.searchWord.next(word);
+  }
+  concatPage(): void {
     this.responding = true;
     this.page += 1;
     this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
-      .subscribe(data => {
+      .subscribe((data: User[]) => {
         this.users = this.users.concat(data);
         this.checkLength = data.length;
         this.responding = false;
       });
 
   }
-  reset() {
-    this.page = 1;
-    this.users = [];
+  search(...adminBools): void {
     this.loaded = false;
-    this.checkLength = 0;
-  }
-  updateWord(word: string): void {
-    this.searchWord.next(word);
-  }
-  search(...adminBools) {
-    this.reset();
+    this.page = 1;
     if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
     if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
     this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
-      .subscribe(data => {
+      .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;
         this.loaded = true;
@@ -63,7 +59,7 @@ export class AdminUsersComponent implements OnInit {
     this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.userService.getUsers()
-      .subscribe(data => {
+      .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;
         this.loaded = true;

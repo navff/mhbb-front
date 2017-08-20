@@ -15,35 +15,30 @@ export class MainComponent implements OnInit {
   cities = [];
   interests = [];
   activities: Activity[];
-  loading = true;
 
   word: string;
   age: string;
   sobriety: string;
   free: string;
-  searchWord: Subject<string> = new Subject();
-  searchAge: Subject<string> = new Subject();
+  searchWord: Subject<any> = new Subject();
+  searchAge: Subject<any> = new Subject();
 
-  city: any = { id: undefined };
-  interest: any = { id: undefined };
+  city: any = {};
+  interest: any = {};
 
   checkLength: number;
   page = 1;
-  responding = false;
+  loaded: boolean;
+  responding: boolean;
 
   constructor(
     private activityService: ActivityService,
     private interestService: InterestService,
     private cityService: CityService) { }
 
-  reset() {
+  search(...values): void {
     this.page = 1;
-    this.activities = [];
-    this.loading = true;
-    this.checkLength = 0;
-  }
-  search(...values) {
-    this.reset();
+    this.loaded = false;
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
     this.activityService
@@ -51,7 +46,7 @@ export class MainComponent implements OnInit {
       .subscribe(data => {
         this.activities = data;
         this.checkLength = data.length;
-        this.loading = false;
+        this.loaded = true;
       });
   }
   updateWord(word: string): void {
@@ -60,7 +55,7 @@ export class MainComponent implements OnInit {
   updateAge(age: string): void {
     this.searchWord.next(age);
   }
-  concatPage() {
+  concatPage(): void {
     this.responding = true;
     this.page += 1;
     this.activityService.getActivities(this.page.toString(10))
@@ -76,11 +71,11 @@ export class MainComponent implements OnInit {
     this.activityService.getActivities().subscribe((data: Activity[]) => {
       this.activities = data;
       this.checkLength = data.length;
-      this.loading = false;
+      this.loaded = true;
     });
     this.interestService.getInterests().subscribe(data => {
       this.interests = data;
-      this.interests.unshift({Id: null, Name: 'Показать все'});
+      this.interests.unshift({ Id: null, Name: 'Показать все' });
     });
     this.cityService.getCities().subscribe(data => this.cities = data);
   }

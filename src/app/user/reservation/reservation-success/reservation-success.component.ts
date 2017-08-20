@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReservationSuccessComponent implements OnInit {
   activity: any = {};
-  activityId: string;
 
   constructor(
     private activityService: ActivityService,
@@ -18,10 +17,9 @@ export class ReservationSuccessComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.activityId = params['id']);
-    this.activityService.getActivity(this.activityId)
-      .subscribe(data => {
-        this.activity = data;
-      });
+    this.route.params.subscribe(params =>  {
+      this.activityService.getActivity(params.id)
+        .subscribe(data => this.activity = data);
+    });
   }
 }

@@ -14,11 +14,10 @@ import { Router } from '@angular/router';
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
-  currentUrl: string;
+  url: string;
   organizerId: string;
 
-  responding = false;
-  deleteResponding = false;
+  responding: string;
   loaded = true;
 
   editOrganizer: FormGroup;
@@ -31,40 +30,40 @@ export class AdminOrganizersEditComponent implements OnInit {
     this.editOrganizer = fb.group({
       'name': ['', Validators.required],
       'cityId': ['', Validators.required],
-      'sobriety': '',
+      'sobriety': false,
       'email': '',
       'phone': ''
     });
   }
 
   putOrganizer() {
-    this.responding = true;
+    this.responding = 'put';
     let body = new Organizer(
       this.editOrganizer.get('name').value,
       this.editOrganizer.get('cityId').value,
       this.editOrganizer.get('sobriety').value,
       this.editOrganizer.get('email').value,
       this.editOrganizer.get('phone').value);
-    if (this.currentUrl !== '/admin/organizers/add') {
-      this.organizerService.putOrganizer(this.organizerId, body)
-        .subscribe(() => this.router.navigate(['/admin/organizers']));
-    } else {
+    if (this.url === '/admin/organizers/add') {
       this.organizerService.postOrganizer(body)
         .subscribe(() => this.router.navigate(['/admin/organizers']));
+      } else {
+        this.organizerService.putOrganizer(this.organizerId, body)
+          .subscribe(() => this.router.navigate(['/admin/organizers']));
     }
   }
   deleteOrganizer() {
-    this.deleteResponding = true;
+    this.responding = 'delete';
     this.organizerService.deleteOrganizer(this.organizerId)
       .subscribe(() => this.router.navigate(['/admin/organizers']));
   }
 
   ngOnInit() {
-    this.currentUrl = this.router.url;
+    this.url = this.router.url;
     this.cityService.getCities().subscribe(data => this.cities = data);
-    if (this.currentUrl !== '/admin/organizers/add') {
+    if (this.url !== '/admin/organizers/add') {
       this.loaded = false;
-      this.route.params.subscribe(params => this.organizerId = params['id']);
+      this.route.params.subscribe(params => this.organizerId = params.id);
       this.organizerService.getOrganizerById(this.organizerId)
         .subscribe((data: Organizer) => {
           this.editOrganizer.get('name').setValue(data.Name);

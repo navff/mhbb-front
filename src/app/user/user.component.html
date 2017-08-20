@@ -1,18 +1,16 @@
 <div class="content">
-	<a style="display: none" routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
-	<header *ngIf="!admin.isActive" [ngClass]="{'home-header': home.isActive}">
-		<ul class="main-nav container">
-			<li><img routerLink='' routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" src="img/logo.svg"
-				 alt="" class="main-nav__link-logo" [ngClass]="{'home-logo': home.isActive}"></li>
-			<li><a href="javascript:void(0);" class="main-nav__link">О проекте</a></li>
-			<li><a href="javascript:void(0);" class="main-nav__link">Стать спонсором</a></li>
-			<li><a href="javascript:void(0);" class="main-nav__link">Стать представителем</a></li>
-			<li><a routerLink='/enter' class="main-nav__link-enter">Вход</a></li>
-			<!--*ngIf="!userEmail"-->
-			<li><a (click)="setAdmin()" href="javascript:void(0);" class="main-nav__link-enter">Админ</a></li>
-			<li *ngIf="userEmail"><a routerLink="/user" class="main-nav__link-enter">{{userEmail}}</a></li>
-		</ul>
-		<h1 *ngIf="home.isActive" class="header-text">Находим хобби по вкусу и возрасту</h1>
+	<header [ngClass]="{'home-header': home.isActive}">
+		<div class="container">
+			<img routerLink='' routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" src="img/logo.svg"
+				 alt="Моё Хобби" class="logo" [ngClass]="{'home-logo': home.isActive}">
+			<a>О проекте</a>
+			<a>Стать спонсором</a>
+			<a>Стать представителем</a>
+			<a routerLink='/enter' class="enter">Вход</a>
+			<a (click)="setAdmin()" class="enter">Админ</a>
+			<a *ngIf="userEmail" routerLink="/user" class="enter">{{userEmail}}</a>
+		<h1 *ngIf="home.isActive">Находим хобби по вкусу и возрасту</h1>
+		</div>
 	</header>
 
 	<router-outlet></router-outlet>

@@ -1,15 +1,15 @@
 <div class="content">
     <header>
-        <ul class="main-nav container">
-            <li><img routerLink='/admin' src="img/logo.svg" alt="" class="main-nav__link-logo"></li>
-            <li><a routerLink='/admin' class="main-nav__link">Хобби</a></li>
-            <li><a routerLink='organizers' class="main-nav__link">Организаторы</a></li>
-            <li><a routerLink='users' class="main-nav__link">Пользователи</a></li>
-            <li><a routerLink='reviews' class="main-nav__link">Отзывы на проверку</a></li>
-            <li><a (click)="exitAdmin()" href="javascript:void(0);" class="main-nav__link-exit">Выход</a></li>
-            <li *ngIf="userEmail"><a routerLink="edit" class="main-nav__link-enter">{{userEmail}}</a></li>
-            <div class="activities-count">{{activitiesCount}}</div>
-        </ul>
+        <div class="container">
+            <img routerLink='/admin' src="img/logo.svg" alt="Моё Хобби" class="logo">
+            <a routerLink='/admin'>Хобби</a>
+            <a routerLink='organizers'>Организаторы</a>
+            <a routerLink='users'>Пользователи</a>
+            <a routerLink='reviews'>Отзывы на проверку</a>
+            <a (click)="exitAdmin()" class="exit">Выход</a>
+            <a routerLink="edit" *ngIf="email" class="enter">{{email}}</a>
+            <p>{{activitiesAmount}}</p>
+        </div>
     </header>
 
     <router-outlet></router-outlet>

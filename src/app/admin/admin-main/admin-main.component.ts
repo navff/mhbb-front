@@ -20,27 +20,20 @@ export class AdminMainComponent implements OnInit {
   age: string;
   sobriety: any;
   free: any;
-  searchWord: Subject<string> = new Subject();
-  searchAge: Subject<string> = new Subject();
-  city: any = { id: undefined };
-  interest: any = { id: undefined };
-  loading = true;
+  searchWord: Subject<any> = new Subject();
+  searchAge: Subject<any> = new Subject();
+  city: any = {};
+  interest: any = {};
+  loaded: boolean;
   uncheckedActivities: Activity[];
-  uncheckedLoading = true;
 
   constructor(
     private activityService: ActivityService,
     private cityService: CityService,
     private interestService: InterestService) { }
 
-  reset() {
-    this.loading = true;
-    this.uncheckedLoading = true;
-    this.activities = [];
-    this.uncheckedActivities = [];
-  }
-  search(...values) {
-    this.reset();
+  search(...values): void {
+    this.loaded = false;
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
 
@@ -48,12 +41,11 @@ export class AdminMainComponent implements OnInit {
       .getUncheckedActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
       .subscribe(data => {
         this.uncheckedActivities = data;
-        this.uncheckedLoading = false;
         this.activityService
           .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
           .subscribe(act => {
             this.activities = act;
-            this.loading = false;
+            this.loaded = true;
           });
       });
 
@@ -75,11 +67,10 @@ export class AdminMainComponent implements OnInit {
     this.activityService.getUncheckedActivities()
       .subscribe((data: Activity[]) => {
         this.uncheckedActivities = data;
-        this.uncheckedLoading = false;
         this.activityService.getActivities()
           .subscribe((act: Activity[]) => {
             this.activities = act;
-            this.loading = false;
+            this.loaded = true;
           });
       });
   }
