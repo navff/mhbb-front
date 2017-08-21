@@ -57,8 +57,8 @@ export class AdminMainComponent implements OnInit {
     this.searchWord.next(age);
   }
   ngOnInit() {
-    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
+    this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
+    this.searchAge.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.interestService.getInterests().subscribe(data => {
       this.interests = data;

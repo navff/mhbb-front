@@ -52,7 +52,7 @@ export class AdminOrganizersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
+    this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.organizerService.getOrganizers()
       .subscribe((data: Organizer[]) => {

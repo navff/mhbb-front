@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { CityService } from '../shared/services/city.service';
 import { InterestService } from '../shared/services/interest.service';
 import { ActivityService } from '../shared/services/activity.service';
+import { OrganizerService } from '../shared/services/organizer.service';
 import { Activity } from '../models/activity.model';
 import { TempFile } from '../models/tempfile.model';
 import { Router } from '@angular/router';
@@ -11,13 +11,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'mh-add-hobby',
   templateUrl: './add-hobby.component.html',
-  providers: [InterestService, CityService, ActivityService],
+  providers: [InterestService, ActivityService, OrganizerService],
   styleUrls: ['./add-hobby.component.sass']
 })
 export class AddHobbyComponent implements OnInit {
-  cities = [];
   interests = [];
-
+  organizers = [];
   fileNames = [];
   fileData = [];
   fileId = [];
@@ -26,8 +25,9 @@ export class AddHobbyComponent implements OnInit {
   responding = false;
   addHobby: FormGroup;
 
-  constructor(private interestService: InterestService,
-    private cityService: CityService,
+  constructor(
+    private interestService: InterestService,
+    private organizerService: OrganizerService,
     fb: FormBuilder,
     private activityService: ActivityService,
     private router: Router
@@ -51,6 +51,9 @@ export class AddHobbyComponent implements OnInit {
       'image2': '',
       'image3': ''
     });
+  }
+  filterOrganizers(value) {
+    this.organizerService.getOrganizers('1', value).subscribe(data => this.organizers = data);
   }
   submitForm() {
     this.responding = true;
@@ -77,7 +80,7 @@ export class AddHobbyComponent implements OnInit {
     this.activityService.postActivity(body)
       .subscribe(() => {
         this.router.url === '/admin/addhobby' ? this.router.navigate(['/admin/addhobby/success'])
-                                              : this.router.navigate(['/addhobby/success']);
+          : this.router.navigate(['/addhobby/success']);
         this.responding = false;
       });
   }
@@ -114,6 +117,6 @@ export class AddHobbyComponent implements OnInit {
   }
   ngOnInit() {
     this.interestService.getInterests().subscribe(data => this.interests = data);
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.organizerService.getOrganizers('1').subscribe(res => this.organizers = res);
   }
 }

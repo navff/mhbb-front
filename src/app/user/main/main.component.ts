@@ -66,8 +66,8 @@ export class MainComponent implements OnInit {
       });
   }
   ngOnInit() {
-    this.searchWord.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
-    this.searchAge.debounceTime(300).distinctUntilChanged().subscribe(() => this.search());
+    this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
+    this.searchAge.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.activityService.getActivities().subscribe((data: Activity[]) => {
       this.activities = data;
       this.checkLength = data.length;
