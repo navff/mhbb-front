@@ -27,7 +27,7 @@ export class AdminActEditComponent implements OnInit {
   organizerName: string;
   organizers = [];
   loaded = false;
-  responding = false;
+  responding: string;
   editHobby: FormGroup;
 
   picId = [];
@@ -106,7 +106,7 @@ export class AdminActEditComponent implements OnInit {
     }
   }
   submitForm() {
-    this.responding = true;
+    this.responding = 'saving';
 
     this.organizers.forEach((org) => {
       if (org.Name.toLowerCase() === this.editHobby.get('organizer').value.toLowerCase()) {
@@ -137,14 +137,15 @@ export class AdminActEditComponent implements OnInit {
           .subscribe(() => loop(++i)) : loop(++i);
       } else {
         that.activityService.putActivity(body, that.activityId)
-          .subscribe(() => {
-            that.responding = false;
-            that.router.navigate(['/admin/act', that.activityId]);
-          });
+          .subscribe(() => that.router.navigate(['/admin/act', that.activityId]));
       }
     })(0);
   }
-
+  deleteActivity(): void {
+    this.responding = 'deleting';
+    this.activityService.deleteActivity(this.activityId)
+      .subscribe(() => this.router.navigate(['/admin']));
+  }
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params.id);
     this.interestService.getInterests().subscribe(data => this.interests = data);

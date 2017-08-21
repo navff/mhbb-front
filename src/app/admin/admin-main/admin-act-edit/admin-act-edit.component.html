@@ -92,7 +92,8 @@
                 <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="editHobby.controls['mentor']"></textarea>
             </md-input-container>
 
-            <mh-button [disabled]="!editHobby.valid" [loading]="responding">СОХРАНИТЬ</mh-button>
+            <mh-button [disabled]="!editHobby.valid" [loading]="responding === 'saving'">СОХРАНИТЬ</mh-button>
         </div>
     </form>
+        <mh-button (click)="deleteActivity()" [loading]="responding === 'deleting'" class="btn-delete" color="warn">УДАЛИТЬ</mh-button>
 </div>
