@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { PicturesComponent } from './components/pictures/pictures.component';
 
 @NgModule({
   imports: [
@@ -27,14 +28,14 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
   ],
   declarations: [
     OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent,
-    ProgressBarComponent
+    ProgressBarComponent, PicturesComponent
   ],
   exports: [
     HttpModule, FormsModule, ReactiveFormsModule,
     MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
     MdProgressBarModule, MdTooltipModule,
     OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent,
-    ProgressBarComponent
+    ProgressBarComponent, PicturesComponent
   ]
 })
 export class SharedModule { }

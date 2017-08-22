@@ -12,14 +12,7 @@
                 <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
             </div>
         </div>
-
-        <div [ngStyle]="{'background-image': 'url(' +  picUrls[0] + ')'}" class="main-picture"></div>
-
-        <div class="secondary-pictures">
-            <div [ngStyle]="{'background-image': 'url(' +  picUrls[1] + ')'}" class="secondary-picture"></div>
-            <div [ngStyle]="{'background-image': 'url(' +  picUrls[2] + ')'}" class="secondary-picture"></div>
-            <div [ngStyle]="{'background-image': 'url(' +  picUrls[3] + ')'}" class="secondary-picture"></div>
-        </div>
+        <mh-pictures [pictures]="picUrls"></mh-pictures>
     </section>
 
     <section class="info">

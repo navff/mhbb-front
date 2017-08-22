@@ -1,0 +1,9 @@
+<div (click)="toggle(0)" [ngStyle]="{'background-image': 'url(' +  pictures[0] + ')', 'cursor': pictures[0] ? 'cell' : 'default'}" class="main"></div>
+
+<div class="secondary">
+    <div (click)="toggle(1)" [ngStyle]="{'background-image': 'url(' +  pictures[1] + ')', 'cursor': pictures[1] ? 'cell' : 'default'}" class="secondary"></div>
+    <div (click)="toggle(2)" [ngStyle]="{'background-image': 'url(' +  pictures[2] + ')', 'cursor': pictures[2] ? 'cell' : 'default'}" class="secondary"></div>
+    <div (click)="toggle(3)" [ngStyle]="{'background-image': 'url(' +  pictures[3] + ')', 'cursor': pictures[3] ? 'cell' : 'default'}" class="secondary"></div>
+</div>
+
+<div class="show" *ngIf="pictureShow" [ngStyle]="{'background-image': 'url(' +  pictures[number] + ')'}"></div>
