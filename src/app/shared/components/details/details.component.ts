@@ -30,10 +30,10 @@ export class DetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) { }
 
-  votePositive() {
+  vote(type: string): void {
     if (localStorage.getItem('token')) {
       let oldAmount = this.voteAmount;
-      this.voicesService.votePositive(this.activityId)
+      this.voicesService.vote(this.activityId, type)
         .subscribe(data => {
         this.voteAmount = data;
           oldAmount === data ? this.voted = true : this.voted = false;
@@ -42,19 +42,7 @@ export class DetailsComponent implements OnInit {
       this.router.navigate(['enter']);
     }
   }
-  voteNegative() {
-    if (localStorage.getItem('token')) {
-      let oldAmount = this.voteAmount;
-      this.voicesService.voteNegative(this.activityId)
-        .subscribe(data => {
-        this.voteAmount = data;
-          oldAmount === data ? this.voted = true : this.voted = false;
-        });
-    } else {
-      this.router.navigate(['enter']);
-    }
-  }
-  publishReview() {
+  publishReview(): void {
     this.responding = true;
     let body = {
       ActivityId: parseInt(this.activityId, 10),
@@ -66,7 +54,7 @@ export class DetailsComponent implements OnInit {
         this.responding = false;
       });
   }
-  actApprove() {
+  actApprove(): void {
     this.approveResponding = true;
     this.activityService.putApproveActivity(true, this.activityId)
       .subscribe(() => {

@@ -1,12 +1,13 @@
+import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OrganizerService {
   token = localStorage.getItem('token');
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   getOrganizers(page?: string, word?: string, cityId?: string) {
     let search = new URLSearchParams();
@@ -24,21 +25,12 @@ export class OrganizerService {
       .map((data) => data.json());
   }
   putOrganizer(id: any, body: any) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.put(`http://test.mhbb.ru/b/api/organizer/${id}`, body, options)
-      .map((data) => data.json());
+    return this.http.myPut(`http://test.mhbb.ru/b/api/organizer/${id}`, body);
   }
   postOrganizer(body: any) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(`http://test.mhbb.ru/b/api/organizer`, body, options)
-      .map((data) => data.json());
+    return this.http.myPost(`http://test.mhbb.ru/b/api/organizer`, body);
   }
   deleteOrganizer(id: any) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.delete(`http://test.mhbb.ru/b/api/organizer/${id}`, options)
-      .map((data) => data.json());
+    return this.http.myDelete(`http://test.mhbb.ru/b/api/organizer/${id}`);
   }
 }

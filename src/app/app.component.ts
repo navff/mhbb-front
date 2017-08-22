@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {
-      !this.auth.token ?
+      !localStorage.getItem('token') ?
         this.router.navigate(['']) :
         this.auth.getUserByToken()
           .subscribe(user => {

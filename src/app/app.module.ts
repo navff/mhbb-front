@@ -7,10 +7,11 @@ import { SharedModule } from './shared/_shared.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthGuard } from './shared/auth.guard';
 import { AuthService } from './shared/services/auth.service';
+import { Http } from '@angular/http';
+import { HttpService } from './shared/services/http.service';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { AuthService } from './shared/services/auth.service';
     AppRoutingModule
   ],
   declarations: [AppComponent],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, HttpService, { provide: Http, useClass: HttpService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

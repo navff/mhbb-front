@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.activityService.getUncheckedActivities()
       .subscribe(data => this.activitiesAmount = data.length);
-    if (this.auth.token) {
+    if (localStorage.getItem('token')) {
       this.auth.getUserByToken()
         .subscribe(data => this.email = data.Email);
     }

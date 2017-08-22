@@ -6,9 +6,9 @@
         <div class="heading">
             <h1>{{activity.Name}}</h1>
             <div class="voicing" *ngIf="activity.IsChecked">
-                <img (click)="votePositive()" class="thumb-up" src="img/thumbs-up-black.svg">
+                <img (click)="vote('positive')" class="thumb-up" src="img/thumbs-up-black.svg">
                 <p class="amount">{{voteAmount}}</p>
-                <img (click)="voteNegative()" class="thumb-down" src="img/thumbs-up-black.svg">
+                <img (click)="vote('negative')" class="thumb-down" src="img/thumbs-up-black.svg">
                 <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
             </div>
         </div>

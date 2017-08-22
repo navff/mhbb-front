@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate() {
-    if (this.auth.token) {
+    if (localStorage.getItem('token')) {
       return this.auth.getUserByToken()
         .toPromise()
         .then((result) => {

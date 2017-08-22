@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { HttpService } from './http.service';
+import { Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserService {
   token = localStorage.getItem('token');
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   getUsers(page?: string, role1?: string, role2?: string, cityId?: string, word?: string) {
     let search = new URLSearchParams();
@@ -23,23 +24,12 @@ export class UserService {
       .map((data) => data.json());
   }
   getUserByEmail(email: string) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    let url = `http://test.mhbb.ru/b/api/user?email=${email}`;
-    return this.http.get(url, options)
-      .map((data) => data.json());
+    return this.http.myGet(`http://test.mhbb.ru/b/api/user?email=${email}`);
   }
-  putUser(email: any, body: any) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.put(`http://test.mhbb.ru/b/api/user?email=${email}`, body, options)
-      .map((data) => data.json());
+  putUser(email: string, body: any) {
+    return this.http.myPut(`http://test.mhbb.ru/b/api/user?email=${email}`, body);
   }
   deletePicture(id) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.delete(`http://test.mhbb.ru/b/api/picture/${id}`, options)
-      .map((data) => data.json());
+    return this.http.myDelete(`http://test.mhbb.ru/b/api/picture/${id}`);
   }
 }

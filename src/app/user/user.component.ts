@@ -19,7 +19,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.auth.token) {
+    if (localStorage.getItem('token')) {
       this.auth.getUserByToken()
         .subscribe(user => this.userEmail = user.Email);
     }

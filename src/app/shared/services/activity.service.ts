@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { HttpService } from './http.service';
+import { Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ActivityService {
   token = localStorage.getItem('token');
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   getActivities(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: any, free?: any) {
@@ -46,45 +47,24 @@ export class ActivityService {
       .map((data) => data.json());
   }
   postTempFile(body) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(`http://test.mhbb.ru/b/api/tempfile`, body, options)
-      .map((data) => data.json());
+    return this.http.myPost(`http://test.mhbb.ru/b/api/tempfile`, body);
   }
   deleteTempfile(id) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.delete(`http://test.mhbb.ru/b/api/tempfile/${id}`, options)
-      .map((data) => data.json());
+    return this.http.myDelete(`http://test.mhbb.ru/b/api/tempfile/${id}`);
   }
   deletePicture(id) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.delete(`http://test.mhbb.ru/b/api/picture/${id}`, options)
-      .map((data) => data.json());
+    return this.http.myDelete(`http://test.mhbb.ru/b/api/picture/${id}`);
   }
   postActivity(body) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post(`http://test.mhbb.ru/b/api/activity`, body, options)
-      .map((data) => data.json());
+    return this.http.myPost(`http://test.mhbb.ru/b/api/activity`, body);
   }
   putActivity(body, id) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.put(`http://test.mhbb.ru/b/api/activity/${id}`, body, options)
-      .map((data) => data.json());
+    return this.http.myPut(`http://test.mhbb.ru/b/api/activity/${id}`, body);
   }
   putApproveActivity(isChecked, id) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.put(`http://test.mhbb.ru/b/api/activity/setchecked?activityId=${id}&isChecked=${isChecked}`, null, options)
-      .map((data) => data.json());
+    return this.http.myPut(`http://test.mhbb.ru/b/api/activity/setchecked?activityId=${id}&isChecked=${isChecked}`);
   }
   deleteActivity(id: any) {
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.delete(`http://test.mhbb.ru/b/api/activity/${id}`, options)
-    .map((data) => data.json());
+    return this.http.myDelete(`http://test.mhbb.ru/b/api/activity/${id}`);
   }
 }
