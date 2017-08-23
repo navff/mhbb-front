@@ -16,9 +16,8 @@ export class DetailsComponent implements OnInit {
   loaded = false;
   reviews = [];
   reviewText: string;
-  published = false;
-  responding = false;
-  approveResponding = false;
+  published: boolean;
+  responding: string;
   voted = false;
 
   constructor(
@@ -30,18 +29,17 @@ export class DetailsComponent implements OnInit {
 
   vote(type: string): void {
     if (localStorage.getItem('token')) {
-      let oldAmount = this.activity.Voices;
       this.voicesService.vote(this.activity.Id, type)
         .subscribe(data => {
+          this.voted = this.activity.Voices === data ? true : false;
           this.activity.Voices = data;
-          oldAmount === data ? this.voted = true : this.voted = false;
         });
     } else {
       this.router.navigate(['enter']);
     }
   }
   publishReview(): void {
-    this.responding = true;
+    this.responding = 'publish';
     let body = {
       ActivityId: parseInt(this.activity.Id, 10),
       Text: this.reviewText
@@ -49,28 +47,25 @@ export class DetailsComponent implements OnInit {
     this.reviewService.postReview(body)
       .subscribe(() => {
         this.published = true;
-        this.responding = false;
+        this.responding = '';
       });
   }
   actApprove(): void {
-    this.approveResponding = true;
+    this.responding = 'approve';
     this.activityService.putApproveActivity(true, this.activity.Id)
-      .subscribe(() => {
-        this.approveResponding = false;
-        this.router.navigate(['/admin']);
-      });
+      .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.activityService.getActivity(params.id)
         .subscribe(data => {
           this.activity = data;
-          this.activity.Pictures.forEach((pic, i) => {
-            this.pictures[i] = pic.Url;
-          });
-          this.loaded = true;
+          this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);
           this.reviewService.getReviewsByActivity(this.activity.Id)
-            .subscribe(res => this.reviews = res);
+          .subscribe(res => {
+            this.reviews = res;
+            this.loaded = true;
+            });
         });
     });
   }

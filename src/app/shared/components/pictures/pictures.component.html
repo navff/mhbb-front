@@ -5,7 +5,8 @@
     <div (click)="open(2)" [ngStyle]="{'background-image': 'url(' +  pictures[2] + ')', 'cursor': pictures[2] ? 'cell' : 'default'}"></div>
     <div (click)="open(3)" [ngStyle]="{'background-image': 'url(' +  pictures[3] + ')', 'cursor': pictures[3] ? 'cell' : 'default'}"></div>
 </div>
-<div *ngIf="show" (click)="close()" class="shade"></div>
+
+<div *ngIf="show" (click)="close()" class="overlay"></div>
 <div class="show" *ngIf="show" [ngStyle]="{'background-image': 'url(' +  pictures[num] + ')'}">
     <a (click)="next()" md-fab class="next"></a>
     <a (click)="prev()" md-fab class="previous"></a>

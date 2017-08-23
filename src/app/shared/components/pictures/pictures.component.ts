@@ -11,7 +11,7 @@ export class PicturesComponent {
   show: boolean;
 
   @HostListener('document:keydown', ['$event'])
-  onKeyUp(ev) {
+  onKeyDown(ev) {
     if (ev.key === 'ArrowRight') { this.next(); }
     if (ev.key === 'ArrowLeft') { this.prev(); }
     if (ev.key === 'Escape') { this.close(); }

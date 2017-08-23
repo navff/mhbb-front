@@ -42,7 +42,7 @@
         <mh-button *ngIf="!admin.isActive" routerLink="reservation">ЗАПИСАТЬСЯ</mh-button>
         <div class="admin-buttons" *ngIf="admin.isActive">
             <mh-button routerLink="edit" color="primary">РЕДАКТИРОВАТЬ</mh-button>
-            <mh-button *ngIf="!activity.IsChecked && loaded" (click)="actApprove()" [loading]="approveResponding">ПОДТВЕРДИТЬ</mh-button>
+            <mh-button *ngIf="!activity.IsChecked && loaded" (click)="actApprove()" [loading]="responding === 'approve'">ПОДТВЕРДИТЬ</mh-button>
         </div>
     </section>
 
@@ -61,7 +61,7 @@
         <md-input-container>
             <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
         </md-input-container>
-        <mh-button *ngIf="!published" [loading]="responding" [disabled]="!reviewText" (click)="publishReview()" color="primary">Опубликовать</mh-button>
+        <mh-button *ngIf="!published" [loading]="responding === 'publish'" [disabled]="!reviewText" (click)="publishReview()" color="primary">Опубликовать</mh-button>
         <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
     </section>
 </div>
