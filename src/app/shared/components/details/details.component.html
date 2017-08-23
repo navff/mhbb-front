@@ -7,12 +7,12 @@
             <h1>{{activity.Name}}</h1>
             <div class="voicing" *ngIf="activity.IsChecked">
                 <img (click)="vote('positive')" class="thumb-up" src="img/thumbs-up-black.svg">
-                <p class="amount">{{voteAmount}}</p>
+                <p class="amount">{{activity.Voices}}</p>
                 <img (click)="vote('negative')" class="thumb-down" src="img/thumbs-up-black.svg">
                 <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
             </div>
         </div>
-        <mh-pictures [pictures]="picUrls"></mh-pictures>
+        <mh-pictures [pictures]="pictures"></mh-pictures>
     </section>
 
     <section class="info">

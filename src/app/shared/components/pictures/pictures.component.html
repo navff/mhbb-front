@@ -1,9 +1,13 @@
-<div (click)="toggle(0)" [ngStyle]="{'background-image': 'url(' +  pictures[0] + ')', 'cursor': pictures[0] ? 'cell' : 'default'}" class="main"></div>
+<div (click)="open(0)" [ngStyle]="{'background-image': 'url(' +  pictures[0] + ')', 'cursor': pictures[0] ? 'cell' : 'default'}" class="main"></div>
 
 <div class="secondary">
-    <div (click)="toggle(1)" [ngStyle]="{'background-image': 'url(' +  pictures[1] + ')', 'cursor': pictures[1] ? 'cell' : 'default'}" class="secondary"></div>
-    <div (click)="toggle(2)" [ngStyle]="{'background-image': 'url(' +  pictures[2] + ')', 'cursor': pictures[2] ? 'cell' : 'default'}" class="secondary"></div>
-    <div (click)="toggle(3)" [ngStyle]="{'background-image': 'url(' +  pictures[3] + ')', 'cursor': pictures[3] ? 'cell' : 'default'}" class="secondary"></div>
+    <div (click)="open(1)" [ngStyle]="{'background-image': 'url(' +  pictures[1] + ')', 'cursor': pictures[1] ? 'cell' : 'default'}"></div>
+    <div (click)="open(2)" [ngStyle]="{'background-image': 'url(' +  pictures[2] + ')', 'cursor': pictures[2] ? 'cell' : 'default'}"></div>
+    <div (click)="open(3)" [ngStyle]="{'background-image': 'url(' +  pictures[3] + ')', 'cursor': pictures[3] ? 'cell' : 'default'}"></div>
 </div>
-
-<div class="show" *ngIf="pictureShow" [ngStyle]="{'background-image': 'url(' +  pictures[number] + ')'}"></div>
+<div *ngIf="show" (click)="close()" class="shade"></div>
+<div class="show" *ngIf="show" [ngStyle]="{'background-image': 'url(' +  pictures[num] + ')'}">
+    <a (click)="next()" md-fab class="next"></a>
+    <a (click)="prev()" md-fab class="previous"></a>
+    <a (click)="close()" md-mini-fab color="primary" class="close"></a>
+</div>

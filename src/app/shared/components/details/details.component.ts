@@ -12,9 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
   activity: any = {};
-  activityId: string;
-  voteAmount: number;
-  picUrls = [];
+  pictures = [];
   loaded = false;
   reviews = [];
   reviewText: string;
@@ -32,10 +30,10 @@ export class DetailsComponent implements OnInit {
 
   vote(type: string): void {
     if (localStorage.getItem('token')) {
-      let oldAmount = this.voteAmount;
-      this.voicesService.vote(this.activityId, type)
+      let oldAmount = this.activity.Voices;
+      this.voicesService.vote(this.activity.Id, type)
         .subscribe(data => {
-        this.voteAmount = data;
+          this.activity.Voices = data;
           oldAmount === data ? this.voted = true : this.voted = false;
         });
     } else {
@@ -45,7 +43,7 @@ export class DetailsComponent implements OnInit {
   publishReview(): void {
     this.responding = true;
     let body = {
-      ActivityId: parseInt(this.activityId, 10),
+      ActivityId: parseInt(this.activity.Id, 10),
       Text: this.reviewText
     };
     this.reviewService.postReview(body)
@@ -56,24 +54,24 @@ export class DetailsComponent implements OnInit {
   }
   actApprove(): void {
     this.approveResponding = true;
-    this.activityService.putApproveActivity(true, this.activityId)
+    this.activityService.putApproveActivity(true, this.activity.Id)
       .subscribe(() => {
         this.approveResponding = false;
         this.router.navigate(['/admin']);
       });
   }
   ngOnInit() {
-    this.route.params.subscribe(params => this.activityId = params.id);
-    this.activityService.getActivity(this.activityId)
-      .subscribe(data => {
-        this.activity = data;
-        this.voteAmount = this.activity.Voices;
-        this.activity.Pictures.forEach((pic, i) => {
-          this.picUrls[i] = pic.Url;
+    this.route.params.subscribe(params => {
+      this.activityService.getActivity(params.id)
+        .subscribe(data => {
+          this.activity = data;
+          this.activity.Pictures.forEach((pic, i) => {
+            this.pictures[i] = pic.Url;
+          });
+          this.loaded = true;
+          this.reviewService.getReviewsByActivity(this.activity.Id)
+            .subscribe(res => this.reviews = res);
         });
-        this.loaded = true;
-      });
-    this.reviewService.getReviewsByActivity(this.activityId)
-      .subscribe(data => this.reviews = data);
+    });
   }
 }

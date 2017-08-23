@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 
 @Component({
   selector: 'mh-pictures',
@@ -7,14 +7,31 @@ import { Component, Input } from '@angular/core';
 })
 export class PicturesComponent {
   @Input() pictures: string[];
-  number: number;
-  pictureShow: boolean;
+  num: number;
+  show: boolean;
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyUp(ev) {
+    if (ev.key === 'ArrowRight') { this.next(); }
+    if (ev.key === 'ArrowLeft') { this.prev(); }
+    if (ev.key === 'Escape') { this.close(); }
+  }
 
   constructor() { }
 
-  toggle(number?: number) {
-    console.log('toggled');
-    this.pictureShow = (this.pictureShow && this.number === number) ? false : true;
-    this.number = number;
+  open(num?: number) {
+    if (this.pictures[num]) {
+      this.show = true;
+      this.num = num;
+    }
+  }
+  close() {
+    this.show = false;
+  }
+  prev() {
+    this.pictures[this.num - 1] ? --this.num : this.num = this.pictures.length - 1;
+  }
+  next() {
+    this.pictures[this.num + 1] ? ++this.num : this.num = 0;
   }
 }
