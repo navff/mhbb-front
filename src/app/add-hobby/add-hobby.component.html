@@ -55,7 +55,7 @@
 
         <div class='form-right'>
             <md-input-container class="form-item-organizer">
-                <input (keyup)="filterOrganizers(addHobby.get('organizerName').value)" (focus)="showOrganizers()"
+                <input (ngModelChange)="filterOrganizers(addHobby.get('organizerName').value)" (focus)="showOrganizers()" id="organizerInput"
                     mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="addHobby.controls['organizerName']">
             </md-input-container>
             <md-autocomplete #org="mdAutocomplete">
@@ -63,7 +63,8 @@
                     {{organizer.Name}}
                 </md-option>
             </md-autocomplete>
-            <md-select class="form-item-interests" placeholder="Город" [formControl]="addHobby.controls['cityId']">
+            <md-select class="form-item-interests" placeholder="Город" [formControl]="addHobby.controls['cityId']"
+                [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">
                 <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
             </md-select>
             <md-input-container class="form-item-age-from">
@@ -94,7 +95,8 @@
             <md-input-container class="form-item-guides">
                 <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="addHobby.controls['mentor']"></textarea>
             </md-input-container>
-            <md-checkbox color="primary" class="form-item-sobriety-checkbox" [formControl]="addHobby.controls['sobriety']">Преподаватели не пьют и не курят</md-checkbox>
+            <md-checkbox color="primary" class="form-item-sobriety-checkbox" [formControl]="addHobby.controls['sobriety']"
+            [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">Преподаватели не пьют и не курят</md-checkbox>
             <mh-button [disabled]="!addHobby.valid" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
         </div>
     </form>

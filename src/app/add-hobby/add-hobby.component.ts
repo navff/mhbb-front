@@ -71,6 +71,7 @@ export class AddHobbyComponent implements OnInit {
   }
   setOrganizer(id: string) {
     this.isOrganizerChosen = true;
+    document.getElementById('organizerInput').blur();
     this.organizerId = id;
     this.addHobby.controls['cityId'].disable();
     this.addHobby.controls['sobriety'].disable();
