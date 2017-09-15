@@ -55,14 +55,17 @@
 
         <div class='form-right'>
             <md-input-container class="form-item-organizer">
-                <input (keyup)="filterOrganizers(addHobby.get('organizerName').value)" (focus)="filterOrganizers(addHobby.get('organizerName').value)"
+                <input (keyup)="filterOrganizers(addHobby.get('organizerName').value)" (focus)="showOrganizers()"
                     mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="addHobby.controls['organizerName']">
             </md-input-container>
             <md-autocomplete #org="mdAutocomplete">
-                <md-option (click)="setOrganizerId(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">
+                <md-option (click)="setOrganizer(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">
                     {{organizer.Name}}
                 </md-option>
             </md-autocomplete>
+            <md-select class="form-item-interests" placeholder="Город" [formControl]="addHobby.controls['cityId']">
+                <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
+            </md-select>
             <md-input-container class="form-item-age-from">
                 <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [formControl]="addHobby.controls['ageFrom']">
             </md-input-container>

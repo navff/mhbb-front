@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { CityService } from './../shared/services/city.service';
 import { InterestService } from '../shared/services/interest.service';
 import { ActivityService } from '../shared/services/activity.service';
 import { OrganizerService } from '../shared/services/organizer.service';
@@ -15,18 +16,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-hobby.component.sass']
 })
 export class AddHobbyComponent implements OnInit {
-  interests = [];
-  organizers = [];
-  fileNames = [];
-  fileData = [];
-  fileId = [];
+  interests: any[];
+  cities: any[];
+  organizers: any[];
+  organizerId: any;
+  fileNames: string[] = [];
+  fileData: string[] = [];
+  fileId: string[] = [];
   formId: any;
-  isChecked = false;
-  responding = false;
+
+  isChecked: boolean;
+  responding: boolean;
+  isOrganizerChosen: boolean;
+
   addHobby: FormGroup;
 
   constructor(
     private interestService: InterestService,
+    private cityService: CityService,
     private organizerService: OrganizerService,
     fb: FormBuilder,
     private activityService: ActivityService,
@@ -53,11 +60,35 @@ export class AddHobbyComponent implements OnInit {
     });
   }
   filterOrganizers(value) {
+    if (this.isOrganizerChosen) {
+      this.isOrganizerChosen = false;
+      this.addHobby.controls['cityId'].setValue('');
+      this.addHobby.controls['sobriety'].setValue(false);
+      this.addHobby.controls['cityId'].enable();
+      this.addHobby.controls['sobriety'].enable();
+    }
     this.organizerService.getOrganizers('1', value).subscribe(data => this.organizers = data);
+  }
+  setOrganizer(id: string) {
+    this.isOrganizerChosen = true;
+    this.organizerId = id;
+    this.addHobby.controls['cityId'].disable();
+    this.addHobby.controls['sobriety'].disable();
+    this.organizerService.getOrganizerById(id).subscribe(data => {
+      this.addHobby.controls['cityId'].setValue(data.CityId);
+      this.addHobby.controls['sobriety'].setValue(data.Sobriety);
+    });
+  }
+  showOrganizers() {
+    this.organizerService.getOrganizers('1').subscribe(data => this.organizers = data);
   }
   submitForm() {
     this.responding = true;
-
+    let organizer = {
+      Name: this.addHobby.get('organizerName').value,
+      CityId: this.addHobby.get('cityId').value,
+      Sobriety: this.addHobby.get('sobriety').value
+    };
     let body = new Activity(
       this.addHobby.get('name').value,
       +this.addHobby.get('ageFrom').value,
@@ -71,16 +102,14 @@ export class AddHobbyComponent implements OnInit {
       this.isChecked,
       this.addHobby.get('free').value,
       this.formId,
-      {
-        Name: this.addHobby.get('organizerName').value,
-        CityId: this.addHobby.get('cityId').value,
-        Sobriety: this.addHobby.get('sobriety').value
-      },
+      this.isOrganizerChosen ? null : organizer,
+      this.isOrganizerChosen ? this.organizerId : null
     );
     this.activityService.postActivity(body)
       .subscribe(() => {
-        this.router.url === '/admin/addhobby' ? this.router.navigate(['/admin/addhobby/success'])
-          : this.router.navigate(['/addhobby/success']);
+        this.router.url === '/admin/addhobby' ?
+          this.router.navigate(['/admin/addhobby/success']) :
+          this.router.navigate(['/addhobby/success']);
         this.responding = false;
       });
   }
@@ -117,6 +146,7 @@ export class AddHobbyComponent implements OnInit {
   }
   ngOnInit() {
     this.interestService.getInterests().subscribe(data => this.interests = data);
+    this.cityService.getCities().subscribe(data => this.cities = data);
     this.organizerService.getOrganizers('1').subscribe(res => this.organizers = res);
   }
 }
