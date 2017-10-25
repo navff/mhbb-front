@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'mh-add-hobby',
   templateUrl: './add-hobby.component.html',
-  providers: [InterestService, ActivityService, OrganizerService],
+  providers: [InterestService, ActivityService, OrganizerService, CityService],
   styleUrls: ['./add-hobby.component.sass']
 })
 export class AddHobbyComponent implements OnInit {
