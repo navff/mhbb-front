@@ -13,29 +13,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DetailsComponent implements OnInit {
   activity: any = {};
   pictures = [];
-  loaded = false;
   reviews = [];
   reviewText: string;
+
   published: boolean;
+  loaded = false;
   responding: string;
   voted = false;
+  isAuthorized: boolean;
 
   constructor(
     private activityService: ActivityService,
     private reviewService: ReviewService,
     private voicesService: VoicesService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+      this.isAuthorized = !!localStorage.getItem('token');
+    }
 
   vote(type: string): void {
-    if (localStorage.getItem('token')) {
+    if (this.isAuthorized) {
       this.voicesService.vote(this.activity.Id, type)
         .subscribe(data => {
           this.voted = this.activity.Voices === data ? true : false;
           this.activity.Voices = data;
         });
-    } else {
-      this.router.navigate(['enter']);
     }
   }
   publishReview(): void {

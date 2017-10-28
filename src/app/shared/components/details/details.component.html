@@ -5,10 +5,10 @@
         <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-btn-back">&larr; Поиск</a>
         <div class="heading">
             <h1>{{activity.Name}}</h1>
-            <div class="voicing" *ngIf="activity.IsChecked">
-                <img (click)="vote('positive')" class="thumb-up" src="img/thumbs-up-black.svg">
+            <div class="voicing" *ngIf="activity.IsChecked" [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы голосовать' : ''">
+                <img (click)="vote('positive')" class="thumb-up" src="img/thumbs-up-black.svg" [ngStyle]="{'cursor': isAuthorized ? 'pointer' : 'default'}">
                 <p class="amount">{{activity.Voices}}</p>
-                <img (click)="vote('negative')" class="thumb-down" src="img/thumbs-up-black.svg">
+                <img (click)="vote('negative')" class="thumb-down" src="img/thumbs-up-black.svg" [ngStyle]="{'cursor': isAuthorized ? 'pointer' : 'default'}">
                 <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
             </div>
         </div>
@@ -58,8 +58,8 @@
                 <p>{{review.Text}}</p>
             </div>
         </div>
-        <md-input-container>
-            <textarea mdInput [disabled]="published" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
+        <md-input-container [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы оставлять отзывы' : ''">
+            <textarea mdInput [disabled]="published || !isAuthorized" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
         </md-input-container>
         <mh-button *ngIf="!published" [loading]="responding === 'publish'" [disabled]="!reviewText" (click)="publishReview()" color="primary">Опубликовать</mh-button>
         <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
