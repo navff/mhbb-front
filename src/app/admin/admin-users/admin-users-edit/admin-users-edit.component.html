@@ -6,13 +6,13 @@
             <input mdInput [formControl]="editUser.controls['email']" placeholder="Электропочта">
         </md-input-container>
         <md-select [formControl]="editUser.controls['cityId']" class="input" placeholder="Город">
-            <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
+            <md-option *ngFor="let city of cities" [value]="city.Id">{{city.Name}}</md-option>
         </md-select>
         <md-checkbox [formControl]="editUser.controls['role']" color="primary">Представитель в городе</md-checkbox>
         <md-input-container class="input name">
             <input [formControl]="editUser.controls['name']" mdInput placeholder="Имя">
         </md-input-container>
-        <md-input-container class="input" >
+        <md-input-container class="input">
             <input [formControl]="editUser.controls['phone']" mdInput placeholder="Телефон">
         </md-input-container>
         <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>

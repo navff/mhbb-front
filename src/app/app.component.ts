@@ -7,14 +7,14 @@ import '../style/app.sass';
 
 @Component({
   selector: 'mh-app',
-  templateUrl: './app.component.html',
+  template: `<router-outlet></router-outlet>`,
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router) {}
+    private router: Router) { }
   ngOnInit() {
     this.auth.setToken();
     if (window.location.pathname === '/') {
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
             (user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager') ?
               this.router.navigate(['admin']) :
               this.router.navigate(['']);
-            }
+          }
           );
     }
   }

@@ -5,9 +5,8 @@
         <md-input-container>
             <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
         </md-input-container>
-        <mh-button [disabled]="!f.valid" [loading]="responding">ОТПРАВИТЬ ССЫЛКУ</mh-button>
+        <mh-button [disabled]="f.invalid" [loading]="responding">ОТПРАВИТЬ ССЫЛКУ</mh-button>
     </form>
     <p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять
-        кружки и курсы. Если вы не были зарегистрированы, — зарегистрируем.
-    </p>
+        кружки и курсы. Если вы не были зарегистрированы, — зарегистрируем.</p>
 </div>

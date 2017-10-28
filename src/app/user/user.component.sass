@@ -2,16 +2,27 @@ header
     background: url("img/mosaic-bg.svg") no-repeat center
     background-size: cover
     height: 7rem
+.logo
+    width: 6.25rem
+    cursor: pointer
+    float: left
+    margin: 0.4375rem 2.8125rem 0 0
+    outline: none
+
 .home-header
 	height: 21.25rem
+.home-header .logo
+    width: 13.75rem
+    position: absolute
+    left: 50%
+    margin: 1.875rem 0 0 -6.875rem
+    cursor: default
 a
     margin-top: 3rem
     color: #fff
     float: left
-    text-decoration: underline
     margin-right: 2.5rem
-    &:hover
-        text-decoration: none
+
 .enter
     float: right
     margin-right: 0.625rem
@@ -25,15 +36,4 @@ h1
     font-size: 2.5rem
     cursor: default
 
-.logo
-    width: 6.25rem
-    cursor: pointer
-    float: left
-    margin: 0.4375rem 2.8125rem 0 0
-    outline: none
-.home-logo
-    width: 13.75rem
-    position: absolute
-    left: 50%
-    margin: 1.875rem 0 0 -6.875rem
-    cursor: default
+
