@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
   constructor(private activityService: ActivityService,
     private auth: AuthService) { }
 
-  exitAdmin(): void {
+  exit(): void {
     localStorage.setItem('token', '');
     window.location.reload();
   }
