@@ -54,7 +54,7 @@ export class AdminUsersEditComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((data) => this.email = data.email);
     this.cityService.getCities().subscribe(data => this.cities = data);
-    this.userService.getUserByEmail(this.email)
+    this.userService.getByEmail(this.email)
       .subscribe((data: User) => {
         this.editUser.get('email').setValue(data.Email);
         this.editUser.get('name').setValue(data.Name);

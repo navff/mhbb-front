@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from './../../services/activity.service';
 import { TempFile } from '../../../models/tempfile.model';
-import { AuthService } from '../../services/auth.service';
 import { CityService } from '../../services/city.service';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -33,7 +32,6 @@ export class UserEditComponent implements OnInit {
 
   editUser: FormGroup;
   constructor(
-    private auth: AuthService,
     private userService: UserService,
     private cityService: CityService,
     private activityService: ActivityService,
@@ -115,7 +113,7 @@ export class UserEditComponent implements OnInit {
       this.router.navigate(['']);
     }
     this.cityService.getCities().subscribe(data => this.cities = data);
-    this.auth.getUserByToken()
+    this.userService.getByToken()
       .subscribe(user => {
         this.user = user;
         this.editUser.get('email').setValue(this.user.Email);

@@ -23,7 +23,7 @@ export class UserService {
       .get('http://test.mhbb.ru/b/api/user/search', options)
       .map((data) => data.json());
   }
-  getUserByEmail(email: string) {
+  getByEmail(email: string) {
     return this.http.myGet(`http://test.mhbb.ru/b/api/user?email=${email}`);
   }
   putUser(email: string, body: any) {
@@ -31,5 +31,12 @@ export class UserService {
   }
   deletePicture(id) {
     return this.http.myDelete(`http://test.mhbb.ru/b/api/picture/${id}`);
+  }
+
+  register(email) {
+    return this.http.myPost(`http://test.mhbb.ru/b/api/user`, { 'Email': email });
+  }
+  getByToken() {
+    return this.http.myGet(`http://test.mhbb.ru/b/api/user`);
   }
 }

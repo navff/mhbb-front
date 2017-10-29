@@ -1,5 +1,5 @@
-import { AuthService } from './../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './../shared/services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ export class UserComponent implements OnInit {
   userEmail: string;
   isAuthorized: boolean;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private userService: UserService, private router: Router) {
     this.isAuthorized = !!localStorage.getItem('token');
   }
 
@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     if (this.isAuthorized) {
-      this.auth.getUserByToken()
+      this.userService.getByToken()
         .subscribe(user => this.userEmail = user.Email);
     }
   }

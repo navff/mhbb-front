@@ -5,6 +5,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HttpService extends Http {
     constructor(backend: XHRBackend, options: RequestOptions) {
+        let match = window.location.href.match(/token=(.)+/);
+        if (match) {
+          localStorage.setItem('token', match[0].substr(6));
+        }
+
         options.headers.set('Authorization', 'token ' + localStorage.getItem('token'));
         super(backend, options);
     }

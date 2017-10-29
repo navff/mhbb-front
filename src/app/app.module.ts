@@ -9,9 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthGuard } from './shared/auth.guard';
-import { AuthService } from './shared/services/auth.service';
 import { Http } from '@angular/http';
 import { HttpService } from './shared/services/http.service';
+import { UserService } from './shared/services/user.service';
 
 @NgModule({
   imports: [
@@ -21,8 +21,7 @@ import { HttpService } from './shared/services/http.service';
     AppRoutingModule
   ],
   declarations: [AppComponent],
-  providers: [AuthGuard, AuthService, HttpService, { provide: Http, useClass: HttpService }
-  ],
+  providers: [AuthGuard, HttpService, { provide: Http, useClass: HttpService }, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

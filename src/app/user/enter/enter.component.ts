@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
+import { UserService } from './../../shared/services/user.service';
 
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class EnterComponent {
   responding: boolean;
 
   constructor(
-    private auth: AuthService,
+    private userService: UserService,
     private router: Router,
   ) { }
 
@@ -23,7 +23,7 @@ export class EnterComponent {
 
   registerUser() {
     this.responding = true;
-    this.auth.postUser(this.email)
+    this.userService.register(this.email)
       .subscribe(() => this.router.navigate(['/enter/success']));
   }
 }

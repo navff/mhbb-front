@@ -1,5 +1,5 @@
-import { AuthService } from './../shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from './../shared/services/user.service';
 import { CityService } from '../shared/services/city.service';
 import { ActivityService } from '../shared/services/activity.service';
 
@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   email: string;
 
   constructor(private activityService: ActivityService,
-    private auth: AuthService) { }
+    private userService: UserService) { }
 
   exit(): void {
     localStorage.setItem('token', '');
@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
     this.activityService.getUncheckedActivities()
       .subscribe(data => this.activitiesAmount = data.length);
     if (localStorage.getItem('token')) {
-      this.auth.getUserByToken()
+      this.userService.getByToken()
         .subscribe(data => this.email = data.Email);
     }
   }
