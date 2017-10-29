@@ -19,24 +19,24 @@ export class UserService {
 
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers, search: search });
-    return this.http
-      .get('http://test.mhbb.ru/b/api/user/search', options)
+    return this.http.get('user/search', options)
       .map((data) => data.json());
   }
   getByEmail(email: string) {
-    return this.http.myGet(`http://test.mhbb.ru/b/api/user?email=${email}`);
+    return this.http.get(`user?email=${email}`)
+      .map((data) => data.json());
   }
   putUser(email: string, body: any) {
-    return this.http.myPut(`http://test.mhbb.ru/b/api/user?email=${email}`, body);
+    return this.http.myPut(`user?email=${email}`, body);
   }
   deletePicture(id) {
-    return this.http.myDelete(`http://test.mhbb.ru/b/api/picture/${id}`);
+    return this.http.myDelete(`picture/${id}`);
   }
-
   register(email) {
-    return this.http.myPost(`http://test.mhbb.ru/b/api/user`, { 'Email': email });
+    return this.http.myPost(`user`, { 'Email': email });
   }
   getByToken() {
-    return this.http.myGet(`http://test.mhbb.ru/b/api/user`);
+    return this.http.get(`user`)
+      .map((data) => data.json());
   }
 }

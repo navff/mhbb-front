@@ -6,10 +6,10 @@
 			<a>О проекте</a>
 			<a>Стать спонсором</a>
 			<a>Стать представителем</a>
-			<a routerLink='/enter' *ngIf="!isAuthorized" class="enter">Вход</a>
+			<a routerLink='enter' *ngIf="!isAuthorized" class="enter">Вход</a>
 			<a (click)="exit()" *ngIf="isAuthorized" class="enter">Выход</a>
-			<a *ngIf="userEmail" routerLink="/user" class="enter">{{userEmail}}</a>
-		<h1 *ngIf="home.isActive">Находим хобби по вкусу и возрасту</h1>
+			<a *ngIf="userEmail" routerLink="user" class="enter">{{userEmail}}</a>
+			<h1 *ngIf="home.isActive">Находим хобби по вкусу и возрасту</h1>
 		</div>
 	</header>
 

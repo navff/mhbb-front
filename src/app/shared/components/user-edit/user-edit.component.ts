@@ -99,7 +99,7 @@ export class UserEditComponent implements OnInit {
       this.editUser.get('cityId').value,
       this.formId
     );
-    if (this.fileId && this.fileToDelete) { this.activityService.deletePicture(this.fileId); }
+    if (this.fileId && this.fileToDelete) { this.activityService.deletePicture(this.fileId).subscribe(); }
     this.userService.putUser(this.user.Email, body)
       .subscribe(user => {
         this.user = user;

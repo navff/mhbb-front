@@ -21,7 +21,7 @@ export class ActivityService {
     free ? search.append('free', free) : search.delete('free');
 
     let options = new RequestOptions({ search: search });
-    return this.http.get('http://test.mhbb.ru/b/api/activity/search', options)
+    return this.http.get('activity/search', options)
       .map((data) => data.json());
   }
   getUncheckedActivities(word?: string, age?: string, interestId?: string, cityId?: string,
@@ -38,33 +38,33 @@ export class ActivityService {
 
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers, search: search });
-    let url = 'http://test.mhbb.ru/b/api/activity/searchunchecked';
+    let url = 'activity/searchunchecked';
     return this.http.get(url, options)
       .map((data) => data.json());
   }
   getActivity(id) {
-    return this.http.get(`http://test.mhbb.ru/b/api/activity/${id}`)
+    return this.http.get(`activity/${id}`)
       .map((data) => data.json());
   }
   postTempFile(body) {
-    return this.http.myPost(`http://test.mhbb.ru/b/api/tempfile`, body);
+    return this.http.myPost(`tempfile`, body);
   }
   deleteTempfile(id) {
-    return this.http.myDelete(`http://test.mhbb.ru/b/api/tempfile/${id}`);
+    return this.http.myDelete(`tempfile/${id}`);
   }
   deletePicture(id) {
-    return this.http.myDelete(`http://test.mhbb.ru/b/api/picture/${id}`);
+    return this.http.myDelete(`picture/${id}`);
   }
   postActivity(body) {
-    return this.http.myPost(`http://test.mhbb.ru/b/api/activity`, body);
+    return this.http.myPost(`activity`, body);
   }
   putActivity(body, id) {
-    return this.http.myPut(`http://test.mhbb.ru/b/api/activity/${id}`, body);
+    return this.http.myPut(`activity/${id}`, body);
   }
   putApproveActivity(isChecked, id) {
-    return this.http.myPut(`http://test.mhbb.ru/b/api/activity/setchecked?activityId=${id}&isChecked=${isChecked}`);
+    return this.http.myPut(`activity/setchecked?activityId=${id}&isChecked=${isChecked}`);
   }
   deleteActivity(id: any) {
-    return this.http.myDelete(`http://test.mhbb.ru/b/api/activity/${id}`);
+    return this.http.myDelete(`activity/${id}`);
   }
 }

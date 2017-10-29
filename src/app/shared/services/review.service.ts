@@ -10,10 +10,10 @@ export class ReviewService {
   constructor(private http: HttpService) { }
 
   postReview(body: any) {
-    return this.http.myPost(`http://test.mhbb.ru/b/api/review`, body);
+    return this.http.myPost(`review`, body);
   }
   getReviewsByActivity(id: any) {
-    return this.http.get(`http://test.mhbb.ru/b/api/review/byactivity?activityId=${id}`)
+    return this.http.get(`review/byactivity?activityId=${id}`)
       .map((data) => data.json());
   }
   getUncheckedReviews(word?: string, cityId?: string) {
@@ -24,13 +24,13 @@ export class ReviewService {
     let headers = new Headers({ 'Authorization': 'Token ' + this.token });
     let options = new RequestOptions({ headers: headers, search: search });
 
-    return this.http.get('http://test.mhbb.ru/b/api/review/unchecked', options)
+    return this.http.get('review/unchecked', options)
       .map((data) => data.json());
   }
   putSetChecked(id: string, isChecked: string) {
-    return this.http.myPut(`http://test.mhbb.ru/b/api/review/setchecked?reviewId=${id}&isChecked=${isChecked}`);
+    return this.http.myPut(`review/setchecked?reviewId=${id}&isChecked=${isChecked}`);
   }
   deleteReview(id: string) {
-    return this.http.myDelete(`http://test.mhbb.ru/b/api/review/${id}`);
+    return this.http.myDelete(`review/${id}`);
   }
 }

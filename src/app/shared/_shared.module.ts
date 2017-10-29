@@ -17,25 +17,20 @@ import { ActivitiesComponent } from './components/activities/activities.componen
 import { ButtonComponent } from './components/button/button.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { PicturesComponent } from './components/pictures/pictures.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+
+const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
+  MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
+  MdProgressBarModule, MdTooltipModule,
+  RouterModule,
+  CommonModule];
+
+const Components = [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent,
+  ButtonComponent, ProgressBarComponent, PicturesComponent, ImageUploadComponent];
 
 @NgModule({
-  imports: [
-    HttpModule, FormsModule, ReactiveFormsModule,
-    MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
-    MdProgressBarModule, MdTooltipModule,
-    RouterModule,
-    CommonModule
-  ],
-  declarations: [
-    OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent,
-    ProgressBarComponent, PicturesComponent
-  ],
-  exports: [
-    HttpModule, FormsModule, ReactiveFormsModule,
-    MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
-    MdProgressBarModule, MdTooltipModule,
-    OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent, ButtonComponent,
-    ProgressBarComponent, PicturesComponent
-  ]
+  imports: [Modules],
+  declarations: [Components],
+  exports: [Modules, Components]
 })
 export class SharedModule { }

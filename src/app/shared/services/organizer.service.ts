@@ -17,20 +17,20 @@ export class OrganizerService {
 
     let options = new RequestOptions({ search: search });
     return this.http
-      .get(`http://test.mhbb.ru/b/api/organizer/search`, options)
+      .get(`organizer/search`, options)
       .map((data) => data.json());
   }
   getOrganizerById(id: string) {
-    return this.http.get(`http://test.mhbb.ru/b/api/organizer/${id}`)
+    return this.http.get(`organizer/${id}`)
       .map((data) => data.json());
   }
   putOrganizer(id: any, body: any) {
-    return this.http.myPut(`http://test.mhbb.ru/b/api/organizer/${id}`, body);
+    return this.http.myPut(`organizer/${id}`, body);
   }
   postOrganizer(body: any) {
-    return this.http.myPost(`http://test.mhbb.ru/b/api/organizer`, body);
+    return this.http.myPost(`organizer`, body);
   }
   deleteOrganizer(id: any) {
-    return this.http.myDelete(`http://test.mhbb.ru/b/api/organizer/${id}`);
+    return this.http.myDelete(`organizer/${id}`);
   }
 }
