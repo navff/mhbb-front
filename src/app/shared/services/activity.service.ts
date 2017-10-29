@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ActivityService {
-  token = localStorage.getItem('token');
-
   constructor(private http: HttpService) { }
 
-  getActivities(word?: string, age?: string, interestId?: string, cityId?: string,
+  list(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: any, free?: any) {
     let search = new URLSearchParams();
 
@@ -20,11 +18,10 @@ export class ActivityService {
     sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
     free ? search.append('free', free) : search.delete('free');
 
-    let options = new RequestOptions({ search: search });
-    return this.http.get('activity/search', options)
+    return this.http.get('activity/search', new RequestOptions({ search: search }))
       .map((data) => data.json());
   }
-  getUncheckedActivities(word?: string, age?: string, interestId?: string, cityId?: string,
+  listUnchecked(word?: string, age?: string, interestId?: string, cityId?: string,
     sobriety?: any, free?: any) {
     let search = new URLSearchParams();
 
@@ -35,11 +32,7 @@ export class ActivityService {
     sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
     free ? search.append('free', free) : search.delete('free');
 
-
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers, search: search });
-    let url = 'activity/searchunchecked';
-    return this.http.get(url, options)
+    return this.http.get('activity/searchunchecked', new RequestOptions({ search: search }))
       .map((data) => data.json());
   }
   getActivity(id) {
@@ -47,24 +40,31 @@ export class ActivityService {
       .map((data) => data.json());
   }
   postTempFile(body) {
-    return this.http.myPost(`tempfile`, body);
+    return this.http.post('tempfile', body)
+      .map((data) => data.json());
   }
   deleteTempfile(id) {
-    return this.http.myDelete(`tempfile/${id}`);
+    return this.http.delete(`tempfile/${id}`)
+      .map((data) => data.json());
   }
   deletePicture(id) {
-    return this.http.myDelete(`picture/${id}`);
+    return this.http.delete(`picture/${id}`)
+      .map((data) => data.json());
   }
   postActivity(body) {
-    return this.http.myPost(`activity`, body);
+    return this.http.post(`activity`, body)
+      .map((data) => data.json());
   }
   putActivity(body, id) {
-    return this.http.myPut(`activity/${id}`, body);
+    return this.http.put(`activity/${id}`, body)
+      .map((data) => data.json());
   }
-  putApproveActivity(isChecked, id) {
-    return this.http.myPut(`activity/setchecked?activityId=${id}&isChecked=${isChecked}`);
+  approveActivity(isChecked, id) {
+    return this.http.put(`activity/setchecked?activityId=${id}&isChecked=${isChecked}`, null)
+      .map((data) => data.json());
   }
   deleteActivity(id: any) {
-    return this.http.myDelete(`activity/${id}`);
+    return this.http.delete(`activity/${id}`)
+      .map((data) => data.json());
   }
 }

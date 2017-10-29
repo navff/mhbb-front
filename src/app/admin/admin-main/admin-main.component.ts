@@ -38,11 +38,11 @@ export class AdminMainComponent implements OnInit {
     if (values[1] !== undefined) { this.free = values[1]; }
 
     this.activityService
-      .getUncheckedActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
+      .listUnchecked(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
       .subscribe(data => {
         this.uncheckedActivities = data;
         this.activityService
-          .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
+          .list(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
           .subscribe(act => {
             this.activities = act;
             this.loaded = true;
@@ -64,10 +64,10 @@ export class AdminMainComponent implements OnInit {
       this.interests = data;
       this.interests.unshift({Id: null, Name: 'Показать все'});
     });
-    this.activityService.getUncheckedActivities()
+    this.activityService.listUnchecked()
       .subscribe((data: Activity[]) => {
         this.uncheckedActivities = data;
-        this.activityService.getActivities()
+        this.activityService.list()
           .subscribe((act: Activity[]) => {
             this.activities = act;
             this.loaded = true;

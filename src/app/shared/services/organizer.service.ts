@@ -5,8 +5,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OrganizerService {
-  token = localStorage.getItem('token');
-
   constructor(private http: HttpService) { }
 
   getOrganizers(page?: string, word?: string, cityId?: string) {
@@ -15,9 +13,7 @@ export class OrganizerService {
     search.append('cityId', cityId);
     search.append('page', page);
 
-    let options = new RequestOptions({ search: search });
-    return this.http
-      .get(`organizer/search`, options)
+    return this.http.get(`organizer/search`, new RequestOptions({ search: search }))
       .map((data) => data.json());
   }
   getOrganizerById(id: string) {
@@ -25,12 +21,15 @@ export class OrganizerService {
       .map((data) => data.json());
   }
   putOrganizer(id: any, body: any) {
-    return this.http.myPut(`organizer/${id}`, body);
+    return this.http.put(`organizer/${id}`, body)
+      .map((data) => data.json());
   }
   postOrganizer(body: any) {
-    return this.http.myPost(`organizer`, body);
+    return this.http.post('organizer', body)
+      .map((data) => data.json());
   }
   deleteOrganizer(id: any) {
-    return this.http.myDelete(`organizer/${id}`);
+    return this.http.delete(`organizer/${id}`)
+      .map((data) => data.json());
   }
 }

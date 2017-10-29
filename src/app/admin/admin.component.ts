@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activityService.getUncheckedActivities()
+    this.activityService.listUnchecked()
       .subscribe(data => this.activitiesAmount = data.length);
     if (localStorage.getItem('token')) {
       this.userService.getByToken()

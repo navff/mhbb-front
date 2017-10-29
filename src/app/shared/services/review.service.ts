@@ -1,16 +1,15 @@
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
-import { Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ReviewService {
-  token = localStorage.getItem('token');
-
   constructor(private http: HttpService) { }
 
   postReview(body: any) {
-    return this.http.myPost(`review`, body);
+    return this.http.post('review', body)
+      .map((data) => data.json());
   }
   getReviewsByActivity(id: any) {
     return this.http.get(`review/byactivity?activityId=${id}`)
@@ -21,16 +20,15 @@ export class ReviewService {
     word ? search.append('word', word) : search.delete('word');
     search.append('cityId', cityId);
 
-    let headers = new Headers({ 'Authorization': 'Token ' + this.token });
-    let options = new RequestOptions({ headers: headers, search: search });
-
-    return this.http.get('review/unchecked', options)
+    return this.http.get('review/unchecked', new RequestOptions({ search: search }))
       .map((data) => data.json());
   }
   putSetChecked(id: string, isChecked: string) {
-    return this.http.myPut(`review/setchecked?reviewId=${id}&isChecked=${isChecked}`);
+    return this.http.put(`review/setchecked?reviewId=${id}&isChecked=${isChecked}`, null)
+      .map((data) => data.json());
   }
   deleteReview(id: string) {
-    return this.http.myDelete(`review/${id}`);
+    return this.http.delete(`review/${id}`)
+      .map((data) => data.json());
   }
 }

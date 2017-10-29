@@ -143,7 +143,7 @@ export class AddHobbyComponent implements OnInit {
     this.fileNames[index] = null;
     this.addHobby.controls[`image${index}`].setValue('');
     this.fileData[index] = null;
-    this.activityService.deleteTempfile(this.fileId[index]);
+    this.activityService.deleteTempfile(this.fileId[index]).subscribe();
   }
   ngOnInit() {
     this.interestService.getInterests().subscribe(data => this.interests = data);

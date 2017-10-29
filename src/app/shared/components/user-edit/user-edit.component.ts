@@ -73,7 +73,7 @@ export class UserEditComponent implements OnInit {
       this.fileName = null;
       this.fileData = null;
       this.fileToDelete = true;
-      this.activityService.deleteTempfile(this.tempFileId);
+      this.activityService.deleteTempfile(this.tempFileId).subscribe();
     }
     if (this.fileId) {
       (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;

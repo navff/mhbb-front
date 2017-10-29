@@ -7,7 +7,7 @@ export class ReservationService {
   constructor(private http: Http) { }
 
   postReservation(body: any) {
-    return this.http.post(`reservation`, body)
+    return this.http.post('reservation', body)
       .map((data) => data.json());
   }
 }

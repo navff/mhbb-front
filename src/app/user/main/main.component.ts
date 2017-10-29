@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
     this.activityService
-      .getActivities(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
+      .list(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
       .subscribe(data => {
         this.activities = data;
         this.checkLength = data.length;
@@ -58,7 +58,7 @@ export class MainComponent implements OnInit {
   concatPage(): void {
     this.responding = true;
     this.page += 1;
-    this.activityService.getActivities(this.page.toString(10))
+    this.activityService.list(this.page.toString(10))
       .subscribe(data => {
         this.activities = this.activities.concat(data);
         this.checkLength = data.length;
@@ -68,7 +68,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.searchAge.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
-    this.activityService.getActivities().subscribe((data: Activity[]) => {
+    this.activityService.list().subscribe((data: Activity[]) => {
       this.activities = data;
       this.checkLength = data.length;
       this.loaded = true;

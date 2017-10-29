@@ -102,7 +102,7 @@ export class AdminActEditComponent implements OnInit {
       this.fileNames[index] = null;
       this.editHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
-      this.activityService.deleteTempfile(this.tempfileId[index]);
+      this.activityService.deleteTempfile(this.tempfileId[index]).subscribe();
     }
   }
   submitForm() {

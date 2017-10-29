@@ -54,7 +54,7 @@ export class DetailsComponent implements OnInit {
   }
   actApprove(): void {
     this.responding = 'approve';
-    this.activityService.putApproveActivity(true, this.activity.Id)
+    this.activityService.approveActivity(true, this.activity.Id)
       .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
