@@ -8,6 +8,7 @@ import { EnterSuccessComponent } from './enter/enter-success/enter-success.compo
 import { EnterComponent } from './enter/enter.component';
 import { MainComponent } from './main/main.component';
 
+import { StaticComponent } from './../shared/components/static/static.component';
 import { DetailsComponent } from './../shared/components/details/details.component';
 import { UserEditComponent } from './../shared/components/user-edit/user-edit.component';
 
@@ -23,6 +24,9 @@ const routes: Routes = [
       { path: 'act/:id/reservation', component: ReservationComponent },
       { path: 'act/:id/reservation/success', component: ReservationSuccessComponent },
       { path: 'user', component: UserEditComponent },
+      { path: 'about', component: StaticComponent },
+      { path: 'sponsor', component: StaticComponent },
+      { path: 'member', component: StaticComponent },
 
       { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule' },
     ]

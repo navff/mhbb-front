@@ -1,11 +1,11 @@
 <div class="content">
     <header>
         <div class="container">
-            <img routerLink='/admin' src="img/logo.svg" alt="Моё Хобби" class="logo">
-            <a routerLink='/admin'>Хобби</a>
-            <a routerLink='organizers'>Организаторы</a>
-            <a routerLink='users'>Пользователи</a>
-            <a routerLink='reviews'>Отзывы на проверку</a>
+            <img routerLink="/admin" src="img/logo.svg" alt="Моё Хобби" class="logo">
+            <a routerLink="/admin">Хобби</a>
+            <a routerLink="organizers">Организаторы</a>
+            <a routerLink="users">Пользователи</a>
+            <a routerLink="reviews">Отзывы на проверку</a>
             <a (click)="exit()" class="exit">Выход</a>
             <a routerLink="edit" *ngIf="email" class="enter">{{email}}</a>
             <p>{{activitiesAmount}}</p>

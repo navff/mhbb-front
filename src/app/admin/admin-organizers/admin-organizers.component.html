@@ -1,7 +1,7 @@
 <mh-progress [loading]="!loaded"></mh-progress>
 <div class="container">
     <h1 class="admin-heading">Организаторы</h1>
-    <button class="btn-add" routerLink='add' md-fab></button>
+    <button class="btn-add" routerLink="add" md-fab></button>
     <form>
         <md-input-container class="input">
             <input (ngModelChange)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">

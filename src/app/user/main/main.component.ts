@@ -20,8 +20,8 @@ export class MainComponent implements OnInit {
   age: string;
   sobriety: string;
   free: string;
-  searchWord: Subject<any> = new Subject();
-  searchAge: Subject<any> = new Subject();
+  searchWord: Subject<string> = new Subject();
+  searchAge: Subject<string> = new Subject();
 
   city: any = {};
   interest: any = {};

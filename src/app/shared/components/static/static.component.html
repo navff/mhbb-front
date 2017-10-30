@@ -1,0 +1,15 @@
+<div class="container">
+    <a class="mh-back" (click)="back()">&larr; Назад</a>
+    <ng-container *ngIf="path === '/about'">
+        <h1>О проекте</h1>
+    </ng-container>
+    
+    <ng-container *ngIf="path === '/sponsor'">
+        <h1>Стать спонсором</h1>
+    </ng-container>
+
+    <ng-container *ngIf="path === '/member'">
+        <h1>Стать представителем</h1>
+    </ng-container>
+
+</div>

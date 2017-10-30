@@ -9,78 +9,50 @@
     width: 29.75rem
     height: 21.1094rem
 
+    background-size: cover
+    background-position: 50%
+
     color: #fff
     cursor: pointer
     overflow: hidden
     outline: none
-    &:before,
-    &:after
-        content: ''
-        display: block
-        position: absolute
-        width: 100%
-        background-color: rgba(0,0,0,0.36)
-        opacity: 0
-        transition: 0.4s
-    &:before
-        top: -4.375rem
-        height: 4.375rem
-    &:after
-        bottom: -6.875rem
-        height: 6.875rem   
-    &:hover:before
-        opacity: 1
-        top: 0
-    &:hover:after
-        opacity: 1
-        bottom: 0
-
-.image-wrapper
-    position: absolute
-    z-index: -1
-    width: 29.75rem
-    height: 21.0625rem
-    .image
-        background-size: cover
-        background-position: 50%
-        width: 100%
-        height: 100%
-.top-descr
+    &:hover section
+        background: rgba(0,0,0,0.36)
+section
+    transition: 0.4s ease
+    background: rgba(0,0,0,0.2)
     width: 100%
     position: absolute
-    z-index: 10
+    box-sizing: border-box
+.bottom
+    bottom: 0
+    padding: 0.625rem 0.9375rem 1.125rem
+.company
+    font-size: 1.0625rem
+    line-height: 1.375rem
+    margin-top: 0.3125rem
+.name
+    display: flex
+    align-items: center
+    height: 3.2rem
+    font-size: 1.5625rem
+
+
 .age
     font-size: 1.625rem
-    float: left
     margin: 1.25rem
-    
+
 .voices
     position: absolute
     top: 1.25rem
     right: 0.625rem
     .thumb-up
-        position: relative
         width: 1rem
     .amount
         min-width: 2.25rem
         text-align: center
         font-size: 1.625rem
         display: inline-block
-.bottom-descr
-    position: absolute
-    bottom: 0
-    padding: 0.625rem 0.9375rem 1.875rem
-    z-index: 10	
-    width: 446.0.5rem
-.company
-    font-size: 1.0625rem
-    line-height: 1.375rem
-    margin-top: 0.3125rem
-    width: 90%	
-.name
-    font-size: 1.5625rem
-    line-height: 
-    width: 90%
 .free-icon
     position: absolute
     bottom: 1.5rem
@@ -91,7 +63,7 @@
 mh-button
     margin: 1.875rem auto
 
-.empty-block 
+.empty 
     width: 29.75rem
     height: 0
 

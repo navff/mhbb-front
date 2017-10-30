@@ -7,7 +7,6 @@ export class VoicesService {
   constructor(private http: HttpService) { }
 
   vote(id, type) {
-    return this.http.post(`voice/${type}/${id}`, null)
-      .map((data) => data.json());
+    return this.http.post(`voice/${type}/${id}`);
   }
 }

@@ -18,7 +18,7 @@ export class ReservationComponent implements OnInit {
   loaded: boolean;
   responding: boolean;
 
-  reservation: FormGroup;
+  form: FormGroup;
   constructor(
     private activityService: ActivityService,
     private reservationService: ReservationService,
@@ -26,7 +26,7 @@ export class ReservationComponent implements OnInit {
     private route: ActivatedRoute,
     fb: FormBuilder,
   ) {
-    this.reservation = fb.group({
+    this.form = fb.group({
       'email': ['', Validators.required],
       'name': ['', Validators.required],
       'phone': ['', Validators.required],
@@ -37,14 +37,12 @@ export class ReservationComponent implements OnInit {
     this.responding = true;
     let body = new Reservation(
       this.activity.Id,
-      this.reservation.get('email').value,
-      this.reservation.get('name').value,
-      this.reservation.get('phone').value,
-      this.reservation.get('comment').value);
+      this.form.get('email').value,
+      this.form.get('name').value,
+      this.form.get('phone').value,
+      this.form.get('comment').value);
     this.reservationService.postReservation(body)
-      .subscribe(() => {
-        this.router.navigate(['/act/', this.activity.Id, 'reservation', 'success']);
-      });
+      .subscribe(() => this.router.navigate(['/act/', this.activity.Id, 'reservation', 'success']));
   }
   ngOnInit() {
     this.route.params.subscribe(params => {

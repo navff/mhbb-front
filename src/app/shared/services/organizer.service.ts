@@ -1,7 +1,6 @@
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
 import { RequestOptions, URLSearchParams } from '@angular/http';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OrganizerService {
@@ -13,23 +12,18 @@ export class OrganizerService {
     search.append('cityId', cityId);
     search.append('page', page);
 
-    return this.http.get(`organizer/search`, new RequestOptions({ search: search }))
-      .map((data) => data.json());
+    return this.http.get(`organizer/search`, new RequestOptions({ search: search }));
   }
   getOrganizerById(id: string) {
-    return this.http.get(`organizer/${id}`)
-      .map((data) => data.json());
+    return this.http.get(`organizer/${id}`);
   }
   putOrganizer(id: any, body: any) {
-    return this.http.put(`organizer/${id}`, body)
-      .map((data) => data.json());
+    return this.http.put(`organizer/${id}`, body);
   }
   postOrganizer(body: any) {
-    return this.http.post('organizer', body)
-      .map((data) => data.json());
+    return this.http.post('organizer', body);
   }
   deleteOrganizer(id: any) {
-    return this.http.delete(`organizer/${id}`)
-      .map((data) => data.json());
+    return this.http.delete(`organizer/${id}`);
   }
 }

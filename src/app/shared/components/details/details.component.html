@@ -2,7 +2,7 @@
 
 <div class="container">
     <section class="gallery">
-        <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-btn-back">&larr; Поиск</a>
+        <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-back">&larr; Поиск</a>
         <div class="heading">
             <h1>{{activity.Name}}</h1>
             <div class="voicing" *ngIf="activity.IsChecked" [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы голосовать' : ''">

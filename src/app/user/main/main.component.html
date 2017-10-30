@@ -20,7 +20,7 @@
 
         <md-checkbox (click)="search(!IsSober)" [(ngModel)]="IsSober" name="sober" color="primary" class="soberness" mdTooltip="Преподаватели не пьют и не курят">Трезвость</md-checkbox>
         <md-checkbox (click)="search(null, !IsFree)" [(ngModel)]="IsFree" name="free" color="primary">Бесплатно</md-checkbox>
-        <a class="add" routerLink='/addhobby' md-fab></a>
+        <a class="add" routerLink="/addhobby" md-fab></a>
     </form>
 
     <mh-activities [activities]="activities" [loading]="!loaded"></mh-activities>

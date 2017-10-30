@@ -1,12 +1,12 @@
 <div class="content">
 	<header [ngClass]="{'home-header': home.isActive}">
 		<div class="container">
-			<img routerLink='' routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" src="img/logo.svg"
+			<img routerLink="" routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" src="img/logo.svg"
 				 alt="Моё Хобби" class="logo">
-			<a>О проекте</a>
-			<a>Стать спонсором</a>
-			<a>Стать представителем</a>
-			<a routerLink='enter' *ngIf="!isAuthorized" class="enter">Вход</a>
+			<a routerLink="/about">О проекте</a>
+			<a routerLink="/sponsor">Стать спонсором</a>
+			<a routerLink="/member">Стать представителем</a>
+			<a routerLink="/enter" *ngIf="!isAuthorized" class="enter">Вход</a>
 			<a (click)="exit()" *ngIf="isAuthorized" class="enter">Выход</a>
 			<a *ngIf="userEmail" routerLink="user" class="enter">{{userEmail}}</a>
 			<h1 *ngIf="home.isActive">Находим хобби по вкусу и возрасту</h1>

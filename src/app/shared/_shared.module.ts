@@ -18,6 +18,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { PicturesComponent } from './components/pictures/pictures.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { StaticComponent } from './components/static/static.component';
 
 const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
   MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
@@ -26,7 +27,7 @@ const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
   CommonModule];
 
 const Components = [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent,
-  ButtonComponent, ProgressBarComponent, PicturesComponent, ImageUploadComponent];
+  ButtonComponent, ProgressBarComponent, PicturesComponent, ImageUploadComponent, StaticComponent];
 
 @NgModule({
   imports: [Modules],
