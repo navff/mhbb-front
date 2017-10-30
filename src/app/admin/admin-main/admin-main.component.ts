@@ -24,7 +24,6 @@ export class AdminMainComponent implements OnInit {
   searchAge: Subject<any> = new Subject();
   city: any = {};
   interest: any = {};
-  loaded: boolean;
   uncheckedActivities: Activity[];
 
   constructor(
@@ -33,7 +32,6 @@ export class AdminMainComponent implements OnInit {
     private interestService: InterestService) { }
 
   search(...values): void {
-    this.loaded = false;
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
 
@@ -43,10 +41,7 @@ export class AdminMainComponent implements OnInit {
         this.uncheckedActivities = data;
         this.activityService
           .list(this.word, this.age, this.interest.Id, this.city.Id, this.sobriety, this.free)
-          .subscribe(act => {
-            this.activities = act;
-            this.loaded = true;
-          });
+          .subscribe(act => this.activities = act);
       });
 
   }
@@ -60,18 +55,12 @@ export class AdminMainComponent implements OnInit {
     this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.searchAge.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
-    this.interestService.getInterests().subscribe(data => {
-      this.interests = data;
-      this.interests.unshift({Id: null, Name: 'Показать все'});
-    });
+    this.interestService.getInterests()
+      .subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));
     this.activityService.listUnchecked()
       .subscribe((data: Activity[]) => {
         this.uncheckedActivities = data;
-        this.activityService.list()
-          .subscribe((act: Activity[]) => {
-            this.activities = act;
-            this.loaded = true;
-          });
+        this.activityService.list().subscribe((act: Activity[]) => this.activities = act);
       });
   }
 }

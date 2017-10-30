@@ -8,7 +8,6 @@ import { Activity } from '../../../models/activity.model';
 })
 export class ActivitiesComponent {
   @Input() activities: Activity[];
-  @Input() loading: boolean;
 
   constructor() { }
 }

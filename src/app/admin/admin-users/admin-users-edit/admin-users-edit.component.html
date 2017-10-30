@@ -1,20 +1,17 @@
-<mh-progress [loading]="!loaded"></mh-progress>
-<div class="container">
-    <h1 class="admin-heading">Редактирование пользователя</h1>
-    <form [formGroup]="editUser" (ngSubmit)="putUser()">
-        <md-input-container class="input email">
-            <input mdInput [formControl]="editUser.controls['email']" placeholder="Электропочта">
-        </md-input-container>
-        <md-select [formControl]="editUser.controls['cityId']" class="input" placeholder="Город">
-            <md-option *ngFor="let city of cities" [value]="city.Id">{{city.Name}}</md-option>
-        </md-select>
-        <md-checkbox [formControl]="editUser.controls['role']" color="primary">Представитель в городе</md-checkbox>
-        <md-input-container class="input name">
-            <input [formControl]="editUser.controls['name']" mdInput placeholder="Имя">
-        </md-input-container>
-        <md-input-container class="input">
-            <input [formControl]="editUser.controls['phone']" mdInput placeholder="Телефон">
-        </md-input-container>
-        <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>
-    </form>
-</div>
+<h1 class="admin-heading">Редактирование пользователя</h1>
+<form [formGroup]="editUser" (ngSubmit)="putUser()">
+    <md-input-container class="input email">
+        <input mdInput [formControl]="editUser.controls['email']" placeholder="Электропочта">
+    </md-input-container>
+    <md-select [formControl]="editUser.controls['cityId']" class="input" placeholder="Город">
+        <md-option *ngFor="let city of cities" [value]="city.Id">{{city.Name}}</md-option>
+    </md-select>
+    <md-checkbox [formControl]="editUser.controls['role']" color="primary">Представитель в городе</md-checkbox>
+    <md-input-container class="input name">
+        <input [formControl]="editUser.controls['name']" mdInput placeholder="Имя">
+    </md-input-container>
+    <md-input-container class="input">
+        <input [formControl]="editUser.controls['phone']" mdInput placeholder="Телефон">
+    </md-input-container>
+    <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>
+</form>

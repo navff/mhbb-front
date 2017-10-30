@@ -12,7 +12,7 @@ import { User } from '../../models/user.model';
 })
 export class AdminUsersComponent implements OnInit {
   cities = [];
-  users: User[] = [];
+  users: User[];
 
   word: string;
   searchWord: Subject<any> = new Subject();
@@ -21,7 +21,6 @@ export class AdminUsersComponent implements OnInit {
   page = 1;
   checkLength: number;
 
-  loaded: boolean;
   responding: boolean;
 
   constructor(
@@ -43,7 +42,6 @@ export class AdminUsersComponent implements OnInit {
 
   }
   search(...adminBools): void {
-    this.loaded = false;
     this.page = 1;
     if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
     if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
@@ -51,7 +49,6 @@ export class AdminUsersComponent implements OnInit {
       .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;
-        this.loaded = true;
       });
   }
 
@@ -62,7 +59,6 @@ export class AdminUsersComponent implements OnInit {
       .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;
-        this.loaded = true;
       });
   }
 }

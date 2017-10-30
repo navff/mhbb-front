@@ -1,31 +1,27 @@
-<mh-progress [loading]="!loaded"></mh-progress>
+<a (click)="back()" class="mh-back">&larr; Назад</a>
+<h2>Редактирование личной информации</h2>
+<form [formGroup]="editUser" (ngSubmit)="putUser()">
+    <div class="inputs">
+        <md-input-container class="form-item-name">
+            <input [formControl]="editUser.controls['name']" mdInput placeholder="Имя">
+        </md-input-container>
+        <md-input-container class="form-item-phone">
+            <input [formControl]="editUser.controls['phone']" mdInput placeholder="Номер телефона">
+        </md-input-container>
+        <md-select [formControl]="editUser.controls['cityId']" class="form-item-cities" placeholder="Город">
+                <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
+        </md-select>
+        <md-checkbox [formControl]="editUser.controls['role']" *ngIf="user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager'">Представитель в городе</md-checkbox>
+    </div>
 
-<div class="container form">
-    <a (click)="back()" class="mh-back">&larr; Назад</a>
-    <h2>Редактирование личной информации</h2>
-    <form [formGroup]="editUser" (ngSubmit)="putUser()">
-        <div class="inputs">
-            <md-input-container class="form-item-name">
-                <input [formControl]="editUser.controls['name']" mdInput placeholder="Имя">
-            </md-input-container>
-            <md-input-container class="form-item-phone">
-                <input [formControl]="editUser.controls['phone']" mdInput placeholder="Номер телефона">
-            </md-input-container>
-            <md-select [formControl]="editUser.controls['cityId']" class="form-item-cities" placeholder="Город">
-                    <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
-            </md-select>
-            <md-checkbox [formControl]="editUser.controls['role']" *ngIf="user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager'">Представитель в городе</md-checkbox>
-        </div>
-
-        <div class="user-image">
-            <div (click)="removeImage()" *ngIf="fileData" class="delete-image-button"></div>                
-            <label class="user-input-design">
-                <div class="user-image-wrapper" [ngClass]="{'cover': fileData}">
-                    <div [ngStyle]="{'background-image': 'url(' +  fileData + ')'}" class="user-image-preview"></div>
-                </div>
-                <input (change)="addImage($event, 1, false)" [disabled]="fileName" type="file" id="input" class="add-image-input" accept=".png,.jpg,.jpeg">
-            </label>
-        </div>
-        <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>
-    </form>
-</div>
+    <div class="user-image">
+        <div (click)="removeImage()" *ngIf="fileData" class="delete-image-button"></div>                
+        <label class="user-input-design">
+            <div class="user-image-wrapper" [ngClass]="{'cover': fileData}">
+                <div [ngStyle]="{'background-image': 'url(' +  fileData + ')'}" class="user-image-preview"></div>
+            </div>
+            <input (change)="addImage($event, 1, false)" [disabled]="fileName" type="file" id="input" class="add-image-input" accept=".png,.jpg,.jpeg">
+        </label>
+    </div>
+    <mh-button [loading]="responding">СОХРАНИТЬ</mh-button>
+</form>

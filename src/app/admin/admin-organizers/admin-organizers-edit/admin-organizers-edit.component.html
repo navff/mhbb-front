@@ -1,21 +1,18 @@
-<mh-progress [loading]="!loaded"></mh-progress>
-<div class="container">
-    <h1 class="admin-heading">{{url === "/admin/organizers/add" ? 'Добавление' : 'Редактирование'}} организатора</h1>
-    <form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()">
-        <md-input-container class="input name">
-            <input mdInput [formControl]="editOrganizer.controls['name']" placeholder="Название">
-        </md-input-container>
-        <md-input-container class="input">
-            <input mdInput [formControl]="editOrganizer.controls['email']" placeholder="Email">
-        </md-input-container>
-        <md-input-container class="input">
-            <input mdInput [formControl]="editOrganizer.controls['phone']" placeholder="Телефон">
-        </md-input-container>
-        <md-select [formControl]="editOrganizer.controls['cityId']" class="input" placeholder="Город" floatPlaceholder="never">
-            <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
-        </md-select>
-        <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
-        <mh-button [disabled]="!editOrganizer.valid" [loading]="responding === 'put'">{{url === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
-    </form>
-    <mh-button *ngIf="url !== '/admin/organizers/add'" (click)="deleteOrganizer()" [loading]="responding === 'delete'" color="warn" class="btn-delete">УДАЛИТЬ</mh-button>
-</div>
+<h1 class="admin-heading">{{url === "/admin/organizers/add" ? 'Добавление' : 'Редактирование'}} организатора</h1>
+<form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()">
+    <md-input-container class="input name">
+        <input mdInput [formControl]="editOrganizer.controls['name']" placeholder="Название">
+    </md-input-container>
+    <md-input-container class="input">
+        <input mdInput [formControl]="editOrganizer.controls['email']" placeholder="Email">
+    </md-input-container>
+    <md-input-container class="input">
+        <input mdInput [formControl]="editOrganizer.controls['phone']" placeholder="Телефон">
+    </md-input-container>
+    <md-select [formControl]="editOrganizer.controls['cityId']" class="input" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
+    </md-select>
+    <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
+    <mh-button [disabled]="!editOrganizer.valid" [loading]="responding === 'put'">{{url === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
+</form>
+<mh-button *ngIf="url !== '/admin/organizers/add'" (click)="deleteOrganizer()" [loading]="responding === 'delete'" color="warn" class="btn-delete">УДАЛИТЬ</mh-button>

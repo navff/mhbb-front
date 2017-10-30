@@ -26,7 +26,6 @@ export class AdminActEditComponent implements OnInit {
   organizerId: number;
   organizerName: string;
   organizers = [];
-  loaded = false;
   responding: string;
   editHobby: FormGroup;
 
@@ -175,7 +174,6 @@ export class AdminActEditComponent implements OnInit {
         this.organizerId = data.Organizer.Id;
         this.organizerName = data.Organizer.Name;
         this.organizerService.getOrganizers('1', this.organizerName).subscribe(res => this.organizers = res);
-        this.loaded = true;
       });
   }
 }

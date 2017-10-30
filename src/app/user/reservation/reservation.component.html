@@ -1,36 +1,32 @@
-<mh-progress [loading]="!loaded" color="accent"></mh-progress>
+<section class="info">
+    <a routerLink="../" class="mh-back">&larr; Назад</a>
+    <h1>{{activity.Name}}</h1>
+    <div [ngStyle]="{'background-image': 'url(' +  pictureUrl + ')'}" class="picture"></div>
+    <div class="text">
+        <h4>Организатор:</h4>
+        <p>{{activity.Organizer?.Name}}</p>
+        <h4>Телефоны:</h4>
+        <p>{{activity.Phones}}</p>
+        <h4>Адрес:</h4>
+        <p>{{activity.Address}}</p>
+        <h4>Цены:</h4>
+        <p>{{activity.Prices}}</p>
+    </div>
+</section>
 
-<div class="container">
-    <section class="info">
-        <a routerLink="../" class="mh-back">&larr; Назад</a>
-        <h1>{{activity.Name}}</h1>
-        <div [ngStyle]="{'background-image': 'url(' +  pictureUrl + ')'}" class="picture"></div>
-        <div class="text">
-            <h4>Организатор:</h4>
-            <p>{{activity.Organizer?.Name}}</p>
-            <h4>Телефоны:</h4>
-            <p>{{activity.Phones}}</p>
-            <h4>Адрес:</h4>
-            <p>{{activity.Address}}</p>
-            <h4>Цены:</h4>
-            <p>{{activity.Prices}}</p>
-        </div>
-    </section>
-
-    <form [formGroup]="form" (ngSubmit)="postReservation()">
-        <md-input-container>
-            <input mdInput [formControl]="form.controls['name']" placeholder="Имя, Фамилия">
-        </md-input-container>
-        <md-input-container>
-            <input mdInput [formControl]="form.controls['phone']" placeholder="Сотовый телефон">
-        </md-input-container>
-        <md-input-container>
-            <input mdInput [formControl]="form.controls['email']" placeholder="Электронная почта" type="email">
-        </md-input-container>
-        <md-input-container>
-            <input mdInput [formControl]="form.controls['comment']" placeholder="Пожелания, комментарии">
-        </md-input-container>
-        <mh-button [disabled]="form.invalid" color="primary" [loading]="responding">ЗАПИСАТЬСЯ</mh-button>
-        <p>С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
-    </form>
-</div>
+<form [formGroup]="form" (ngSubmit)="postReservation()">
+    <md-input-container>
+        <input mdInput [formControl]="form.controls['name']" placeholder="Имя, Фамилия">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput [formControl]="form.controls['phone']" placeholder="Сотовый телефон">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput [formControl]="form.controls['email']" placeholder="Электронная почта" type="email">
+    </md-input-container>
+    <md-input-container>
+        <input mdInput [formControl]="form.controls['comment']" placeholder="Пожелания, комментарии">
+    </md-input-container>
+    <mh-button [disabled]="form.invalid" color="primary" [loading]="responding">ЗАПИСАТЬСЯ</mh-button>
+    <p>С вами свяжутся организаторы и зададут дополнительные вопросы, если нужно. </p>
+</form>

@@ -18,7 +18,6 @@ export class AdminOrganizersEditComponent implements OnInit {
   organizerId: string;
 
   responding: string;
-  loaded = true;
 
   editOrganizer: FormGroup;
   constructor(
@@ -62,7 +61,6 @@ export class AdminOrganizersEditComponent implements OnInit {
     this.url = this.router.url;
     this.cityService.getCities().subscribe(data => this.cities = data);
     if (this.url !== '/admin/organizers/add') {
-      this.loaded = false;
       this.route.params.subscribe(params => this.organizerId = params.id);
       this.organizerService.getOrganizerById(this.organizerId)
         .subscribe((data: Organizer) => {
@@ -71,7 +69,6 @@ export class AdminOrganizersEditComponent implements OnInit {
           this.editOrganizer.get('sobriety').setValue(data.Sobriety);
           this.editOrganizer.get('email').setValue(data.Email);
           this.editOrganizer.get('phone').setValue(data.Phone);
-          this.loaded = true;
         });
     }
   }

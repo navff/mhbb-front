@@ -1,67 +1,63 @@
-<mh-progress [loading]="!loaded" [color]="admin.isActive ? 'primary' : 'accent'"></mh-progress>
+<section class="gallery">
+    <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-back">&larr; Поиск</a>
+    <div class="heading">
+        <h1>{{activity.Name}}</h1>
+        <div class="voicing" *ngIf="activity.IsChecked" [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы голосовать' : ''">
+            <img (click)="vote('positive')" class="thumb-up" src="img/thumbs-up-black.svg" [ngStyle]="{'cursor': isAuthorized ? 'pointer' : 'default'}">
+            <p class="amount">{{activity.Voices}}</p>
+            <img (click)="vote('negative')" class="thumb-down" src="img/thumbs-up-black.svg" [ngStyle]="{'cursor': isAuthorized ? 'pointer' : 'default'}">
+            <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
+        </div>
+    </div>
+    <mh-pictures [pictures]="pictures"></mh-pictures>
+</section>
 
-<div class="container">
-    <section class="gallery">
-        <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-back">&larr; Поиск</a>
-        <div class="heading">
-            <h1>{{activity.Name}}</h1>
-            <div class="voicing" *ngIf="activity.IsChecked" [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы голосовать' : ''">
-                <img (click)="vote('positive')" class="thumb-up" src="img/thumbs-up-black.svg" [ngStyle]="{'cursor': isAuthorized ? 'pointer' : 'default'}">
-                <p class="amount">{{activity.Voices}}</p>
-                <img (click)="vote('negative')" class="thumb-down" src="img/thumbs-up-black.svg" [ngStyle]="{'cursor': isAuthorized ? 'pointer' : 'default'}">
-                <p *ngIf="voted" class="voted">Вы уже проголосовали за эту активность.</p>
-            </div>
-        </div>
-        <mh-pictures [pictures]="pictures"></mh-pictures>
-    </section>
+<section class="info">
+    <div class="organizer">
+        <h4>Организатор:</h4>
+        <p>{{activity.Organizer?.Name}}</p>
+    </div>
+    <div class="age">
+        <h4>Возраст:</h4>
+        <p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
+    </div>
+    <h4>Телефоны:</h4>
+    <p>{{activity.Phones}}</p>
+    <h4>Адрес:</h4>
+    <p>{{activity.Address}}</p>
+    <h4>Цены:</h4>
+    <div class="prices">
+        <p>{{activity.Prices}}</p>
+        <img class="hobby-free-icon" src="img/free-withborder.svg" *ngIf="activity.Free">
+    </div>
+    <h4>Трезвость:</h4>
+    <p>{{activity.Organizer?.Sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
+    <h4>Ведущий:</h4>
+    <p>{{activity.Mentor}}</p>
 
-    <section class="info">
-        <div class="organizer">
-            <h4>Организатор:</h4>
-            <p>{{activity.Organizer?.Name}}</p>
-        </div>
-        <div class="age">
-            <h4>Возраст:</h4>
-            <p>от {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
-        </div>
-        <h4>Телефоны:</h4>
-        <p>{{activity.Phones}}</p>
-        <h4>Адрес:</h4>
-        <p>{{activity.Address}}</p>
-        <h4>Цены:</h4>
-        <div class="prices">
-            <p>{{activity.Prices}}</p>
-            <img class="hobby-free-icon" src="img/free-withborder.svg" *ngIf="activity.Free">
-        </div>
-        <h4>Трезвость:</h4>
-        <p>{{activity.Organizer?.Sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
-        <h4>Ведущий:</h4>
-        <p>{{activity.Mentor}}</p>
+    <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
+    <mh-button *ngIf="!admin.isActive" routerLink="reservation">ЗАПИСАТЬСЯ</mh-button>
+    <div class="admin-buttons" *ngIf="admin.isActive">
+        <mh-button routerLink="edit" color="primary">РЕДАКТИРОВАТЬ</mh-button>
+        <mh-button *ngIf="activity.length !== 0 && !activity.IsChecked" (click)="actApprove()" [loading]="responding === 'approve'">ПОДТВЕРДИТЬ</mh-button>
+    </div>
+</section>
 
-        <a routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
-        <mh-button *ngIf="!admin.isActive" routerLink="reservation">ЗАПИСАТЬСЯ</mh-button>
-        <div class="admin-buttons" *ngIf="admin.isActive">
-            <mh-button routerLink="edit" color="primary">РЕДАКТИРОВАТЬ</mh-button>
-            <mh-button *ngIf="!activity.IsChecked && loaded" (click)="actApprove()" [loading]="responding === 'approve'">ПОДТВЕРДИТЬ</mh-button>
-        </div>
-    </section>
+<p class="description">{{activity.Description}}</p>
 
-    <p class="description">{{activity.Description}}</p>
-
-    <section class="reviews" *ngIf="activity.IsChecked">
-        <h2>Отзывы</h2>
-        <div class="review" *ngFor="let review of reviews">
-            <div [ngStyle]="{'background-image': 'url(' +  review.User?.Picture?.Url + ')'}" class="user-image-preview"></div>
-            <div class="text">
-                <p class="name">{{review.User?.Name}}</p>
-                <p class="date">{{review.DateCreated | myDate}}</p>
-                <p>{{review.Text}}</p>
-            </div>
+<section class="reviews" *ngIf="activity.IsChecked">
+    <h2>Отзывы</h2>
+    <div class="review" *ngFor="let review of reviews">
+        <div [ngStyle]="{'background-image': 'url(' +  review.User?.Picture?.Url + ')'}" class="user-image-preview"></div>
+        <div class="text">
+            <p class="name">{{review.User?.Name}}</p>
+            <p class="date">{{review.DateCreated | myDate}}</p>
+            <p>{{review.Text}}</p>
         </div>
-        <md-input-container [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы оставлять отзывы' : ''">
-            <textarea mdInput [disabled]="published || !isAuthorized" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
-        </md-input-container>
-        <mh-button *ngIf="!published" [loading]="responding === 'publish'" [disabled]="!reviewText" (click)="publishReview()" color="primary">Опубликовать</mh-button>
-        <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
-    </section>
-</div>
+    </div>
+    <md-input-container [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы оставлять отзывы' : ''">
+        <textarea mdInput [disabled]="published || !isAuthorized" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
+    </md-input-container>
+    <mh-button *ngIf="!published" [loading]="responding === 'publish'" [disabled]="!reviewText" (click)="publishReview()" color="primary">Опубликовать</mh-button>
+    <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
+</section>

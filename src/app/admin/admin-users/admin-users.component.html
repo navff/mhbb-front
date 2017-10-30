@@ -1,5 +1,4 @@
-<mh-progress [loading]="!loaded"></mh-progress>
-<form class="container">
+<form>
     <h1 class="admin-heading">Пользователи</h1>
     <md-input-container class="input">
         <input (ngModelChange)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
@@ -10,12 +9,12 @@
     <md-checkbox (click)="!admin ? search(0, 1) : search(null, null)" [(ngModel)]="admin" name="admin" color="primary">Представители в городах</md-checkbox>
 </form>
 
-<section class="container">
+<section>
     <div class="users">
         <div class="user" *ngFor="let user of users">
             <a routerLink="edit" [queryParams]="{ email: user.Email }">{{user.Email}}</a>
         </div>
     </div>
     <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>
-    <h2 class="no-results" *ngIf="loaded && users.length === 0">По вашему запросу ничего не найдено.</h2>
+    <h2 class="no-results" *ngIf="users?.length === 0">По вашему запросу ничего не найдено.</h2>
 </section>

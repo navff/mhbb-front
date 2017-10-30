@@ -1,12 +1,10 @@
-<div class="container form">
-    <a class="mh-back" (click)="back()">&larr; Назад</a>
-    <h2>Вход и регистрация</h2>
-    <form #f="ngForm" (ngSubmit)="registerUser()">
-        <md-input-container>
-            <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
-        </md-input-container>
-        <mh-button [disabled]="f.invalid" [loading]="responding">ОТПРАВИТЬ ССЫЛКУ</mh-button>
-    </form>
-    <p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять
-        кружки и курсы. Если вы не были зарегистрированы, — зарегистрируем.</p>
-</div>
+<a class="mh-back" (click)="back()">&larr; Назад</a>
+<h2>Вход и регистрация</h2>
+<form #f="ngForm" (ngSubmit)="registerUser()">
+    <md-input-container>
+        <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
+    </md-input-container>
+    <mh-button [disabled]="f.invalid" [loading]="responding">ОТПРАВИТЬ ССЫЛКУ</mh-button>
+</form>
+<p>На вашу почту мы отправим ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы, голосовать, добавлять
+    кружки и курсы. Если вы не были зарегистрированы, — зарегистрируем.</p>

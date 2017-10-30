@@ -1,21 +1,18 @@
-<mh-progress [loading]="!loaded"></mh-progress>
-<div class="container">
-    <h1 class="admin-heading">Организаторы</h1>
-    <button class="btn-add" routerLink="add" md-fab></button>
-    <form>
-        <md-input-container class="input">
-            <input (ngModelChange)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
-        </md-input-container>
-        <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
-            <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
-        </md-select>
-    </form>
+<h1 class="admin-heading">Организаторы</h1>
+<button class="btn-add" routerLink="add" md-fab></button>
+<form>
+    <md-input-container class="input">
+        <input (ngModelChange)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+    </md-input-container>
+    <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
+    </md-select>
+</form>
 
-    <div class="organizers">
-        <div *ngFor="let organizer of organizers" class="organizer">
-            <a [routerLink]="['edit', organizer.Id]">{{organizer.Name}}</a>
-        </div>
-        <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>
+<div class="organizers">
+    <div *ngFor="let organizer of organizers" class="organizer">
+        <a [routerLink]="['edit', organizer.Id]">{{organizer.Name}}</a>
     </div>
-    <h2 class="no-results" *ngIf="loaded && organizers.length === 0">По вашему запросу ничего не найдено.</h2>
+    <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>
 </div>
+<h2 class="no-results" *ngIf="organizers?.length === 0">По вашему запросу ничего не найдено.</h2>

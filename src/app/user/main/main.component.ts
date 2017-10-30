@@ -28,7 +28,6 @@ export class MainComponent implements OnInit {
 
   checkLength: number;
   page = 1;
-  loaded: boolean;
   responding: boolean;
 
   constructor(
@@ -38,7 +37,6 @@ export class MainComponent implements OnInit {
 
   search(...values): void {
     this.page = 1;
-    this.loaded = false;
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
     this.activityService
@@ -46,7 +44,6 @@ export class MainComponent implements OnInit {
       .subscribe(data => {
         this.activities = data;
         this.checkLength = data.length;
-        this.loaded = true;
       });
   }
   updateWord(word: string): void {
@@ -71,7 +68,6 @@ export class MainComponent implements OnInit {
     this.activityService.list().subscribe((data: Activity[]) => {
       this.activities = data;
       this.checkLength = data.length;
-      this.loaded = true;
     });
     this.interestService.getInterests().subscribe(data => {
       this.interests = data;

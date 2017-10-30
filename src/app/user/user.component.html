@@ -2,7 +2,7 @@
 	<header [ngClass]="{'home-header': home.isActive}">
 		<div class="container">
 			<img routerLink="" routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" src="img/logo.svg"
-				 alt="Моё Хобби" class="logo">
+			 alt="Моё Хобби" class="logo">
 			<a routerLink="/about">О проекте</a>
 			<a routerLink="/sponsor">Стать спонсором</a>
 			<a routerLink="/member">Стать представителем</a>
@@ -12,8 +12,10 @@
 			<h1 *ngIf="home.isActive">Находим хобби по вкусу и возрасту</h1>
 		</div>
 	</header>
-
-	<router-outlet></router-outlet>
+	<mh-progress></mh-progress>
+	<div class="container">
+		<router-outlet></router-outlet>
+	</div>
 </div>
 
 <mh-footer></mh-footer>

@@ -15,7 +15,6 @@ export class ReservationComponent implements OnInit {
   activity: any = {};
   mainPictureUrl: string;
 
-  loaded: boolean;
   responding: boolean;
 
   form: FormGroup;
@@ -50,7 +49,6 @@ export class ReservationComponent implements OnInit {
         .subscribe(data => {
           this.activity = data;
           this.mainPictureUrl = this.activity.Pictures[0].Url;
-          this.loaded = true;
         });
     });
   }

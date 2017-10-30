@@ -1,99 +1,100 @@
-<mh-progress [loading]="!loaded"></mh-progress>
+<form [formGroup]="editHobby" (ngSubmit)="submitForm()">
+    <a routerLink="../" class="mh-back">&larr; Назад</a>
+    <md-input-container class="form-item-course-name">
+        <input mdInput placeholder="Название курса" [formControl]="editHobby.controls['name']">
+    </md-input-container>
 
-<div class="container">
-    <form [formGroup]="editHobby" (ngSubmit)="submitForm()">
-        <a routerLink="../" class="mh-back">&larr; Назад</a>
-        <md-input-container class="form-item-course-name">
-            <input mdInput placeholder="Название курса" [formControl]="editHobby.controls['name']">
+    <div class="photos">
+        <div class="main-image">
+            <div (click)="removeImage(0)" *ngIf="fileData[0] || picUrls[0]" class="delete-image-button"></div>
+            <label class="main-input-design">
+                <div class="main-wrapper" [ngClass]="{'cover': fileData[0] || picUrls[0]}">
+                    <div [ngStyle]="{'background-image': picUrls[0] ? 'url(' +  picUrls[0] + ')' : 'url(' +  fileData[0] + ')'}" class="main-preview"></div>
+                </div>
+                <input (change)="addImage($event, 0, true)" [disabled]="fileNames[0] || picUrls[0]" type="file" id="input-0" class="add-image-input"
+                    accept=".png,.jpg,.jpeg">
+                <input type="hidden" [formControl]="editHobby.controls['image0']">
+            </label>
+        </div>
+
+        <div *ngIf="fileNames[0] || fileNames[1] || fileNames[2] || fileNames[3]" class="secondary-image-1">
+            <div (click)="removeImage(1)" *ngIf="fileData[1] || picUrls[1]" class="delete-image-button"></div>
+            <label class="secondary-input-design">
+                <div class="secondary-wrapper" [ngClass]="{'cover': fileData[1] || picUrls[1]}">
+                    <div [ngStyle]="{'background-image': picUrls[1] ? 'url(' +  picUrls[1] + ')' : 'url(' +  fileData[1] + ')'}" class="secondary-preview"></div>
+                </div>
+                <input (change)="addImage($event, 1, false)" [disabled]="fileNames[1] || picUrls[1]" type="file" id="input-1" class="add-image-input"
+                    accept=".png,.jpg,.jpeg">
+                <input type="hidden" [formControl]="editHobby.controls['image1']">
+            </label>
+        </div>
+
+        <div *ngIf="fileNames[1] || fileNames[3] || fileNames[2]" class="secondary-image-2">
+            <div (click)="removeImage(2)" *ngIf="fileData[2] || picUrls[2]" class="delete-image-button"></div>
+            <label class="secondary-input-design">
+                <div class="secondary-wrapper" [ngClass]="{'cover': fileData[2] || picUrls[2]}">
+                    <div [ngStyle]="{'background-image': picUrls[2] ? 'url(' +  picUrls[2] + ')' : 'url(' +  fileData[2] + ')'}" class="secondary-preview"></div>
+                </div>
+                <input (change)="addImage($event, 2, false)" [disabled]="fileNames[2] || picUrls[2]" type="file" id="input-2" class="add-image-input"
+                    accept=".png,.jpg,.jpeg">
+                <input type="hidden" [formControl]="editHobby.controls['image2']">
+            </label>
+        </div>
+
+        <div *ngIf="fileNames[2] || fileNames[3]" class="secondary-image-3">
+            <div (click)="removeImage(3)" *ngIf="fileData[3] || picUrls[3]" class="delete-image-button"></div>
+            <label class="secondary-input-design">
+                <div class="secondary-wrapper" [ngClass]="{'cover': fileData[3] || picUrls[3]}">
+                    <div [ngStyle]="{'background-image': picUrls[3] ? 'url(' +  picUrls[3] + ')' : 'url(' +  fileData[3] + ')'}" class="secondary-preview"></div>
+                </div>
+                <input (change)="addImage($event, 3, false)" [disabled]="fileNames[3] || picUrls[3]" type="file" id="input-3" class="add-image-input"
+                    accept=".png,.jpg,.jpeg">
+                <input type="hidden" [formControl]="editHobby.controls['image3']">
+            </label>
+        </div>
+    </div>
+
+    <div class='form-right'>
+        <md-input-container class="form-item-organizer">
+            <input (keyup)="filterOrganizers(editHobby.get('organizer').value)" (focus)="filterOrganizers(editHobby.get('organizer').value)"
+                mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="editHobby.controls['organizer']">
+        </md-input-container>
+        <md-autocomplete #org="mdAutocomplete">
+            <md-option (click)="setOrganizerId(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">
+                {{organizer.Name}}
+            </md-option>
+        </md-autocomplete>
+        <md-input-container class="form-item-age-from">
+            <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [formControl]="editHobby.controls['ageFrom']">
+        </md-input-container>
+        <md-input-container class="form-item-age-to">
+            <input mdInput placeholder="До" myOnlyNumber maxlength="3" [formControl]="editHobby.controls['ageTo']">
+        </md-input-container>
+        <md-select class="form-item-interests" placeholder="Интересы" [formControl]="editHobby.controls['interestId']">
+            <md-option *ngFor="let interest of interests" [value]="interest.Id">{{ interest.Name }}</md-option>
+        </md-select>
+        <md-input-container class="form-item-phones">
+            <textarea mdInput rows="3" placeholder="Телефоны" [formControl]="editHobby.controls['phones']"></textarea>
+        </md-input-container>
+        <md-input-container class="form-item-address">
+            <textarea mdInput rows="3" placeholder="Адрес" [formControl]="editHobby.controls['address']"></textarea>
+        </md-input-container>
+        <md-input-container class="form-item-price">
+            <input mdInput placeholder="Цены" [formControl]="editHobby.controls['prices']">
+        </md-input-container>
+        <md-checkbox color="primary" class="form-item-free-checkbox" [formControl]="editHobby.controls['free']">Бесплатно</md-checkbox>
+    </div>
+
+    <div class='form-bottom'>
+        <md-input-container class="form-item-description">
+            <textarea mdInput rows="10" placeholder="Подробное описание" [formControl]="editHobby.controls['description']"></textarea>
+        </md-input-container>
+        <md-input-container class="form-item-guides">
+            <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="editHobby.controls['mentor']"></textarea>
         </md-input-container>
 
-        <div class="photos">
-            <div class="main-image">
-                <div (click)="removeImage(0)" *ngIf="fileData[0] || picUrls[0]" class="delete-image-button"></div>
-                <label class="main-input-design">
-                    <div class="main-wrapper" [ngClass]="{'cover': fileData[0] || picUrls[0]}">
-                        <div [ngStyle]="{'background-image': picUrls[0] ? 'url(' +  picUrls[0] + ')' : 'url(' +  fileData[0] + ')'}" class="main-preview"></div>
-                    </div>
-                    <input (change)="addImage($event, 0, true)" [disabled]="fileNames[0] || picUrls[0]" type="file"  id="input-0" class="add-image-input" accept=".png,.jpg,.jpeg">
-                    <input type="hidden" [formControl]="editHobby.controls['image0']">
-                </label>
-            </div>
+        <mh-button [disabled]="!editHobby.valid" [loading]="responding === 'saving'">СОХРАНИТЬ</mh-button>
+    </div>
+</form>
 
-            <div *ngIf="fileNames[0] || fileNames[1] || fileNames[2] || fileNames[3]" class="secondary-image-1">
-                <div (click)="removeImage(1)" *ngIf="fileData[1] || picUrls[1]" class="delete-image-button"></div>
-                <label class="secondary-input-design">
-                    <div class="secondary-wrapper" [ngClass]="{'cover': fileData[1] || picUrls[1]}">
-                        <div [ngStyle]="{'background-image': picUrls[1] ? 'url(' +  picUrls[1] + ')' : 'url(' +  fileData[1] + ')'}" class="secondary-preview"></div>                        
-                    </div>
-                    <input (change)="addImage($event, 1, false)" [disabled]="fileNames[1] || picUrls[1]" type="file" id="input-1" class="add-image-input" accept=".png,.jpg,.jpeg">
-                    <input type="hidden" [formControl]="editHobby.controls['image1']">
-                </label>
-            </div>
-
-            <div *ngIf="fileNames[1] || fileNames[3] || fileNames[2]" class="secondary-image-2">
-                <div (click)="removeImage(2)" *ngIf="fileData[2] || picUrls[2]" class="delete-image-button"></div>
-                <label class="secondary-input-design">
-                    <div class="secondary-wrapper" [ngClass]="{'cover': fileData[2] || picUrls[2]}">
-                        <div [ngStyle]="{'background-image': picUrls[2] ? 'url(' +  picUrls[2] + ')' : 'url(' +  fileData[2] + ')'}" class="secondary-preview"></div>                        
-                    </div>
-                    <input (change)="addImage($event, 2, false)" [disabled]="fileNames[2] || picUrls[2]" type="file" id="input-2" class="add-image-input" accept=".png,.jpg,.jpeg">
-                    <input type="hidden" [formControl]="editHobby.controls['image2']">
-                </label>
-            </div>
-
-            <div *ngIf="fileNames[2] || fileNames[3]" class="secondary-image-3">
-                <div (click)="removeImage(3)" *ngIf="fileData[3] || picUrls[3]" class="delete-image-button"></div>
-                <label class="secondary-input-design">
-                    <div class="secondary-wrapper" [ngClass]="{'cover': fileData[3] || picUrls[3]}">
-                        <div [ngStyle]="{'background-image': picUrls[3] ? 'url(' +  picUrls[3] + ')' : 'url(' +  fileData[3] + ')'}" class="secondary-preview"></div>                        
-                    </div>
-                    <input (change)="addImage($event, 3, false)" [disabled]="fileNames[3] || picUrls[3]" type="file" id="input-3" class="add-image-input" accept=".png,.jpg,.jpeg">
-                    <input type="hidden" [formControl]="editHobby.controls['image3']">
-                </label>
-            </div>
-        </div>
-
-        <div class='form-right'>
-            <md-input-container class="form-item-organizer">
-                <input (keyup)="filterOrganizers(editHobby.get('organizer').value)" (focus)="filterOrganizers(editHobby.get('organizer').value)"
-                    mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="editHobby.controls['organizer']">
-            </md-input-container>
-            <md-autocomplete #org="mdAutocomplete">
-                <md-option (click)="setOrganizerId(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">
-                    {{organizer.Name}}
-                </md-option>
-            </md-autocomplete>
-            <md-input-container class="form-item-age-from">
-                <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [formControl]="editHobby.controls['ageFrom']">
-            </md-input-container>
-            <md-input-container class="form-item-age-to">
-                <input mdInput placeholder="До" myOnlyNumber maxlength="3" [formControl]="editHobby.controls['ageTo']">
-            </md-input-container>
-            <md-select class="form-item-interests" placeholder="Интересы" [formControl]="editHobby.controls['interestId']">
-                <md-option *ngFor="let interest of interests" [value]="interest.Id">{{ interest.Name }}</md-option>
-            </md-select>
-            <md-input-container class="form-item-phones">
-                <textarea mdInput rows="3" placeholder="Телефоны" [formControl]="editHobby.controls['phones']"></textarea>
-            </md-input-container>
-            <md-input-container class="form-item-address">
-                <textarea mdInput rows="3" placeholder="Адрес" [formControl]="editHobby.controls['address']"></textarea>
-            </md-input-container>
-            <md-input-container class="form-item-price">
-                <input mdInput placeholder="Цены" [formControl]="editHobby.controls['prices']">
-            </md-input-container>
-            <md-checkbox color="primary" class="form-item-free-checkbox" [formControl]="editHobby.controls['free']">Бесплатно</md-checkbox>
-        </div>
-
-        <div class='form-bottom'>
-            <md-input-container class="form-item-description">
-                <textarea mdInput rows="10" placeholder="Подробное описание" [formControl]="editHobby.controls['description']"></textarea>
-            </md-input-container>
-            <md-input-container class="form-item-guides">
-                <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="editHobby.controls['mentor']"></textarea>
-            </md-input-container>
-
-            <mh-button [disabled]="!editHobby.valid" [loading]="responding === 'saving'">СОХРАНИТЬ</mh-button>
-        </div>
-    </form>
-        <mh-button (click)="deleteActivity()" [loading]="responding === 'deleting'" class="btn-delete" color="warn">УДАЛИТЬ</mh-button>
-</div>
+<mh-button (click)="deleteActivity()" [loading]="responding === 'deleting'" class="btn-delete" color="warn">УДАЛИТЬ</mh-button>

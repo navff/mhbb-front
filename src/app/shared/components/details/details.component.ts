@@ -11,13 +11,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [ActivityService, VoicesService, ReviewService],
 })
 export class DetailsComponent implements OnInit {
-  activity: any = {};
+  activity: any = [];
   pictures = [];
   reviews = [];
   reviewText: string;
 
   published: boolean;
-  loaded = false;
   responding: string;
   voted = false;
   isAuthorized: boolean;
@@ -64,10 +63,7 @@ export class DetailsComponent implements OnInit {
           this.activity = data;
           this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);
           this.reviewService.getReviewsByActivity(this.activity.Id)
-          .subscribe(res => {
-            this.reviews = res;
-            this.loaded = true;
-            });
+          .subscribe(res => this.reviews = res);
         });
     });
   }

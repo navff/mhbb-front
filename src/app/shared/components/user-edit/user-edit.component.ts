@@ -26,7 +26,6 @@ export class UserEditComponent implements OnInit {
   user: any = {};
 
   responding = false;
-  loaded = false;
 
   sub: Subscription;
 
@@ -125,7 +124,6 @@ export class UserEditComponent implements OnInit {
           this.editUser.get('role').setValue(false);
         }
         this.editUser.get('cityId').setValue(this.user.CityId);
-        this.loaded = true;
         if (user.Picture) {
           this.fileName = user.Picture.Filename;
           this.fileData = user.Picture.Url;

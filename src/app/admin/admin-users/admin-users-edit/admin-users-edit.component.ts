@@ -15,7 +15,6 @@ export class AdminUsersEditComponent implements OnInit {
   cities = [];
   email: string;
 
-  loaded: boolean;
   responding: boolean;
 
   editUser: FormGroup;
@@ -63,7 +62,6 @@ export class AdminUsersEditComponent implements OnInit {
           this.editUser.get('role').setValue(true) :
           this.editUser.get('role').setValue(false);
         this.editUser.get('cityId').setValue(data.CityId);
-        this.loaded = true;
       });
   }
 }

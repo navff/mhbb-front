@@ -12,7 +12,7 @@ import { Organizer } from '../../models/organizer.model';
 })
 export class AdminOrganizersComponent implements OnInit {
   cities = [];
-  organizers: Organizer[] = [];
+  organizers: Organizer[];
 
   page = 1;
   word: string;
@@ -20,7 +20,6 @@ export class AdminOrganizersComponent implements OnInit {
   city: any = {};
   checkLength: number;
 
-  loaded: boolean;
   responding: boolean;
 
   constructor(
@@ -42,12 +41,10 @@ export class AdminOrganizersComponent implements OnInit {
   }
   search(): void {
     this.page = 1;
-    this.loaded = false;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
       .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;
-        this.loaded = true;
       });
   }
 
@@ -58,7 +55,6 @@ export class AdminOrganizersComponent implements OnInit {
       .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;
-        this.loaded = true;
       });
   }
 }

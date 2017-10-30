@@ -10,24 +10,19 @@ import { Subject } from 'rxjs/Subject';
   providers: [ReviewService, CityService]
 })
 export class AdminReviewsComponent implements OnInit {
-  reviews: any[] = [];
+  reviews: any[];
   cities = [];
   word: string;
   searchWord: Subject<any> = new Subject();
   city: any = {};
-  loaded: boolean;
 
   constructor(
     private reviewService: ReviewService,
     private cityService: CityService) { }
 
   search(): void {
-    this.loaded = false;
     this.reviewService.getUncheckedReviews(this.word, this.city.Id)
-      .subscribe(data => {
-        this.reviews = data;
-        this.loaded = true;
-      });
+      .subscribe(data => this.reviews = data);
   }
   updateWord(word: string): void {
     this.searchWord.next(word);
@@ -47,9 +42,6 @@ export class AdminReviewsComponent implements OnInit {
     this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.reviewService.getUncheckedReviews()
-      .subscribe(data => {
-        this.reviews = data;
-        this.loaded = true;
-      });
+      .subscribe(data => this.reviews = data);
   }
 }
