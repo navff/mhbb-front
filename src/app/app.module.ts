@@ -1,44 +1,137 @@
-import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import {
+  NgModule,
+  ApplicationRef
+} from '@angular/core';
+import {
+  removeNgStyles,
+  createNewHosts,
+  createInputTransfer
+} from '@angularclass/hmr';
+import {
+  RouterModule,
+  PreloadAllModules
+} from '@angular/router';
+
+/*
+* Platform and Environment providers/directives/pipes
+*/
+import { ENV_PROVIDERS } from './environment';
+// App is our top level component
+import { AppComponent } from './app.component';
+import { APP_RESOLVER_PROVIDERS } from './app.resolver';
+import { AppState, InternalStateType } from './app.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedModule } from './shared/_shared.module';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { AuthGuard } from './shared/auth.guard';
 import { Http } from '@angular/http';
 import { HttpService } from './shared/services/http.service';
 import { UserService } from './shared/services/user.service';
 
+import '../styles/material-theme.css';
+import '../styles/reset.css';
+
+// Application wide providers
+const APP_PROVIDERS = [
+  ...APP_RESOLVER_PROVIDERS,
+  AppState,
+  AuthGuard, HttpService, { provide: Http, useClass: HttpService }, UserService
+];
+
+type StoreType = {
+  state: InternalStateType,
+  restoreInputValues: () => void,
+  disposeOldHosts: () => void
+};
+
+/**
+ * `AppModule` is the main entry point into Angular2's bootstraping process
+ */
 @NgModule({
+  bootstrap: [ AppComponent ],
+  declarations: [
+    AppComponent,
+  ],
+  /**
+   * Import Angular's modules.
+   */
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule
   ],
-  declarations: [AppComponent],
-  providers: [AuthGuard, HttpService, { provide: Http, useClass: HttpService }, UserService],
-  bootstrap: [AppComponent]
+  /**
+   * Expose our Services and Providers into Angular's dependency injection.
+   */
+  providers: [
+    ENV_PROVIDERS,
+    APP_PROVIDERS
+  ]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef) { }
-  hmrOnInit(store) {
-    console.log('HMR store', store);
+
+  constructor(
+    public appRef: ApplicationRef,
+    public appState: AppState
+  ) {}
+
+  public hmrOnInit(store: StoreType) {
+    if (!store || !store.state) {
+      return;
+    }
+    console.log('HMR store', JSON.stringify(store, null, 2));
+    /**
+     * Set state
+     */
+    this.appState._state = store.state;
+    /**
+     * Set input values
+     */
+    if ('restoreInputValues' in store) {
+      let restoreInputValues = store.restoreInputValues;
+      setTimeout(restoreInputValues);
+    }
+
+    this.appRef.tick();
+    delete store.state;
+    delete store.restoreInputValues;
   }
-  hmrOnDestroy(store) {
-    let cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    // recreate elements
+
+  public hmrOnDestroy(store: StoreType) {
+    const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
+    /**
+     * Save state
+     */
+    const state = this.appState._state;
+    store.state = state;
+    /**
+     * Recreate root elements
+     */
     store.disposeOldHosts = createNewHosts(cmpLocation);
-    // remove styles
+    /**
+     * Save input values
+     */
+    store.restoreInputValues  = createInputTransfer();
+    /**
+     * Remove styles
+     */
     removeNgStyles();
   }
-  hmrAfterDestroy(store) {
-    // display new elements
+
+  public hmrAfterDestroy(store: StoreType) {
+    /**
+     * Display new elements
+     */
     store.disposeOldHosts();
     delete store.disposeOldHosts;
   }
+
 }

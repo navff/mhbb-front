@@ -4,14 +4,14 @@
         <section class="top">
             <p class="age">От {{activity.AgeFrom}} до {{activity.AgeTo}} лет</p>
             <div class="voices">
-                <img src="img/thumbs-up.svg" class="thumb-up">
+                <img src="assets/img/thumbs-up.svg" class="thumb-up">
                 <p class="amount">{{activity.Voices}}</p>
             </div>
         </section>
         <section class="bottom">
             <h6 class="name">{{activity.Name}}</h6>
             <p class="company">{{activity.Organizer.Name}}</p>
-            <img class="free-icon" src="img/free.svg" *ngIf="activity.Free && !responding">
+            <img class="free-icon" src="assets/img/free.svg" *ngIf="activity.Free && !responding">
         </section>
     </div>
     <span class="empty"></span> 

@@ -1,8 +1,39 @@
-/deep/ 
-    .mat-select-placeholder
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,900&subset=cyrillic-ext')
+
+html
+	font-size: 1rem
+	min-height: 100%
+html
+    overflow-y: scroll
+body
+	font-family:  Roboto, Arial, sans-serif
+	font-weight: 400
+	min-height: 100%
+a
+    cursor: pointer
+    text-decoration: underline
+    &:hover
+        text-decoration: none
+.container
+	width: 95%
+	position: relative
+	max-width: 98rem
+	margin: 0 auto
+.content
+    min-height: calc(100vh - 7.75rem)
+.mh-back
+    display: inline-block
+    margin: 2.75rem 0 2.0625rem
+    width: 5.375rem
+    font-size: 1.25rem
+.admin-heading
+    font-size: 2.1875rem
+    margin: 2.5rem auto
+
+.mat-select
+    position: relative
+    top: 0.125rem
+    &-value
         font-size: 1.25rem
-    .mat-select
-        position: relative
-        top: 0.125rem
-    .mat-select-value
+    &-placeholder
         font-size: 1.25rem

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UserService } from './shared/services/user.service';
 
 import { Router } from '@angular/router';
 
-import '../style/app.sass';
-
 @Component({
   selector: 'mh-app',
   template: `<router-outlet></router-outlet>`,
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
 

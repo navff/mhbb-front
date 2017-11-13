@@ -53,7 +53,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchWord.debounceTime(250).distinctUntilChanged().subscribe(() => this.search());
+    this.searchWord.debounceTime(250).subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.userService.getUsers()
       .subscribe((data: User[]) => {
