@@ -27,11 +27,11 @@ export class AdminOrganizersEditComponent implements OnInit {
     private router: Router,
     fb: FormBuilder) {
     this.editOrganizer = fb.group({
-      'name': ['', Validators.required],
-      'cityId': ['', Validators.required],
-      'sobriety': false,
-      'email': '',
-      'phone': ''
+      name: ['', Validators.required],
+      cityId: ['', Validators.required],
+      sobriety: false,
+      email: '',
+      phone: ''
     });
   }
 
@@ -43,13 +43,11 @@ export class AdminOrganizersEditComponent implements OnInit {
       this.editOrganizer.get('sobriety').value,
       this.editOrganizer.get('email').value,
       this.editOrganizer.get('phone').value);
-    if (this.url === '/admin/organizers/add') {
-      this.organizerService.postOrganizer(body)
-        .subscribe(() => this.router.navigate(['/admin/organizers']));
-      } else {
-        this.organizerService.putOrganizer(this.organizerId, body)
-          .subscribe(() => this.router.navigate(['/admin/organizers']));
-    }
+
+    let request = this.url === '/admin/organizers/add' ?
+      this.organizerService.postOrganizer(body) :
+      this.organizerService.putOrganizer(this.organizerId, body);
+    request.subscribe(() => this.router.navigate(['/admin/organizers']));
   }
   deleteOrganizer() {
     this.responding = 'delete';

@@ -14,7 +14,7 @@ export class UserService {
     search.append('roles', role1);
     search.append('roles', role2);
 
-    return this.http.get('user/search', new RequestOptions({ search: search }));
+    return this.http.get('user/search', new RequestOptions({ search }));
   }
   getByEmail(email: string) {
     return this.http.get(`user?email=${email}`);
@@ -25,8 +25,8 @@ export class UserService {
   deletePicture(id) {
     return this.http.delete(`picture/${id}`);
   }
-  register(email) {
-    return this.http.post(`user`, { 'Email': email });
+  register(Email) {
+    return this.http.post(`user`, { Email });
   }
   getByToken() {
     return this.http.get('user');

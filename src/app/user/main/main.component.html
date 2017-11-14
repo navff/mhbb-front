@@ -1,10 +1,10 @@
 <form class="form">
     <md-input-container class="search">
-        <input (keyup)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+        <input (ngModelChange)="onChange()" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
     </md-input-container>
 
     <md-input-container class="age">
-        <input (keyup)="updateAge(age)" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" myOnlyNumber maxlength="3">
+        <input (ngModelChange)="onChange()" [(ngModel)]="age" name="age" mdInput placeholder="Возраст" myOnlyNumber maxlength="3">
     </md-input-container>
 
     <md-select (change)="search()" [(ngModel)]="interest" name="interest" class="interests" placeholder="Интересы" floatPlaceholder="never">

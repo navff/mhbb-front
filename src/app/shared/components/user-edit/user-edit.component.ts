@@ -37,11 +37,11 @@ export class UserEditComponent implements OnInit {
     private router: Router,
     fb: FormBuilder) {
     this.editUser = fb.group({
-      'email': '',
-      'name': '',
-      'phone': '',
-      'role': '',
-      'cityId': ''
+      email: '',
+      name: '',
+      phone: '',
+      role: '',
+      cityId: ''
     });
   }
   back() {
@@ -68,14 +68,14 @@ export class UserEditComponent implements OnInit {
   };
   removeImage() {
     if (this.tempFileId) {
-      (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
+      (<HTMLScriptElement> document.getElementById(`input`))['value'] = null;
       this.fileName = null;
       this.fileData = null;
       this.fileToDelete = true;
       this.activityService.deleteTempfile(this.tempFileId).subscribe();
     }
     if (this.fileId) {
-      (<HTMLScriptElement>document.getElementById(`input`))['value'] = null;
+      (<HTMLScriptElement> document.getElementById(`input`))['value'] = null;
       this.fileName = null;
       this.fileData = null;
       this.fileToDelete = true;

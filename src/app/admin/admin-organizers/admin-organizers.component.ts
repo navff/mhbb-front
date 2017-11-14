@@ -28,7 +28,7 @@ export class AdminOrganizersComponent implements OnInit {
 
   concatPage(): void {
     this.responding = true;
-    this.page += 1;
+    this.page++;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
       .subscribe((data: Organizer[]) => {
         this.organizers = this.organizers.concat(data);

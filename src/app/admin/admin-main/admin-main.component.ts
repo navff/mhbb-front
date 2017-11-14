@@ -20,8 +20,7 @@ export class AdminMainComponent implements OnInit {
   age: string;
   sobriety: any;
   free: any;
-  searchWord: Subject<any> = new Subject();
-  searchAge: Subject<any> = new Subject();
+  changes$ = new Subject();
   city: any = {};
   interest: any = {};
   uncheckedActivities: Activity[];
@@ -45,15 +44,11 @@ export class AdminMainComponent implements OnInit {
       });
 
   }
-  updateWord(word: string): void {
-    this.searchWord.next(word);
-  }
-  updateAge(age: string): void {
-    this.searchWord.next(age);
+  updateWord(): void {
+    this.changes$.next();
   }
   ngOnInit() {
-    this.searchWord.debounceTime(250).subscribe(() => this.search());
-    this.searchAge.debounceTime(250).subscribe(() => this.search());
+    this.changes$.debounceTime(250).subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.interestService.getInterests()
       .subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));

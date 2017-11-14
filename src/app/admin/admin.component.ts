@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   email: string;
 
   constructor(private activityService: ActivityService,
-    private userService: UserService) { }
+              private userService: UserService) { }
 
   exit(): void {
     localStorage.setItem('token', '');

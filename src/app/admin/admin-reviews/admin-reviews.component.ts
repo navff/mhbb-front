@@ -13,7 +13,7 @@ export class AdminReviewsComponent implements OnInit {
   reviews: any[];
   cities = [];
   word: string;
-  searchWord: Subject<any> = new Subject();
+  changes$: Subject<any> = new Subject();
   city: any = {};
 
   constructor(
@@ -24,8 +24,8 @@ export class AdminReviewsComponent implements OnInit {
     this.reviewService.getUncheckedReviews(this.word, this.city.Id)
       .subscribe(data => this.reviews = data);
   }
-  updateWord(word: string): void {
-    this.searchWord.next(word);
+  onChange(): void {
+    this.changes$.next();
   }
   reject(id, index): void {
     this.reviews[index].state = 'rejecting';
@@ -39,7 +39,7 @@ export class AdminReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchWord.debounceTime(250).subscribe(() => this.search());
+    this.changes$.debounceTime(250).subscribe(() => this.search());
     this.cityService.getCities().subscribe(data => this.cities = data);
     this.reviewService.getUncheckedReviews()
       .subscribe(data => this.reviews = data);

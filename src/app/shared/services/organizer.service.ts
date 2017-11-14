@@ -12,7 +12,7 @@ export class OrganizerService {
     search.append('cityId', cityId);
     search.append('page', page);
 
-    return this.http.get(`organizer/search`, new RequestOptions({ search: search }));
+    return this.http.get(`organizer/search`, new RequestOptions({ search }));
   }
   getOrganizerById(id: string) {
     return this.http.get(`organizer/${id}`);

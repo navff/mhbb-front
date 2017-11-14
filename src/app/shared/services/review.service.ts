@@ -17,7 +17,7 @@ export class ReviewService {
     word ? search.append('word', word) : search.delete('word');
     search.append('cityId', cityId);
 
-    return this.http.get('review/unchecked', new RequestOptions({ search: search }));
+    return this.http.get('review/unchecked', new RequestOptions({ search }));
   }
   putSetChecked(id: string, isChecked: string) {
     return this.http.put(`review/setchecked?reviewId=${id}&isChecked=${isChecked}`);

@@ -27,12 +27,12 @@ export class AdminUsersComponent implements OnInit {
     private userService: UserService,
     private cityService: CityService) { }
 
-  updateWord(word: string): void {
-    this.searchWord.next(word);
+  onChange(): void {
+    this.searchWord.next();
   }
   concatPage(): void {
     this.responding = true;
-    this.page += 1;
+    this.page++;
     this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
       .subscribe((data: User[]) => {
         this.users = this.users.concat(data);

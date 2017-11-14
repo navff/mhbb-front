@@ -20,8 +20,7 @@ export class MainComponent implements OnInit {
   age: string;
   sobriety: string;
   free: string;
-  searchWord: Subject<string> = new Subject();
-  searchAge: Subject<string> = new Subject();
+  changes$: Subject<string> = new Subject();
 
   city: any = {};
   interest: any = {};
@@ -46,11 +45,8 @@ export class MainComponent implements OnInit {
         this.checkLength = data.length;
       });
   }
-  updateWord(word: string): void {
-    this.searchWord.next(word);
-  }
-  updateAge(age: string): void {
-    this.searchWord.next(age);
+  onChange(): void {
+    this.changes$.next();
   }
   concatPage(): void {
     this.responding = true;
@@ -63,8 +59,7 @@ export class MainComponent implements OnInit {
       });
   }
   ngOnInit() {
-    this.searchWord.debounceTime(250).subscribe(() => this.search());
-    this.searchAge.debounceTime(250).subscribe(() => this.search());
+    this.changes$.debounceTime(250).subscribe(() => this.search());
     this.activityService.list().subscribe((data: Activity[]) => {
       this.activities = data;
       this.checkLength = data.length;

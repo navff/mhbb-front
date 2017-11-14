@@ -25,24 +25,22 @@ export class AdminUsersEditComponent implements OnInit {
     private route: ActivatedRoute,
     fb: FormBuilder) {
     this.editUser = fb.group({
-      'email': '',
-      'name': '',
-      'phone': '',
-      'role': '',
-      'cityId': '',
+      email: '',
+      name: '',
+      phone: '',
+      role: '',
+      cityId: '',
     });
   }
 
   putUser() {
     this.responding = true;
-    let role: number;
-    this.editUser.get('role').value === true ? role = 1 : role = 2;
 
     let body = new User(
       this.editUser.get('email').value,
       this.editUser.get('name').value,
       this.editUser.get('phone').value,
-      role,
+      this.editUser.get('role').value ? 1 : 2,
       this.editUser.get('cityId').value,
       null
     );

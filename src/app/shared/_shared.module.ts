@@ -21,13 +21,13 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { StaticComponent } from './components/static/static.component';
 
 const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
-  MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule, MdAutocompleteModule,
-  MdProgressBarModule, MdTooltipModule,
+  MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule,
+  MdAutocompleteModule, MdProgressBarModule, MdTooltipModule,
   RouterModule,
   CommonModule];
 
-const Components = [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent, ActivitiesComponent,
-  ButtonComponent, ProgressBarComponent, PicturesComponent, ImageUploadComponent, StaticComponent];
+const Components = [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent,
+  ActivitiesComponent, ButtonComponent, ProgressBarComponent, PicturesComponent, ImageUploadComponent, StaticComponent];
 
 @NgModule({
   imports: [Modules],

@@ -17,10 +17,10 @@ export class ActivityService {
     sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
     free ? search.append('free', free) : search.delete('free');
 
-    return this.http.get('activity/search', new RequestOptions({ search: search }));
+    return this.http.get('activity/search', new RequestOptions({ search }));
   }
   listUnchecked(word?: string, age?: string, interestId?: string, cityId?: string,
-    sobriety?: any, free?: any) {
+                sobriety?: any, free?: any) {
     let search = new URLSearchParams();
 
     word ? search.append('word', word) : search.delete('word');
@@ -30,7 +30,7 @@ export class ActivityService {
     sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
     free ? search.append('free', free) : search.delete('free');
 
-    return this.http.get('activity/searchunchecked', new RequestOptions({ search: search }));
+    return this.http.get('activity/searchunchecked', new RequestOptions({ search }));
   }
   getActivity(id) {
     return this.http.get(`activity/${id}`);
