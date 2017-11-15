@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/services/activity.service';
 import { Activity } from '../../models/activity.model';
-import { CityService } from '../../shared/services/city.service';
-import { InterestService } from '../../shared/services/interest.service';
+import { ListService } from '../../shared/services/list.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'mh-admin-main',
   templateUrl: './admin-main.component.html',
-  providers: [ActivityService, CityService, InterestService],
+  providers: [ActivityService, ListService, ListService],
   styleUrls: ['./admin-main.component.sass']
 })
 export class AdminMainComponent implements OnInit {
@@ -27,10 +25,9 @@ export class AdminMainComponent implements OnInit {
 
   constructor(
     private activityService: ActivityService,
-    private cityService: CityService,
-    private interestService: InterestService) { }
+    private listService: ListService) { }
 
-  search(...values): void {
+  search(...values) {
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
 
@@ -44,13 +41,13 @@ export class AdminMainComponent implements OnInit {
       });
 
   }
-  updateWord(): void {
+  updateWord() {
     this.changes$.next();
   }
   ngOnInit() {
     this.changes$.debounceTime(250).subscribe(() => this.search());
-    this.cityService.getCities().subscribe(data => this.cities = data);
-    this.interestService.getInterests()
+    this.listService.getCities().subscribe(data => this.cities = data);
+    this.listService.getInterests()
       .subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));
     this.activityService.listUnchecked()
       .subscribe((data: Activity[]) => {

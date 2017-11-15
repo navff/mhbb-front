@@ -5,7 +5,6 @@ import { ReviewService } from '../../services/review.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'mh-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.sass'],
   providers: [ActivityService, VoicesService, ReviewService],
@@ -30,7 +29,7 @@ export class DetailsComponent implements OnInit {
       this.isAuthorized = !!localStorage.getItem('token');
     }
 
-  vote(type: string): void {
+  vote(type: string) {
     if (this.isAuthorized) {
       this.voicesService.vote(this.activity.Id, type)
         .subscribe(data => {
@@ -39,7 +38,7 @@ export class DetailsComponent implements OnInit {
         });
     }
   }
-  publishReview(): void {
+  publishReview() {
     this.responding = 'publish';
     let body = {
       ActivityId: parseInt(this.activity.Id, 10),
@@ -51,7 +50,7 @@ export class DetailsComponent implements OnInit {
         this.responding = '';
       });
   }
-  actApprove(): void {
+  actApprove() {
     this.responding = 'approve';
     this.activityService.approveActivity(true, this.activity.Id)
       .subscribe(() => this.router.navigate(['/admin']));

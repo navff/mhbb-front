@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
-import { CityService } from '../../shared/services/city.service';
+import { ListService } from '../../shared/services/list.service';
 import { Subject } from 'rxjs/Subject';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'mh-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.sass'],
-  providers: [CityService, UserService]
+  providers: [ListService, UserService]
 })
 export class AdminUsersComponent implements OnInit {
   cities = [];
@@ -25,12 +24,12 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cityService: CityService) { }
+    private listService: ListService) { }
 
-  onChange(): void {
+  onChange() {
     this.searchWord.next();
   }
-  concatPage(): void {
+  concatPage() {
     this.responding = true;
     this.page++;
     this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
@@ -41,7 +40,7 @@ export class AdminUsersComponent implements OnInit {
       });
 
   }
-  search(...adminBools): void {
+  search(...adminBools) {
     this.page = 1;
     if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
     if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
@@ -54,7 +53,7 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.searchWord.debounceTime(250).subscribe(() => this.search());
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getCities().subscribe(data => this.cities = data);
     this.userService.getUsers()
       .subscribe((data: User[]) => {
         this.users = data;

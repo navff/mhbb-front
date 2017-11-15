@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../../shared/services/organizer.service';
-import { CityService } from '../../shared/services/city.service';
+import { ListService } from '../../shared/services/list.service';
 import { Subject } from 'rxjs/Subject';
 import { Organizer } from '../../models/organizer.model';
 
 @Component({
-  selector: 'mh-admin-organizers',
   templateUrl: './admin-organizers.component.html',
   styleUrls: ['./admin-organizers.component.sass'],
-  providers: [OrganizerService, CityService]
+  providers: [OrganizerService, ListService]
 })
 export class AdminOrganizersComponent implements OnInit {
   cities = [];
@@ -24,9 +23,9 @@ export class AdminOrganizersComponent implements OnInit {
 
   constructor(
     private organizerService: OrganizerService,
-    private cityService: CityService) { }
+    private listService: ListService) { }
 
-  concatPage(): void {
+  concatPage() {
     this.responding = true;
     this.page++;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
@@ -36,10 +35,10 @@ export class AdminOrganizersComponent implements OnInit {
         this.responding = false;
       });
   }
-  updateWord(word: string): void {
+  updateWord(word: string) {
     this.searchWord.next(word);
   }
-  search(): void {
+  search() {
     this.page = 1;
     this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
       .subscribe((data: Organizer[]) => {
@@ -50,7 +49,7 @@ export class AdminOrganizersComponent implements OnInit {
 
   ngOnInit() {
     this.searchWord.debounceTime(250).subscribe(() => this.search());
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getCities().subscribe(data => this.cities = data);
     this.organizerService.getOrganizers()
       .subscribe((data: Organizer[]) => {
         this.organizers = data;

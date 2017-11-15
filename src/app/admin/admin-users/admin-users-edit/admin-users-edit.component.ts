@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../../models/user.model';
-import { CityService } from '../../../shared/services/city.service';
+import { ListService } from '../../../shared/services/list.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'mh-admin-users-edit',
   templateUrl: './admin-users-edit.component.html',
   styleUrls: ['./admin-users-edit.component.sass'],
-  providers: [CityService, UserService]
+  providers: [ListService, UserService]
 })
 export class AdminUsersEditComponent implements OnInit {
   cities = [];
@@ -20,7 +19,7 @@ export class AdminUsersEditComponent implements OnInit {
   editUser: FormGroup;
   constructor(
     private userService: UserService,
-    private cityService: CityService,
+    private listService: ListService,
     private router: Router,
     private route: ActivatedRoute,
     fb: FormBuilder) {
@@ -50,7 +49,7 @@ export class AdminUsersEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((data) => this.email = data.email);
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getCities().subscribe(data => this.cities = data);
     this.userService.getByEmail(this.email)
       .subscribe((data: User) => {
         this.editUser.get('email').setValue(data.Email);

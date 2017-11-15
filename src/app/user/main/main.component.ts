@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../shared/services/activity.service';
-import { InterestService } from '../../shared/services/interest.service';
-import { CityService } from '../../shared/services/city.service';
+import { ListService } from '../../shared/services/list.service';
 import { Subject } from 'rxjs/Subject';
 import { Activity } from '../../models/activity.model';
 
 @Component({
-  selector: 'mh-main',
   templateUrl: './main.component.html',
-  providers: [ActivityService, InterestService, CityService],
+  providers: [ActivityService, ListService],
   styleUrls: ['./main.component.sass']
 })
 export class MainComponent implements OnInit {
@@ -20,7 +18,7 @@ export class MainComponent implements OnInit {
   age: string;
   sobriety: string;
   free: string;
-  changes$: Subject<string> = new Subject();
+  changes$ = new Subject();
 
   city: any = {};
   interest: any = {};
@@ -31,10 +29,9 @@ export class MainComponent implements OnInit {
 
   constructor(
     private activityService: ActivityService,
-    private interestService: InterestService,
-    private cityService: CityService) { }
+    private listService: ListService) { }
 
-  search(...values): void {
+  search(...values) {
     this.page = 1;
     if (values[0] !== undefined) { this.sobriety = values[0]; }
     if (values[1] !== undefined) { this.free = values[1]; }
@@ -45,12 +42,12 @@ export class MainComponent implements OnInit {
         this.checkLength = data.length;
       });
   }
-  onChange(): void {
+  onChange() {
     this.changes$.next();
   }
-  concatPage(): void {
+  concatPage() {
     this.responding = true;
-    this.page += 1;
+    this.page++;
     this.activityService.list(this.page.toString(10))
       .subscribe(data => {
         this.activities = this.activities.concat(data);
@@ -64,10 +61,8 @@ export class MainComponent implements OnInit {
       this.activities = data;
       this.checkLength = data.length;
     });
-    this.interestService.getInterests().subscribe(data => {
-      this.interests = data;
-      this.interests.unshift({ Id: null, Name: 'Показать все' });
-    });
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getInterests()
+      .subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));
+    this.listService.getCities().subscribe(data => this.cities = data);
   }
 }

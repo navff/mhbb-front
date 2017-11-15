@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { UserService } from './services/user.service';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,7 +14,7 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem('token')) {
       return this.userService.getByToken()
         .toPromise()
-        .then((result) => {
+        .then(result => {
           if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {
             return true;
           }

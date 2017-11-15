@@ -11,6 +11,7 @@ import { MainComponent } from './main/main.component';
 import { StaticComponent } from './../shared/components/static/static.component';
 import { DetailsComponent } from './../shared/components/details/details.component';
 import { UserEditComponent } from './../shared/components/user-edit/user-edit.component';
+import { AuthGuard } from './../shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       { path: 'act/:id', component: DetailsComponent },
       { path: 'act/:id/reservation', component: ReservationComponent },
       { path: 'act/:id/reservation/success', component: ReservationSuccessComponent },
-      { path: 'user', component: UserEditComponent },
+      { path: 'user', component: UserEditComponent , canActivate: [AuthGuard]},
       { path: 'about', component: StaticComponent },
       { path: 'sponsor', component: StaticComponent },
       { path: 'member', component: StaticComponent },

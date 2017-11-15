@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CityService } from '../../shared/services/city.service';
+import { ListService } from '../../shared/services/list.service';
 import { ReviewService } from '../../shared/services/review.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'mh-admin-reviews',
   templateUrl: './admin-reviews.component.html',
   styleUrls: ['./admin-reviews.component.sass'],
-  providers: [ReviewService, CityService]
+  providers: [ReviewService, ListService]
 })
 export class AdminReviewsComponent implements OnInit {
   reviews: any[];
@@ -18,21 +17,21 @@ export class AdminReviewsComponent implements OnInit {
 
   constructor(
     private reviewService: ReviewService,
-    private cityService: CityService) { }
+    private listService: ListService) { }
 
-  search(): void {
+  search() {
     this.reviewService.getUncheckedReviews(this.word, this.city.Id)
       .subscribe(data => this.reviews = data);
   }
-  onChange(): void {
+  onChange() {
     this.changes$.next();
   }
-  reject(id, index): void {
+  reject(id, index) {
     this.reviews[index].state = 'rejecting';
     this.reviewService.deleteReview(id)
       .subscribe(() => this.reviews[index].state = 'rejected');
   }
-  accept(id, index): void {
+  accept(id, index) {
     this.reviews[index].state = 'accepting';
     this.reviewService.putSetChecked(id, 'true')
       .subscribe(() => this.reviews[index].state = 'accepted');
@@ -40,7 +39,7 @@ export class AdminReviewsComponent implements OnInit {
 
   ngOnInit() {
     this.changes$.debounceTime(250).subscribe(() => this.search());
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getCities().subscribe(data => this.cities = data);
     this.reviewService.getUncheckedReviews()
       .subscribe(data => this.reviews = data);
   }

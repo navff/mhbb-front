@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { InterestService } from '../../../shared/services/interest.service';
+import { ListService } from '../../../shared/services/list.service';
 import { OrganizerService } from './../../../shared/services/organizer.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,9 +9,8 @@ import { Activity } from '../../../models/activity.model';
 import { TempFile } from '../../../models/tempfile.model';
 
 @Component({
-  selector: 'mh-admin-act-edit',
   templateUrl: './admin-act-edit.component.html',
-  providers: [InterestService, ActivityService, OrganizerService],
+  providers: [ListService, ActivityService, OrganizerService],
   styleUrls: ['./admin-act-edit.component.sass']
 })
 export class AdminActEditComponent implements OnInit {
@@ -33,7 +32,7 @@ export class AdminActEditComponent implements OnInit {
   picsToDelete: boolean[] = [];
 
   constructor(
-    private interestService: InterestService,
+    private listService: ListService,
     fb: FormBuilder,
     private organizerService: OrganizerService,
     private activityService: ActivityService,
@@ -140,14 +139,14 @@ export class AdminActEditComponent implements OnInit {
       }
     })(0);
   }
-  deleteActivity(): void {
+  deleteActivity() {
     this.responding = 'deleting';
     this.activityService.deleteActivity(this.activityId)
       .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params.id);
-    this.interestService.getInterests().subscribe(data => this.interests = data);
+    this.listService.getInterests().subscribe(data => this.interests = data);
 
     this.activityService.getActivity(this.activityId)
       .subscribe((data) => {

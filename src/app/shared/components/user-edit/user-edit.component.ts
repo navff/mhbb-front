@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from './../../services/activity.service';
 import { TempFile } from '../../../models/tempfile.model';
-import { CityService } from '../../services/city.service';
+import { ListService } from '../../services/list.service';
 import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,10 +9,9 @@ import { Router } from '@angular/router';
 import { User } from '../../../models/user.model';
 
 @Component({
-  selector: 'mh-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.sass'],
-  providers: [CityService, UserService, ActivityService]
+  providers: [ListService, UserService, ActivityService]
 })
 export class UserEditComponent implements OnInit {
   cities = [];
@@ -22,17 +21,17 @@ export class UserEditComponent implements OnInit {
   fileId: string;
   tempFileId: string;
   formId: any;
-  fileToDelete = false;
+  fileToDelete: boolean;
   user: any = {};
 
-  responding = false;
+  responding: boolean;
 
   sub: Subscription;
 
   editUser: FormGroup;
   constructor(
     private userService: UserService,
-    private cityService: CityService,
+    private listService: ListService,
     private activityService: ActivityService,
     private router: Router,
     fb: FormBuilder) {
@@ -48,8 +47,7 @@ export class UserEditComponent implements OnInit {
     history.back();
   }
   addImage(event) {
-    let data, body, file: File;
-    file = event.target.files[0];
+    let file: File = event.target.files[0];
 
     this.formId = Date.now().toString(10);
     this.fileName = file.name;
@@ -58,12 +56,10 @@ export class UserEditComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       this.fileData = reader.result;
-      data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
-      body = new TempFile(this.formId, this.fileName, data, true);
+      let data = this.fileData.replace(/^data:image\/[a-z]+;base64,/, '');
+      let body = new TempFile(this.formId, this.fileName, data, true);
       this.activityService.postTempFile(body)
-        .subscribe(res => {
-          this.tempFileId = res.Id;
-        });
+        .subscribe(res => this.tempFileId = res.Id);
     };
   };
   removeImage() {
@@ -84,12 +80,8 @@ export class UserEditComponent implements OnInit {
 
   putUser() {
     this.responding = true;
-    let role: number;
-    if (this.editUser.get('role').value === true) {
-      role = 1;
-    } else {
-      role = 2;
-    }
+    let role = this.editUser.get('role').value ? 1 : 2;
+
     let body = new User(
       this.editUser.get('email').value,
       this.editUser.get('name').value,
@@ -108,21 +100,18 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!localStorage.getItem('token')) {
-      this.router.navigate(['']);
-    }
-    this.cityService.getCities().subscribe(data => this.cities = data);
+
+    this.listService.getCities().subscribe(data => this.cities = data);
     this.userService.getByToken()
       .subscribe(user => {
         this.user = user;
         this.editUser.get('email').setValue(this.user.Email);
         this.editUser.get('name').setValue(this.user.Name);
         this.editUser.get('phone').setValue(this.user.Phone);
-        if (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') {
-          this.editUser.get('role').setValue(true);
-        } else {
+        (this.user.RoleName === 'PortalAdmin' || this.user.RoleName === 'PortalManager') ?
+          this.editUser.get('role').setValue(true) :
           this.editUser.get('role').setValue(false);
-        }
+
         this.editUser.get('cityId').setValue(this.user.CityId);
         if (user.Picture) {
           this.fileName = user.Picture.Filename;

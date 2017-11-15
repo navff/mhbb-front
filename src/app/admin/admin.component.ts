@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './../shared/services/user.service';
-import { CityService } from '../shared/services/city.service';
+import { ListService } from '../shared/services/list.service';
 import { ActivityService } from '../shared/services/activity.service';
 
 @Component({
-  selector: 'mh-admin-main',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.sass'],
-  providers: [CityService, ActivityService],
+  providers: [ListService, ActivityService],
 })
 export class AdminComponent implements OnInit {
   activitiesAmount: number;
@@ -16,7 +15,7 @@ export class AdminComponent implements OnInit {
   constructor(private activityService: ActivityService,
               private userService: UserService) { }
 
-  exit(): void {
+  exit() {
     localStorage.setItem('token', '');
     window.location.reload();
   }

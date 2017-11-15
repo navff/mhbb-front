@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { CityService } from './../shared/services/city.service';
-import { InterestService } from '../shared/services/interest.service';
+import { ListService } from './../shared/services/list.service';
 import { ActivityService } from '../shared/services/activity.service';
 import { OrganizerService } from '../shared/services/organizer.service';
 import { Activity } from '../models/activity.model';
@@ -10,9 +9,8 @@ import { TempFile } from '../models/tempfile.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'mh-add-hobby',
   templateUrl: './add-hobby.component.html',
-  providers: [InterestService, ActivityService, OrganizerService, CityService],
+  providers: [ListService, ActivityService, OrganizerService],
   styleUrls: ['./add-hobby.component.sass']
 })
 export class AddHobbyComponent implements OnInit {
@@ -32,8 +30,7 @@ export class AddHobbyComponent implements OnInit {
   addHobby: FormGroup;
 
   constructor(
-    private interestService: InterestService,
-    private cityService: CityService,
+    private listService: ListService,
     private organizerService: OrganizerService,
     fb: FormBuilder,
     private activityService: ActivityService,
@@ -146,8 +143,8 @@ export class AddHobbyComponent implements OnInit {
     this.activityService.deleteTempfile(this.fileId[index]).subscribe();
   }
   ngOnInit() {
-    this.interestService.getInterests().subscribe(data => this.interests = data);
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getInterests().subscribe(data => this.interests = data);
+    this.listService.getCities().subscribe(data => this.cities = data);
     this.organizerService.getOrganizers('1').subscribe(res => this.organizers = res);
   }
 }

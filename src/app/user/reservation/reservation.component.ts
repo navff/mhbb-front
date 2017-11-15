@@ -6,7 +6,6 @@ import { Reservation } from '../../models/reservation.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'mh-reservation',
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.sass'],
   providers: [ActivityService, ReservationService]
@@ -26,13 +25,13 @@ export class ReservationComponent implements OnInit {
     fb: FormBuilder,
   ) {
     this.form = fb.group({
-      'email': ['', Validators.required],
-      'name': ['', Validators.required],
-      'phone': ['', Validators.required],
-      'comment': '',
+      email: ['', Validators.required],
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      comment: '',
     });
   }
-  postReservation(): void {
+  postReservation() {
     this.responding = true;
     let body = new Reservation(
       this.activity.Id,

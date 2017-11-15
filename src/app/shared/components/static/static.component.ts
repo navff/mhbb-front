@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'mh-static',
   templateUrl: './static.component.html',
   styleUrls: ['./static.component.sass'],
 })

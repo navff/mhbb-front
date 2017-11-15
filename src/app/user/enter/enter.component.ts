@@ -4,7 +4,6 @@ import { UserService } from './../../shared/services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'mh-enter',
   templateUrl: './enter.component.html',
   styleUrls: ['./enter.component.sass']
 })

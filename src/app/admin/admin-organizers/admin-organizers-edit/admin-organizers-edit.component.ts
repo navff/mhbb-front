@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrganizerService } from '../../../shared/services/organizer.service';
 import { Organizer } from '../../../models/organizer.model';
-import { CityService } from '../../../shared/services/city.service';
+import { ListService } from '../../../shared/services/list.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'mh-admin-organizers-edit',
   templateUrl: './admin-organizers-edit.component.html',
   styleUrls: ['./admin-organizers-edit.component.sass'],
-  providers: [OrganizerService, CityService]
+  providers: [OrganizerService, ListService]
 })
 export class AdminOrganizersEditComponent implements OnInit {
   cities = [];
@@ -22,7 +21,7 @@ export class AdminOrganizersEditComponent implements OnInit {
   editOrganizer: FormGroup;
   constructor(
     private organizerService: OrganizerService,
-    private cityService: CityService,
+    private listService: ListService,
     private route: ActivatedRoute,
     private router: Router,
     fb: FormBuilder) {
@@ -57,7 +56,7 @@ export class AdminOrganizersEditComponent implements OnInit {
 
   ngOnInit() {
     this.url = this.router.url;
-    this.cityService.getCities().subscribe(data => this.cities = data);
+    this.listService.getCities().subscribe(data => this.cities = data);
     if (this.url !== '/admin/organizers/add') {
       this.route.params.subscribe(params => this.organizerId = params.id);
       this.organizerService.getOrganizerById(this.organizerId)
