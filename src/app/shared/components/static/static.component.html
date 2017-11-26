@@ -1,18 +1,24 @@
 <a class="mh-back" (click)="back()">&larr; Назад</a>
-<ng-container *ngIf="path === '/about'">
-    <h1>О проекте</h1>
-</ng-container>
-
-<ng-container *ngIf="path === '/sponsor'">
-    <h1>Стать спонсором</h1>
-</ng-container>
-
-<ng-container *ngIf="path === '/member'">
-    <h1>Стать представителем</h1>
-</ng-container>
-
-<ng-container *ngIf="path === '/enter/success'">
-    <h1>Готово</h1>
-    <p>На вашу почту мы отправили ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы и голосовать. </p>
-    <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>	
-</ng-container>
+<div [ngSwitch]="page">
+    <ng-container *ngSwitchCase="'about'">
+        <h1>О проекте</h1>
+    </ng-container>
+    
+    <ng-container *ngSwitchCase="'sponsor'">
+        <h1>Стать спонсором</h1>
+    </ng-container>
+    
+    <ng-container *ngSwitchCase="'member'">
+        <h1>Стать представителем</h1>
+    </ng-container>
+    
+    <ng-container *ngSwitchCase="'enter/success'">
+        <h1>Готово</h1>
+        <p>На вашу почту мы отправили ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы и голосовать. </p>
+        <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <h1>Страница не найдена</h1>
+        <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>        
+    </ng-container> 
+</div>

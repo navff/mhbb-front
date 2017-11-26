@@ -1,3 +1,4 @@
+import { StaticComponent } from './../shared/components/static/static.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'reviews', component: ReviewsComponent },
 
       { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule' },
+      { path: '**', component: StaticComponent},
     ]
   }
 ];

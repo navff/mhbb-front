@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./static.component.sass'],
 })
 export class StaticComponent {
-  path: string;
+  page: string;
   constructor() {
-    this.path = location.pathname;
+    this.page = location.pathname.substr(1);
   }
 
   back() {
