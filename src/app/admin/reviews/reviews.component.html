@@ -1,23 +1,23 @@
-<form>
+<section class="search">
     <h1 class="admin-heading">Отзывы на проверку</h1>
     <md-input-container class="input">
-        <input (ngModelChange)="onChange()" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+        <input (ngModelChange)="onChange()" [(ngModel)]="params.word" mdInput placeholder="Поисковое слово">
     </md-input-container>
-    <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
-        <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
+    <md-select (change)="search()" [(ngModel)]="params.cityId" class="input" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
     </md-select>
-</form>
+</section>
 
 <div *ngFor="let review of reviews; let i = index" class="review">
     <p>
         <a [routerLink]="['/admin/users/edit']" [queryParams]="{ email: review.User.Email }">
-        {{review.User?.Name}}
-        </a>
-        , {{review.DateCreated
-        | myDate }}г.
+            {{review.User?.Name}}
+        </a> , {{review.DateCreated | myDate }}г.
     </p>
     <p class="text">{{review.Text}}</p>
-    <p >Отзыв о <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a></p>
+    <p>Отзыв о
+        <a [routerLink]="['/admin/act', review.ActivityId]">{{review.ActivityName}}</a>
+    </p>
     <div class="buttons">
         <a (click)="accept(review.Id, i)" *ngIf="!review.state" class="accept">ПРИНЯТЬ</a>
         <a (click)="reject(review.Id, i)" *ngIf="!review.state" class="reject">ОТКЛОНИТЬ</a>

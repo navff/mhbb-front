@@ -14,12 +14,12 @@ export class UsersComponent implements OnInit {
   users: User[];
 
   word: string;
-  searchWord: Subject<any> = new Subject();
-  city: any = {};
-  roles = [];
+  isAdmin: boolean;
+  cityId: string;
   page = 1;
-  checkLength: number;
+  changes$ = new Subject();
 
+  checkLength: number;
   responding: boolean;
 
   constructor(
@@ -27,37 +27,32 @@ export class UsersComponent implements OnInit {
     private listService: ListService) { }
 
   onChange() {
-    this.searchWord.next();
+    this.changes$.next();
   }
   concatPage() {
     this.responding = true;
     this.page++;
-    this.userService.list(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
-      .subscribe((data: User[]) => {
-        this.users = this.users.concat(data);
-        this.checkLength = data.length;
-        this.responding = false;
-      });
-
+    this.search();
   }
-  search(...adminBools) {
-    this.page = 1;
-    if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
-    if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
-    this.userService.list(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
+  search() {
+    let roles = [];
+    if (this.isAdmin !== undefined) {
+      roles = [
+        this.isAdmin ? '0' : null,
+        this.isAdmin ? '1' : null
+      ];
+    }
+    this.userService.list(this.page.toString(10), roles[0], roles[1], this.cityId, this.word)
       .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;
+        this.responding = false;
       });
   }
 
   ngOnInit() {
-    this.searchWord.debounceTime(250).subscribe(() => this.search());
+    this.changes$.debounceTime(250).subscribe(() => this.search());
     this.listService.cities$.subscribe(data => this.cities = data);
-    this.userService.list()
-      .subscribe((data: User[]) => {
-        this.users = data;
-        this.checkLength = data.length;
-      });
+    this.search();
   }
 }

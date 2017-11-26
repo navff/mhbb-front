@@ -1,13 +1,13 @@
-<form>
+<section class="search">
     <h1 class="admin-heading">Пользователи</h1>
     <md-input-container class="input">
-        <input (ngModelChange)="onChange()" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+        <input (ngModelChange)="onChange()" [(ngModel)]="word" mdInput placeholder="Поисковое слово">
     </md-input-container>
-    <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
-        <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
+    <md-select (change)="search()" [(ngModel)]="cityId" class="input" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
     </md-select>
-    <md-checkbox (click)="!admin ? search(0, 1) : search(null, null)" [(ngModel)]="admin" name="admin" color="primary">Представители в городах</md-checkbox>
-</form>
+    <md-checkbox [(ngModel)]="isAdmin" (ngModelChange)="search()" color="primary">Представители в городах</md-checkbox>
+</section>
 
 <section>
     <div class="users">

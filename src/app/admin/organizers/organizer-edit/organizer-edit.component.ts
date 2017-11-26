@@ -13,19 +13,20 @@ import { Router } from '@angular/router';
 })
 export class OrganizerEditComponent implements OnInit {
   cities = [];
-  url: string;
   organizerId: string;
+  form: FormGroup;
 
   responding: string;
 
-  editOrganizer: FormGroup;
+  addPage = location.pathname === '/admin/organizers/add';
+
   constructor(
     private organizerService: OrganizerService,
     private listService: ListService,
     private route: ActivatedRoute,
     private router: Router,
     fb: FormBuilder) {
-    this.editOrganizer = fb.group({
+    this.form = fb.group({
       name: ['', Validators.required],
       cityId: ['', Validators.required],
       sobriety: false,
@@ -37,13 +38,13 @@ export class OrganizerEditComponent implements OnInit {
   update() {
     this.responding = 'put';
     let body = new Organizer(
-      this.editOrganizer.get('name').value,
-      this.editOrganizer.get('cityId').value,
-      this.editOrganizer.get('sobriety').value,
-      this.editOrganizer.get('email').value,
-      this.editOrganizer.get('phone').value);
+      this.form.get('name').value,
+      this.form.get('cityId').value,
+      this.form.get('sobriety').value,
+      this.form.get('email').value,
+      this.form.get('phone').value);
 
-    let request = this.url === '/admin/organizers/add' ?
+    let request = this.addPage ?
       this.organizerService.create(body) :
       this.organizerService.update(this.organizerId, body);
     request.subscribe(() => this.router.navigate(['/admin/organizers']));
@@ -55,17 +56,16 @@ export class OrganizerEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.url = this.router.url;
     this.listService.cities$.subscribe(data => this.cities = data);
-    if (this.url !== '/admin/organizers/add') {
-      this.route.params.subscribe(params => this.organizerId = params.id);
-      this.organizerService.take(this.organizerId)
+    if (!this.addPage) {
+      this.route.params.switchMap(params => this.organizerService.take(params.id))
         .subscribe((data: Organizer) => {
-          this.editOrganizer.get('name').setValue(data.Name);
-          this.editOrganizer.get('cityId').setValue(data.CityId);
-          this.editOrganizer.get('sobriety').setValue(data.Sobriety);
-          this.editOrganizer.get('email').setValue(data.Email);
-          this.editOrganizer.get('phone').setValue(data.Phone);
+          this.organizerId = data.Id;
+          this.form.get('name').setValue(data.Name);
+          this.form.get('cityId').setValue(data.CityId);
+          this.form.get('sobriety').setValue(data.Sobriety);
+          this.form.get('email').setValue(data.Email);
+          this.form.get('phone').setValue(data.Phone);
         });
     }
   }

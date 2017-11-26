@@ -1,18 +1,18 @@
 <h1 class="admin-heading">Организаторы</h1>
 <button class="btn-add" routerLink="add" md-fab></button>
-<form>
+<section class="search">
     <md-input-container class="input">
-        <input (ngModelChange)="updateWord(word)" [(ngModel)]="word" name="word" mdInput placeholder="Поисковое слово">
+        <input (ngModelChange)="onChange()" [(ngModel)]="params.word" mdInput placeholder="Поисковое слово">
     </md-input-container>
-    <md-select (change)="search()" [(ngModel)]="city" name="city" class="input" placeholder="Город" floatPlaceholder="never">
-        <md-option *ngFor="let city of cities" [value]="city">{{ city.Name }}</md-option>
+    <md-select (change)="search()" [(ngModel)]="params.cityId" class="input" placeholder="Город" floatPlaceholder="never">
+        <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
     </md-select>
-</form>
+</section>
 
-<div class="organizers">
+<section class="organizers">
     <div *ngFor="let organizer of organizers" class="organizer">
         <a [routerLink]="['edit', organizer.Id]">{{organizer.Name}}</a>
     </div>
     <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>
-</div>
+</section>
 <h2 class="no-results" *ngIf="organizers?.length === 0">По вашему запросу ничего не найдено.</h2>

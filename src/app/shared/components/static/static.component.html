@@ -17,6 +17,13 @@
         <p>На вашу почту мы отправили ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы и голосовать. </p>
         <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>
     </ng-container>
+    
+    <ng-container *ngSwitchCase="'addhobby/success'">
+        <h1>Информация добавлена</h1>
+        <p>Администраторы сайта проверят и опубликуют вашу информацию. Большое спасибо за участие.</p>
+        <mh-button routerLink="../../">НА ГЛАВНУЮ</mh-button>
+    </ng-container>
+
     <ng-container *ngSwitchDefault>
         <h1>Страница не найдена</h1>
         <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>        

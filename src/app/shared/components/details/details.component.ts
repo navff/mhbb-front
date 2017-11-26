@@ -26,8 +26,8 @@ export class DetailsComponent implements OnInit {
     private voicesService: VoicesService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.isAuthorized = !!localStorage.getItem('token');
-    }
+    this.isAuthorized = !!localStorage.getItem('token');
+  }
 
   vote(type: string) {
     if (this.isAuthorized) {
@@ -56,14 +56,13 @@ export class DetailsComponent implements OnInit {
       .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.activityService.take(params.id)
-        .subscribe(data => {
-          this.activity = data;
-          this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);
-          this.reviewService.listByActivity(this.activity.Id)
-          .subscribe(res => this.reviews = res);
-        });
-    });
+    this.route.params
+      .switchMap(params => this.activityService.take(params.id))
+      .switchMap(data => {
+        this.activity = data;
+        this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);
+        return this.reviewService.listByActivity(this.activity.Id);
+      })
+      .subscribe(res => this.reviews = res);
   }
 }

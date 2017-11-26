@@ -57,8 +57,8 @@ export class ActEditComponent implements OnInit {
       'image3': ''
     });
   }
-  filterOrganizers(value) {
-    this.organizerService.list('1', value).subscribe(data => this.organizers = data);
+  filterOrganizers(word = null) {
+    this.organizerService.list({page: '1', word}).subscribe(data => this.organizers = data);
   }
   setOrganizerId(id) {
     this.organizerId = id;
@@ -172,7 +172,7 @@ export class ActEditComponent implements OnInit {
         this.isChecked = data.IsChecked;
         this.organizerId = data.Organizer.Id;
         this.organizerName = data.Organizer.Name;
-        this.organizerService.list('1', this.organizerName).subscribe(res => this.organizers = res);
+        this.organizerService.list({page: '1', word: this.organizerName}).subscribe(res => this.organizers = res);
       });
   }
 }

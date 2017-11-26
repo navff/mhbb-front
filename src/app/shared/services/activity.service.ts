@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { SharedService } from './shared.service';
-import { RequestOptions, URLSearchParams } from '@angular/http';
+import { RequestOptions } from '@angular/http';
 import { SearchParams } from './../../models/search-params.model';
+import { Reservation } from './../../models/reservation.model';
 
 @Injectable()
 export class ActivityService {
   constructor(private http: HttpService, private shared: SharedService) { }
-  setSearch(params): URLSearchParams {
-    let search = new URLSearchParams();
-    Object.keys(params).forEach(key => {
-      search.append(key, params[key] || null);
-    });
-    return search;
-  }
 
   list(params?: SearchParams) {
-    return this.http.get('activity/search', new RequestOptions({ search: params && this.setSearch(params) }));
+    return this.http.get('activity/search',
+      new RequestOptions({ search: params && this.http.setSearch(params) }));
   }
   listUnchecked(params?: SearchParams) {
-    return this.http.get('activity/searchunchecked', new RequestOptions({ search: params && this.setSearch(params) }))
+    return this.http.get('activity/searchunchecked',
+      new RequestOptions({ search: params && this.http.setSearch(params) }))
       .map(data => {
         this.shared.activitiesNumber$.next(data.length);
         return data;
@@ -56,5 +52,8 @@ export class ActivityService {
   }
   removePicture(id) {
     return this.http.delete(`picture/${id}`);
+  }
+  reserve(body: Reservation) {
+    return this.http.post('reservation', body);
   }
 }

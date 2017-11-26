@@ -12,12 +12,8 @@ export class ReviewService {
   listByActivity(id: string) {
     return this.http.get(`review/byactivity?activityId=${id}`);
   }
-  listUnchecked(word?: string, cityId?: string) {
-    let search = new URLSearchParams();
-    word ? search.append('word', word) : search.delete('word');
-    search.append('cityId', cityId);
-
-    return this.http.get('review/unchecked', new RequestOptions({ search }));
+  listUnchecked(params?: any) {
+    return this.http.get('review/unchecked', new RequestOptions({ search: this.http.setSearch(params) }));
   }
   setCheck(id: string, isChecked: string) {
     return this.http.put(`review/setchecked?reviewId=${id}&isChecked=${isChecked}`);

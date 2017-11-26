@@ -6,13 +6,8 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 export class OrganizerService {
   constructor(private http: HttpService) { }
 
-  list(page?: string, word?: string, cityId?: string) {
-    let search = new URLSearchParams();
-    word ? search.append('word', word) : search.delete('word');
-    search.append('cityId', cityId);
-    search.append('page', page);
-
-    return this.http.get(`organizer/search`, new RequestOptions({ search }));
+  list(params?: any) {
+    return this.http.get(`organizer/search`, new RequestOptions({ search: this.http.setSearch(params) }));
   }
   take(id: string) {
     return this.http.get(`organizer/${id}`);

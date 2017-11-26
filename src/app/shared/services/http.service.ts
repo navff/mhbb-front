@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, XHRBackend, Request, RequestOptionsArgs, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { URLSearchParams } from '@angular/http';
+import { SharedService } from './shared.service';
 
 const apiUrl = 'http://test.mhbb.ru/b/api/';
 
 @Injectable()
 export class HttpService extends Http {
-    requests$: BehaviorSubject<number> = new BehaviorSubject(0);
 
-    constructor(backend: XHRBackend, options: RequestOptions) {
+    constructor(backend: XHRBackend, options: RequestOptions, private shared: SharedService) {
         super(backend, options);
 
         const match = window.location.href.match(/token=(.)+/);
@@ -20,11 +21,11 @@ export class HttpService extends Http {
     }
 
     request(request: Request, options?: RequestOptionsArgs): Observable<Response> {
-        this.requests$.next(this.requests$.getValue() + 1);
+        this.shared.requests$.next(this.shared.requests$.getValue() + 1);
         request.url = apiUrl + request.url;
         request.headers.set('Authorization', `token ${localStorage.getItem('token')}`);
         return super.request(request, options)
-            .finally(() => this.requests$.next(this.requests$.getValue() - 1));
+            .finally(() => this.shared.requests$.next(this.shared.requests$.getValue() - 1));
     }
 
     get(url: string, options?: RequestOptions) {
@@ -43,4 +44,13 @@ export class HttpService extends Http {
         return super.put(url, body, options).map((data) => data.json());
     }
 
+    setSearch(params?): URLSearchParams {
+        let search = new URLSearchParams();
+        if (params) {
+            Object.keys(params).forEach(key => {
+                search.append(key, params[key] || null);
+            });
+        }
+        return search;
+    }
 }

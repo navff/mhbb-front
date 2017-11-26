@@ -11,16 +11,15 @@ import { Subject } from 'rxjs/Subject';
 export class ReviewsComponent implements OnInit {
   reviews: any[];
   cities = [];
-  word: string;
-  changes$: Subject<any> = new Subject();
-  city: any = {};
+  params = {};
+  changes$ = new Subject();
 
   constructor(
     private reviewService: ReviewService,
     private listService: ListService) { }
 
   search() {
-    this.reviewService.listUnchecked(this.word, this.city.Id)
+    this.reviewService.listUnchecked(this.params)
       .subscribe(data => this.reviews = data);
   }
   onChange() {
@@ -40,7 +39,6 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
     this.changes$.debounceTime(250).subscribe(() => this.search());
     this.listService.cities$.subscribe(data => this.cities = data);
-    this.reviewService.listUnchecked()
-      .subscribe(data => this.reviews = data);
+    this.search();
   }
 }

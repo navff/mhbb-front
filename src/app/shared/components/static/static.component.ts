@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 export class StaticComponent {
   page: string;
   constructor() {
-    this.page = location.pathname.substr(1);
+    this.page =  location.pathname.substr(location.pathname.match('admin') ? 7 : 1);
   }
 
   back() {

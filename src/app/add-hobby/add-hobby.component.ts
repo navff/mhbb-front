@@ -51,7 +51,7 @@ export class AddHobbyComponent implements OnInit {
       sobriety: false,
     });
   }
-  filterOrganizers(value) {
+  filterOrganizers(word = null) {
     if (this.isOrganizerChosen) {
       this.isOrganizerChosen = false;
       this.form.controls['cityId'].setValue('');
@@ -59,7 +59,7 @@ export class AddHobbyComponent implements OnInit {
       this.form.controls['cityId'].enable();
       this.form.controls['sobriety'].enable();
     }
-    this.organizerService.list('1', value || null)
+    this.organizerService.list({page: '1', word})
       .subscribe(data => this.organizers = data);
   }
   setOrganizer(id: string) {

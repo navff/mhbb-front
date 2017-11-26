@@ -1,4 +1,5 @@
 export class Organizer {
+  Id: any;
   constructor(
     public Name: string,
     public CityId: number,

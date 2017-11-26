@@ -13,10 +13,10 @@ export class OrganizersComponent implements OnInit {
   cities = [];
   organizers: Organizer[];
 
-  page = 1;
-  word: string;
-  searchWord: Subject<any> = new Subject();
-  city: any = {};
+  params = {
+    page: 1,
+  };
+  searchWord = new Subject();
   checkLength: number;
 
   responding: boolean;
@@ -27,33 +27,24 @@ export class OrganizersComponent implements OnInit {
 
   concatPage() {
     this.responding = true;
-    this.page++;
-    this.organizerService.list(this.page.toString(10), this.word, this.city.Id)
-      .subscribe((data: Organizer[]) => {
-        this.organizers = this.organizers.concat(data);
-        this.checkLength = data.length;
-        this.responding = false;
-      });
+    this.params.page++;
+    this.search();
   }
-  updateWord(word: string) {
-    this.searchWord.next(word);
+  onChange() {
+    this.searchWord.next();
   }
   search() {
-    this.page = 1;
-    this.organizerService.list(this.page.toString(10), this.word, this.city.Id)
+    this.organizerService.list(this.params)
       .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;
+        this.responding = false;
       });
   }
 
   ngOnInit() {
     this.searchWord.debounceTime(250).subscribe(() => this.search());
     this.listService.cities$.subscribe(data => this.cities = data);
-    this.organizerService.list()
-      .subscribe((data: Organizer[]) => {
-        this.organizers = data;
-        this.checkLength = data.length;
-      });
+    this.search();
   }
 }

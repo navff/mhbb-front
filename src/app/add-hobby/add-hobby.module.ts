@@ -4,11 +4,11 @@ import { SharedModule } from '../shared/_shared.module';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AddHobbyComponent } from './add-hobby.component';
-import { AddHobbySuccessComponent } from './add-hobby-success/add-hobby-success.component';
+import { StaticComponent } from './../shared/components/static/static.component';
 
 const routes: Routes = [
   { path: '', component: AddHobbyComponent },
-  { path: 'success', component: AddHobbySuccessComponent }
+  { path: 'success', component: StaticComponent }
 ];
 
 @NgModule({
@@ -18,7 +18,7 @@ const routes: Routes = [
     SharedModule
   ],
   declarations: [
-    AddHobbyComponent, AddHobbySuccessComponent
+    AddHobbyComponent
   ]
 })
 export class AddHobbyModule { }

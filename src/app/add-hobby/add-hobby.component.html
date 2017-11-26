@@ -15,7 +15,7 @@
 
     <div class='form-right'>
         <md-input-container class="form-item-organizer">
-            <input (ngModelChange)="filterOrganizers($event)" (focus)="filterOrganizers()" id="organizerInput"
+            <input (ngModelChange)="filterOrganizers($event)" (focus)="filterOrganizers(form.get('organizerName').value)" id="organizerInput"
                 mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="form.controls['organizerName']">
         </md-input-container>
         <md-autocomplete #org="mdAutocomplete">

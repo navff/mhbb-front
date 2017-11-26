@@ -16,9 +16,7 @@ export class ReservationSuccessComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params =>  {
-      this.activityService.take(params.id)
+    this.route.params.switchMap(params => this.activityService.take(params.id))
         .subscribe(data => this.activity = data);
-    });
   }
 }
