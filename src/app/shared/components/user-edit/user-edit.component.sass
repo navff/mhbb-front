@@ -1,110 +1,23 @@
-form
+\:host
     font-size: 1.25rem
-    width: 62.5rem
 h2
     font-size: 2.1875rem
     margin-bottom: 2.5rem
-[class^="form-item"]
-    width: 13.3125rem
-    margin: 0 2.625rem 2.375rem 0
-.form-item-cities,.form-item-name
+.input
     width: 21.25rem
-.inputs
-    width: 46.875rem
-    display: inline-block
-.user-image
+    margin: 0 2.625rem 2.375rem 0
+.wrapper
+    width: 57rem
     display: inline-block
     position: relative
-    .add-image-input
-        display: none
-    .delete-image-button
-        position: absolute
-        right: 0
-        z-index: 20
-        cursor: pointer
-        width: 1.0625rem
-        height: 1.0625rem
-        background-color: #795548
-        border-radius: 50%
-        &:before
-            content: ""
-            display: block
-            position: absolute
-            top: 0.25rem
-            right: 0.5rem
-            width: 0.0625rem
-            height: 0.5625rem
-            background-color: white
-            transition: 0.4s
-            transform: rotate(135deg)
-        &:after
-            content: ""
-            display: block
-            position: absolute
-            top: 0.5rem
-            right: 0.25rem
-            width: 0.5625rem
-            height: 0.0625rem
-            background-color: white
-            transition: 0.4s
-            transform: rotate(-45deg)        
-        &:hover:before
-            transform: rotate(135deg) scale(1.2)
-        &:hover:after
-            transform: rotate(-45deg) scale(1.2)
-    .user-input-design
-        display: block
-        cursor: pointer
-        position: relative
-        box-sizing: border-box
-        width: 7.5rem
-        height: 7.5rem
-        border-radius: 50%
-        border: solid 0.0625rem #795548
-        transition: 0.4s
-        &:before
-            content: ""
-            display: block
-            position: absolute
-            top: 3.3125rem
-            right: 3.75rem
-            width: 0.0625rem
-            height: 0.8125rem
-            background-color: #795548
-            transition: 0.4s
-        &:after
-            content: ""
-            display: block
-            position: absolute
-            top: 3.6875rem
-            right: 3.375rem
-            width: 0.8125rem
-            height: 0.0625rem
-            background-color: #795548
-            transition: 0.4s
-        &:hover
-            background-color: rgba(#795548, .15)
-        &:hover:before
-            transform: scale(1.2)
-        &:hover:after
-            transform: scale(1.2)
-        .user-image-wrapper
-            position: absolute
-            border-radius: 50%
-            z-index: -1
-            top: -0.0625rem
-            left: -0.0625rem
-            width: 7.5rem
-            height: 7.5rem
-            cursor: default
-            overflow: hidden
-            .user-image-preview
-                background-size: cover
-                background-position: 50%
-                width: 7.5rem
-                height: 7.5rem
-        .cover
-            z-index: 15
-
+mh-upload
+    position: absolute
+    right: 0
+    top: 0.6rem
+    width: 7.5rem
+    height: 7.5rem
+    border-radius: 50%
 mh-button
     margin-top: 1.25rem
+    display: block
+    width: 11.25rem

@@ -31,7 +31,7 @@ export class ReservationComponent implements OnInit {
       comment: '',
     });
   }
-  postReservation() {
+  reserve() {
     this.responding = true;
     let body = new Reservation(
       this.activity.Id,
@@ -39,12 +39,12 @@ export class ReservationComponent implements OnInit {
       this.form.get('name').value,
       this.form.get('phone').value,
       this.form.get('comment').value);
-    this.reservationService.postReservation(body)
+    this.reservationService.create(body)
       .subscribe(() => this.router.navigate(['/act/', this.activity.Id, 'reservation', 'success']));
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.activityService.getActivity(params.id)
+      this.activityService.take(params.id)
         .subscribe(data => {
           this.activity = data;
           this.mainPictureUrl = this.activity.Pictures[0].Url;

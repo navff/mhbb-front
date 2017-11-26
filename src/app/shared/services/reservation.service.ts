@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 export class ReservationService {
   constructor(private http: Http) { }
 
-  postReservation(body: any) {
+  create(body: any) {
     return this.http.post('reservation', body);
   }
 }

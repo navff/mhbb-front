@@ -17,7 +17,7 @@ import { ActivitiesComponent } from './components/activities/activities.componen
 import { ButtonComponent } from './components/button/button.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { PicturesComponent } from './components/pictures/pictures.component';
-import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { UploadComponent } from './components/upload/upload.component';
 import { StaticComponent } from './components/static/static.component';
 
 const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
@@ -27,7 +27,7 @@ const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
   CommonModule];
 
 const Components = [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent,
-  ActivitiesComponent, ButtonComponent, ProgressBarComponent, PicturesComponent, ImageUploadComponent, StaticComponent];
+  ActivitiesComponent, ButtonComponent, ProgressBarComponent, PicturesComponent, UploadComponent, StaticComponent];
 
 @NgModule({
   imports: [Modules],

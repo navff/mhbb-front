@@ -6,7 +6,7 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 export class OrganizerService {
   constructor(private http: HttpService) { }
 
-  getOrganizers(page?: string, word?: string, cityId?: string) {
+  list(page?: string, word?: string, cityId?: string) {
     let search = new URLSearchParams();
     word ? search.append('word', word) : search.delete('word');
     search.append('cityId', cityId);
@@ -14,16 +14,16 @@ export class OrganizerService {
 
     return this.http.get(`organizer/search`, new RequestOptions({ search }));
   }
-  getOrganizerById(id: string) {
+  take(id: string) {
     return this.http.get(`organizer/${id}`);
   }
-  putOrganizer(id: any, body: any) {
+  update(id: any, body: any) {
     return this.http.put(`organizer/${id}`, body);
   }
-  postOrganizer(body: any) {
+  create(body: any) {
     return this.http.post('organizer', body);
   }
-  deleteOrganizer(id: any) {
+  remove(id: any) {
     return this.http.delete(`organizer/${id}`);
   }
 }

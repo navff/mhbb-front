@@ -1,0 +1,7 @@
+<label>
+    <div class="icon"></div>
+    <input (change)="upload($event)" [disabled]="url" hidden type="file" id="input" accept=".png,.jpg,.jpeg">
+</label>
+<div [ngStyle]="{'background-image': 'url(' + url + ')','display': url ? 'block' : 'none'}" class="preview">
+    <a (click)="clear()" class="remove"></a>
+</div>

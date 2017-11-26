@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './../shared/services/user.service';
 import { ListService } from '../shared/services/list.service';
 import { ActivityService } from '../shared/services/activity.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.sass'],
-  providers: [ListService, ActivityService],
+  providers: [ActivityService],
 })
 export class AdminComponent implements OnInit {
   activitiesAmount: number;
@@ -24,8 +25,8 @@ export class AdminComponent implements OnInit {
     this.activityService.listUnchecked()
       .subscribe(data => this.activitiesAmount = data.length);
     if (localStorage.getItem('token')) {
-      this.userService.getByToken()
-        .subscribe(data => this.email = data.Email);
+      this.userService.takeCurrent()
+        .subscribe((data: User) => this.email = data.Email);
     }
   }
 }

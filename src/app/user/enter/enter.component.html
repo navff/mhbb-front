@@ -1,6 +1,6 @@
 <a class="mh-back" (click)="back()">&larr; Назад</a>
 <h2>Вход и регистрация</h2>
-<form #f="ngForm" (ngSubmit)="registerUser()">
+<form #f="ngForm" (ngSubmit)="register()">
     <md-input-container>
         <input mdInput placeholder="Электронная почта" [(ngModel)]="email" name="email" type="email" email="true">
     </md-input-container>

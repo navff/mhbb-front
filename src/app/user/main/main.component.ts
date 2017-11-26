@@ -6,7 +6,7 @@ import { Activity } from '../../models/activity.model';
 
 @Component({
   templateUrl: './main.component.html',
-  providers: [ActivityService, ListService],
+  providers: [ActivityService],
   styleUrls: ['./main.component.sass']
 })
 export class MainComponent implements OnInit {
@@ -61,8 +61,8 @@ export class MainComponent implements OnInit {
       this.activities = data;
       this.checkLength = data.length;
     });
-    this.listService.getInterests()
+    this.listService.interests$
       .subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));
-    this.listService.getCities().subscribe(data => this.cities = data);
+    this.listService.cities$.subscribe(data => this.cities = data);
   }
 }

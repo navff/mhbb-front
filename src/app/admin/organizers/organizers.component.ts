@@ -5,11 +5,11 @@ import { Subject } from 'rxjs/Subject';
 import { Organizer } from '../../models/organizer.model';
 
 @Component({
-  templateUrl: './admin-organizers.component.html',
-  styleUrls: ['./admin-organizers.component.sass'],
-  providers: [OrganizerService, ListService]
+  templateUrl: './organizers.component.html',
+  styleUrls: ['./organizers.component.sass'],
+  providers: [OrganizerService]
 })
-export class AdminOrganizersComponent implements OnInit {
+export class OrganizersComponent implements OnInit {
   cities = [];
   organizers: Organizer[];
 
@@ -28,7 +28,7 @@ export class AdminOrganizersComponent implements OnInit {
   concatPage() {
     this.responding = true;
     this.page++;
-    this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
+    this.organizerService.list(this.page.toString(10), this.word, this.city.Id)
       .subscribe((data: Organizer[]) => {
         this.organizers = this.organizers.concat(data);
         this.checkLength = data.length;
@@ -40,7 +40,7 @@ export class AdminOrganizersComponent implements OnInit {
   }
   search() {
     this.page = 1;
-    this.organizerService.getOrganizers(this.page.toString(10), this.word, this.city.Id)
+    this.organizerService.list(this.page.toString(10), this.word, this.city.Id)
       .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;
@@ -49,8 +49,8 @@ export class AdminOrganizersComponent implements OnInit {
 
   ngOnInit() {
     this.searchWord.debounceTime(250).subscribe(() => this.search());
-    this.listService.getCities().subscribe(data => this.cities = data);
-    this.organizerService.getOrganizers()
+    this.listService.cities$.subscribe(data => this.cities = data);
+    this.organizerService.list()
       .subscribe((data: Organizer[]) => {
         this.organizers = data;
         this.checkLength = data.length;

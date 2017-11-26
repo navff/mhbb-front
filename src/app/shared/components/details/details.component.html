@@ -39,7 +39,7 @@
     <mh-button *ngIf="!admin.isActive" routerLink="reservation">ЗАПИСАТЬСЯ</mh-button>
     <div class="admin-buttons" *ngIf="admin.isActive">
         <mh-button routerLink="edit" color="primary">РЕДАКТИРОВАТЬ</mh-button>
-        <mh-button *ngIf="activity.length !== 0 && !activity.IsChecked" (click)="actApprove()" [loading]="responding === 'approve'">ПОДТВЕРДИТЬ</mh-button>
+        <mh-button *ngIf="activity.length !== 0 && !activity.IsChecked" (click)="approve()" [loading]="responding === 'approve'">ПОДТВЕРДИТЬ</mh-button>
     </div>
 </section>
 

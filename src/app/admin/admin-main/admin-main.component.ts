@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   templateUrl: './admin-main.component.html',
-  providers: [ActivityService, ListService, ListService],
+  providers: [ActivityService],
   styleUrls: ['./admin-main.component.sass']
 })
 export class AdminMainComponent implements OnInit {
@@ -46,9 +46,8 @@ export class AdminMainComponent implements OnInit {
   }
   ngOnInit() {
     this.changes$.debounceTime(250).subscribe(() => this.search());
-    this.listService.getCities().subscribe(data => this.cities = data);
-    this.listService.getInterests()
-      .subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));
+    this.listService.cities$.subscribe(data => this.cities = data);
+    this.listService.interests$.subscribe(data => this.interests = [{ Id: null, Name: 'Показать все' }].concat(data));
     this.activityService.listUnchecked()
       .subscribe((data: Activity[]) => {
         this.uncheckedActivities = data;

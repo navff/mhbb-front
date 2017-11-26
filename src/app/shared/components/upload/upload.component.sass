@@ -1,0 +1,58 @@
+\:host
+    position: relative
+    width: 40.625rem
+    height: 28.75rem
+    display: block
+    overflow: hidden
+
+label
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    border: solid 0.0625rem #795548
+    border-radius: inherit
+    transition: 0.4s ease
+    &:hover
+        background-color: rgba(#795548, .15)
+    &:hover .icon:before
+        transform: scale(1.2)
+    &:hover .icon:after
+        transform: scale(1.2) rotate(90deg)
+    .icon
+        width: 10%
+        &:after,
+        &:before
+            content: ""
+            position: absolute
+            background-color: #795548
+            transition: 0.4s ease
+            width: 10%
+            height: 0.05rem
+        &:after
+            transform: rotate(90deg)
+
+.preview
+    position: absolute
+    top: 0
+    height: 100%
+    width: 100%
+    background-color: #fff
+    background-size: cover
+    background-position: center
+.remove
+    height: 100%
+    width: 100%
+    display: block
+    
+    background: url(assets/img/rubbish-bin.svg) no-repeat center
+    background-color: rgba(#795548, .15)
+    background-size: 4rem
+
+    opacity: 0
+    transition: 0.4s ease
+    &:hover
+        opacity: 1

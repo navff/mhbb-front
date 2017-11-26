@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { AdminComponent } from './admin.component';
 import { AdminMainComponent } from './admin-main/admin-main.component';
-import { AdminActEditComponent } from './admin-main/admin-act-edit/admin-act-edit.component';
-import { AdminOrganizersComponent } from './admin-organizers/admin-organizers.component';
-import { AdminOrganizersEditComponent } from './admin-organizers/admin-organizers-edit/admin-organizers-edit.component';
-import { AdminUsersComponent } from './admin-users/admin-users.component';
-import { AdminUsersEditComponent } from './admin-users/admin-users-edit/admin-users-edit.component';
-import { AdminReviewsComponent } from './admin-reviews/admin-reviews.component';
+import { ActEditComponent } from './admin-main/act-edit/act-edit.component';
+import { OrganizersComponent } from './organizers/organizers.component';
+import { OrganizerEditComponent } from './organizers/organizer-edit/organizer-edit.component';
+import { UsersComponent } from './users/users.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/_shared.module';
@@ -21,10 +20,10 @@ import { SharedModule } from '../shared/_shared.module';
   ],
   declarations: [
     AdminComponent,
-    AdminMainComponent, AdminActEditComponent,
-    AdminOrganizersComponent, AdminOrganizersEditComponent,
-    AdminUsersComponent, AdminUsersEditComponent,
-    AdminReviewsComponent
+    AdminMainComponent, ActEditComponent,
+    OrganizersComponent, OrganizerEditComponent,
+    UsersComponent,
+    ReviewsComponent
   ]
 })
 export class AdminModule { }

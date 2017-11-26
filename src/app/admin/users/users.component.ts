@@ -5,11 +5,11 @@ import { Subject } from 'rxjs/Subject';
 import { User } from '../../models/user.model';
 
 @Component({
-  templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.sass'],
-  providers: [ListService, UserService]
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.sass'],
+  providers: [UserService]
 })
-export class AdminUsersComponent implements OnInit {
+export class UsersComponent implements OnInit {
   cities = [];
   users: User[];
 
@@ -32,7 +32,7 @@ export class AdminUsersComponent implements OnInit {
   concatPage() {
     this.responding = true;
     this.page++;
-    this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
+    this.userService.list(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
       .subscribe((data: User[]) => {
         this.users = this.users.concat(data);
         this.checkLength = data.length;
@@ -44,7 +44,7 @@ export class AdminUsersComponent implements OnInit {
     this.page = 1;
     if (adminBools[0] !== undefined) { this.roles[0] = adminBools[0]; }
     if (adminBools[1] !== undefined) { this.roles[1] = adminBools[1]; }
-    this.userService.getUsers(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
+    this.userService.list(this.page.toString(10), this.roles[0], this.roles[1], this.city.Id, this.word)
       .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;
@@ -53,8 +53,8 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.searchWord.debounceTime(250).subscribe(() => this.search());
-    this.listService.getCities().subscribe(data => this.cities = data);
-    this.userService.getUsers()
+    this.listService.cities$.subscribe(data => this.cities = data);
+    this.userService.list()
       .subscribe((data: User[]) => {
         this.users = data;
         this.checkLength = data.length;

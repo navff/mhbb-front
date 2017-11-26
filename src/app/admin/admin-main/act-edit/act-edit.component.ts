@@ -9,11 +9,11 @@ import { Activity } from '../../../models/activity.model';
 import { TempFile } from '../../../models/tempfile.model';
 
 @Component({
-  templateUrl: './admin-act-edit.component.html',
-  providers: [ListService, ActivityService, OrganizerService],
-  styleUrls: ['./admin-act-edit.component.sass']
+  templateUrl: './act-edit.component.html',
+  providers: [ActivityService, OrganizerService],
+  styleUrls: ['./act-edit.component.sass']
 })
-export class AdminActEditComponent implements OnInit {
+export class ActEditComponent implements OnInit {
   activityId: string;
   picUrls = [];
   interests = [];
@@ -58,7 +58,7 @@ export class AdminActEditComponent implements OnInit {
     });
   }
   filterOrganizers(value) {
-    this.organizerService.getOrganizers('1', value).subscribe(data => this.organizers = data);
+    this.organizerService.list('1', value).subscribe(data => this.organizers = data);
   }
   setOrganizerId(id) {
     this.organizerId = id;
@@ -79,7 +79,7 @@ export class AdminActEditComponent implements OnInit {
       this.fileData[index] = reader.result;
       data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
       body = new TempFile(this.formId, this.fileNames[index], data, isMain);
-      this.activityService.postTempFile(body)
+      this.activityService.createTempFile(body)
         .subscribe(res => {
           this.tempfileId[index] = res.Id;
         });
@@ -100,7 +100,7 @@ export class AdminActEditComponent implements OnInit {
       this.fileNames[index] = null;
       this.editHobby.controls[`image${index}`].setValue('');
       this.fileData[index] = null;
-      this.activityService.deleteTempfile(this.tempfileId[index]).subscribe();
+      this.activityService.removeTempFile(this.tempfileId[index]).subscribe();
     }
   }
   submitForm() {
@@ -131,24 +131,24 @@ export class AdminActEditComponent implements OnInit {
     let that = this;
     (function loop(i) {
       if (i < 4) {
-        that.picsToDelete[i] ? that.activityService.deletePicture(that.picId[i])
+        that.picsToDelete[i] ? that.activityService.removePicture(that.picId[i])
           .subscribe(() => loop(++i)) : loop(++i);
       } else {
-        that.activityService.putActivity(body, that.activityId)
+        that.activityService.update(body, that.activityId)
           .subscribe(() => that.router.navigate(['/admin/act', that.activityId]));
       }
     })(0);
   }
-  deleteActivity() {
+  remove() {
     this.responding = 'deleting';
-    this.activityService.deleteActivity(this.activityId)
+    this.activityService.remove(this.activityId)
       .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
     this.route.params.subscribe(params => this.activityId = params.id);
-    this.listService.getInterests().subscribe(data => this.interests = data);
+    this.listService.interests$.subscribe(data => this.interests = data);
 
-    this.activityService.getActivity(this.activityId)
+    this.activityService.take(this.activityId)
       .subscribe((data) => {
         this.editHobby.controls['name'].setValue(data.Name);
         this.editHobby.controls['organizer'].setValue(data.Organizer.Name);
@@ -172,7 +172,7 @@ export class AdminActEditComponent implements OnInit {
         this.isChecked = data.IsChecked;
         this.organizerId = data.Organizer.Id;
         this.organizerName = data.Organizer.Name;
-        this.organizerService.getOrganizers('1', this.organizerName).subscribe(res => this.organizers = res);
+        this.organizerService.list('1', this.organizerName).subscribe(res => this.organizers = res);
       });
   }
 }

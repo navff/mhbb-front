@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     if (window.location.pathname === '/') {
       !localStorage.getItem('token') ?
         this.router.navigate(['']) :
-        this.userService.getByToken()
+        this.userService.takeCurrent()
           .subscribe(user => {
             (user.RoleName === 'PortalAdmin' || user.RoleName === 'PortalManager') ?
               this.router.navigate(['admin']) :

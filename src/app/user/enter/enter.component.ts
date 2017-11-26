@@ -20,7 +20,7 @@ export class EnterComponent {
     history.back();
   }
 
-  registerUser() {
+  register() {
     this.responding = true;
     this.userService.register(this.email)
       .subscribe(() => this.router.navigate(['/enter/success']));

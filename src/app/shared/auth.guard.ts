@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
     if (localStorage.getItem('token')) {
-      return this.userService.getByToken()
+      return this.userService.takeCurrent()
         .toPromise()
         .then(result => {
           if (result.RoleName === 'PortalAdmin' || result.RoleName === 'PortalManager') {

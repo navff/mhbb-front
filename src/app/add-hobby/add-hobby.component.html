@@ -1,98 +1,60 @@
-<form [formGroup]="addHobby" (ngSubmit)="submitForm()">
-    <a style="display: none" routerLink="/admin" routerLinkActive #admin="routerLinkActive"></a>
-    <a [routerLink]="admin.isActive ? '/admin' : ''" class="mh-back">&larr; Назад</a>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <a (click)="back()" class="mh-back">&larr; Назад</a>
     <md-input-container class="form-item-course-name">
-        <input mdInput placeholder="Название курса" [formControl]="addHobby.controls['name']">
+        <input mdInput placeholder="Название курса" [formControl]="form.controls['name']">
     </md-input-container>
 
-    <div class="photos">
-        <div class="main-image">
-            <div (click)="removeImage(0)" *ngIf="fileData[0]" class="delete-image-button"></div>
-            <label class="main-input-design">
-                <div class="main-wrapper" [ngClass]="{'cover': fileData[0]}">
-                    <div [ngStyle]="{'background-image': 'url(' + fileData[0] + ')'}" class="main-preview"></div>
-                </div>
-                <input (change)="addImage($event, 0, true)" [disabled]="fileNames[0]" type="file" id="input-0" class="add-image-input" accept=".png,.jpg,.jpeg">
-                <input type="hidden" [formControl]="addHobby.controls['image0']">
-            </label>
-        </div>
-
-        <div *ngIf="fileNames[0] || fileNames[1] || fileNames[2] || fileNames[3]" class="secondary-image-1">
-            <div (click)="removeImage(1)" *ngIf="fileData[1]" class="delete-image-button"></div>
-            <label class="secondary-input-design">
-                <div class="secondary-wrapper" [ngClass]="{'cover': fileData[1]}">
-                    <div [ngStyle]="{'background-image': 'url(' + fileData[1] + ')'}" class="secondary-preview"></div>
-                </div>
-                <input (change)="addImage($event, 1, false)" [disabled]="fileNames[1]" type="file" id="input-1" class="add-image-input" accept=".png,.jpg,.jpeg">
-                <input type="hidden" [formControl]="addHobby.controls['image1']">
-            </label>
-        </div>
-
-        <div *ngIf="fileNames[1] || fileNames[3] || fileNames[2]" class="secondary-image-2">
-            <div (click)="removeImage(2)" *ngIf="fileData[2]" class="delete-image-button"></div>
-            <label class="secondary-input-design">
-                <div class="secondary-wrapper" [ngClass]="{'cover': fileData[2]}">
-                    <div [ngStyle]="{'background-image': 'url(' + fileData[2] + ')'}" class="secondary-preview"></div>
-                </div>
-                <input (change)="addImage($event, 2, false)" [disabled]="fileNames[2]" type="file" id="input-2" class="add-image-input" accept=".png,.jpg,.jpeg">
-                <input type="hidden" [formControl]="addHobby.controls['image2']">
-            </label>
-        </div>
-
-        <div *ngIf="fileNames[2] || fileNames[3]" class="secondary-image-3">
-            <div (click)="removeImage(3)" *ngIf="fileData[3]" class="delete-image-button"></div>
-            <label class="secondary-input-design">
-                <div class="secondary-wrapper" [ngClass]="{'cover': fileData[3]}">
-                    <div [ngStyle]="{'background-image': 'url(' + fileData[3] + ')'}" class="secondary-preview"></div>
-                </div>
-                <input (change)="addImage($event, 3, false)" [disabled]="fileNames[3]" type="file" id="input-3" class="add-image-input" accept=".png,.jpg,.jpeg">
-                <input type="hidden" [formControl]="addHobby.controls['image3']">
-            </label>
+    <div class="images">
+        <mh-upload [url]="pics[0]?.url" (success)="addImage($event, 0)" (remove)="removeImage(0)" main="true"></mh-upload>
+        <div class="secondary-images">
+            <mh-upload [url]="pics[1]?.url" (success)="addImage($event, 1)" (remove)="removeImage(1)" class="secondary"></mh-upload>
+            <mh-upload [url]="pics[2]?.url" (success)="addImage($event, 2)" (remove)="removeImage(2)" class="secondary"></mh-upload>
+            <mh-upload [url]="pics[3]?.url" (success)="addImage($event, 3)" (remove)="removeImage(3)" class="secondary"></mh-upload>
         </div>
     </div>
 
     <div class='form-right'>
         <md-input-container class="form-item-organizer">
-            <input (ngModelChange)="filterOrganizers(addHobby.get('organizerName').value)" (focus)="showOrganizers()" id="organizerInput"
-                mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="addHobby.controls['organizerName']">
+            <input (ngModelChange)="filterOrganizers(form.get('organizerName').value)" (focus)="filterOrganizers()" id="organizerInput"
+                mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="form.controls['organizerName']">
         </md-input-container>
         <md-autocomplete #org="mdAutocomplete">
             <md-option (click)="setOrganizer(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">
                 {{organizer.Name}}
             </md-option>
         </md-autocomplete>
-        <md-select class="form-item-interests" placeholder="Город" [formControl]="addHobby.controls['cityId']" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">
+        <md-select class="form-item-interests" placeholder="Город" [formControl]="form.controls['cityId']" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">
             <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
         </md-select>
         <md-input-container class="form-item-age-from">
-            <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [formControl]="addHobby.controls['ageFrom']">
+            <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [formControl]="form.controls['ageFrom']">
         </md-input-container>
         <md-input-container class="form-item-age-to">
-            <input mdInput placeholder="До" myOnlyNumber maxlength="3" [formControl]="addHobby.controls['ageTo']">
+            <input mdInput placeholder="До" myOnlyNumber maxlength="3" [formControl]="form.controls['ageTo']">
         </md-input-container>
-        <md-select class="form-item-interests" placeholder="Интересы" [formControl]="addHobby.controls['interestId']">
+        <md-select class="form-item-interests" placeholder="Интересы" [formControl]="form.controls['interestId']">
             <md-option *ngFor="let interest of interests" [value]="interest.Id">{{ interest.Name }}</md-option>
         </md-select>
         <md-input-container class="form-item-phones">
-            <textarea mdInput rows="3" placeholder="Телефоны" [formControl]="addHobby.controls['phones']"></textarea>
+            <textarea mdInput rows="3" placeholder="Телефоны" [formControl]="form.controls['phones']"></textarea>
         </md-input-container>
         <md-input-container class="form-item-address">
-            <textarea mdInput rows="3" placeholder="Адрес" [formControl]="addHobby.controls['address']"></textarea>
+            <textarea mdInput rows="3" placeholder="Адрес" [formControl]="form.controls['address']"></textarea>
         </md-input-container>
         <md-input-container class="form-item-price">
-            <textarea mdInput rows="3" placeholder="Цены" [formControl]="addHobby.controls['prices']"></textarea>
+            <textarea mdInput rows="3" placeholder="Цены" [formControl]="form.controls['prices']"></textarea>
         </md-input-container>
-        <md-checkbox color="primary" class="form-item-free-checkbox" [formControl]="addHobby.controls['free']">Бесплатно</md-checkbox>
+        <md-checkbox color="primary" class="form-item-free-checkbox" [formControl]="form.controls['free']">Бесплатно</md-checkbox>
     </div>
 
     <div class='form-bottom'>
         <md-input-container class="form-item-description">
-            <textarea mdInput rows="10" placeholder="Подробное описание" [formControl]="addHobby.controls['description']"></textarea>
+            <textarea mdInput rows="10" placeholder="Подробное описание" [formControl]="form.controls['description']"></textarea>
         </md-input-container>
         <md-input-container class="form-item-guides">
-            <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="addHobby.controls['mentor']"></textarea>
+            <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="form.controls['mentor']"></textarea>
         </md-input-container>
-        <md-checkbox color="primary" class="form-item-sobriety-checkbox" [formControl]="addHobby.controls['sobriety']" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">Преподаватели не пьют и не курят</md-checkbox>
-        <mh-button [disabled]="!addHobby.valid" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
+        <md-checkbox color="primary" class="form-item-sobriety-checkbox" [formControl]="form.controls['sobriety']" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">Преподаватели не пьют и не курят</md-checkbox>
+        <mh-button [disabled]="form.invalid && !pics[0]?.url" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
     </div>
 </form>

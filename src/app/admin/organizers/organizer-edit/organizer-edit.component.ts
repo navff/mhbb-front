@@ -7,11 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: './admin-organizers-edit.component.html',
-  styleUrls: ['./admin-organizers-edit.component.sass'],
-  providers: [OrganizerService, ListService]
+  templateUrl: './organizer-edit.component.html',
+  styleUrls: ['./organizer-edit.component.sass'],
+  providers: [OrganizerService]
 })
-export class AdminOrganizersEditComponent implements OnInit {
+export class OrganizerEditComponent implements OnInit {
   cities = [];
   url: string;
   organizerId: string;
@@ -34,7 +34,7 @@ export class AdminOrganizersEditComponent implements OnInit {
     });
   }
 
-  putOrganizer() {
+  update() {
     this.responding = 'put';
     let body = new Organizer(
       this.editOrganizer.get('name').value,
@@ -44,22 +44,22 @@ export class AdminOrganizersEditComponent implements OnInit {
       this.editOrganizer.get('phone').value);
 
     let request = this.url === '/admin/organizers/add' ?
-      this.organizerService.postOrganizer(body) :
-      this.organizerService.putOrganizer(this.organizerId, body);
+      this.organizerService.create(body) :
+      this.organizerService.update(this.organizerId, body);
     request.subscribe(() => this.router.navigate(['/admin/organizers']));
   }
-  deleteOrganizer() {
+  remove() {
     this.responding = 'delete';
-    this.organizerService.deleteOrganizer(this.organizerId)
+    this.organizerService.remove(this.organizerId)
       .subscribe(() => this.router.navigate(['/admin/organizers']));
   }
 
   ngOnInit() {
     this.url = this.router.url;
-    this.listService.getCities().subscribe(data => this.cities = data);
+    this.listService.cities$.subscribe(data => this.cities = data);
     if (this.url !== '/admin/organizers/add') {
       this.route.params.subscribe(params => this.organizerId = params.id);
-      this.organizerService.getOrganizerById(this.organizerId)
+      this.organizerService.take(this.organizerId)
         .subscribe((data: Organizer) => {
           this.editOrganizer.get('name').setValue(data.Name);
           this.editOrganizer.get('cityId').setValue(data.CityId);

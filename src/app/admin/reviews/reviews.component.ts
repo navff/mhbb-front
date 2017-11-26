@@ -4,11 +4,11 @@ import { ReviewService } from '../../shared/services/review.service';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  templateUrl: './admin-reviews.component.html',
-  styleUrls: ['./admin-reviews.component.sass'],
-  providers: [ReviewService, ListService]
+  templateUrl: './reviews.component.html',
+  styleUrls: ['./reviews.component.sass'],
+  providers: [ReviewService]
 })
-export class AdminReviewsComponent implements OnInit {
+export class ReviewsComponent implements OnInit {
   reviews: any[];
   cities = [];
   word: string;
@@ -20,7 +20,7 @@ export class AdminReviewsComponent implements OnInit {
     private listService: ListService) { }
 
   search() {
-    this.reviewService.getUncheckedReviews(this.word, this.city.Id)
+    this.reviewService.listUnchecked(this.word, this.city.Id)
       .subscribe(data => this.reviews = data);
   }
   onChange() {
@@ -28,19 +28,19 @@ export class AdminReviewsComponent implements OnInit {
   }
   reject(id, index) {
     this.reviews[index].state = 'rejecting';
-    this.reviewService.deleteReview(id)
+    this.reviewService.remove(id)
       .subscribe(() => this.reviews[index].state = 'rejected');
   }
   accept(id, index) {
     this.reviews[index].state = 'accepting';
-    this.reviewService.putSetChecked(id, 'true')
+    this.reviewService.setCheck(id, 'true')
       .subscribe(() => this.reviews[index].state = 'accepted');
   }
 
   ngOnInit() {
     this.changes$.debounceTime(250).subscribe(() => this.search());
-    this.listService.getCities().subscribe(data => this.cities = data);
-    this.reviewService.getUncheckedReviews()
+    this.listService.cities$.subscribe(data => this.cities = data);
+    this.reviewService.listUnchecked()
       .subscribe(data => this.reviews = data);
   }
 }

@@ -17,7 +17,7 @@ export class DetailsComponent implements OnInit {
 
   published: boolean;
   responding: string;
-  voted = false;
+  voted: boolean;
   isAuthorized: boolean;
 
   constructor(
@@ -44,24 +44,24 @@ export class DetailsComponent implements OnInit {
       ActivityId: parseInt(this.activity.Id, 10),
       Text: this.reviewText
     };
-    this.reviewService.postReview(body)
+    this.reviewService.create(body)
       .subscribe(() => {
         this.published = true;
         this.responding = '';
       });
   }
-  actApprove() {
+  approve() {
     this.responding = 'approve';
-    this.activityService.approveActivity(true, this.activity.Id)
+    this.activityService.setCheck(true, this.activity.Id)
       .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.activityService.getActivity(params.id)
+      this.activityService.take(params.id)
         .subscribe(data => {
           this.activity = data;
           this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);
-          this.reviewService.getReviewsByActivity(this.activity.Id)
+          this.reviewService.listByActivity(this.activity.Id)
           .subscribe(res => this.reviews = res);
         });
     });

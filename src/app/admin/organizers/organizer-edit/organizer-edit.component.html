@@ -1,5 +1,5 @@
 <h1 class="admin-heading">{{url === "/admin/organizers/add" ? 'Добавление' : 'Редактирование'}} организатора</h1>
-<form [formGroup]="editOrganizer" (ngSubmit)="putOrganizer()">
+<form [formGroup]="editOrganizer" (ngSubmit)="update()">
     <md-input-container class="input name">
         <input mdInput [formControl]="editOrganizer.controls['name']" placeholder="Название">
     </md-input-container>
@@ -15,4 +15,4 @@
     <md-checkbox [formControl]="editOrganizer.controls['sobriety']" color="primary">Трезвость</md-checkbox>
     <mh-button [disabled]="!editOrganizer.valid" [loading]="responding === 'put'">{{url === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
 </form>
-<mh-button *ngIf="url !== '/admin/organizers/add'" (click)="deleteOrganizer()" [loading]="responding === 'delete'" color="warn" class="btn-delete">УДАЛИТЬ</mh-button>
+<mh-button *ngIf="url !== '/admin/organizers/add'" (click)="remove()" [loading]="responding === 'delete'" color="warn" class="btn-delete">УДАЛИТЬ</mh-button>

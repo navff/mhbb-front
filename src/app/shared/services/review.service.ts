@@ -6,23 +6,23 @@ import { RequestOptions, URLSearchParams } from '@angular/http';
 export class ReviewService {
   constructor(private http: HttpService) { }
 
-  postReview(body: any) {
+  create(body: any) {
     return this.http.post('review', body);
   }
-  getReviewsByActivity(id: string) {
+  listByActivity(id: string) {
     return this.http.get(`review/byactivity?activityId=${id}`);
   }
-  getUncheckedReviews(word?: string, cityId?: string) {
+  listUnchecked(word?: string, cityId?: string) {
     let search = new URLSearchParams();
     word ? search.append('word', word) : search.delete('word');
     search.append('cityId', cityId);
 
     return this.http.get('review/unchecked', new RequestOptions({ search }));
   }
-  putSetChecked(id: string, isChecked: string) {
+  setCheck(id: string, isChecked: string) {
     return this.http.put(`review/setchecked?reviewId=${id}&isChecked=${isChecked}`);
   }
-  deleteReview(id: string) {
+  remove(id: string) {
     return this.http.delete(`review/${id}`);
   }
 }

@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { ReservationSuccessComponent } from './reservation/reservation-success/reservation-success.component';
 import { ReservationComponent } from './reservation/reservation.component';
-import { EnterSuccessComponent } from './enter/enter-success/enter-success.component';
 import { EnterComponent } from './enter/enter.component';
 import { MainComponent } from './main/main.component';
 
@@ -20,7 +19,7 @@ const routes: Routes = [
     children: [
       { path: '', component: MainComponent },
       { path: 'enter', component: EnterComponent },
-      { path: 'enter/success', component: EnterSuccessComponent },
+      { path: 'enter/success', component: StaticComponent },
       { path: 'act/:id', component: DetailsComponent },
       { path: 'act/:id/reservation', component: ReservationComponent },
       { path: 'act/:id/reservation/success', component: ReservationSuccessComponent },

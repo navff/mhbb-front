@@ -14,7 +14,7 @@
     </div>
 </section>
 
-<form [formGroup]="form" (ngSubmit)="postReservation()">
+<form [formGroup]="form" (ngSubmit)="reserve()">
     <md-input-container>
         <input mdInput [formControl]="form.controls['name']" placeholder="Имя, Фамилия">
     </md-input-container>

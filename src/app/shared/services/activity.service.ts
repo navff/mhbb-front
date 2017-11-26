@@ -7,7 +7,7 @@ export class ActivityService {
   constructor(private http: HttpService) { }
 
   list(word?: string, age?: string, interestId?: string, cityId?: string,
-    sobriety?: any, free?: any) {
+       sobriety?: any, free?: any) {
     let search = new URLSearchParams();
 
     word ? search.append('word', word) : search.delete('word');
@@ -32,28 +32,28 @@ export class ActivityService {
 
     return this.http.get('activity/searchunchecked', new RequestOptions({ search }));
   }
-  getActivity(id) {
+  take(id) {
     return this.http.get(`activity/${id}`);
   }
-  postTempFile(body) {
-    return this.http.post('tempfile', body);
-  }
-  deleteTempfile(id) {
-    return this.http.delete(`tempfile/${id}`);
-  }
-  deletePicture(id) {
-    return this.http.delete(`picture/${id}`);
-  }
-  postActivity(body) {
+  create(body) {
     return this.http.post(`activity`, body);
   }
-  putActivity(body, id) {
+  update(body, id) {
     return this.http.put(`activity/${id}`, body);
   }
-  approveActivity(isChecked, id) {
+  setCheck(isChecked, id) {
     return this.http.put(`activity/setchecked?activityId=${id}&isChecked=${isChecked}`);
   }
-  deleteActivity(id: any) {
+  remove(id) {
     return this.http.delete(`activity/${id}`);
+  }
+  createTempFile(body) {
+    return this.http.post('tempfile', body);
+  }
+  removeTempFile(id) {
+    return this.http.delete(`tempfile/${id}`);
+  }
+  removePicture(id) {
+    return this.http.delete(`picture/${id}`);
   }
 }

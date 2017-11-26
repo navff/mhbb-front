@@ -1,10 +1,20 @@
 export class User {
-  constructor(
-    public Email: string,
-    public Name: string,
-    public Phone: string,
-    public Role: number,
-    public CityId: any,
-    public FormId: any,
-    public RoleName?: string) { }
+  Email: string;
+  Name: string;
+  Phone: string;
+  Role: number;
+  CityId: any;
+  FormId: any;
+  RoleName: string;
+
+  constructor(data?: any, roleValue?: boolean, formId?: string) {
+    if (data) {
+      this.Email = data.Email;
+      this.Name = data.Name;
+      this.Phone = data.Phone;
+      this.CityId = data.CityId;
+    }
+    this.Role = roleValue ? 1 : 2;
+    this.FormId = formId;
+  }
 }
