@@ -13,11 +13,11 @@ label
     width: 100%
     height: 100%
     box-sizing: border-box
-    border: solid 0.0625rem #795548
+    border: solid 0.0625rem $primary
     border-radius: inherit
     transition: 0.4s ease
     &:hover
-        background-color: rgba(#795548, .15)
+        background-color: rgba($primary, .15)
     &:hover .icon:before
         transform: scale(1.2)
     &:hover .icon:after
@@ -28,7 +28,7 @@ label
         &:before
             content: ""
             position: absolute
-            background-color: #795548
+            background-color: $primary
             transition: 0.4s ease
             width: 10%
             height: 0.05rem
@@ -49,7 +49,7 @@ label
     display: block
     
     background: url(assets/img/rubbish-bin.svg) no-repeat center
-    background-color: rgba(#795548, .15)
+    background-color: rgba($primary, .15)
     background-size: 4rem
 
     opacity: 0

@@ -198,8 +198,15 @@ module.exports = function (options) {
 
         {
           test: /\.(sass)$/,
-          exclude: /node_modules/,
-          loader: 'raw-loader!sass-loader'
+          use: [
+            'raw-loader',
+            'sass-loader',
+            {
+              loader: 'sass-resources-loader',
+              options: { resources: helpers.root('src/styles/vars.sass'), }
+            }
+          ],
+          exclude: ['/node_modules/', [helpers.root('src', 'styles')]],
         }
 
       ],

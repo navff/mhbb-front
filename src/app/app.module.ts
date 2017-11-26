@@ -37,7 +37,7 @@ import { UserService } from './shared/services/user.service';
 import { ListService } from './shared/services/list.service';
 import { SharedService } from './shared/services/shared.service';
 
-import '../styles/material-theme.css';
+import '../styles/material-theme.scss';
 import '../styles/reset.css';
 
 // Application wide providers
