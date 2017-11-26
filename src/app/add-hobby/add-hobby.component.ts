@@ -47,11 +47,11 @@ export class AddHobbyComponent implements OnInit {
       prices: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       mentor: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
-      free: [false, Validators.required],
-      sobriety: [false, Validators.required]
+      free: false,
+      sobriety: false,
     });
   }
-  filterOrganizers(value?) {
+  filterOrganizers(value) {
     if (this.isOrganizerChosen) {
       this.isOrganizerChosen = false;
       this.form.controls['cityId'].setValue('');
@@ -59,15 +59,16 @@ export class AddHobbyComponent implements OnInit {
       this.form.controls['cityId'].enable();
       this.form.controls['sobriety'].enable();
     }
-    this.organizerService.list('1', value || null).subscribe(data => this.organizers = data);
+    this.organizerService.list('1', value || null)
+      .subscribe(data => this.organizers = data);
   }
   setOrganizer(id: string) {
     this.isOrganizerChosen = true;
     document.getElementById('organizerInput').blur();
-    this.organizerId = id;
     this.form.controls['cityId'].disable();
     this.form.controls['sobriety'].disable();
     this.organizerService.take(id).subscribe(data => {
+      this.organizerId = id;
       this.form.controls['cityId'].setValue(data.CityId);
       this.form.controls['sobriety'].setValue(data.Sobriety);
     });
@@ -110,7 +111,7 @@ export class AddHobbyComponent implements OnInit {
       this.isOrganizerChosen ? this.organizerId : null
     );
     this.activityService.create(body)
-      .subscribe(() => this.router.navigate(['/success'], { relativeTo: this.route }));
+      .subscribe(() => this.router.navigate(['success'], { relativeTo: this.route }));
   }
   back() {
     history.back();

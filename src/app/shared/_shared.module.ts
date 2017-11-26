@@ -8,12 +8,13 @@ import {
   MdIconModule, MdProgressSpinnerModule, MdAutocompleteModule, MdProgressBarModule,
   MdTooltipModule
 } from '@angular/material';
-import { OnlyNumberDirective } from './_only-number.directive';
+import { NumberDirective } from './_number.directive';
 import { DatePipe } from './_date.pipe';
 import { DetailsComponent } from './components/details/details.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
+import { MainComponent } from './components/main/main.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { PicturesComponent } from './components/pictures/pictures.component';
@@ -26,8 +27,9 @@ const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
   RouterModule,
   CommonModule];
 
-const Components = [OnlyNumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent,
-  ActivitiesComponent, ButtonComponent, ProgressBarComponent, PicturesComponent, UploadComponent, StaticComponent];
+const Components = [NumberDirective, DatePipe, DetailsComponent, UserEditComponent, FooterComponent,
+  MainComponent, ActivitiesComponent, ButtonComponent, ProgressBarComponent,
+  PicturesComponent, UploadComponent, StaticComponent];
 
 @NgModule({
   imports: [Modules],

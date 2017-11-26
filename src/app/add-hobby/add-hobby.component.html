@@ -15,7 +15,7 @@
 
     <div class='form-right'>
         <md-input-container class="form-item-organizer">
-            <input (ngModelChange)="filterOrganizers(form.get('organizerName').value)" (focus)="filterOrganizers()" id="organizerInput"
+            <input (ngModelChange)="filterOrganizers($event)" (focus)="filterOrganizers()" id="organizerInput"
                 mdInput placeholder="Организатор" [mdAutocomplete]="org" [formControl]="form.controls['organizerName']">
         </md-input-container>
         <md-autocomplete #org="mdAutocomplete">
@@ -55,6 +55,6 @@
             <textarea mdInput rows="3" placeholder="Ведущие" [formControl]="form.controls['mentor']"></textarea>
         </md-input-container>
         <md-checkbox color="primary" class="form-item-sobriety-checkbox" [formControl]="form.controls['sobriety']" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">Преподаватели не пьют и не курят</md-checkbox>
-        <mh-button [disabled]="form.invalid && !pics[0]?.url" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
+        <mh-button [disabled]="form.invalid || !pics[0]?.url" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
     </div>
 </form>

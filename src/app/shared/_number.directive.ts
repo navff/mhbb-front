@@ -1,9 +1,9 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[myOnlyNumber]'
+  selector: '[mhNumber]'
 })
-export class OnlyNumberDirective {
+export class NumberDirective {
   private regex: RegExp = new RegExp(/^[0-9]+([0-9]*){0,1}$/g);
 
   private specialKeys: string[] = ['Backspace', 'Tab', 'End', 'Home'];

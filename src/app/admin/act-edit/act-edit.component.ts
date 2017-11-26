@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ListService } from '../../../shared/services/list.service';
-import { OrganizerService } from './../../../shared/services/organizer.service';
-import { ActivityService } from '../../../shared/services/activity.service';
+import { ListService } from '../../shared/services/list.service';
+import { OrganizerService } from '../../shared/services/organizer.service';
+import { ActivityService } from '../../shared/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Activity } from '../../../models/activity.model';
-import { TempFile } from '../../../models/tempfile.model';
+import { Activity } from '../../models/activity.model';
+import { TempFile } from '../../models/tempfile.model';
 
 @Component({
   templateUrl: './act-edit.component.html',

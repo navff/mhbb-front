@@ -1,15 +1,15 @@
-import { StaticComponent } from './../shared/components/static/static.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
-import { AdminMainComponent } from './admin-main/admin-main.component';
-import { ActEditComponent } from './admin-main/act-edit/act-edit.component';
+import { ActEditComponent } from './act-edit/act-edit.component';
 import { OrganizersComponent } from './organizers/organizers.component';
 import { OrganizerEditComponent } from './organizers/organizer-edit/organizer-edit.component';
 import { UsersComponent } from './users/users.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 
+import { MainComponent } from './../shared/components/main/main.component';
+import { StaticComponent } from './../shared/components/static/static.component';
 import { DetailsComponent } from './../shared/components/details/details.component';
 import { UserEditComponent } from './../shared/components/user-edit/user-edit.component';
 
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: '', component: AdminMainComponent },
+      { path: '', component: MainComponent },
       { path: 'edit', component: UserEditComponent },
       { path: 'act/:id', component: DetailsComponent },
       { path: 'act/:id/edit', component: ActEditComponent },

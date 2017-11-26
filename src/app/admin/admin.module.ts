@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminComponent } from './admin.component';
-import { AdminMainComponent } from './admin-main/admin-main.component';
-import { ActEditComponent } from './admin-main/act-edit/act-edit.component';
+import { ActEditComponent } from './act-edit/act-edit.component';
 import { OrganizersComponent } from './organizers/organizers.component';
 import { OrganizerEditComponent } from './organizers/organizer-edit/organizer-edit.component';
 import { UsersComponent } from './users/users.component';
@@ -20,7 +19,7 @@ import { SharedModule } from '../shared/_shared.module';
   ],
   declarations: [
     AdminComponent,
-    AdminMainComponent, ActEditComponent,
+    ActEditComponent,
     OrganizersComponent, OrganizerEditComponent,
     UsersComponent,
     ReviewsComponent

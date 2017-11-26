@@ -35,6 +35,7 @@ import { Http } from '@angular/http';
 import { HttpService } from './shared/services/http.service';
 import { UserService } from './shared/services/user.service';
 import { ListService } from './shared/services/list.service';
+import { SharedService } from './shared/services/shared.service';
 
 import '../styles/material-theme.css';
 import '../styles/reset.css';
@@ -43,7 +44,7 @@ import '../styles/reset.css';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  AuthGuard, HttpService, { provide: Http, useClass: HttpService }, UserService, ListService
+  AuthGuard, HttpService, { provide: Http, useClass: HttpService }, UserService, ListService, SharedService
 ];
 
 type StoreType = {

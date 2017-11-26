@@ -13,7 +13,7 @@ export class ProgressBarComponent implements OnDestroy {
 
   constructor(private http: HttpService) {
     this.color = location.pathname.substr(1, 6).match('admin') ? 'primary' : 'accent';
-    this.sub = this.http.responding.subscribe(data => this.responding = data);
+    this.sub = this.http.requests$.subscribe(data => this.responding = data > 0 ? true : false);
   }
 
   ngOnDestroy() {

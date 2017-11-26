@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, XHRBackend, Request, RequestOptionsArgs, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -8,7 +8,7 @@ const apiUrl = 'http://test.mhbb.ru/b/api/';
 
 @Injectable()
 export class HttpService extends Http {
-    responding: Subject<boolean> = new Subject();
+    requests$: BehaviorSubject<number> = new BehaviorSubject(0);
 
     constructor(backend: XHRBackend, options: RequestOptions) {
         super(backend, options);
@@ -20,11 +20,11 @@ export class HttpService extends Http {
     }
 
     request(request: Request, options?: RequestOptionsArgs): Observable<Response> {
-        this.responding.next(true);
+        this.requests$.next(this.requests$.getValue() + 1);
         request.url = apiUrl + request.url;
         request.headers.set('Authorization', `token ${localStorage.getItem('token')}`);
         return super.request(request, options)
-            .finally(() => this.responding.next(false));
+            .finally(() => this.requests$.next(this.requests$.getValue() - 1));
     }
 
     get(url: string, options?: RequestOptions) {

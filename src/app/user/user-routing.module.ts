@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { UserComponent } from './user.component';
+import { MainComponent } from './../shared/components/main/main.component';
 import { ReservationSuccessComponent } from './reservation/reservation-success/reservation-success.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { EnterComponent } from './enter/enter.component';
-import { MainComponent } from './main/main.component';
 
 import { StaticComponent } from './../shared/components/static/static.component';
 import { DetailsComponent } from './../shared/components/details/details.component';

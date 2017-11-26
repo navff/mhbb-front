@@ -1,48 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+import { SharedService } from './shared.service';
 import { RequestOptions, URLSearchParams } from '@angular/http';
+import { SearchParams } from './../../models/search-params.model';
 
 @Injectable()
 export class ActivityService {
-  constructor(private http: HttpService) { }
-
-  list(word?: string, age?: string, interestId?: string, cityId?: string,
-       sobriety?: any, free?: any) {
+  constructor(private http: HttpService, private shared: SharedService) { }
+  setSearch(params): URLSearchParams {
     let search = new URLSearchParams();
-
-    word ? search.append('word', word) : search.delete('word');
-    age ? search.append('age', age) : search.delete('age');
-    search.append('interestId', interestId);
-    search.append('cityId', cityId);
-    sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
-    free ? search.append('free', free) : search.delete('free');
-
-    return this.http.get('activity/search', new RequestOptions({ search }));
+    Object.keys(params).forEach(key => {
+      search.append(key, params[key] || null);
+    });
+    return search;
   }
-  listUnchecked(word?: string, age?: string, interestId?: string, cityId?: string,
-                sobriety?: any, free?: any) {
-    let search = new URLSearchParams();
 
-    word ? search.append('word', word) : search.delete('word');
-    age ? search.append('age', age) : search.delete('age');
-    search.append('interestId', interestId);
-    search.append('cityId', cityId);
-    sobriety ? search.append('sobriety', sobriety) : search.delete('sobriety');
-    free ? search.append('free', free) : search.delete('free');
-
-    return this.http.get('activity/searchunchecked', new RequestOptions({ search }));
+  list(params?: SearchParams) {
+    return this.http.get('activity/search', new RequestOptions({ search: params && this.setSearch(params) }));
+  }
+  listUnchecked(params?: SearchParams) {
+    return this.http.get('activity/searchunchecked', new RequestOptions({ search: params && this.setSearch(params) }))
+      .map(data => {
+        this.shared.activitiesNumber$.next(data.length);
+        return data;
+      });
   }
   take(id) {
     return this.http.get(`activity/${id}`);
   }
   create(body) {
-    return this.http.post(`activity`, body);
+    return this.http.post(`activity`, body)
+      .map(data => {
+        this.shared.activitiesNumber$.next(this.shared.activitiesNumber$.getValue() + 1);
+        return data;
+      });
   }
   update(body, id) {
     return this.http.put(`activity/${id}`, body);
   }
   setCheck(isChecked, id) {
-    return this.http.put(`activity/setchecked?activityId=${id}&isChecked=${isChecked}`);
+    return this.http.put(`activity/setchecked?activityId=${id}&isChecked=${isChecked}`, null)
+      .map(data => {
+        this.shared.activitiesNumber$.next(this.shared.activitiesNumber$.getValue() - 1);
+        return data;
+      });
   }
   remove(id) {
     return this.http.delete(`activity/${id}`);
