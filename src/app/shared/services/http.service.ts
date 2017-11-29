@@ -21,9 +21,11 @@ export class HttpService extends Http {
     }
 
     request(request: Request, options?: RequestOptionsArgs): Observable<Response> {
+        console.log(request);
         this.shared.requests$.next(this.shared.requests$.getValue() + 1);
         request.url = apiUrl + request.url;
         request.headers.set('Authorization', `token ${localStorage.getItem('token')}`);
+        console.log(request);
         return super.request(request, options)
             .finally(() => this.shared.requests$.next(this.shared.requests$.getValue() - 1));
     }
