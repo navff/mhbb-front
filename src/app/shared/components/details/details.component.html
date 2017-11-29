@@ -40,6 +40,7 @@
     <div class="admin-buttons" *ngIf="admin.isActive">
         <mh-button routerLink="edit" color="primary">РЕДАКТИРОВАТЬ</mh-button>
         <mh-button *ngIf="activity.length !== 0 && !activity.IsChecked" (click)="approve()" [loading]="responding === 'approve'">ПОДТВЕРДИТЬ</mh-button>
+        <div class="error" *ngIf="error">Не заполнены email или телефон <a [routerLink]="'/admin/organizers/edit/' + activity.Organizer?.Id">организатора</a></div>
     </div>
 </section>
 

@@ -18,7 +18,7 @@ export class ReservationComponent implements OnInit {
     private activityService: ActivityService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+  ) { }
   reserve() {
     this.responding = true;
     this.reservation.ActivityId = this.activity.Id;
@@ -26,7 +26,8 @@ export class ReservationComponent implements OnInit {
       .subscribe(() => this.router.navigate(['success'], { relativeTo: this.route }));
   }
   ngOnInit() {
-    this.route.params.switchMap(params => this.activityService.take(params.id))
+    this.route.params
+      .switchMap(params => this.activityService.take(params.id))
       .subscribe(data => {
         this.activity = data;
         this.picUrl = data.Pictures[0].Url;

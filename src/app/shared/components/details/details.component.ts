@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
   };
 
   published: boolean;
+  error: boolean;
   responding: string;
   voted: boolean;
   isAuthorized: boolean;
@@ -54,7 +55,13 @@ export class DetailsComponent implements OnInit {
   approve() {
     this.responding = 'approve';
     this.activityService.setCheck(true, this.activity.Id)
-      .subscribe(() => this.router.navigate(['/admin']));
+      .subscribe(() => this.router.navigate(['/admin']),
+      err => {
+        if (JSON.parse(err._body).Message.match('email')) {
+          this.error = true;
+          this.responding = null;
+        }
+      });
   }
   ngOnInit() {
     this.route.params
