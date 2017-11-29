@@ -20,7 +20,6 @@ export class MainComponent implements OnInit {
   changes$ = new Subject();
 
   checkLength: number;
-  page = 1;
   responding: boolean;
 
   adminPage: boolean;
@@ -30,6 +29,7 @@ export class MainComponent implements OnInit {
     if (location.pathname.substr(1, 5) === 'admin') {
       this.adminPage = true;
     }
+    this.params.page = 1;
   };
 
   onChange() {
@@ -49,7 +49,7 @@ export class MainComponent implements OnInit {
   }
   concatPage() {
     this.responding = true;
-    this.page++;
+    this.params.page++;
     this.search();
   }
   ngOnInit() {

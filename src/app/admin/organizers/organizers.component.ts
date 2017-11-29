@@ -35,7 +35,7 @@ export class OrganizersComponent implements OnInit {
   }
   search() {
     this.organizerService.list(this.params)
-      .subscribe((data: Organizer[]) => {
+      .subscribe(data => {
         this.organizers = data;
         this.checkLength = data.length;
         this.responding = false;

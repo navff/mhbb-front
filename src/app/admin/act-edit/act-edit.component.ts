@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ListService } from '../../shared/services/list.service';
 import { OrganizerService } from '../../shared/services/organizer.service';
@@ -7,6 +6,8 @@ import { ActivityService } from '../../shared/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from '../../models/activity.model';
 import { TempFile } from '../../models/tempfile.model';
+import { Organizer } from './../../models/organizer.model';
+import { Picture } from './../../models/picture.model';
 
 @Component({
   templateUrl: './act-edit.component.html',
@@ -14,165 +15,105 @@ import { TempFile } from '../../models/tempfile.model';
   styleUrls: ['./act-edit.component.sass']
 })
 export class ActEditComponent implements OnInit {
-  activityId: string;
-  picUrls = [];
   interests = [];
-  fileNames = [];
-  fileData = [];
-  tempfileId = [];
-  formId: any = null;
-  isChecked: boolean;
-  organizerId: number;
-  organizerName: string;
+  cities = [];
   organizers = [];
-  responding: string;
-  editHobby: FormGroup;
 
-  picId = [];
+  pics: Picture[] = [];
+  act = new Activity();
+  actId: string;
+  organizer = new Organizer();
+
+  responding: string;
+  isOrganizerChosen: boolean;
+
+  tempfileId = [];
   picsToDelete: boolean[] = [];
+  picId: string[] = [];
 
   constructor(
     private listService: ListService,
-    fb: FormBuilder,
     private organizerService: OrganizerService,
     private activityService: ActivityService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.editHobby = fb.group({
-      'name': ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'organizer': ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'ageFrom': ['', Validators.required],
-      'ageTo': ['', Validators.required],
-      'interestId': ['', Validators.required],
-      'phones': ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'address': ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'prices': ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'mentor': ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      'description': ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
-      'free': [false, Validators.required],
-      'image0': ['', Validators.required],
-      'image1': '',
-      'image2': '',
-      'image3': ''
+  ) {}
+  filterOrganizers(word) {
+    if (this.isOrganizerChosen) {
+      this.isOrganizerChosen = false;
+      this.organizer.CityId = '';
+      this.organizer.Sobriety = false;
+    }
+    this.organizerService.list({ page: '1', word })
+      .subscribe(data => this.organizers = data);
+  }
+  setOrganizer(id) {
+    this.isOrganizerChosen = true;
+    document.getElementById('organizerInput').blur();
+    this.organizerService.take(id).subscribe(data => {
+      this.act.OrganizerId = id;
+      this.organizer.CityId = data.CityId;
+      this.organizer.Sobriety = data.Sobriety;
     });
   }
-  filterOrganizers(word = null) {
-    this.organizerService.list({page: '1', word}).subscribe(data => this.organizers = data);
+  addImage(file, id) {
+    this.act.FormId = this.act.FormId || Date.now().toString(10);
+    let isMain = id === 0 ? true : false;
+    this.activityService.createTempFile(new TempFile(this.act.FormId, file.name, file.data, isMain))
+      .subscribe(res => {
+        this.pics[id] = new Picture(res);
+        this.tempfileId[id] = res.Id;
+      });
   }
-  setOrganizerId(id) {
-    this.organizerId = id;
-  }
-  addImage(event, index, isMain) {
-    let data, body, file: File;
-    file = event.target.files[0];
-
-    if (!this.formId) {
-      this.formId = Date.now().toString(10);
-    }
-    this.fileNames[index] = file.name;
-    this.editHobby.controls[`image${index}`].setValue(file.name);
-
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      this.fileData[index] = reader.result;
-      data = this.fileData[index].replace(/^data:image\/[a-z]+;base64,/, '');
-      body = new TempFile(this.formId, this.fileNames[index], data, isMain);
-      this.activityService.createTempFile(body)
-        .subscribe(res => {
-          this.tempfileId[index] = res.Id;
-        });
-    };
-  }
-
   removeImage(index) {
-    if (this.picId[index]) {
-      (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
-      this.picUrls[index] = null;
-      this.fileNames[index] = null;
-      this.editHobby.controls[`image${index}`].setValue('');
-      this.fileData[index] = null;
-      this.picsToDelete[index] = true;
-    }
     if (this.tempfileId[index]) {
-      (<HTMLScriptElement>document.getElementById(`input-${index}`))['value'] = null;
-      this.fileNames[index] = null;
-      this.editHobby.controls[`image${index}`].setValue('');
-      this.fileData[index] = null;
-      this.activityService.removeTempFile(this.tempfileId[index]).subscribe();
+      this.activityService.removeTempFile(this.pics[index].Id)
+        .subscribe(() => this.pics[index].Url = '');
+    } else {
+      this.picsToDelete[index] = true;
+      this.pics[index].Url = null;
     }
   }
+
   submitForm() {
     this.responding = 'saving';
+    this.act.OrganizerId = this.isOrganizerChosen ? this.act.OrganizerId : null;
+    this.act.Organizer = this.isOrganizerChosen ? null : this.organizer;
 
-    this.organizers.forEach((org) => {
-      if (org.Name.toLowerCase() === this.editHobby.get('organizer').value.toLowerCase()) {
-        this.organizerId = org.Id;
-      }
-    });
-    let body = new Activity(
-      this.editHobby.get('name').value,
-      +this.editHobby.get('ageFrom').value,
-      +this.editHobby.get('ageTo').value,
-      this.editHobby.get('phones').value,
-      this.editHobby.get('address').value,
-      this.editHobby.get('prices').value,
-      this.editHobby.get('mentor').value,
-      this.editHobby.get('description').value,
-      this.editHobby.get('interestId').value,
-      this.isChecked,
-      this.editHobby.get('free').value,
-      this.formId,
-      null,
-      this.organizerId
-    );
-
-    let that = this;
-    (function loop(i) {
+    let loop = (i) => {
       if (i < 4) {
-        that.picsToDelete[i] ? that.activityService.removePicture(that.picId[i])
+        this.picsToDelete[i] ? this.activityService.removePicture(this.picId[i])
           .subscribe(() => loop(++i)) : loop(++i);
       } else {
-        that.activityService.update(body, that.activityId)
-          .subscribe(() => that.router.navigate(['/admin/act', that.activityId]));
+        this.activityService.update(this.act, this.actId)
+          .subscribe(() => this.router.navigate(['/admin/act', this.actId]));
       }
-    })(0);
+    };
+    loop(0);
   }
   remove() {
     this.responding = 'deleting';
-    this.activityService.remove(this.activityId)
+    this.activityService.remove(this.actId)
       .subscribe(() => this.router.navigate(['/admin']));
   }
   ngOnInit() {
-    this.route.params.subscribe(params => this.activityId = params.id);
     this.listService.interests$.subscribe(data => this.interests = data);
-
-    this.activityService.take(this.activityId)
-      .subscribe((data) => {
-        this.editHobby.controls['name'].setValue(data.Name);
-        this.editHobby.controls['organizer'].setValue(data.Organizer.Name);
-        this.editHobby.controls['ageFrom'].setValue(data.AgeFrom);
-        this.editHobby.controls['ageTo'].setValue(data.AgeTo);
-        this.editHobby.controls['interestId'].setValue(data.Interest.Id);
-        this.editHobby.controls['phones'].setValue(data.Phones);
-        this.editHobby.controls['address'].setValue(data.Address);
-        this.editHobby.controls['prices'].setValue(data.Prices);
-        this.editHobby.controls['mentor'].setValue(data.Mentor);
-        this.editHobby.controls['description'].setValue(data.Description);
-        this.editHobby.controls['free'].setValue(data.Free);
+    this.listService.cities$.subscribe(data => this.cities = data);
+    this.route.params.switchMap(params => this.activityService.take(params.id))
+      .subscribe(data => {
+        this.act = new Activity(data);
+        this.isOrganizerChosen = true;
+        this.organizer = new Organizer(data.Organizer);
+        this.actId = data.Id;
         data.Pictures.forEach((pic, i) => {
           if (i < 4) {
-            this.editHobby.controls[`image${i}`].setValue(pic.Url);
-            this.picUrls[i] = pic.Url;
-            this.fileNames[i] = pic.Id;
             this.picId[i] = pic.Id;
+            this.pics[i] = new Picture(pic);
           }
         });
-        this.isChecked = data.IsChecked;
-        this.organizerId = data.Organizer.Id;
-        this.organizerName = data.Organizer.Name;
-        this.organizerService.list({page: '1', word: this.organizerName}).subscribe(res => this.organizers = res);
+        this.organizer = new Organizer(data.Organizer);
+        this.organizerService.list({ page: '1', word: this.organizer.Name })
+          .subscribe(res => this.organizers = res);
       });
   }
 }

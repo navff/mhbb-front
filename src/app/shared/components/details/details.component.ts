@@ -3,6 +3,7 @@ import { ActivityService } from '../../services/activity.service';
 import { VoicesService } from '../../services/voices.service';
 import { ReviewService } from '../../services/review.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Activity } from './../../../models/activity.model';
 
 @Component({
   templateUrl: './details.component.html',
@@ -10,10 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [ActivityService, VoicesService, ReviewService],
 })
 export class DetailsComponent implements OnInit {
-  activity: any = [];
+  activity = new Activity();
   pictures = [];
   reviews = [];
-  reviewText: string;
+
+  review = {
+    Text: '',
+    Id: '',
+  };
 
   published: boolean;
   responding: string;
@@ -40,11 +45,7 @@ export class DetailsComponent implements OnInit {
   }
   publishReview() {
     this.responding = 'publish';
-    let body = {
-      ActivityId: parseInt(this.activity.Id, 10),
-      Text: this.reviewText
-    };
-    this.reviewService.create(body)
+    this.reviewService.create(this.review)
       .subscribe(() => {
         this.published = true;
         this.responding = '';
@@ -60,6 +61,7 @@ export class DetailsComponent implements OnInit {
       .switchMap(params => this.activityService.take(params.id))
       .switchMap(data => {
         this.activity = data;
+        this.review.Id = data.Id;
         this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);
         return this.reviewService.listByActivity(this.activity.Id);
       })

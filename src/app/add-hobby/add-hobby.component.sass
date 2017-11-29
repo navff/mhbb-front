@@ -1,55 +1,46 @@
 form
     font-size: 1.25rem
-.form-item-course-name
-    display: block
+.left
     width: 40.625rem
+.course-name
+    display: block
     margin-bottom: 1.375rem
 
-.form-right
+.right
     width: 31.375rem
     height: 40.625rem
     display: inline-block
     position: absolute
     top: 9.125rem
     left: 50rem
-    [class^='form-item']
+    .input
         margin-bottom: 1.25rem
-    .form-item-organizer
+        width: 100%
+    .organizer
         width: 15.5rem
-        margin-right: 2.5rem
-    .form-item-cities
+    .cities,
+    .interests
         width: 13rem
-    [class^='form-item-age']
+        margin-left: 2.5rem
+    .age-to,
+    .age-from
         width: 6.5625rem
+    .age-from
         margin-right: 2.0625rem
-    .form-item-age-to
-        margin-right: 2.5rem
-    .form-item-interests
-        width: 13rem
-    .form-item-phones,
-    .form-item-address,
-    .form-item-price
-        width: 31.1875rem
-    .form-item-free-checkbox
-        font-size: 1.25rem
 
-.form-bottom
-    .form-item-sobriety-checkbox
-        font-size: 1.25rem
-        line-height: 1.6875rem
-    .form-item-description
+.bottom
+    .input
         width: 66.875rem
         display: block	
-    .form-item-guides
-        width: 66.875rem
-        display: block
     mh-button
         margin: 3.125rem 0
         width: 12.5rem
         display: block
+
+md-checkbox
+    font-size: 1.25rem
+        
 .images
-    width: 40.625rem
-.secondary-images
     display: flex
     justify-content: space-between
     margin-top: 0.875rem

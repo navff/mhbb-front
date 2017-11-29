@@ -15,6 +15,5 @@
             <a routerLink="edit" [queryParams]="{ email: user.Email }">{{user.Email}}</a>
         </div>
     </div>
-    <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>
     <h2 class="no-results" *ngIf="users?.length === 0">По вашему запросу ничего не найдено.</h2>
 </section>

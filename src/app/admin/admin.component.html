@@ -6,8 +6,8 @@
             <a routerLink="organizers">Организаторы</a>
             <a routerLink="users">Пользователи</a>
             <a routerLink="reviews">Отзывы на проверку</a>
-            <a (click)="exit()" class="exit">Выход</a>
-            <a routerLink="edit" *ngIf="email" class="enter">{{email}}</a>
+            <a routerLink="edit" *ngIf="email">{{email}}</a>
+            <a (click)="exit()">Выход</a>
             <p>{{activitiesAmount}}</p>
         </div>
     </header>

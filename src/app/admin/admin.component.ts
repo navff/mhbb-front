@@ -24,10 +24,9 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activityService.listUnchecked().subscribe(() => {
-      this.shared.activitiesNumber$
-        .subscribe(data => this.activitiesAmount = data);
-    });
+    this.activityService.listUnchecked()
+      .switchMap(() => this.shared.activitiesNumber$)
+      .subscribe(data => this.activitiesAmount = data);
     if (localStorage.getItem('token')) {
       this.userService.takeCurrent()
         .subscribe((data: User) => this.email = data.Email);

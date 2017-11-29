@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit {
       ];
     }
     this.userService.list(this.page.toString(10), roles[0], roles[1], this.cityId, this.word)
-      .subscribe((data: User[]) => {
+      .subscribe(data => {
         this.users = data;
         this.checkLength = data.length;
         this.responding = false;

@@ -1,18 +1,18 @@
 <h1 class="admin-heading">{{addPage ? 'Добавление' : 'Редактирование'}} организатора</h1>
-<form [formGroup]="form" (ngSubmit)="update()">
+<form #f="ngForm" (ngSubmit)="post()">
     <md-input-container class="input name">
-        <input mdInput [formControl]="form.controls['name']" placeholder="Название">
+        <input mdInput [(ngModel)]="organizer.Name" name="name" placeholder="Название">
     </md-input-container>
     <md-input-container class="input">
-        <input mdInput [formControl]="form.controls['email']" placeholder="Email">
+        <input mdInput [(ngModel)]="organizer.Email" name="email" placeholder="Email">
     </md-input-container>
     <md-input-container class="input">
-        <input mdInput [formControl]="form.controls['phone']" placeholder="Телефон">
+        <input mdInput [(ngModel)]="organizer.Phone" name="phone" placeholder="Телефон">
     </md-input-container>
-    <md-select [formControl]="form.controls['cityId']" class="input" placeholder="Город" floatPlaceholder="never">
+    <md-select [(ngModel)]="organizer.CityId" name="cityId" class="input" placeholder="Город" floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
     </md-select>
-    <md-checkbox [formControl]="form.controls['sobriety']" color="primary">Трезвость</md-checkbox>
-    <mh-button [disabled]="form.invalid" [loading]="responding === 'put'">{{url === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
+    <md-checkbox [(ngModel)]="organizer.Sobriety" name="sobriety" color="primary">Трезвость</md-checkbox>
+    <mh-button [disabled]="f.invalid" [loading]="responding === 'put'">{{url === "/admin/organizers/add" ? 'ДОБАВИТЬ' : 'СОХРАНИТЬ'}}</mh-button>
 </form>
 <mh-button *ngIf="!addPage" (click)="remove()" [loading]="responding === 'delete'" color="warn" class="btn-delete">УДАЛИТЬ</mh-button>

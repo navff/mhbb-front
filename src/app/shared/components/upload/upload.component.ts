@@ -18,8 +18,7 @@ export class UploadComponent {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       let data = reader.result.replace(/^data:image\/[a-z]+;base64,/, '');
-      let name = file.name;
-      this.success.emit({data, name});
+      this.success.emit({data, name: file.name});
     };
   }
 

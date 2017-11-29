@@ -1,4 +1,4 @@
-<div class="search">
+<section class="search">
     <md-input-container class="word">
         <input (ngModelChange)="onChange()" [(ngModel)]="params.word" mdInput placeholder="Поисковое слово">
     </md-input-container>
@@ -18,7 +18,7 @@
     <md-checkbox [(ngModel)]="params.sobriety" (ngModelChange)="search()" color="primary" class="soberness" mdTooltip="Преподаватели не пьют и не курят">Трезвость</md-checkbox>
     <md-checkbox [(ngModel)]="params.free" (ngModelChange)="search()" color="primary">Бесплатно</md-checkbox>
     <a class="add" routerLink="addhobby" md-fab></a>
-</div>
+</section>
 <ng-container *ngIf="adminPage">
     <h2 class="admin-heading">На проверку</h2>
     <mh-activities [activities]="uncheckedActivities"></mh-activities>

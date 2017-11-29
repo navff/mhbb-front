@@ -1,12 +1,12 @@
-import { TempFile } from './../models/tempfile.model';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { ListService } from './../shared/services/list.service';
 import { ActivityService } from '../shared/services/activity.service';
 import { OrganizerService } from '../shared/services/organizer.service';
-import { Activity } from '../models/activity.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TempFile } from './../models/tempfile.model';
+import { Activity } from '../models/activity.model';
+import { Organizer } from './../models/organizer.model';
+import { Picture } from './../models/picture.model';
 
 @Component({
   templateUrl: './add-hobby.component.html',
@@ -14,103 +14,57 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-hobby.component.sass']
 })
 export class AddHobbyComponent implements OnInit {
-  interests: any[];
-  cities: any[];
-  organizers: any[];
-  organizerId: any;
-  pics = [];
-  formId: string;
+  interests = [];
+  cities = [];
+  organizers: Organizer[];
 
-  isChecked: boolean;
+  pics: Picture[] = [];
+  act = new Activity();
+  organizer = new Organizer();
+
   responding: boolean;
   isOrganizerChosen: boolean;
-
-  form: FormGroup;
 
   constructor(
     private listService: ListService,
     private organizerService: OrganizerService,
-    fb: FormBuilder,
     private activityService: ActivityService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {
-    this.form = fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      organizerName: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      cityId: ['', Validators.required],
-      ageFrom: ['', Validators.required],
-      ageTo: ['', Validators.required],
-      interestId: ['', Validators.required],
-      phones: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      address: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      prices: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      mentor: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-      description: ['', Validators.compose([Validators.required, Validators.maxLength(1000)])],
-      free: false,
-      sobriety: false,
-    });
-  }
-  filterOrganizers(word = null) {
+  ) {}
+  filterOrganizers(word) {
     if (this.isOrganizerChosen) {
       this.isOrganizerChosen = false;
-      this.form.controls['cityId'].setValue('');
-      this.form.controls['sobriety'].setValue(false);
-      this.form.controls['cityId'].enable();
-      this.form.controls['sobriety'].enable();
+      this.organizer.CityId = '';
+      this.organizer.Sobriety = false;
     }
-    this.organizerService.list({page: '1', word})
+    this.organizerService.list({ page: '1', word })
       .subscribe(data => this.organizers = data);
   }
   setOrganizer(id: string) {
     this.isOrganizerChosen = true;
     document.getElementById('organizerInput').blur();
-    this.form.controls['cityId'].disable();
-    this.form.controls['sobriety'].disable();
     this.organizerService.take(id).subscribe(data => {
-      this.organizerId = id;
-      this.form.controls['cityId'].setValue(data.CityId);
-      this.form.controls['sobriety'].setValue(data.Sobriety);
+      this.act.OrganizerId = id;
+      this.organizer.CityId = data.CityId;
+      this.organizer.Sobriety = data.Sobriety;
     });
   }
   addImage(file, id) {
-    this.formId = this.formId || Date.now().toString(10);
+    this.act.FormId = this.act.FormId || Date.now().toString(10);
     let isMain = id === 0 ? true : false;
-    this.activityService.createTempFile(new TempFile(this.formId, file.name, file.data, isMain))
-      .subscribe(res => {
-        this.pics[id] = {};
-        this.pics[id].url = res.Url;
-        this.pics[id].id = res.Id;
-      });
+    this.activityService.createTempFile(new TempFile(this.act.FormId, file.name, file.data, isMain))
+      .subscribe(res => this.pics[id] = new Picture(res));
   }
   removeImage(id) {
-    this.activityService.removeTempFile(this.pics[id].id)
-      .subscribe(() => this.pics[id].url = '');
+    this.activityService.removeTempFile(this.pics[id].Id)
+      .subscribe(() => this.pics[id].Url = '');
   }
   submit() {
     this.responding = true;
-    let organizer = {
-      Name: this.form.get('organizerName').value,
-      CityId: this.form.get('cityId').value,
-      Sobriety: this.form.get('sobriety').value
-    };
-    let body = new Activity(
-      this.form.get('name').value,
-      +this.form.get('ageFrom').value,
-      +this.form.get('ageTo').value,
-      this.form.get('phones').value,
-      this.form.get('address').value,
-      this.form.get('prices').value,
-      this.form.get('mentor').value,
-      this.form.get('description').value,
-      this.form.get('interestId').value,
-      this.isChecked,
-      this.form.get('free').value,
-      this.formId,
-      this.isOrganizerChosen ? null : organizer,
-      this.isOrganizerChosen ? this.organizerId : null
-    );
-    this.activityService.create(body)
+    this.act.OrganizerId = this.isOrganizerChosen ? this.act.OrganizerId : null;
+    this.act.Organizer = this.isOrganizerChosen ? null : this.organizer;
+    this.activityService.create(this.act)
       .subscribe(() => this.router.navigate(['success'], { relativeTo: this.route }));
   }
   back() {

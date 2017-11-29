@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ListService {
-  _interests: any[];
-  _cities: any[];
+  private _interests: any[];
+  private _cities: any[];
 
   get cities$(): Observable<any[]> {
     return this._cities ?

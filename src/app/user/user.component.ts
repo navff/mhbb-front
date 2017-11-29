@@ -17,8 +17,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('token')) {
-      this.userService.takeCurrent()
-        .subscribe(user => this.userEmail = user.Email);
+      this.userService.takeCurrent().subscribe(user => this.userEmail = user.Email);
     }
   }
 }

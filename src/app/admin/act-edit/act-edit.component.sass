@@ -1,233 +1,52 @@
 form
     font-size: 1.25rem
-.form-item-course-name
-    display: block
+.left
     width: 40.625rem
+.course-name
+    display: block
     margin-bottom: 1.375rem
 
-.photos
-    width: 40.625rem
-    height: 40.625rem
-    margin-right: 8.75rem
-    display: block
-    .add-image-input
-        opacity: 0
-        z-index: 10   
-    .delete-image-button
-        position: absolute
-        right: 0
-        z-index: 20
-        cursor: pointer
-        width: 0
-        height: 0
-        border-style: solid
-        border-width: 0 3.125rem 3.125rem 0
-        border-color: transparent $primary transparent transparent
-        &:before
-            content: ""
-            display: block
-            position: absolute
-            top: 0.625rem
-            right: -2.1875rem
-            width: 0.0625rem
-            height: 0.6875rem
-            background-color: white
-            transition: 0.4s
-            transform: rotate(135deg)
-        &:after
-            content: ""
-            display: block
-            position: absolute
-            top: 0.9375rem
-            right: -2.5rem
-            width: 0.6875rem
-            height: 0.0625rem
-            background-color: white
-            transition: 0.4s
-            transform: rotate(-45deg)        
-        &:hover:before
-            transform: rotate(135deg) scale(1.2)
-        &:hover:after
-            transform: rotate(-45deg) scale(1.2)
-    .main-image
-        position: relative
-    .main-input-design
-        cursor: pointer
-        position: relative
-        box-sizing: border-box
-        display: block
-        width: 40.625rem
-        height: 28.75rem
-        border: solid 0.0625rem $primary
-        transition: 0.4s
-        &:before
-            content: ""
-            display: block
-            position: absolute
-            top: 13.5rem
-            right: 20.125rem
-            width: 0.0625rem
-            height: 1.875rem
-            background-color: $primary
-            transition: 0.4s
-        &:after
-            content: ""
-            display: block
-            position: absolute
-            top: 14.375rem
-            right: 19.25rem
-            width: 1.875rem
-            height: 0.0625rem
-            background-color: $primary
-            transition: 0.4s
-        &:hover
-            background-color: rgba($primary, .15)
-        &:hover:before
-            transform: scale(1.2)
-        &:hover:after
-            transform: scale(1.2)
-        .main-wrapper
-            position: absolute
-            z-index: -1
-            top: -0.0625rem
-            left: -0.0625rem
-            width: 40.625rem
-            height: 28.75rem
-            cursor: default
-            .main-preview
-                width: 40.625rem
-                height: 28.75rem
-                background-size: cover
-                background-position: 50%
-        .cover
-            z-index: 15
-    [class^="secondary-image"]
-        position: relative
-        width: 12.875rem
-        height: 8.5625rem    
-        margin-top: 1.25rem
-        margin-right: 0.6875rem
-        display: inline-block
-
-        .delete-image-button
-            border-width: 0 1.875rem 1.875rem 0
-            &:before
-                content: ""
-                display: block
-                position: absolute
-                top: 0.25rem
-                right: -1.375rem
-                width: 0.0625rem
-                height: 0.5625rem
-                background-color: white
-                transition: 0.4s
-                transform: rotate(135deg)
-            &:after
-                content: ""
-                display: block
-                position: absolute
-                top: 0.5rem
-                right: -1.625rem
-                width: 0.5625rem
-                height: 0.0625rem
-                background-color: white
-                transition: 0.4s
-                transform: rotate(-45deg)        
-            &:hover:before
-                transform: rotate(135deg) scale(1.2)
-            &:hover:after
-                transform: rotate(-45deg) scale(1.2)
-    .secondary-image-3
-        margin-right: 0
-    .secondary-input-design
-        display: block
-        cursor: pointer
-        position: relative
-        box-sizing: border-box
-        width: 12.875rem
-        height: 8.5625rem
-        border: solid 0.0625rem $primary
-        transition: 0.4s
-        &:before
-            content: ""
-            display: block
-            position: absolute
-            top: 3.875rem
-            right: 6.3125rem
-            width: 0.0625rem
-            height: 0.8125rem
-            background-color: $primary
-            transition: 0.4s
-        &:after
-            content: ""
-            display: block
-            position: absolute
-            top: 4.25rem
-            right: 5.9375rem
-            width: 0.8125rem
-            height: 0.0625rem
-            background-color: $primary
-            transition: 0.4s
-        &:hover
-            background-color: rgba($primary, .15)
-        &:hover:before
-            transform: scale(1.2)
-        &:hover:after
-            transform: scale(1.2)
-        .secondary-wrapper
-            position: absolute
-            z-index: -1
-            top: -0.0625rem
-            left: -0.0625rem
-            width: 12.875rem
-            height: 8.5625rem
-            cursor: default
-            .secondary-preview
-                width: 12.875rem
-                height: 8.5625rem
-                background-size: cover
-                background-position: 50%
-        .cover
-            z-index: 15
-
-.form-right
+.right
     width: 31.375rem
     height: 40.625rem
     display: inline-block
     position: absolute
     top: 9.125rem
     left: 50rem
-    [class^='form-item']
+    .input
         margin-bottom: 1.25rem
-    .form-item-organizer
-        width: 31.375rem
-        margin-right: 2.5rem
-    [class^='form-item-age']
-        width: 6.5625rem
-        margin-right: 2.0625rem
-    .form-item-age-to
-        margin-right: 2.5rem
-    .form-item-interests
+        width: 100%
+    .organizer
+        width: 15.5rem
+    .cities,
+    .interests
         width: 13rem
-    .form-item-phones
-        width: 31.1875rem
-    .form-item-address
-        width: 31.1875rem	
-    .form-item-price
-        width: 31.1875rem
+        margin-left: 2.5rem
+    .age-to,
+    .age-from
+        width: 6.5625rem
+    .age-from
+        margin-right: 2.0625rem
 
-.form-bottom
-    .form-item-sobriety-checkbox
-        font-size: 1.25rem
-        line-height: 1.6875rem
-    .form-item-description
+.bottom
+    .input
         width: 66.875rem
         display: block	
-    .form-item-guides
-        width: 66.875rem
-        display: block
     mh-button
         margin: 3.125rem 0
+        width: 12.5rem
+        display: block
+
+md-checkbox
+    font-size: 1.25rem
+        
+.images
+    display: flex
+    justify-content: space-between
+    margin-top: 0.875rem
+    mh-upload
+        width: 12.875rem
+        height: 8.50rem  
 
 .btn-delete
     position: relative

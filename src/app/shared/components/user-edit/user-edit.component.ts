@@ -5,6 +5,7 @@ import { ListService } from '../../services/list.service';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../../models/user.model';
+import { Picture } from './../../../models/picture.model';
 
 @Component({
   templateUrl: './user-edit.component.html',
@@ -19,13 +20,8 @@ export class UserEditComponent implements OnInit {
   email: string;
   responding: boolean;
 
-  pic = {
-    url: '',
-    beingRemoved: false,
-    id: null
-  };
-
-  formId: string;
+  pic = new Picture();
+  picBeingRemoved = false;
 
   constructor(
     private userService: UserService,
@@ -40,32 +36,24 @@ export class UserEditComponent implements OnInit {
   }
 
   removePicture() {
-    this.pic.beingRemoved = true;
-    this.pic.url = '';
+    this.picBeingRemoved = true;
+    this.pic.Url = '';
   }
 
   createTempfile(file: any) {
-    this.formId = Date.now().toString(10);
-    this.activityService.createTempFile(new TempFile(this.formId, file.name, file.data, true))
-      .subscribe(res => {
-        this.pic.url = res.Url;
-        this.pic.id = res.Id;
-      });
+    this.user.FormId = Date.now().toString(10);
+    this.activityService.createTempFile(new TempFile(this.user.FormId, file.name, file.data, true))
+      .subscribe(res => this.pic = res);
   }
   save() {
     this.responding = true;
-
-    let body = new User(
-      this.user,
-      this.roleValue,
-      this.formId,
-    );
-    if (this.pic.beingRemoved) {
-      this.formId ?
-      this.activityService.removeTempFile(this.pic.id).subscribe() :
-      this.activityService.removePicture(this.pic.id).subscribe();
+    this.user.Role = this.roleValue ? 1 : 2;
+    if (this.picBeingRemoved) {
+      this.user.FormId ?
+      this.activityService.removeTempFile(this.pic.Id).subscribe() :
+      this.activityService.removePicture(this.pic.Id).subscribe();
     }
-    this.userService.update(this.email || this.user.Email, body)
+    this.userService.update(this.email || this.user.Email, this.user)
       .subscribe(() => this.router.navigate(['../'], { relativeTo: this.route }));
   }
 
@@ -85,14 +73,13 @@ export class UserEditComponent implements OnInit {
           this.userService.take(this.email) :
           this.userService.takeCurrent();
       })
-      .subscribe((user) => {
+      .subscribe(user => {
         this.user = user;
         if (this.isAdmin(user)) {
           this.roleValue = true;
         }
         if (!this.adminPage && user.Picture) {
-          this.pic.id = user.Picture.Id;
-          this.pic.url = user.Picture.Url;
+          this.pic = user.Picture;
         }
       });
   }

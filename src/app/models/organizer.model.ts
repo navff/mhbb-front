@@ -1,10 +1,17 @@
 export class Organizer {
-  Id: any;
-  constructor(
-    public Name: string,
-    public CityId: number,
-    public Sobriety: boolean,
-    public Email: string,
-    public Phone: string
-  ) { }
+  Id?: any;
+  Name?: string;
+  CityId?: string;
+  Sobriety?: boolean;
+  Email?: string;
+  Phone?: string;
+  constructor(data?) {
+    if (data) {
+      this.Name = data.Name;
+      this.CityId = data.CityId;
+      this.Sobriety = data.Sobriety;
+      this.Email = data.Email;
+      this.Phone = data.Phone;
+    }
+  }
 }

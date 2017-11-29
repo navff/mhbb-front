@@ -13,6 +13,5 @@
     <div *ngFor="let organizer of organizers" class="organizer">
         <a [routerLink]="['edit', organizer.Id]">{{organizer.Name}}</a>
     </div>
-    <mh-button *ngIf="checkLength > 98" [loading]="responding" (click)="concatPage()" color="primary">Показать ещё</mh-button>
 </section>
 <h2 class="no-results" *ngIf="organizers?.length === 0">По вашему запросу ничего не найдено.</h2>

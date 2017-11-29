@@ -56,8 +56,8 @@
         </div>
     </div>
     <md-input-container [mdTooltip]="!isAuthorized ? 'Авторизуйтесь, чтобы оставлять отзывы' : ''">
-        <textarea mdInput [disabled]="published || !isAuthorized" placeholder="Ваш отзыв" [(ngModel)]="reviewText"></textarea>
+        <textarea mdInput [disabled]="published || !isAuthorized" placeholder="Ваш отзыв" [(ngModel)]="review.Text"></textarea>
     </md-input-container>
-    <mh-button *ngIf="!published" [loading]="responding === 'publish'" [disabled]="!reviewText" (click)="publishReview()" color="primary">Опубликовать</mh-button>
+    <mh-button *ngIf="!published" [loading]="responding === 'publish'" [disabled]="!review.Text" (click)="publishReview()" color="primary">Опубликовать</mh-button>
     <p *ngIf="published" class="publish-success">Готово! Ваш отзыв будет опубликован после проверки модераторами.</p>
 </section>

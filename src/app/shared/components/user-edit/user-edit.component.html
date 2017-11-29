@@ -15,6 +15,6 @@
     </md-input-container>
     <md-checkbox [(ngModel)]="roleValue" *ngIf="isAdmin(user) || adminPage">Представитель в городе</md-checkbox>
     <mh-button (click)="save()" [loading]="responding">СОХРАНИТЬ</mh-button>
-    <mh-upload #upload *ngIf="!adminPage" [url]="pic.url" 
+    <mh-upload #upload *ngIf="!adminPage" [url]="pic.Url" 
         (success)="createTempfile($event)" (remove)="removePicture()"></mh-upload>
 </div>
