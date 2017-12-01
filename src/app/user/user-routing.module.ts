@@ -18,15 +18,15 @@ const routes: Routes = [
     component: UserComponent,
     children: [
       { path: '', component: MainComponent },
-      { path: 'enter', component: EnterComponent },
-      { path: 'enter/success', component: StaticComponent },
+      { path: 'enter', component: EnterComponent, data: { title: 'Вход и Регистрация' } },
+      { path: 'enter/success', component: StaticComponent, data: { title: 'Успех!' } },
       { path: 'act/:id', component: DetailsComponent },
-      { path: 'act/:id/reservation', component: ReservationComponent },
-      { path: 'act/:id/reservation/success', component: ReservationSuccessComponent },
-      { path: 'user', component: UserEditComponent , canActivate: [AuthGuard]},
-      { path: 'about', component: StaticComponent },
-      { path: 'sponsor', component: StaticComponent },
-      { path: 'member', component: StaticComponent },
+      { path: 'act/:id/reservation', component: ReservationComponent, data: { title: 'Запись' } },
+      { path: 'act/:id/reservation/success', component: ReservationSuccessComponent, data: { title: 'Успех!' } },
+      { path: 'user', component: UserEditComponent, canActivate: [AuthGuard], data: { title: 'Мой профиль' } },
+      { path: 'about', component: StaticComponent, data: { title: 'О проекте' } },
+      { path: 'sponsor', component: StaticComponent, data: { title: 'Стать спонсором' } },
+      { path: 'member', component: StaticComponent, data: { title: 'Стать представителем' } },
 
       { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule' },
     ]

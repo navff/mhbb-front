@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from '../../services/activity.service';
 import { VoicesService } from '../../services/voices.service';
 import { ReviewService } from '../../services/review.service';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from './../../../models/activity.model';
 
@@ -31,6 +32,7 @@ export class DetailsComponent implements OnInit {
     private reviewService: ReviewService,
     private voicesService: VoicesService,
     private route: ActivatedRoute,
+    private titleService: Title,
     private router: Router) {
     this.isAuthorized = !!localStorage.getItem('token');
   }
@@ -65,8 +67,9 @@ export class DetailsComponent implements OnInit {
   }
   ngOnInit() {
     this.route.params
-      .switchMap(params => this.activityService.take(params.id))
-      .switchMap(data => {
+    .switchMap(params => this.activityService.take(params.id))
+    .switchMap(data => {
+        this.titleService.setTitle(data.Name + ' - Моё Хобби');
         this.activity = data;
         this.review.Id = data.Id;
         this.activity.Pictures.forEach((pic, i) => this.pictures[i] = pic.Url);

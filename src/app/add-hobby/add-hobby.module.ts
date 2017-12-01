@@ -7,7 +7,7 @@ import { AddHobbyComponent } from './add-hobby.component';
 import { StaticComponent } from './../shared/components/static/static.component';
 
 const routes: Routes = [
-  { path: '', component: AddHobbyComponent },
+  { path: '', component: AddHobbyComponent, data: { title: 'Добавление хобби' } },
   { path: 'success', component: StaticComponent }
 ];
 

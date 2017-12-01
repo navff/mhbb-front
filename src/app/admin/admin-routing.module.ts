@@ -19,18 +19,21 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: '', component: MainComponent },
-      { path: 'edit', component: UserEditComponent },
+      { path: 'edit', component: UserEditComponent, data: { title: 'Мой профиль' } },
       { path: 'act/:id', component: DetailsComponent },
-      { path: 'act/:id/edit', component: ActEditComponent },
-      { path: 'organizers', component: OrganizersComponent },
-      { path: 'organizers/edit/:id', component: OrganizerEditComponent },
-      { path: 'organizers/add', component: OrganizerEditComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'users/edit', component: UserEditComponent },
-      { path: 'reviews', component: ReviewsComponent },
+      { path: 'act/:id/edit', component: ActEditComponent, data: { title: 'Редактирование хобби' } },
+      { path: 'organizers', component: OrganizersComponent, data: { title: 'Организаторы' } },
+      {
+        path: 'organizers/edit/:id', component: OrganizerEditComponent,
+        data: { title: 'Редактирование организатора' }
+      },
+      { path: 'organizers/add', component: OrganizerEditComponent, data: { title: 'Добавление организатора' } },
+      { path: 'users', component: UsersComponent, data: { title: 'Пользователи' } },
+      { path: 'users/edit', component: UserEditComponent, data: { title: 'Редактирование пользователя' } },
+      { path: 'reviews', component: ReviewsComponent, data: { title: 'Отзывы на проверку' } },
 
       { path: 'addhobby', loadChildren: '../add-hobby/add-hobby.module#AddHobbyModule' },
-      { path: '**', component: StaticComponent},
+      { path: '**', component: StaticComponent },
     ]
   }
 ];
