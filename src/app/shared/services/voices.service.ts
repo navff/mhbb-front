@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
 
@@ -6,7 +7,7 @@ export class VoicesService {
 
   constructor(private http: HttpService) { }
 
-  vote(id, type) {
-    return this.http.post(`voice/${type}/${id}`);
+  vote(id, type): Observable<any> {
+    return this.http.post(`voice/${type}/${id}`, null);
   }
 }

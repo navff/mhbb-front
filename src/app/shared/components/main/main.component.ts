@@ -47,11 +47,6 @@ export class MainComponent implements OnInit {
         .subscribe(data => this.uncheckedActivities = data);
     }
   }
-  concatPage() {
-    this.responding = true;
-    this.params.page++;
-    this.search();
-  }
   ngOnInit() {
     this.changes$.debounceTime(250).subscribe(() => this.search());
     this.search();

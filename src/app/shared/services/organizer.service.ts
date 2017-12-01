@@ -1,6 +1,5 @@
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
-import { RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Organizer } from './../../models/organizer.model';
 
@@ -9,7 +8,7 @@ export class OrganizerService {
   constructor(private http: HttpService) { }
 
   list(params?: any): Observable<Organizer[]> {
-    return this.http.get(`organizer/search`, new RequestOptions({ search: this.http.setSearch(params) }));
+    return this.http.get<Organizer[]>(`organizer/search`, { params: params && this.http.setSearch(params) });
   }
   take(id): Observable<Organizer> {
     return this.http.get(`organizer/${id}`);

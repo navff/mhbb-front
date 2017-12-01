@@ -20,7 +20,6 @@ export class UsersComponent implements OnInit {
   changes$ = new Subject();
 
   checkLength: number;
-  responding: boolean;
 
   constructor(
     private userService: UserService,
@@ -28,11 +27,6 @@ export class UsersComponent implements OnInit {
 
   onChange() {
     this.changes$.next();
-  }
-  concatPage() {
-    this.responding = true;
-    this.page++;
-    this.search();
   }
   search() {
     let roles = [];
@@ -46,7 +40,6 @@ export class UsersComponent implements OnInit {
       .subscribe(data => {
         this.users = data;
         this.checkLength = data.length;
-        this.responding = false;
       });
   }
 

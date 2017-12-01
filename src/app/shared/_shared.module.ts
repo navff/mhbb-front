@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {
   MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule,
@@ -21,7 +21,7 @@ import { PicturesComponent } from './components/pictures/pictures.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { StaticComponent } from './components/static/static.component';
 
-const Modules = [HttpModule, FormsModule, ReactiveFormsModule,
+const Modules = [HttpClientModule, FormsModule, ReactiveFormsModule,
   MdCheckboxModule, MdInputModule, MdSelectModule, MdIconModule, MdButtonModule, MdProgressSpinnerModule,
   MdAutocompleteModule, MdProgressBarModule, MdTooltipModule,
   RouterModule,

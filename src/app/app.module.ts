@@ -1,6 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import {
   NgModule,
   ApplicationRef
@@ -10,10 +8,6 @@ import {
   createNewHosts,
   createInputTransfer
 } from '@angularclass/hmr';
-import {
-  RouterModule,
-  PreloadAllModules
-} from '@angular/router';
 
 /*
 * Platform and Environment providers/directives/pipes
@@ -31,7 +25,7 @@ import { SharedModule } from './shared/_shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthGuard } from './shared/auth.guard';
-import { Http } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './shared/services/http.service';
 import { UserService } from './shared/services/user.service';
 import { ListService } from './shared/services/list.service';
@@ -44,7 +38,7 @@ import '../styles/reset.css';
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  AuthGuard, HttpService, { provide: Http, useClass: HttpService }, UserService, ListService, SharedService
+  AuthGuard, HttpService, { provide: HttpClientModule, useClass: HttpService }, UserService, ListService, SharedService
 ];
 
 type StoreType = {

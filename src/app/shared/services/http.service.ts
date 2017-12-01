@@ -1,51 +1,34 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, XHRBackend, Request, RequestOptionsArgs, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import { URLSearchParams } from '@angular/http';
 import { SharedService } from './shared.service';
+import { HttpClient, HttpHandler, HttpRequest, HttpHeaders, HttpParams } from '@angular/common/http';
 
 const apiUrl = 'http://test.mhbb.ru/b/api/';
 
 @Injectable()
-export class HttpService extends Http {
+export class HttpService extends HttpClient {
 
-    constructor(backend: XHRBackend, options: RequestOptions, private shared: SharedService) {
-        super(backend, options);
-
+    constructor(handler: HttpHandler, private shared: SharedService) {
+        super(handler);
         const match = window.location.href.match(/token=(.)+/);
         if (match) {
             localStorage.setItem('token', match[0].substr(6));
         }
     }
 
-    request(request: Request, options?: RequestOptionsArgs): Observable<Response> {
+    request(req: string | HttpRequest<any>, url?: string, options: any = {}): Observable<any> {
         this.shared.requests$.next(this.shared.requests$.getValue() + 1);
-        request.url = apiUrl + request.url;
-        request.headers.set('Authorization', `token ${localStorage.getItem('token')}`);
-        return super.request(request, options)
+        let headers = options.headers || new HttpHeaders();
+        headers = headers.set('Authorization', `token ${localStorage.getItem('token')}`);
+        options.headers = headers;
+        url = apiUrl + url;
+        return super.request(req as any, url as string, options)
             .finally(() => this.shared.requests$.next(this.shared.requests$.getValue() - 1));
-    }
+      }
 
-    get(url: string, options?: RequestOptions) {
-        return super.get(url, options).map((data) => data.json());
-    }
-
-    delete(url: string, options?: RequestOptions) {
-        return super.delete(url, options).map((data) => data.json());
-    }
-
-    post(url: string, body = null, options?: RequestOptions) {
-        return super.post(url, body, options).map((data) => data.json());
-    }
-
-    put(url: string, body = null, options?: RequestOptions) {
-        return super.put(url, body, options).map((data) => data.json());
-    }
-
-    setSearch(params?): URLSearchParams {
-        let search = new URLSearchParams();
+    setSearch(params?): HttpParams {
+        let search = new HttpParams();
         if (params) {
             Object.keys(params).forEach(key => {
                 search.append(key, params[key] || null);

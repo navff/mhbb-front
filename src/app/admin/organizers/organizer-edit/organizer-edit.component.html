@@ -4,10 +4,10 @@
         <input mdInput [(ngModel)]="organizer.Name" name="name" placeholder="Название">
     </md-input-container>
     <md-input-container class="input">
-        <input mdInput [(ngModel)]="organizer.Email" name="email" placeholder="Email">
+        <input mdInput [(ngModel)]="organizer.Email" name="email" placeholder="Email" required>
     </md-input-container>
     <md-input-container class="input">
-        <input mdInput [(ngModel)]="organizer.Phone" name="phone" placeholder="Телефон">
+        <input mdInput [(ngModel)]="organizer.Phone" name="phone" placeholder="Телефон" required>
     </md-input-container>
     <md-select [(ngModel)]="organizer.CityId" name="cityId" class="input" placeholder="Город" floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>

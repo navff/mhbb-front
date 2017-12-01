@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { SharedService } from './shared.service';
-import { RequestOptions } from '@angular/http';
 import { SearchParams } from './../../models/search-params.model';
 import { Observable } from 'rxjs/Observable';
 import { Reservation } from './../../models/reservation.model';
@@ -12,14 +11,12 @@ import { TempFile } from './../../models/tempfile.model';
 export class ActivityService {
   constructor(private http: HttpService, private shared: SharedService) { }
 
-  list(params?: SearchParams): Observable<Activity[]> {
-    return this.http.get('activity/search',
-      new RequestOptions({ search: params && this.http.setSearch(params) }));
+  list(params?: SearchParams) {
+    return this.http.get<Activity[]>('activity/search', {params: params && this.http.setSearch(params)});
   }
   listUnchecked(params?: SearchParams): Observable<Activity[]> {
-    return this.http.get('activity/searchunchecked',
-      new RequestOptions({ search: params && this.http.setSearch(params) }))
-      .map(data => {
+    return this.http.get<Activity[]>('activity/searchunchecked', { params: params && this.http.setSearch(params) })
+      .map((data: any) => {
         this.shared.activitiesNumber$.next(data.length);
         return data;
       });
@@ -47,8 +44,8 @@ export class ActivityService {
   remove(id) {
     return this.http.delete(`activity/${id}`);
   }
-  createTempFile(body: TempFile) {
-    return this.http.post('tempfile', body);
+  createTempFile(body: TempFile): Observable<TempFile> {
+    return this.http.post<TempFile>('tempfile', body);
   }
   removeTempFile(id) {
     return this.http.delete(`tempfile/${id}`);

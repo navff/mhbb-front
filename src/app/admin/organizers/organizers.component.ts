@@ -17,29 +17,17 @@ export class OrganizersComponent implements OnInit {
     page: 1,
   };
   searchWord = new Subject();
-  checkLength: number;
-
-  responding: boolean;
 
   constructor(
     private organizerService: OrganizerService,
     private listService: ListService) { }
 
-  concatPage() {
-    this.responding = true;
-    this.params.page++;
-    this.search();
-  }
   onChange() {
     this.searchWord.next();
   }
   search() {
     this.organizerService.list(this.params)
-      .subscribe(data => {
-        this.organizers = data;
-        this.checkLength = data.length;
-        this.responding = false;
-      });
+      .subscribe(data => this.organizers = data);
   }
 
   ngOnInit() {

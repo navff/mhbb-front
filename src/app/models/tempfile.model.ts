@@ -1,4 +1,5 @@
 export class TempFile {
+  Id?: string;
   constructor(
     public FormId: string,
     public Filename: string,

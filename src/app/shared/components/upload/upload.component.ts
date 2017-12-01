@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TempFile } from '../../../models/tempfile.model';
 
 @Component({
   selector: 'mh-upload',

@@ -2,7 +2,7 @@
     <section class="left">
         <a (click)="back()" class="mh-back">&larr; Назад</a>
         <md-input-container class="course-name">
-            <input mdInput placeholder="Название курса" [(ngModel)]="act.Name" name="name">
+            <input mdInput placeholder="Название курса" [(ngModel)]="act.Name" name="name" required>
         </md-input-container>
     
         <mh-upload [url]="pics[0]?.Url" (success)="addImage($event, 0)" (remove)="removeImage(0)"></mh-upload>
@@ -16,7 +16,7 @@
     <section class='right'>
         <md-input-container class="input organizer">
             <input (ngModelChange)="filterOrganizers($event)" id="organizerInput" (focus)="filterOrganizers(organizer.Name)"
-                mdInput placeholder="Организатор" [mdAutocomplete]="org" [(ngModel)]="organizer.Name" name="organizerName">
+                mdInput placeholder="Организатор" [mdAutocomplete]="org" [(ngModel)]="organizer.Name" name="organizerName" required>
         </md-input-container>
         <md-autocomplete #org="mdAutocomplete">
             <md-option (click)="setOrganizer(organizer.Id)" *ngFor="let organizer of organizers" [value]="organizer.Name">
@@ -24,40 +24,41 @@
             </md-option>
         </md-autocomplete>
         <md-select class="input cities" placeholder="Город" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''" 
-            [(ngModel)]="organizer.CityId" name="cityId" [disabled]="isOrganizerChosen" floatPlaceholder="never">
+            [(ngModel)]="organizer.CityId" name="cityId" [disabled]="isOrganizerChosen" floatPlaceholder="never" required>
             <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
         </md-select>
         <md-input-container class="input age-from">
-            <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [(ngModel)]="act.AgeFrom" name="ageFrom">
+            <input mdInput placeholder="Возраст От" myOnlyNumber maxlength="3" [(ngModel)]="act.AgeFrom" name="ageFrom" required>
         </md-input-container>
         <md-input-container class="input age-to">
-            <input mdInput placeholder="До" myOnlyNumber maxlength="3" [(ngModel)]="act.AgeTo" name="ageTo">
+            <input mdInput placeholder="До" myOnlyNumber maxlength="3" [(ngModel)]="act.AgeTo" name="ageTo" required>
         </md-input-container>
-        <md-select class="input interests" placeholder="Интересы" [(ngModel)]="act.InterestId" name="interestId" floatPlaceholder="never">
+        <md-select class="input interests" placeholder="Интересы" required
+            [(ngModel)]="act.InterestId" name="interestId" floatPlaceholder="never">
             <md-option *ngFor="let interest of interests" [value]="interest.Id">{{ interest.Name }}</md-option>
         </md-select>
         <md-input-container class="input">
-            <textarea mdInput rows="3" placeholder="Телефоны" [(ngModel)]="act.Phones" name="phones"></textarea>
+            <textarea mdInput rows="3" placeholder="Телефоны" [(ngModel)]="act.Phones" name="phones" required></textarea>
         </md-input-container>
         <md-input-container class="input">
-            <textarea mdInput rows="3" placeholder="Адрес" [(ngModel)]="act.Address" name="address"></textarea>
+            <textarea mdInput rows="3" placeholder="Адрес" [(ngModel)]="act.Address" name="address" required></textarea>
         </md-input-container>
         <md-input-container class="input">
-            <textarea mdInput rows="3" placeholder="Цены" [(ngModel)]="act.Prices" name="prices"></textarea>
+            <textarea mdInput rows="3" placeholder="Цены" [(ngModel)]="act.Prices" name="prices" required></textarea>
         </md-input-container>
         <md-checkbox color="primary" [(ngModel)]="act.Free" name="free">Бесплатно</md-checkbox>
     </section>
 
     <section class='bottom'>
         <md-input-container class="input">
-            <textarea mdInput rows="10" placeholder="Подробное описание" [(ngModel)]="act.Description" name="description"></textarea>
+            <textarea mdInput rows="10" placeholder="Подробное описание" [(ngModel)]="act.Description" name="description" required></textarea>
         </md-input-container>
         <md-input-container class="input">
-            <textarea mdInput rows="3" placeholder="Ведущие" [(ngModel)]="act.Mentor" name="mentor"></textarea>
+            <textarea mdInput rows="3" placeholder="Ведущие" [(ngModel)]="act.Mentor" name="mentor" required></textarea>
         </md-input-container>
         <md-checkbox color="primary" [(ngModel)]="organizer.Sobriety" [disabled]="isOrganizerChosen"
             name="sobriety" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">Преподаватели не пьют и не курят</md-checkbox>
-        <mh-button [disabled]="f.invalid" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
+        <mh-button [disabled]="f.invalid || !pics[0]?.Url" [loading]="responding">ОПУБЛИКОВАТЬ</mh-button>
     </section>
 </form>
 <!-- || !pics[0]?.Url -->
