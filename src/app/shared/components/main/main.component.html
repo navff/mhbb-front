@@ -1,22 +1,22 @@
 <section class="search">
-    <md-input-container class="word">
+    <md-input-container class="word item">
         <input (ngModelChange)="onChange()" [(ngModel)]="params.word" mdInput placeholder="Поисковое слово">
     </md-input-container>
 
-    <md-input-container class="age">
+    <md-input-container class="age item">
         <input (ngModelChange)="onChange()" [(ngModel)]="params.age" mdInput placeholder="Возраст" mhNumber maxlength="3">
     </md-input-container>
 
-    <md-select (change)="search()" [(ngModel)]="params.interestId" class="interests" placeholder="Интересы" floatPlaceholder="never">
+    <md-select (change)="search()" [(ngModel)]="params.interestId" class="select item" placeholder="Интересы" floatPlaceholder="never">
         <md-option *ngFor="let interest of interests" [value]="interest.Id">{{ interest.Name }}</md-option>
     </md-select>
 
-    <md-select (change)="search()" [(ngModel)]="params.cityId" class="cities" placeholder="Город" floatPlaceholder="never">
+    <md-select (change)="search()" [(ngModel)]="params.cityId" class="select item" placeholder="Город" floatPlaceholder="never">
         <md-option *ngFor="let city of cities" [value]="city.Id">{{ city.Name }}</md-option>
     </md-select>
 
-    <md-checkbox [(ngModel)]="params.sobriety" (ngModelChange)="search()" color="primary" class="soberness" mdTooltip="Преподаватели не пьют и не курят">Трезвость</md-checkbox>
-    <md-checkbox [(ngModel)]="params.free" (ngModelChange)="search()" color="primary">Бесплатно</md-checkbox>
+    <md-checkbox [(ngModel)]="params.sobriety" (ngModelChange)="search()" class="item" color="primary" mdTooltip="Преподаватели не пьют и не курят">Трезвость</md-checkbox>
+    <md-checkbox [(ngModel)]="params.free" (ngModelChange)="search()" class="item" color="primary">Бесплатно</md-checkbox>
     <a class="add" routerLink="addhobby" md-fab></a>
 </section>
 <ng-container *ngIf="adminPage">

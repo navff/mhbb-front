@@ -5,6 +5,7 @@ header
         display: flex
         justify-content: space-between
         align-items: center
+        height: 100%
 a
     margin-right: 3%
     color: #fff
@@ -13,16 +14,26 @@ a
         margin-left: auto
     &:last-child
         margin-right: 0
+span
+    margin-right: 3%
+    position: relative
 p
     position: absolute
-    top: 2.75rem
-    left: 12.0625rem
+    right: -0.6rem
+    top: -0.4rem
     font-size: 0.75rem
     font-weight: 500
     color: #FBB6C0
     cursor: default
 .logo
-    width: 6.25rem
-    cursor: pointer
-    margin: 0.4375rem 2.8125rem 0 0
+    background-color: white
+    background-image: url(../assets/img/logo-opaque.svg)
+    background-size: 116%
+    width: 5.5rem
+    height: 5.5rem
+    background-position: 40% 30%
+    margin-right: 2.8125rem
     outline: none
+    transition: 0.4s ease
+    &:hover
+        transform: scale(1.04)

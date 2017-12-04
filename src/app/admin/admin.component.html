@@ -1,14 +1,16 @@
 <div class="content">
     <header>
         <div class="container">
-            <img routerLink="/admin" src="assets/img/logo.svg" alt="Моё Хобби" class="logo">
-            <a routerLink="/admin">Хобби</a>
+            <button md-fab class="logo" routerLink="/admin"></button>
+            <span>
+                <a routerLink="/admin">Хобби</a>
+                <p>{{activitiesAmount}}</p>
+            </span>
             <a routerLink="organizers">Организаторы</a>
             <a routerLink="users">Пользователи</a>
             <a routerLink="reviews">Отзывы на проверку</a>
             <a routerLink="edit" *ngIf="email">{{email}}</a>
             <a (click)="exit()">Выход</a>
-            <p>{{activitiesAmount}}</p>
         </div>
     </header>
     <mh-progress></mh-progress>

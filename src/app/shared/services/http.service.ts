@@ -25,13 +25,15 @@ export class HttpService extends HttpClient {
         url = apiUrl + url;
         return super.request(req as any, url as string, options)
             .finally(() => this.shared.requests$.next(this.shared.requests$.getValue() - 1));
-      }
+    }
 
     setSearch(params?): HttpParams {
         let search = new HttpParams();
         if (params) {
             Object.keys(params).forEach(key => {
-                search.append(key, params[key] || null);
+                if (params[key]) {
+                    search = search.append(key, params[key]);
+                }
             });
         }
         return search;

@@ -1,15 +1,15 @@
 <div class="content">
 	<header [ngClass]="{'home-header': home.isActive}">
 		<div class="container">
-			<img routerLink="" routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}" src="assets/img/logo.svg"
-			 alt="Моё Хобби" class="logo">
-			<a routerLink="/about">О проекте</a>
+			<button md-fab class="logo"
+				routerLink="" routerLinkActive #home="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"></button>
+			<a routerLink="/about" class="about">О проекте</a>
 			<a routerLink="/sponsor">Стать спонсором</a>
 			<a routerLink="/member">Стать представителем</a>
 			<a routerLink="/enter" *ngIf="!isAuthorized" class="enter">Вход</a>
 			<a (click)="exit()" *ngIf="isAuthorized" class="enter">Выход</a>
 			<a *ngIf="userEmail" routerLink="user" class="enter">{{userEmail}}</a>
-			<h1 *ngIf="home.isActive">Находим хобби по вкусу и возрасту</h1>
+			<h1>Находим хобби по вкусу и возрасту</h1>
 		</div>
 	</header>
 	<mh-progress></mh-progress>

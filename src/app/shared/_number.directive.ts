@@ -1,25 +1,21 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[mhNumber]'
 })
 export class NumberDirective {
-  private regex: RegExp = new RegExp(/^[0-9]+([0-9]*){0,1}$/g);
-
-  private specialKeys: string[] = ['Backspace', 'Tab', 'End', 'Home'];
-
-  constructor(private el: ElementRef) { }
-
-  @HostListener('keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-    if (this.specialKeys.indexOf(event.key) !== -1) {
+  @HostListener('keydown', ['$event']) onKeyDown(event) {
+    let e = <KeyboardEvent> event;
+    if ([46, 8, 9, 27, 13, 110].indexOf(e.keyCode) !== -1 ||
+      (e.keyCode === 65 && (e.ctrlKey || e.metaKey)) ||
+      (e.keyCode === 67 && (e.ctrlKey || e.metaKey)) ||
+      (e.keyCode === 86 && (e.ctrlKey || e.metaKey)) ||
+      (e.keyCode === 88 && (e.ctrlKey || e.metaKey)) ||
+      (e.keyCode >= 35 && e.keyCode <= 39)) {
       return;
     }
-
-    let current: string = this.el.nativeElement.value;
-    let next: string = current.concat(event.key);
-    if (next && !String(next).match(this.regex)) {
-      event.preventDefault();
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+      e.preventDefault();
     }
   }
 }
