@@ -27,18 +27,22 @@
     position: fixed
     top: 25%
     left: 25%
-    width: 50%
-    height: 50%
+    width: 60%
+    height: 60%
 
     z-index: 999
     background-size: cover
     background-position: 50%
-    box-shadow: 0 0 2rem -0.0625rem rgba(0,0,0,0.48);
+    box-shadow: 0 0 2rem -0.0625rem rgba(0,0,0,0.48)
     cursor: pointer
 .previous,
 .next
     position: absolute
     top: 43.1%
+    ::ng-deep .mat-button-wrapper
+        color: white
+        font-size: 1.6rem
+        line-height: 2.1
 .previous
     left: -4.2%
 .next

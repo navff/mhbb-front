@@ -8,7 +8,7 @@
 
 <div *ngIf="show" (click)="close()" class="overlay"></div>
 <div class="show" *ngIf="show" [ngStyle]="{'background-image': 'url(' +  pictures[num] + ')'}">
-    <a (click)="next()" md-fab class="next"></a>
-    <a (click)="prev()" md-fab class="previous"></a>
-    <a (click)="close()" md-mini-fab color="primary" class="close"></a>
+    <a (click)="next()" md-fab class="next">></a>
+    <a (click)="prev()" md-fab class="previous"><</a>
+    <a (click)="close()" md-mini-fab color="primary" class="close">x</a>
 </div>
