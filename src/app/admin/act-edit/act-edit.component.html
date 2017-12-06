@@ -58,7 +58,7 @@
         </md-input-container>
         <md-checkbox color="primary" [(ngModel)]="organizer.Sobriety" [disabled]="isOrganizerChosen"
             name="sobriety" [mdTooltip]="isOrganizerChosen ? 'Организатор уже выбран' : ''">Преподаватели не пьют и не курят</md-checkbox>
-        <mh-button [disabled]="f.invalid || pics[0]?.Url" [loading]="responding === 'saving'">СОХРАНИТЬ</mh-button>
+        <mh-button [disabled]="f.invalid || !pics[0]?.Url" [loading]="responding === 'saving'">СОХРАНИТЬ</mh-button>
     </section>
 </form>
 

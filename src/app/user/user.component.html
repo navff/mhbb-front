@@ -6,9 +6,9 @@
 			<a routerLink="/about" class="about">О проекте</a>
 			<a routerLink="/sponsor">Стать спонсором</a>
 			<a routerLink="/member">Стать представителем</a>
-			<a routerLink="/enter" *ngIf="!isAuthorized" class="enter">Вход</a>
-			<a (click)="exit()" *ngIf="isAuthorized" class="enter">Выход</a>
-			<a *ngIf="userEmail" routerLink="user" class="enter">{{userEmail}}</a>
+			<a routerLink="/enter" *ngIf="!userEmail" class="enter">Вход</a>
+			<a (click)="exit()" *ngIf="userEmail" class="enter">Выход</a>
+			<a routerLink="user" *ngIf="userEmail" class="enter">{{userEmail}}</a>
 			<h1>Находим хобби по вкусу и возрасту</h1>
 		</div>
 	</header>
