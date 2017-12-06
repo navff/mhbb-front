@@ -44,7 +44,7 @@
             <textarea mdInput rows="3" placeholder="Адрес" [(ngModel)]="act.Address" name="address" required></textarea>
         </md-input-container>
         <md-input-container class="input">
-            <textarea mdInput rows="3" placeholder="Цены" [(ngModel)]="act.Prices" name="prices" required></textarea>
+            <textarea mdInput rows="3" placeholder="Цены" [(ngModel)]="act.Prices" name="prices" [required]="!act.Free"></textarea>
         </md-input-container>
         <md-checkbox color="primary" [(ngModel)]="act.Free" name="free">Бесплатно</md-checkbox>
     </section>
