@@ -59,7 +59,7 @@ export class DetailsComponent implements OnInit {
     this.activityService.setCheck(true, this.activity.Id)
       .subscribe(() => this.router.navigate(['/admin']),
       err => {
-        if (JSON.parse(err._body).Message.match('email')) {
+        if (err.error.Message.match('email')) {
           this.error = true;
           this.responding = null;
         }
