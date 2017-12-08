@@ -8,7 +8,7 @@
 			<a routerLink="/member">Стать представителем</a>
 			<a routerLink="/enter" *ngIf="!userEmail" class="enter">Вход</a>
 			<a (click)="exit()" *ngIf="userEmail" class="enter">Выход</a>
-			<a routerLink="user" *ngIf="userEmail" class="enter">{{userEmail}}</a>
+			<a routerLink="/user" *ngIf="userEmail" class="enter">{{userEmail}}</a>
 			<h1>Находим хобби по вкусу и возрасту</h1>
 		</div>
 	</header>

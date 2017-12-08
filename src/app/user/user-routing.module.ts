@@ -10,7 +10,6 @@ import { EnterComponent } from './enter/enter.component';
 import { StaticComponent } from './../shared/components/static/static.component';
 import { DetailsComponent } from './../shared/components/details/details.component';
 import { UserEditComponent } from './../shared/components/user-edit/user-edit.component';
-import { AuthGuard } from './../shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +22,7 @@ const routes: Routes = [
       { path: 'act/:id', component: DetailsComponent },
       { path: 'act/:id/reservation', component: ReservationComponent, data: { title: 'Запись' } },
       { path: 'act/:id/reservation/success', component: ReservationSuccessComponent, data: { title: 'Успех!' } },
-      { path: 'user', component: UserEditComponent, canActivate: [AuthGuard], data: { title: 'Мой профиль' } },
+      { path: 'user', component: UserEditComponent, data: { title: 'Мой профиль' } },
       { path: 'about', component: StaticComponent, data: { title: 'О проекте' } },
       { path: 'sponsor', component: StaticComponent, data: { title: 'Стать спонсором' } },
       { path: 'member', component: StaticComponent, data: { title: 'Стать представителем' } },

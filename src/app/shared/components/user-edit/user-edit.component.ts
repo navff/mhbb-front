@@ -50,11 +50,16 @@ export class UserEditComponent implements OnInit {
     this.user.Role = this.roleValue ? 1 : 2;
     if (this.picBeingRemoved) {
       this.user.FormId ?
-      this.activityService.removeTempFile(this.pic.Id).subscribe() :
-      this.activityService.removePicture(this.pic.Id).subscribe();
+        this.activityService.removeTempFile(this.pic.Id).subscribe() :
+        this.activityService.removePicture(this.pic.Id).subscribe();
     }
-    this.userService.update(this.email || this.user.Email, this.user)
-      .subscribe(() => this.router.navigate(['../'], { relativeTo: this.route }));
+    this.userService.update(this.email, this.user)
+      .subscribe(() => {
+        this.router.navigate(['../'], { relativeTo: this.route });
+        if (!this.adminPage && this.email !== this.user.Email) {
+          location.reload();
+        }
+      });
   }
 
   isAdmin(user): boolean {
@@ -67,14 +72,14 @@ export class UserEditComponent implements OnInit {
       .switchMap((data) => {
         if (data.email) {
           this.adminPage = true;
-          this.email = data.email;
         }
         return this.adminPage ?
-          this.userService.take(this.email) :
+          this.userService.take(data.email) :
           this.userService.takeCurrent();
       })
       .subscribe(user => {
         this.user = user;
+        this.email = user.Email;
         if (this.isAdmin(user)) {
           this.roleValue = true;
         }

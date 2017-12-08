@@ -10,11 +10,11 @@
     <md-select [(ngModel)]="user.CityId" class="input" placeholder="Город" floatPlaceholder="never">
             <md-option *ngFor="let city of cities" [value]="city.Id">{{city.Name}}</md-option>
     </md-select>
-    <md-input-container class="input" *ngIf="adminPage">
-        <input mdInput [(ngModel)]="user.Email"placeholder="Электропочта">
+    <md-input-container class="input">
+        <input mdInput [(ngModel)]="user.Email" #em="ngModel" type="email" email="true" placeholder="Электропочта" required>
     </md-input-container>
     <md-checkbox [(ngModel)]="roleValue" *ngIf="isAdmin(user) || adminPage">Представитель в городе</md-checkbox>
-    <mh-button (click)="save()" [loading]="responding">СОХРАНИТЬ</mh-button>
+    <mh-button (click)="save()" [disabled]="em.invalid" [loading]="responding">СОХРАНИТЬ</mh-button>
     <mh-upload #upload *ngIf="!adminPage" [url]="pic.Url" 
         (success)="createTempfile($event)" (remove)="removePicture()"></mh-upload>
 </div>
