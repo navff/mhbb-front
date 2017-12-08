@@ -30,7 +30,7 @@ export class ReservationComponent implements OnInit {
       .switchMap(params => this.activityService.take(params.id))
       .subscribe(data => {
         this.activity = data;
-        this.picUrl = data.Pictures[0].Url;
+        this.picUrl = data.Pictures[0] && data.Pictures[0].Url;
       });
   }
 }

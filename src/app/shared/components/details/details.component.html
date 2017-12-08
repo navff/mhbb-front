@@ -27,8 +27,9 @@
     <p>{{activity.Address}}</p>
     <h4>Цены:</h4>
     <div class="prices">
-        <p>{{activity.Prices}}</p>
+        <p *ngIf="activity.Prices">{{activity.Prices}}</p>
         <img class="hobby-free-icon" src="assets/img/free-withborder.svg" *ngIf="activity.Free">
+        <p *ngIf="!activity.Prices && activity.Free">Бесплатно</p>
     </div>
     <h4>Трезвость:</h4>
     <p>{{activity.Organizer?.Sobriety ? "Преподаватели не пьют и не курят" : "Отсутствует"}}</p>
