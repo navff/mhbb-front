@@ -1,23 +1,55 @@
 <a class="mh-back" (click)="back()">&larr; Назад</a>
-<div [ngSwitch]="page">
+<div [ngSwitch]="page" class="static-content">
     <ng-container *ngSwitchCase="'about'">
-        <h1>О проекте</h1>
+      <h1>О проекте</h1>
+      <p>
+        Сайт «Моё хобби» развивается благодаря волонтёрам Общероссийской Общественной Организации
+        <a href="http://общее-дело.рф">«Общее дело»</a>,
+        школе онлайн-образования <a href="http://zarazum.org">«ЗаРазум»</a> и множеству неравнодушных людей,
+        которые жертвуют деньги на полезное дело и наполняют сайт информацией.
+      </p>
+      <p>
+        Часто возникает вопрос: «А чем заняться в глубинке? Ведь у нас ничего нет!». Сайт «Моё хобби» как раз об этом.
+        Наша цель — рассказать людям о местах, мероприятиях и кружках, где они могут с пользой провести время.
+      </p>
+      <p>
+        На сайте у многих активностей есть флаг «трезвость». Это значит, что преподаватели не пьют и не курят.
+        Вообще. Даже по праздникам. Даже в Новый год. Основатели сайта предположили, что для родителей важно,
+        чтобы их ребёнок не нахватался от преподавателей «культурному» питию и курению, ведь алкоголизм начинается
+        не с первой выпитой стопки, а с первой <b>увиденной</b> стопки. Так что, мы за трезвых преподавателей.
+      </p>
+      <p>
+        Если у вас есть вопросы и предложения, пишите их на почту <a href="mailto:feedback@mhbb.ru">feedback@mhbb.ru</a>.
+      </p>
+
+
     </ng-container>
-    
+
     <ng-container *ngSwitchCase="'sponsor'">
         <h1>Стать спонсором</h1>
+        <p>Можно перевести нам деньги через форму ниже. Если вы хотите перевести крупную сумму, напишите
+        на почту <a href="mailto:feedback@mhbb.ru">feedback@mhbb.ru</a> </p>
+        <div>
+          <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9D%D0%B0%20%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0%20%C2%AB%D0%9C%D0%BE%D1%91%20%D1%85%D0%BE%D0%B1%D0%B1%D0%B8%C2%BB&targets-hint=&default-sum=1000&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=41001147395190" width="450" height="213" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+        </div>
     </ng-container>
-    
+
     <ng-container *ngSwitchCase="'member'">
         <h1>Стать представителем</h1>
+        <p>Мы начинаем с Череповца и масштабируемся в другие города, если там есть представитель.</p>
+        <p>Представителем может стать любой человек, не утоптребляющий никаких интоксикаций: алкоголь,
+        никотин и другие наркотики. Для этого нужно написать на почту
+          <a href="mailto:feedback@mhbb.ru">feedback@mhbb.ru</a> или
+          <a href="https:vk.me/navff">Вконтакте</a>
+        </p>
     </ng-container>
-    
+
     <ng-container *ngSwitchCase="'enter/success'">
         <h1>Готово</h1>
         <p>На вашу почту мы отправили ссылку для доступа к сайту. Перейдя по ссылке вы сможете оставлять отзывы и голосовать. </p>
         <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>
     </ng-container>
-    
+
     <ng-container *ngSwitchCase="'addhobby/success'">
         <h1>Информация добавлена</h1>
         <p>Администраторы сайта проверят и опубликуют вашу информацию. Большое спасибо за участие.</p>
@@ -26,6 +58,6 @@
 
     <ng-container *ngSwitchDefault>
         <h1>Страница не найдена</h1>
-        <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>        
-    </ng-container> 
+        <mh-button routerLink="">НА ГЛАВНУЮ</mh-button>
+    </ng-container>
 </div>
