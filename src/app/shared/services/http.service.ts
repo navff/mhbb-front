@@ -32,7 +32,9 @@ export class HttpService extends HttpClient {
         if (params) {
             Object.keys(params).forEach(key => {
                 if (params[key]) {
-                    search = search.append(key, params[key]);
+                    Array.isArray(params[key]) ?
+                        params[key].filter(k => k).forEach(v => search = search.append(key, v)) :
+                        search = search.append(key, params[key]);
                 }
             });
         }

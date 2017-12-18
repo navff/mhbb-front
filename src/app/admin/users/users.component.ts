@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
         this.isAdmin ? '1' : null
       ];
     }
-    this.userService.list(this.page.toString(10), roles[0], roles[1], this.cityId, this.word)
+    this.userService.list({page: this.page.toString(10), roles , cityId: this.cityId, word: this.word})
       .subscribe(data => {
         this.users = data;
         this.checkLength = data.length;

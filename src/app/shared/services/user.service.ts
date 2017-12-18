@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs/Observable';
@@ -8,15 +7,8 @@ import { User } from './../../models/user.model';
 export class UserService {
   constructor(private http: HttpService) { }
 
-  list(page?: string, role1?: string, role2?: string, cityId?: string, word?: string): Observable<User[]> {
-    let params = new HttpParams();
-    word ? params.append('word', word) : params.delete('word');
-    params.append('cityId', cityId);
-    params.append('page', page);
-    params.append('roles', role1);
-    params.append('roles', role2);
-
-    return this.http.get<User[]>('user/search', { params });
+  list(params): Observable<User[]> {
+    return this.http.get<User[]>('user/search', { params : params && this.http.setSearch(params) });
   }
   take(email: string): Observable<User> {
     return this.http.get<User>(`user?email=${email}`);
