@@ -46,9 +46,7 @@ export class UserEditComponent implements OnInit {
   createTempfile(file: any) {
     this.user.FormId = Date.now().toString(10);
     this.activityService
-      .createTempFile(
-      new TempFile(this.user.FormId, file.name, file.data, true)
-      )
+      .createTempFile(new TempFile(this.user.FormId, file.name, file.data, true))
       .subscribe(res => (this.pic = res));
   }
   save() {
@@ -92,7 +90,7 @@ export class UserEditComponent implements OnInit {
           : this.userService.takeCurrent();
       })
       .subscribe(user => {
-        this.user = user;
+        this.user = new User(user);
         this.email = user.Email;
         if (this.isAdmin(user)) {
           this.roleValue = true;
