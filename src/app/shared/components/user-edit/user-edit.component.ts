@@ -21,45 +21,53 @@ export class UserEditComponent implements OnInit {
   responding: boolean;
 
   pic = new Picture();
-  picBeingRemoved = false;
+  picsToRemove: Array<{ id: string; type: string }> = [];
 
   constructor(
     private userService: UserService,
     private listService: ListService,
     private activityService: ActivityService,
     private router: Router,
-    private route: ActivatedRoute) {
-  }
+    private route: ActivatedRoute
+  ) {}
 
   back() {
     history.back();
   }
 
   removePicture() {
-    this.picBeingRemoved = true;
+    this.picsToRemove.push({
+      id: this.pic.Id,
+      type: this.user.FormId ? 'tempfile' : 'picture'
+    });
     this.pic.Url = '';
   }
 
   createTempfile(file: any) {
     this.user.FormId = Date.now().toString(10);
-    this.activityService.createTempFile(new TempFile(this.user.FormId, file.name, file.data, true))
-      .subscribe(res => this.pic = res);
+    this.activityService
+      .createTempFile(
+        new TempFile(this.user.FormId, file.name, file.data, true)
+      )
+      .subscribe(res => (this.pic = res));
   }
   save() {
     this.responding = true;
     this.user.Role = this.roleValue ? 1 : 2;
-    if (this.picBeingRemoved) {
-      this.user.FormId ?
-        this.activityService.removeTempFile(this.pic.Id).subscribe() :
-        this.activityService.removePicture(this.pic.Id).subscribe();
+    if (this.picsToRemove.length > 0) {
+      this.picsToRemove.forEach(
+        p =>
+          p.type === 'picture'
+            ? this.activityService.removePicture(p.id).subscribe()
+            : this.activityService.removeTempFile(p.id).subscribe()
+      );
     }
-    this.userService.update(this.email, this.user)
-      .subscribe(() => {
-        this.router.navigate(['../'], { relativeTo: this.route });
-        if (!this.adminPage && this.email !== this.user.Email) {
-          location.reload();
-        }
-      });
+    this.userService.update(this.email, this.user).subscribe(() => {
+      this.router.navigate(['../'], { relativeTo: this.route });
+      if (!this.adminPage && this.email !== this.user.Email) {
+        location.reload();
+      }
+    });
   }
 
   isAdmin(user): boolean {
@@ -67,15 +75,15 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listService.cities$.subscribe(data => this.cities = data);
+    this.listService.cities$.subscribe(data => (this.cities = data));
     this.route.queryParams
-      .switchMap((data) => {
+      .switchMap(data => {
         if (data.email) {
           this.adminPage = true;
         }
-        return this.adminPage ?
-          this.userService.take(data.email) :
-          this.userService.takeCurrent();
+        return this.adminPage
+          ? this.userService.take(data.email)
+          : this.userService.takeCurrent();
       })
       .subscribe(user => {
         this.user = user;
