@@ -18,7 +18,7 @@ export class UserEditComponent implements OnInit {
   roleValue: boolean;
   user = new User();
   email: string;
-  responding: boolean;
+  responding: string;
 
   pic = new Picture();
   picsToRemove: Array<{ id: string; type: string }> = [];
@@ -29,7 +29,7 @@ export class UserEditComponent implements OnInit {
     private activityService: ActivityService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   back() {
     history.back();
@@ -47,12 +47,12 @@ export class UserEditComponent implements OnInit {
     this.user.FormId = Date.now().toString(10);
     this.activityService
       .createTempFile(
-        new TempFile(this.user.FormId, file.name, file.data, true)
+      new TempFile(this.user.FormId, file.name, file.data, true)
       )
       .subscribe(res => (this.pic = res));
   }
   save() {
-    this.responding = true;
+    this.responding = 'saving';
     this.user.Role = this.roleValue ? 1 : 2;
     if (this.picsToRemove.length > 0) {
       this.picsToRemove.forEach(
@@ -68,6 +68,12 @@ export class UserEditComponent implements OnInit {
         location.reload();
       }
     });
+  }
+
+  remove() {
+    this.responding = 'removing';
+    this.userService.remove(this.email)
+      .subscribe(() => this.router.navigate(['../'], { relativeTo: this.route }));
   }
 
   isAdmin(user): boolean {

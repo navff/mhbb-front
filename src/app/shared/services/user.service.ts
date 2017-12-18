@@ -19,6 +19,9 @@ export class UserService {
   update(email: string, body: User) {
     return this.http.put(`user?email=${email}`, body);
   }
+  remove(email: string) {
+    return this.http.delete(`user/delete?email=${email}`);
+  }
   removePicture(id) {
     return this.http.delete(`picture/${id}`);
   }

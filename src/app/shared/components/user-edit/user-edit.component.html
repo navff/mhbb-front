@@ -14,7 +14,9 @@
         <input mdInput [(ngModel)]="user.Email" #em="ngModel" type="email" email="true" placeholder="Электропочта" required>
     </md-input-container>
     <md-checkbox [(ngModel)]="roleValue" *ngIf="isAdmin(user) || adminPage">Представитель в городе</md-checkbox>
-    <mh-button (click)="save()" [disabled]="em.invalid" [loading]="responding">СОХРАНИТЬ</mh-button>
+    <mh-button (click)="save()" [disabled]="em.invalid" [loading]="responding === 'saving'">СОХРАНИТЬ</mh-button>
+    <mh-button (click)="remove()" color="warn" [loading]="responding === 'removing'" class="btn-delete"
+        *ngIf="adminPage">УДАЛИТЬ</mh-button>
     <mh-upload #upload *ngIf="!adminPage" [url]="pic.Url" 
         (success)="createTempfile($event)" (remove)="removePicture()"></mh-upload>
 </div>
