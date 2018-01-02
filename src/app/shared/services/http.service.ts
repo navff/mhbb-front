@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { SharedService } from './shared.service';
 import { HttpClient, HttpHandler, HttpRequest, HttpHeaders, HttpParams } from '@angular/common/http';
 
-const apiUrl = 'http://test.mhbb.ru/b/api/';
+const apiUrl = 'http://mhbb.ru/b/api/';
 
 @Injectable()
 export class HttpService extends HttpClient {
