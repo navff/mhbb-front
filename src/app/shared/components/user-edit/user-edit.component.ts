@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from './../../services/activity.service';
 import { TempFile } from '../../../models/tempfile.model';
@@ -52,20 +53,27 @@ export class UserEditComponent implements OnInit {
   save() {
     this.responding = 'saving';
     this.user.Role = this.roleValue ? 1 : 2;
+    let pictures$: Array<Observable<any>> = [];
+
     if (this.picsToRemove.length > 0) {
       this.picsToRemove.forEach(
         p =>
-          p.type === 'picture'
-            ? this.activityService.removePicture(p.id).subscribe()
-            : this.activityService.removeTempFile(p.id).subscribe()
+          pictures$.push(p.type === 'picture'
+            ? this.activityService.removePicture(p.id)
+            : this.activityService.removeTempFile(p.id))
       );
+    } else {
+      pictures$.push(Observable.of(true));
     }
-    this.userService.update(this.email, this.user).subscribe(() => {
-      this.router.navigate(['../'], { relativeTo: this.route });
-      if (!this.adminPage && this.email !== this.user.Email) {
-        location.reload();
-      }
-    });
+
+    Observable.forkJoin(pictures$)
+      .switchMap(() => this.userService.update(this.email, this.user))
+      .subscribe(() => {
+        this.router.navigate(['../'], { relativeTo: this.route });
+        if (!this.adminPage && this.email !== this.user.Email) {
+          location.reload();
+        }
+      });
   }
 
   remove() {
