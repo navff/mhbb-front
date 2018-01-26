@@ -1,5 +1,6 @@
 import { SearchParams } from './../../../models/search-params.model';
 import { ListService } from './../../services/list.service';
+import { SharedService } from './../../services/shared.service';
 import { ActivityService } from './../../services/activity.service';
 import { Activity } from './../../../models/activity.model';
 import { Component, OnInit } from '@angular/core';
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit {
   adminPage: boolean;
   constructor(
     private activityService: ActivityService,
+    private shared: SharedService,
     private listService: ListService) {
     if (location.pathname.substr(1, 5) === 'admin') {
       this.adminPage = true;
@@ -41,6 +43,7 @@ export class MainComponent implements OnInit {
         this.activities = data;
         this.checkLength = data.length;
         this.responding = false;
+        this.shared.params$.next(this.params);
       });
     if (this.adminPage) {
       this.activityService.listUnchecked(this.params)
@@ -48,6 +51,7 @@ export class MainComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.params = this.shared.params$.getValue();
     this.changes$.debounceTime(250).subscribe(() => this.search());
     this.search();
 
